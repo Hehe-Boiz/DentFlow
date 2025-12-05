@@ -25,9 +25,9 @@
             <a href="#submenu{{ loop.index }}"
                 class="list-group-item list-group-item-action bg-transparent second-text fw-bold"
                 data-toggle="collapse">
-                <i class="fas fa-folder me-2"></i> {{ item.name }} <i class="fas fa-chevron-down float-right"></i>
+                {{ item.name }}
             </a>
-            <div class="collapse" id="submenu{{ loop.index }}">
+            <div class="" id="submenu{{ loop.index }}">
                 {% for child in item.get_children() %}
                 <a href="{{ child.get_url() }}"
                     class="list-group-item list-group-item-action bg-transparent text-small pl-5">
@@ -39,7 +39,7 @@
             {% if item.is_accessible() and item.is_visible() %}
             <a href="{{ item.get_url() }}"
                 class="list-group-item list-group-item-action bg-transparent second-text {{ 'active' if item.is_active(admin_view) else '' }}">
-                <i class="fas fa-circle-notch me-2"></i> {{ item.name }}
+                {{ item.name }}
             </a>
             {% endif %}
             {% endif %}
@@ -56,19 +56,17 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Trang chủ</a>
-                    </li>
                     <li class="nav-item dropdown">
+                        {% if current_user.is_authenticated %}
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown">
-                            <i class="fas fa-user"></i> Admin
+                            <i class="fas fa-user"></i> {{ current_user.name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Hồ sơ</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Thoát</a>
+                            <a class="dropdown-item" href="/logout-admin">Đăng xuất</a>
                         </div>
+                        {% endif %}
                     </li>
                 </ul>
             </div>

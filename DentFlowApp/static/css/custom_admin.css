@@ -1,9 +1,9 @@
 :root {
-    --main-bg-color: #1a1a2e;
+    --main-bg-color: #2447e6;
     /* Màu nền tối của DentalFlow */
-    --active-color: #d63384;
+    --active-color: white;
     /* Màu hồng tím điểm nhấn */
-    --text-color: #ffffff;
+    --text-color: white;
 }
 
 body {

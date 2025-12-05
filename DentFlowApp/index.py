@@ -27,6 +27,12 @@ def logout_process():
     logout_user()
     return redirect('/login')
 
+@app.route('/logout-admin')
+def logout_admin():
+    logout_user()
+    return redirect('/admin')
+
+
 @login.user_loader
 def load_user(user_id):
     return dao.get_user_by_id(user_id)
