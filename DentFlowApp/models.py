@@ -102,11 +102,7 @@ class BacSi(User):
 
 class BacSiLichHanhChinh(BacSi):
     thu = Column(Integer, nullable=False)
-    lich_hen = relationship(
-        "LichHen",
-        back_populates="thoi_gian",
-        cascade="all, delete-orphan"
-    )
+    
 
 class BacSiLichDangKy(BacSi):
     ngay = Column(Date, nullable=False)
