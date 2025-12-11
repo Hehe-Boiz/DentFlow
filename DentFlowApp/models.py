@@ -42,7 +42,8 @@ class User(BaseModel, UserMixin):
         return f"<Ma USER: {self.id}>"
 
 
-class HoSoBenhNhan(BaseModel):
+class HoSoBenhNhan(db.Model):
+    __tablename__ = "ho_so_benh_nhan"
     ma_ho_so = Column(String(20), primary_key=True)
     ho_ten = Column(String(50), nullable=False)
     so_dien_thoai = Column(Integer, nullable=False)
@@ -70,9 +71,9 @@ class LichHen(BaseModel):
     ngay_dat = Column(DateTime, default=datetime.utcnow)
 
     ho_so_benh_nhan_id = Column(String(20), ForeignKey(HoSoBenhNhan.ma_ho_so), nullable=False)
-    bac_si_id = Column(String(20), ForeignKey("bacsi.ma_bac_si"), nullable=True)
-    thoi_gian_id = Column(Integer, ForeignKey("thoigian.id"), nullable=True)
-    dich_vu_id = Column(String(20), ForeignKey("dichvu.ma_dv"), nullable=True)
+    bac_si_id = Column(Integer, ForeignKey("bac_si.ma_bac_si"), nullable=True)
+    thoi_gian_id = Column(Integer, ForeignKey("thoi_gian.id"), nullable=True)
+    dich_vu_id = Column(String(20), ForeignKey("dich_vu.ma_dv"), nullable=True)
 
     ho_so_benh_nhan = relationship("HoSoBenhNhan", back_populates="lich_hen")
     bac_si = relationship("BacSi", back_populates="lich_hen")
@@ -83,8 +84,8 @@ class LichHen(BaseModel):
         return f"<MaLichHen: {self.id}>"
 
 
-class BacSi(User):
-    ma_bac_si = Column(String(20), primary_key=True)
+class BacSi(db.Model):
+    ma_bac_si = Column(Integer, ForeignKey("user.id"), primary_key=True)
     phieu_dieu_tri = relationship(
         "PhieuDieuTri",
         back_populates="bac_si",
@@ -113,12 +114,15 @@ class BacSiLichDangKy(BacSi):
 
 class ThoiGian(BaseModel):
     thoi_gian = Column(Time, nullable=False)
-
+    lich_hen = relationship(
+        "LichHen",
+        back_populates="thoi_gian"
+    )
     def __repr__(self):
         return f"<MaTime: {self.id}>"
 
 
-class DichVu(BaseModel):
+class DichVu(db.Model):
     ma_dv = Column(String(20), primary_key=True)
     ten_dich_vu = Column(String(80), nullable=False)
     don_gia = Column(Double, nullable=False)
@@ -146,13 +150,12 @@ class PhieuDieuTri(BaseModel):
 
     ho_so_benh_nhan_id = Column(String(20), ForeignKey(HoSoBenhNhan.ma_ho_so), nullable=False)
     dich_vu_id = Column(String(20), ForeignKey(DichVu.ma_dv), nullable=False)
-    bac_si_id = Column(String(20), ForeignKey(BacSi.ma_bac_si), nullable=False)
-    don_thuoc_id = Column(Integer, ForeignKey("donthuoc.id"), nullable=False)
+    bac_si_id = Column(Integer, ForeignKey(BacSi.ma_bac_si), nullable=False)
+    don_thuoc_id = Column(Integer, ForeignKey("don_thuoc.id"), nullable=False)
 
     ho_so_benh_nhan = relationship("HoSoBenhNhan", back_populates="phieu_dieu_tri")
     dich_vu = relationship("DichVu", back_populates="phieu_dieu_tri")
     bac_si = relationship("BacSi", back_populates="phieu_dieu_tri")
-    don_thuoc = relationship("DonThuoc", back_populates="phieu_dieu_tri", uselist=False)
 
     def __repr__(self):
         return f"<MaPhieuDieuTri: {self.id}>"
@@ -165,8 +168,12 @@ class DonThuoc(BaseModel):
         nullable=False,
         unique=True  # Moi phieu dieu tri chi co toi da 1 don thuoc
     )
-    phieu_dieu_tri = relationship("PhieuDieuTri", back_populates="don_thuoc")
-    thuoc = relationship("Thuoc")
+    thuoc_id = Column(
+        Integer,
+        ForeignKey("thuoc.ma_thuoc", ondelete="CASCADE"),
+        nullable=False,
+        unique=True  # Moi phieu dieu tri chi co toi da 1 don thuoc
+    )
     ngay_boc_thuoc = Column(DateTime)
 
     lieu_luong_su_dung = relationship("LieuLuongSuDung", back_populates="don_thuoc")
@@ -175,9 +182,8 @@ class DonThuoc(BaseModel):
         return f"<DonThuoc {self.id} PDT:{self.phieu_dieu_tri_id}>"
 
 
-class Thuoc(BaseModel):
-    id = None
-    ma_thuoc = db.Column(db.Integer, primary_key=True, autoincrement=True)
+class Thuoc(db.Model):
+    ma_thuoc = db.Column(Integer, primary_key=True, autoincrement=True)
     ten_thuoc = db.Column(db.String(100), nullable=False)
     lieu_luong_su_dung = relationship("LieuLuongSuDung", back_populates="thuoc")
     lo_thuocs = relationship('LoThuoc', backref='thuoc', lazy=True)
@@ -193,8 +199,8 @@ class LoThuoc(BaseModel):
 class LieuLuongSuDung(BaseModel):
     so_luong = Column(Integer, nullable=False)
 
-    don_thuoc_id = Column(Integer, ForeignKey(DonThuoc.id), ondelete="CASCADE", nullable=False)
-    thuoc_id = Column(Integer, ForeignKey(Thuoc.ma_thuoc), ondelete="CASCADE", nullable=False)
+    don_thuoc_id = Column(Integer, ForeignKey(DonThuoc.id, ondelete="CASCADE"), nullable=False)
+    thuoc_id = Column(Integer, ForeignKey(Thuoc.ma_thuoc,  ondelete="CASCADE"), nullable=False)
 
     don_thuoc = relationship("DonThuoc", back_populates="lieu_luong_su_dung")
     thuoc = relationship("Thuoc", back_populates="lieu_luong_su_dung")
@@ -206,21 +212,21 @@ class LieuLuongSuDung(BaseModel):
 class HoaDon(BaseModel):
     pass
 
-# if __name__ == '__main__':
-#     with app.app_context():
-#         db.create_all()
-#         import hashlib
-#         u = [
-#              User(name='receptionist', user_role=UserRole.RECEPTIONIST, phone='0123456',
-#                   avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
-#                   username='receptionist', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest())),
-#              User(name='cashier', user_role=UserRole.CASHIER, phone='01234567',
-#                   avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
-#                   username='cashier', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest())),
-#              User(name='user', user_role=UserRole.USER, phone='0123456',
-#                   avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
-#                   username='User', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
-#              ]
-#         for user in u:
-#             db.session.add(user)
-#         db.session.commit()
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+        import hashlib
+        u = [
+             User(name='receptionist', user_role=UserRole.RECEPTIONIST, phone='0123456',
+                  avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
+                  username='receptionist', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest())),
+             User(name='cashier', user_role=UserRole.CASHIER, phone='01234567',
+                  avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
+                  username='cashier', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest())),
+             User(name='user', user_role=UserRole.USER, phone='0123456',
+                  avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
+                  username='User', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
+             ]
+        for user in u:
+            db.session.add(user)
+        db.session.commit()
