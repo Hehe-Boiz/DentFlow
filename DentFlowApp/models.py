@@ -1,231 +1,198 @@
-from sqlalchemy import Column, Integer, String, Enum as sqlEnum, DateTime, Date, Time, Double, ForeignKey
+from sqlalchemy import Column, Integer, String, Enum as sqlEnum, DateTime, Date, Time, Double, ForeignKey, Float
 from sqlalchemy.orm import relationship
-
 from DentFlowApp import db, app
-from enum import Enum as UserEnum
-from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from enum import Enum
+import enum
+
+#ENUMS
+class GioiTinh(enum.Enum):
+    NAM = "Nam"
+    NU = "Nu"
+    KHAC = "Khac"
 
 
-class GioiTinh(Enum):
-    NAM = 'Nam'
-    NU = 'Nu'
-    KHAC = 'Khac'
-
-
-class BaseModel(db.Model):
-    __abstract__ = True
-    id = Column(Integer, primary_key=True, autoincrement=True)
-
-
-class UserRole(UserEnum):
+class UserRole(enum.Enum):
     ADMIN = 1
     USER = 2
     RECEPTIONIST = 3
     DOCTOR = 4
     CASHIER = 5
 
+class TrangThaiLamViec(enum.Enum):
+    DANG_BAN = "Đang bận"
+    SAN_SANG = "Sẵn sàng"
+    NGHI = "Nghỉ"
 
-class User(BaseModel, UserMixin):
-    name = Column(String(50), nullable=False)
-    avatar = Column(String(100))
-    username = Column(String(50), nullable=False, unique=True)
-    password = Column(String(50), nullable=False)
-    user_role = Column(sqlEnum(UserRole), default=UserRole.USER)
-    phone = Column(Integer, nullable=False)
+class LoaiBacSi(enum.Enum):
+    TOAN_THOI_GIAN = "Toàn thời gian"
+    BAN_THOI_GIAN = "Bán thời gian"
 
-    def __str__(self):
-        return self.name
+# MODELS
+class BaseModel(db.Model):
+    __abstract__ = True
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ngay_tao = Column(DateTime, default=datetime.now())
+    ngay_cap_nhat = Column(DateTime, onupdate=datetime.now(), default=datetime.now())
 
-    def __repr__(self):
-        return f"<Ma USER: {self.id}>"
+class NguoiDung(BaseModel):
 
+    __tablename__ = 'nguoi_dung'
+    username = Column(String(50), unique=True, nullable=False)
+    password = Column(String(255), nullable=False)
+    ho_ten = Column(String(100), nullable=False)
+    so_dien_thoai = Column(String(15))
+    avatar = Column(String(255))
+    vai_tro = Column(sqlEnum(UserRole), default=UserRole.USER)
 
-class HoSoBenhNhan(db.Model):
-    __tablename__ = "ho_so_benh_nhan"
-    ma_ho_so = Column(String(20), primary_key=True)
-    ho_ten = Column(String(50), nullable=False)
-    so_dien_thoai = Column(Integer, nullable=False)
-    ngay_tao = Column(DateTime, default=datetime.utcnow, nullable=False)
-    dia_chi = Column(String(255), nullable=True)
-    gioi_tinh = Column(sqlEnum(GioiTinh), nullable=False)
-
-    lich_hen = relationship(
-        "LichHen",
-        back_populates="ho_so_benh_nhan",
-        cascade="all, delete-orphan"
-    )
-    phieu_dieu_tri = relationship(
-        "PhieuDieuTri",
-        back_populates="ho_so_benh_nhan",
-        cascade="all, delete-orphan"
-    )
-
-    def __repr__(self):
-        return f"<HoSoBenhNhan  {self.ma_ho_so}>"
+    ho_so_benh_nhan = relationship('HoSoBenhNhan', backref='nguoi_dung', uselist=False)
 
 
-class LichHen(BaseModel):
-    # ma_lich_hen = super().id
-    ngay_dat = Column(DateTime, default=datetime.utcnow)
+class NhanVien(db.Model):
+    ma_nv = Column(String(5), primary_key=True)
+    ho_ten = Column(String(100), nullable=False)
+    ngay_sinh = Column(DateTime)
+    nam_sinh = Column(Integer)
+    so_dien_thoai = Column(String(15),nullable=False)
+    dia_chi = Column(String(255), nullable=False)
+    muc_luong = Column(Float)
+    ngay_vao_lam = Column(DateTime, default=datetime.now())
 
-    ho_so_benh_nhan_id = Column(String(20), ForeignKey(HoSoBenhNhan.ma_ho_so), nullable=False)
-    bac_si_id = Column(Integer, ForeignKey("bac_si.ma_bac_si"), nullable=True)
-    thoi_gian_id = Column(Integer, ForeignKey("thoi_gian.id"), nullable=True)
-    dich_vu_id = Column(String(20), ForeignKey("dich_vu.ma_dv"), nullable=True)
+class HoSoBenhNhan(BaseModel):
+    __tablename__ = 'ho_so_benh_nhan'
+    ho_ten = Column(String(100), nullable=False)
+    so_dien_thoai = Column(String(15))
+    ngay_tao = Column(DateTime, default=datetime.utcnow)
+    dia_chi = Column(String(255))
+    gioi_tinh = Column(sqlEnum(GioiTinh))
 
-    ho_so_benh_nhan = relationship("HoSoBenhNhan", back_populates="lich_hen")
-    bac_si = relationship("BacSi", back_populates="lich_hen")
-    thoi_gian = relationship("ThoiGian", back_populates="lich_hen")
-    dich_vu = relationship("DichVu", back_populates="lich_hen")
+    # Khóa ngoại
+    nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
 
-    def __repr__(self):
-        return f"<MaLichHen: {self.id}>"
+    # Quan hệ
+    lich_hen_ds = relationship('LichHen', backref='ho_so_benh_nhan', lazy=True)
+    phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='ho_so_benh_nhan', lazy=True)
 
 
 class BacSi(db.Model):
-    ma_bac_si = Column(Integer, ForeignKey("user.id"), primary_key=True)
-    phieu_dieu_tri = relationship(
-        "PhieuDieuTri",
-        back_populates="bac_si",
-        cascade="all, delete-orphan"
-    )
-    # 0..5
-    lich_hen = relationship(
-        "LichHen",
-        back_populates="bac_si",
-        cascade="all, delete-orphan"
-    )
+    __tablename__ = 'bac_si'
+    ma_bac_si = Column(String(5), primary_key=True)  # Map với maBacSi
+    ho_ten = Column(String(100), nullable=False)
+    so_dien_thoai = Column(String(15))
+    avatar = Column(String(255))
 
-    def __repr__(self):
-        return f"<MaBacSi: {self.ma_bac_si}>"
+    # Xử lý kế thừa (BacSiToanThoiGian, BacSiBanThoiGian)
+    loai_bac_si = Column(sqlEnum(LoaiBacSi))
+
+    # Quan hệ
+    lich_lam_viec_ds = relationship('LichLamViec', backref='bac_si', lazy=True)
+    lich_hen_ds = relationship('LichHen', backref='bac_si', lazy=True)
+    phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='bac_si', lazy=True)
 
 
-class BacSiLichHanhChinh(BacSi):
-    thu = Column(Integer, nullable=False)
+class BacSiFullTime(BacSi):
+    luong_co_ban = Column(Float, nullable=True)
 
+class BacSiPartTime(BacSi):
+    muc_luong_gio = Column(Float, nullable=True)
 
-class BacSiLichDangKy(BacSi):
-    ngay = Column(Date, nullable=False)
+class LichLamViec(BaseModel):
+    __tablename__ = 'lich_lam_viec'
+    ngay_lam = db.Column(Date, nullable=False)
     gio_bat_dau = Column(Time, nullable=False)
     gio_ket_thuc = Column(Time, nullable=False)
+    trang_thai = Column(sqlEnum(TrangThaiLamViec))
+
+    bac_si_id = Column(Integer, ForeignKey('bac_si.ma_bac_si'), nullable=False)
 
 
-class ThoiGian(BaseModel):
-    thoi_gian = Column(Time, nullable=False)
-    lich_hen = relationship(
-        "LichHen",
-        back_populates="thoi_gian"
-    )
-    def __repr__(self):
-        return f"<MaTime: {self.id}>"
+class DichVu(BaseModel):
+    __tablename__ = 'dich_vu'
 
 
-class DichVu(db.Model):
-    ma_dv = Column(String(20), primary_key=True)
-    ten_dich_vu = Column(String(80), nullable=False)
-    don_gia = Column(Double, nullable=False)
+    ten_dich_vu = Column(String(100), nullable=False)
+    don_gia = Column(Float, nullable=False)
 
-    phieu_dieu_tri = relationship(
-        "PhieuDieuTri",
-        back_populates="dich_vu",
-        cascade="all, delete-orphan"
-    )
-    lich_hen = relationship(
-        "LichHen",
-        back_populates="dich_vu",
-        cascade="all, delete-orphan"
-    )
+    # Quan hệ
+    lich_hen_ds = relationship('LichHen', backref='dich_vu', lazy=True)
+    phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='dich_vu', lazy=True)
 
-    def __repr__(self):
-        return f"<MaDichVu: {self.ma_dv}>"
 
-    def __str__(self):
-        return f"<DichVu: {self.ten_dich_vu}>"
+class LichHen(BaseModel):
+    __tablename__ = 'lich_hen'
+
+    ngay_dat = Column(DateTime, default=datetime.now())
+    gio_kham = Column(Time, nullable=False)
+
+    # Khóa ngoại
+    ho_so_benh_nhan_id = Column(Integer, ForeignKey('ho_so_benh_nhan.id'), nullable=False)
+    bac_si_id = Column(Integer, ForeignKey('bac_si.ma_bac_si'), nullable=False)
+    dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=True)
 
 
 class PhieuDieuTri(BaseModel):
-    # ma_phieu_dieu_tri = super().id
+    __tablename__ = 'phieu_dieu_tri'
 
-    ho_so_benh_nhan_id = Column(String(20), ForeignKey(HoSoBenhNhan.ma_ho_so), nullable=False)
-    dich_vu_id = Column(String(20), ForeignKey(DichVu.ma_dv), nullable=False)
-    bac_si_id = Column(Integer, ForeignKey(BacSi.ma_bac_si), nullable=False)
-    don_thuoc_id = Column(Integer, ForeignKey("don_thuoc.id"), nullable=False)
+    ho_so_benh_nhan_id = Column(Integer, ForeignKey('ho_so_benh_nhan.id'), nullable=False)
+    bac_si_id = Column(Integer, ForeignKey('bac_si.ma_bac_si'), nullable=False)
+    dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=False)
 
-    ho_so_benh_nhan = relationship("HoSoBenhNhan", back_populates="phieu_dieu_tri")
-    dich_vu = relationship("DichVu", back_populates="phieu_dieu_tri")
-    bac_si = relationship("BacSi", back_populates="phieu_dieu_tri")
-
-    def __repr__(self):
-        return f"<MaPhieuDieuTri: {self.id}>"
-
-
-class DonThuoc(BaseModel):
-    phieu_dieu_tri_id = Column(
-        Integer,
-        ForeignKey(PhieuDieuTri.id, ondelete="CASCADE"),
-        nullable=False,
-        unique=True  # Moi phieu dieu tri chi co toi da 1 don thuoc
-    )
-    thuoc_id = Column(
-        Integer,
-        ForeignKey("thuoc.ma_thuoc", ondelete="CASCADE"),
-        nullable=False,
-        unique=True  # Moi phieu dieu tri chi co toi da 1 don thuoc
-    )
-    ngay_boc_thuoc = Column(DateTime)
-
-    lieu_luong_su_dung = relationship("LieuLuongSuDung", back_populates="don_thuoc")
-
-    def __repr__(self):
-        return f"<DonThuoc {self.id} PDT:{self.phieu_dieu_tri_id}>"
-
-
-class Thuoc(db.Model):
-    ma_thuoc = db.Column(Integer, primary_key=True, autoincrement=True)
-    ten_thuoc = db.Column(db.String(100), nullable=False)
-    lieu_luong_su_dung = relationship("LieuLuongSuDung", back_populates="thuoc")
-    lo_thuocs = relationship('LoThuoc', backref='thuoc', lazy=True)
-
-
-class LoThuoc(BaseModel):
-    han_su_dung = Column(DateTime, nullable=False)
-    ngay_nhap = Column(DateTime, nullable=False)
-    so_luong = Column(Integer, nullable=False)
-    thuoc_id = Column(Integer, ForeignKey(Thuoc.ma_thuoc), nullable=False)
-
-
-class LieuLuongSuDung(BaseModel):
-    so_luong = Column(Integer, nullable=False)
-
-    don_thuoc_id = Column(Integer, ForeignKey(DonThuoc.id, ondelete="CASCADE"), nullable=False)
-    thuoc_id = Column(Integer, ForeignKey(Thuoc.ma_thuoc,  ondelete="CASCADE"), nullable=False)
-
-    don_thuoc = relationship("DonThuoc", back_populates="lieu_luong_su_dung")
-    thuoc = relationship("Thuoc", back_populates="lieu_luong_su_dung")
-
-    def __repr__(self):
-        return f"<LieuLuongSuDung Don:{self.don_thuoc_id} Thuoc:{self.thuoc_id} SL:{self.so_luong}>"
+    # Quan hệ 1-1
+    hoa_don = relationship('HoaDon', backref='phieu_dieu_tri', uselist=False)
+    don_thuoc = relationship('DonThuoc', backref='phieu_dieu_tri', uselist=False)
 
 
 class HoaDon(BaseModel):
-    pass
+    __tablename__ = 'hoa_don'
 
+    tong_tien = Column(Float)  # Có thể tính toán tự động
+    ngay_thanh_toan = Column(DateTime, default=datetime.now())
+    phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id'), nullable=False, unique=True)
+
+
+class Thuoc(BaseModel):
+    __tablename__ = 'thuoc'
+    ten_thuoc = Column(String(100), nullable=False)
+    lo_thuoc_id = Column(Integer, ForeignKey('LoThuoc.id'),nullable=False)
+
+class LoThuoc(db.Model):
+    __tablename__ = 'lo_thuoc'
+    id = Column(Integer, primary_key=True)
+    han_su_dung = Column(DateTime, nullable=False)
+    so_luong = Column(Integer, nullable=False)
+    ngay_nhap = Column(DateTime, default=datetime.now())
+    thuoc_id = Column(Integer, ForeignKey('thuoc.id'), nullable=False)
+
+
+class DonThuoc(BaseModel):
+    __tablename__ = 'don_thuoc'
+    ngay_boc_thuoc = Column(DateTime, default=datetime.now())
+    phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id'), nullable=False, unique=True)
+
+# --- BẢNG TRUNG GIAN (Association Object) ---
+# Tương ứng với class LieuLuongSuDung trong sơ đồ
+class LieuLuongSuDung(BaseModel):
+    __tablename__ = 'lieu_luong_su_dung'
+    don_thuoc_id = Column(Integer, ForeignKey('don_thuoc.id'))
+    thuoc_id = Column(Integer, ForeignKey('thuoc.id'))
+
+    so_luong = Column(Integer, nullable=False)  # Thuộc tính riêng của mối quan hệ
+    huong_dan = Column(String(255))
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
         import hashlib
         u = [
-             User(name='receptionist', user_role=UserRole.RECEPTIONIST, phone='0123456',
+             NguoiDung(ho_ten='receptionist', vai_tro=UserRole.RECEPTIONIST, so_dien_thoai='0123456',
                   avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
                   username='receptionist', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest())),
-             User(name='cashier', user_role=UserRole.CASHIER, phone='01234567',
-                  avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
-                  username='cashier', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest())),
-             User(name='user', user_role=UserRole.USER, phone='0123456',
-                  avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
-                  username='User', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
+            NguoiDung(ho_ten='cashier', vai_tro=UserRole.CASHIER, so_dien_thoai='0123456',
+                      avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
+                      username='cashier', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
+            ,
+            NguoiDung(ho_ten='user', vai_tro=UserRole.USER, so_dien_thoai='0123456',
+                      avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
+                      username='user', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
              ]
         for user in u:
             db.session.add(user)
