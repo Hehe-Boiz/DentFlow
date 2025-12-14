@@ -13,3 +13,7 @@ cloudinary.config(cloud_name='dkvrjdbl6',api_key='277952256147366',api_secret='S
 
 login = LoginManager(app=app)
 db = SQLAlchemy(app=app)
+
+from DentFlowApp.apis import loginApis
+
+
