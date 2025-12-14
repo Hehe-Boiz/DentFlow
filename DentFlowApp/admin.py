@@ -9,15 +9,15 @@ admin = Admin(app=app, name="DentFlow")
 
 class ReceptionistModelView(ModelView):
     def is_accessible(self) -> bool:
-        return current_user.is_authenticated and current_user.user_role == UserRole.RECEPTIONIST
+        return current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST
 
 class AdminModelView(ModelView):
     def is_accessible(self) -> bool:
-        return current_user.is_authenticated and current_user.user_role == UserRole.ADMIN
+        return current_user.is_authenticated and current_user.vai_tro == UserRole.ADMIN
 
 class CashierModelView(ModelView):
     def is_accessible(self) -> bool:
-        return current_user.is_authenticated and current_user.user_role == UserRole.CASHIER
+        return current_user.is_authenticated and current_user.vai_tro == UserRole.CASHIER
 
 
 class LogoutView(BaseView):
