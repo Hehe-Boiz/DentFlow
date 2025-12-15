@@ -1,0 +1,45 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Đăng nhập{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_page.css') }}"/>
+{% endblock %}
+
+{% block content %}
+<div class="main-content">
+        <div class="login-card">
+            <h3 class="fw-bold mb-4 text-center">Đăng Nhập Tài Khoản</h3>
+            <form method="post" action="">
+                <div class="mb-3">
+                    <label for="usernameInput" class="form-label fw-medium">Username</label>
+                    <div class="input-group input-group-custom">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control form-control-lg" id="usernameInput" name="username" placeholder="Tên người dùng" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="passwordInput" class="form-label fw-medium">Password</label>
+                    <div class="input-group input-group-custom">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control form-control-lg fs-6" id="passwordInput" name="password" placeholder="Mật khẩu" required>
+                        <button class="btn btn-toggle-password" type="button" id="togglePasswordBtn">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-login w-100 mb-4">Đăng Nhập</button>
+
+                <div class="">
+                    <div class="text-center">
+                        <p class="text-muted">Chưa có tài khoản?
+                            <a href="#" class="text-decoration-none fw-medium" style="color: #2563eb;">Đăng ký ngay</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

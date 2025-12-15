@@ -1,16 +1,22 @@
-from flask_admin import BaseView, expose
-
 from DentFlowApp import app
-from flask import render_template, request,redirect
-from flask_login import login_user, logout_user
+from flask import request, redirect, render_template
+from flask_login import login_user, logout_user, current_user
 from DentFlowApp import login
 from DentFlowApp.dao import userDao
+from DentFlowApp.models import UserRole
 
 
 @app.route("/")
 def hello_world():
-    return "Hello World!!!"
+    return render_template("index.html")
 
+@app.route('/login')
+def login_view():
+    return render_template('login.html')
+
+@app.route('/register')
+def register_view():
+    return render_template('register.html')
 
 @app.route('/login', methods=['post'])
 def login_process():
@@ -22,13 +28,17 @@ def login_process():
         login_user(user=u)
 
     next = request.args.get('next')
+
     return redirect(next if next else '/')
 
 
 @app.route('/logout')
 def logout_process():
+    next = '/'
+    if current_user.vai_tro == UserRole.ADMIN:
+        next = '/admin'
     logout_user()
-    return redirect('/login')
+    return redirect(next)
 
 
 @app.route('/logout-admin')

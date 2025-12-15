@@ -1,0 +1,104 @@
+body {
+    background-color: #f8faff; /* Màu nền xám xanh nhạt của cả trang */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Phần Header chứa nút Quay lại và Logo */
+.login-header {
+    padding: 20px 0;
+}
+.btn-back {
+    color: #6c757d;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.btn-back:hover { color: #2563eb; }
+.brand-logo-text {
+    color: #2563eb; /* Màu xanh thương hiệu */
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* Container chính để căn giữa form */
+.main-content {
+    flex: 1; /* Chiếm hết không gian còn lại để đẩy footer xuống (nếu có) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+/* Cái card chứa form đăng nhập */
+.login-card {
+    background: white;
+    border-radius: 20px; /* Bo góc tròn nhiều hơn mặc định */
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ tạo hiệu ứng nổi */
+    padding: 40px;
+    width: 100%;
+    max-width: 450px; /* Giới hạn chiều rộng tối đa */
+}
+
+/* Tùy chỉnh các ô input (Email, Mật khẩu) */
+/* Để làm cho icon và ô input trông như liền một khối */
+.input-group-custom .input-group-text {
+    background-color: white;
+    border-right: none; /* Xóa viền phải của icon */
+    color: #adb5bd; /* Màu xám của icon */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.input-group-custom .form-control {
+    border-left: none; /* Xóa viền trái của input */
+    box-shadow: none !important; /* Tắt hiệu ứng glow khi click vào */
+     border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+/* Khi input được focus, đổi màu viền cả nhóm */
+.input-group-custom:focus-within .input-group-text,
+.input-group-custom:focus-within .form-control {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+/* Nút con mắt ẩn hiện mật khẩu */
+.btn-toggle-password {
+    background: white;
+    border: 1px solid #ced4da;
+    border-left: none;
+    color: #adb5bd;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+     /* Ghi đè lại border radius của input password khi có nút này */
+    z-index: 5;
+}
+.input-group-custom .form-control#passwordInput {
+     border-top-right-radius: 0;
+     border-bottom-right-radius: 0;
+}
+
+
+/* Nút Đăng Nhập */
+.btn-login {
+    background-color: #2563eb;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.btn-login:hover { background-color: #1d4ed8; }
+
+/* Hộp thông tin demo ở dưới cùng */
+.demo-info-box {
+    background-color: #eef2ff; /* Màu nền xanh rất nhạt */
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+.demo-info-box i { color: #2563eb; width: 20px;}
