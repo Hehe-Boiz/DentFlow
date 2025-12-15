@@ -33,5 +33,5 @@ class LogoutView(BaseView):
 
 admin.add_view(ReceptionistModelView(HoSoBenhNhan, db.session, name="Quản lý hồ sơ"))
 admin.add_view(ReceptionistModelView(LichHen, db.session, name="Quản lý Lịch Hẹn"))
-admin.add_view(AdminModelView(Thuoc,db.session, name="Quản lý thuốc"))
+admin.add_view(AdminModelView(Thuoc, db.session, name="Quản lý thuốc"))
 admin.add_view(LogoutView(name="Đăng xuất"))

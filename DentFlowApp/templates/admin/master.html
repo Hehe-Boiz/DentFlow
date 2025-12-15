@@ -13,11 +13,13 @@
 
 {% block page_body %}
 <div class="d-flex" id="wrapper">
-
     <div class="bg-dental-dark border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-            <i class="fas fa-tooth me-2"></i> DentalFlow
-        </div>
+            <div class="sidebar-heading py-4 text-center primary-text fs-4 fw-bold text-uppercase border-bottom">
+                <i class="fas fa-tooth me-2"></i>
+                <a class="navbar-brand text-decoration-none text-white" href="/">
+                    DentFlow
+                </a>
+            </div>
 
         <div class="list-group list-group-flush my-3">
             {% for item in admin_view.admin.menu() %}
@@ -60,7 +62,7 @@
                         {% if current_user.is_authenticated %}
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown">
-                            <i class="fas fa-user"></i> {{ current_user.ho_ten }}
+                            <img src="{{ current_user.avatar }}" class="rounded-circle" width="40" /> {{ current_user.ho_ten }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <div class="dropdown-divider"></div>

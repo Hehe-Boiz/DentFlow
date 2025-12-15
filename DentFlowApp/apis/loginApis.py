@@ -1,14 +1,28 @@
+from logging import addLevelName
+
 from DentFlowApp import app
 from flask import request, redirect, render_template
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, AnonymousUserMixin
 from DentFlowApp import login
 from DentFlowApp.dao import userDao
 from DentFlowApp.models import UserRole
+from DentFlowApp.admin import admin
 
 
 @app.route("/")
 def hello_world():
-    return render_template("index.html")
+    can_do = {}
+    if current_user.is_authenticated:
+        if current_user.vai_tro == UserRole.USER:
+            can_do['Hồ sơ của tôi'] = '#'
+            can_do['Lịch hẹn của tôi'] = '#'
+        else:
+            for item in admin.menu():
+                if item.is_accessible():
+                    if item.name != 'Home' and item.name != 'Đăng xuất':
+                        can_do[item.name] = item.get_url()
+    print(can_do)
+    return render_template("index.html", can_do=can_do)
 
 @app.route('/login')
 def login_view():
@@ -28,17 +42,13 @@ def login_process():
         login_user(user=u)
 
     next = request.args.get('next')
-
     return redirect(next if next else '/')
 
 
 @app.route('/logout')
 def logout_process():
-    next = '/'
-    if current_user.vai_tro == UserRole.ADMIN:
-        next = '/admin'
     logout_user()
-    return redirect(next)
+    return redirect('/')
 
 
 @app.route('/logout-admin')
