@@ -1,0 +1,88 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "123456",
+      "ho_ten": "Quản Trị Viên",
+      "vai_tro": "ADMIN",
+      "so_dien_thoai": "0909000000",
+      "avatar": "https://via.placeholder.com/150"
+    },
+    {
+      "username": "letan",
+      "password": "123456",
+      "ho_ten": "Lễ Tân",
+      "vai_tro": "RECEPTIONIST",
+      "so_dien_thoai": "0909000001",
+      "avatar": "https://via.placeholder.com/150"
+    },
+    {
+      "username": "bacsi_a",
+      "password": "123456",
+      "ho_ten": "Bác Sĩ A",
+      "vai_tro": "DOCTOR",
+      "so_dien_thoai": "0909000003",
+      "avatar": "https://via.placeholder.com/150"
+    },
+    {
+      "username": "bacsi_b",
+      "password": "123456",
+      "ho_ten": "Bác Sĩ B",
+      "vai_tro": "DOCTOR",
+      "so_dien_thoai": "0909000004",
+      "avatar": "https://via.placeholder.com/150"
+    }
+  ],
+  "doctors": [
+    {
+      "ma_bac_si": "BS001",
+      "ho_ten": "Nguyễn Văn A",
+      "so_dien_thoai": "0909000003",
+      "loai_bac_si": "TOAN_THOI_GIAN",
+      "username_lien_ket": "bacsi_a",
+      "luong_co_ban": 15000000
+    },
+    {
+      "ma_bac_si": "BS002",
+      "ho_ten": "Trần Thị B",
+      "so_dien_thoai": "0909000004",
+      "loai_bac_si": "BAN_THOI_GIAN",
+      "username_lien_ket": "bacsi_b",
+      "muc_luong_gio": 200000
+    }
+  ],
+  "services": [
+    { "ten_dich_vu": "Cạo vôi răng", "don_gia": 200000 },
+    { "ten_dich_vu": "Trám răng", "don_gia": 500000 },
+    { "ten_dich_vu": "Nhổ răng", "don_gia": 300000 },
+    { "ten_dich_vu": "Tẩy trắng răng", "don_gia": 1500000 }
+  ],
+  "medicines": [
+    {
+      "ten_thuoc": "Paracetamol 500mg",
+      "batches": [
+        { "han_dung_ngay": 365, "so_luong": 100 }
+      ]
+    },
+    {
+      "ten_thuoc": "Amoxicillin 500mg",
+      "batches": [
+        { "han_dung_ngay": 700, "so_luong": 200 }
+      ]
+    }
+  ],
+  "patients": [
+    {
+      "ho_ten": "Lê Văn C",
+      "so_dien_thoai": "0912345678",
+      "gioi_tinh": "NAM",
+      "dia_chi": "TP.HCM"
+    },
+    {
+      "ho_ten": "Phạm Thị D",
+      "so_dien_thoai": "0987654321",
+      "gioi_tinh": "NU",
+      "dia_chi": "Hà Nội"
+    }
+  ]
+}
