@@ -1,5 +1,5 @@
 from datetime import datetime
-from DentFlowApp.models import LichHen, Thuoc
+from DentFlowApp.models import LichHen, Thuoc, LoThuoc
 from DentFlowApp import db
 
 
@@ -54,9 +54,16 @@ class ValidationUtils:
             return False, f"Thuốc {thuoc.ten_thuoc} không nằm trong danh mục được phép."
 
         # Kiểm tra hạn sử dụng
-        if thuoc.ngay_he_han < datetime.now().date():
-            return False, f"Thuốc {thuoc.ten_thuoc} đã hết hạn sử dụng (Hạn: {thuoc.ngay_he_han})."
-
+        now = datetime.now()
+        lo_con_han = (
+            LoThuoc.query.filter(
+                LoThuoc.thuoc_id == thuoc_id,
+                LoThuoc.han_su_dung > now,
+                LoThuoc.so_luong > 0,
+            ).order_by(LoThuoc.han_su_dung).first()
+        )
+        if not lo_con_han:
+            return False, f"Thuốc {thuoc.ten_thuoc} không còn lô nào sử dụng được."
         return True, "Thuốc hợp lệ."
 
 
