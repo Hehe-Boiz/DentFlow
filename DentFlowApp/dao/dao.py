@@ -3,8 +3,6 @@ import cloudinary.uploader
 from DentFlowApp.models import NguoiDung
 from DentFlowApp import db
 
-
-
 def get_user_by_id(id):
     return NguoiDung.query.get(id)
 

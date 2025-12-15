@@ -1,0 +1,135 @@
+.text-gradient-shine {
+    /* Tạo màu gradient hồng tím */
+    background: linear-gradient(to right, #d946ef, #8b5cf6);
+    /* Cắt nền theo hình dạng chữ */
+    -webkit-background-clip: text;
+    /* Làm trong suốt màu chữ gốc để hiện nền gradient */
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+/* Badge "Đang hoạt động 24/7" */
+.badge-custom {
+    background-color: rgba(255, 255, 255, 0.1); /* Nền trắng mờ */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+/* Nút bấm chính màu xanh */
+.btn-primary-custom {
+    background-color: #2563eb; /* Màu xanh tươi */
+    border: none;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 8px;
+}
+.btn-primary-custom:hover {
+     background-color: #1d4ed8;
+}
+
+/* Nút outline số điện thoại */
+.btn-outline-custom {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 8px;
+}
+ .btn-outline-custom:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+ }
+
+/* === Phần xử lý ảnh và các thẻ nổi (Floating Cards) bên phải === */
+.right-image-container {
+    position: relative; /* Để làm mốc tọa độ cho các thẻ con */
+    text-align: center;
+    /* Giới hạn chiều rộng để ảnh không quá to */
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Ảnh chính bác sĩ */
+.main-doctor-img {
+    border-radius: 30px; /* Bo tròn góc ảnh */
+    /* Hiệu ứng bóng mờ nhẹ */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    width: 100%;
+    height: auto;
+}
+
+/* Style chung cho các thẻ nổi (Glassmorphism effect) */
+.floating-card {
+    position: absolute; /* Định vị tuyệt đối so với container cha */
+    background: rgba(255, 255, 255, 0.1); /* Nền trắng rất mờ */
+    backdrop-filter: blur(15px); /* Hiệu ứng làm mờ hậu cảnh cực quan trọng */
+    -webkit-backdrop-filter: blur(15px); /* Cho Safari */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Viền mờ */
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 2; /* Đảm bảo nằm trên ảnh chính */
+}
+
+/* Định vị cụ thể từng thẻ */
+.card-satisfaction { /* Thẻ 98% Hài lòng */
+    top: 10%;
+    right: -20px;
+}
+
+.card-experience { /* Thẻ 15+ Năm kinh nghiệm */
+    bottom: 15%;
+    left: -30px;
+}
+
+/* Thẻ Đặt lịch nhanh màu tím */
+.card-booking-widget {
+    position: absolute;
+    bottom: -30px;
+    right: -10px;
+    background: linear-gradient(135deg, #a855f7, #6366f1); /* Gradient tím */
+    padding: 20px;
+    border-radius: 20px;
+    width: 280px;
+    text-align: left;
+    z-index: 3;
+     box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+.booking-item {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+.btn-booking-light {
+    background: white;
+    color: #6366f1;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 991px) {
+     .hero-section { padding-top: 120px; text-align: center;}
+     .navbar-custom { background-color: white !important; position: relative; padding-bottom: 20px;}
+     .right-image-container { margin-top: 60px; }
+     /* Ẩn bớt các thẻ nổi trên mobile cho đỡ rối */
+     .card-satisfaction, .card-experience { display: none; }
+     .card-booking-widget {
+         position: relative;
+         bottom: auto; right: auto;
+         margin: -40px auto 0; /* Đẩy lên đè vào ảnh một chút */
+     }
+     .d-flex.gap-3 { justify-content: center; } /* Căn giữa nút bấm */
+}
