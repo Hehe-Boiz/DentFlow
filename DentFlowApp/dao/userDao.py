@@ -12,9 +12,9 @@ def auth_user(username, password):
                              NguoiDung.password==password).first()
 
 
-def add_user(name,phone, username, password, avatar):
-    u = NguoiDung(name=name,
-             phone=phone,
+def add_user(ho_ten, so_dien_thoai, username, password, avatar):
+    u = NguoiDung(ho_ten=ho_ten,
+             so_dien_thoai=so_dien_thoai,
              username=username.strip(),
              password=str(hashlib.md5(password.strip().encode('utf-8')).hexdigest()))
 
