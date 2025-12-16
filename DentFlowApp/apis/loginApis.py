@@ -3,7 +3,7 @@ from logging import addLevelName
 from sqlalchemy.exc import IntegrityError
 
 from DentFlowApp import app,db
-from flask import request, redirect, render_template
+from flask import request, redirect, render_template, session
 from flask_login import login_user, logout_user, current_user, AnonymousUserMixin
 from DentFlowApp import login
 from DentFlowApp.dao import userDao
@@ -13,7 +13,7 @@ from DentFlowApp import utils
 
 @app.route("/")
 def index():
-    return render_template("index.html", can_do=utils.user_can_do())
+    return render_template("index.html")
 
 @app.route('/login')
 def login_view():
@@ -31,6 +31,7 @@ def login_process():
     u = userDao.auth_user(username=username, password=password)
     if u:
         login_user(user=u)
+        session['can_do'] = utils.user_can_do(u)
 
     next = request.args.get('next')
     return redirect(next if next else '/')

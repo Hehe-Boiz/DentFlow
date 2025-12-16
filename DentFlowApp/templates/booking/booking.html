@@ -54,54 +54,22 @@
         <h4 class="mb-3 fw-bold">Chọn dịch vụ</h4>
         <p class="text-muted mb-4">Bạn muốn sử dụng dịch vụ nào?</p>
 
-        <form action="#" method="POST">
+        <form action="/booking/chon-dich-vu" method="POST">
             <input type="hidden" name="service_id" id="selectedServiceId" required>
+            <input type="hidden" name="service_name" id="selectedServiceName" required>
 
             <div class="service-list-container mb-4">
-
-                <div class="service-item" onclick="selectService(this, 1)">
+                {% if services %}
+                {% for s in services %}
+                <div class="service-item" onclick="selectService(this, {{ s.id }}, '{{ s.ten_dich_vu }}')">
                     <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="fw-bold mb-0">Khám và tư vấn tổng quát</h6>
-                        <span class="service-price">200.000đ</span>
+                        <h6 class="fw-bold mb-0">{{ s.ten_dich_vu }} </h6>
+                        <span class="service-price">{{ s.don_gia }} </span>
                     </div>
                     <p class="text-muted small mb-2">Khám và tư vấn toàn diện về tình trạng răng miệng.</p>
-                    <div class="service-duration">
-                        <i class="far fa-clock me-1"></i> 30 phút
-                    </div>
                 </div>
-
-                <div class="service-item" onclick="selectService(this, 2)">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="fw-bold mb-0">Trám răng Composite thẩm mỹ</h6>
-                        <span class="service-price">350.000đ</span>
-                    </div>
-                    <p class="text-muted small mb-2">Trám răng bằng vật liệu Composite cao cấp, màu sắc tự nhiên.</p>
-                    <div class="service-duration">
-                        <i class="far fa-clock me-1"></i> 45 phút
-                    </div>
-                </div>
-
-                <div class="service-item" onclick="selectService(this, 3)">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="fw-bold mb-0">Nhổ răng thường</h6>
-                        <span class="service-price">300.000đ</span>
-                    </div>
-                    <p class="text-muted small mb-2">Nhổ răng với công nghệ an toàn, ít đau.</p>
-                    <div class="service-duration">
-                        <i class="far fa-clock me-1"></i> 30 phút
-                    </div>
-                </div>
-                <div class="service-item" onclick="selectService(this, 4)">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="fw-bold mb-0">Lấy cao răng siêu âm</h6>
-                        <span class="service-price">150.000đ</span>
-                    </div>
-                    <p class="text-muted small mb-2">Làm sạch mảng bám, giúp răng sáng bóng.</p>
-                    <div class="service-duration">
-                        <i class="far fa-clock me-1"></i> 20 phút
-                    </div>
-                </div>
-
+                {% endfor %}
+                {% endif %}
             </div>
 
             <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-3" id="btnContinue" disabled>
