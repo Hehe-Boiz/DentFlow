@@ -13,4 +13,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 cloudinary.config(cloud_name=os.getenv('CLOUD_NAME'),api_key=os.getenv('CLOUD_API_KEY'),api_secret=os.getenv('CLOUD_API_SECRET'))
 
 login = LoginManager(app=app)
+login.login_view = 'login_view'
+
 db = SQLAlchemy(app=app)
+from DentFlowApp.apis import loginApis, receptionistApis

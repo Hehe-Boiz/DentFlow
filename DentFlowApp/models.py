@@ -58,6 +58,7 @@ class NhanVien(db.Model):
     dia_chi = Column(String(255), nullable=False)
     muc_luong = Column(Float)
     ngay_vao_lam = Column(DateTime, default=datetime.now())
+    vai_tro = Column(sqlEnum(UserRole), default=UserRole.RECEPTIONIST)
 
     #Mỗi nhân viên có 1 tài khoản
     nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=True)
