@@ -1,6 +1,8 @@
 from logging import addLevelName
 
-from DentFlowApp import app
+from sqlalchemy.exc import IntegrityError
+
+from DentFlowApp import app,db
 from flask import request, redirect, render_template
 from flask_login import login_user, logout_user, current_user, AnonymousUserMixin
 from DentFlowApp import login
@@ -43,6 +45,32 @@ def login_process():
 
     next = request.args.get('next')
     return redirect(next if next else '/')
+
+@app.route('/register', methods=['post'])
+def register_process():
+    data = request.form
+    password = data.get('password')
+    confirm = data.get('confirm')
+    if password != confirm:
+        err_msg = 'Mật khẩu không khớp!'
+        prev_info = {
+            'username': data.get('username'),
+            'name': data.get('name'),
+            'phone': data.get('phone'),
+        }
+        return render_template('register.html', err_msg=err_msg, prev_info=prev_info)
+
+    try:
+        userDao.add_user(ho_ten=data.get('name'), so_dien_thoai=data.get('phone'), username=data.get('username'), password=password, avatar=request.files.get('avatar'))
+        u = userDao.auth_user(username=data.get('username'), password=password)
+        if u:
+            login_user(user=u)
+        return redirect('/')
+    except IntegrityError as e:
+        db.session.rollback()
+        return render_template('register.html', err_msg="Tên người dùng hiện tại đã trùng")
+    except Exception as ex:
+        return render_template('register.html', err_msg=str(ex))
 
 
 @app.route('/logout')

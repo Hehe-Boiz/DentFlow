@@ -1,38 +1,117 @@
-{% block content %}
-<h1 class="text-success text-center mt-2">ĐĂNG KÝ NGƯỜI DÙNG</h1>
+{% extends 'layout/base.html' %}
 
-{% if err_msg %}
-<div class="alert alert-danger">{{err_msg}}</div>
-{% endif %}
+{% block title %}Đăng nhập{% endblock %}
 
-<form method="post" action="/register" enctype="multipart/form-data">
-    <div class="form-floating mb-3 mt-3">
-        <input type="text" class="form-control" id="name" placeholder="Họ tên" name="name" required />
-        <label for="name">Họ tên</label>
-    </div>
-
-    <div class="form-floating mb-3 mt-3">
-        <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập" name="username" required />
-        <label for="username">Tên đăng nhập</label>
-    </div>
-
-    <div class="form-floating mt-3 mb-3">
-        <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="password" required />
-        <label for="pwd">Mật khẩu</label>
-    </div>
-
-    <div class="form-floating mt-3 mb-3">
-        <input type="password" class="form-control" id="confirm" placeholder="Xác nhận mật khẩu" name="confirm" required />
-        <label for="confirm">Xác nhận mật khẩu</label>
-    </div>
-
-    <div class="form-floating mt-3 mb-3">
-        <input type="file" class="form-control" id="avatar" name="avatar" required />
-        <label for="avatar">Ảnh đại diện</label>
-    </div>
-
-    <div class="form-floating mt-3 mb-3">
-        <button type="submit" class="btn btn-danger">Đăng ký</button>
-    </div>
-</form>
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_page.css') }}"/>
 {% endblock %}
+
+{% block content %}
+
+<div class="main-content mt-4">
+        <div class="login-card">
+            <h3 class="fw-bold mb-4 text-center">Đăng Ký</h3>
+            {% if err_msg %}
+                <div class="alert alert-danger">{{err_msg}}</div>
+            {% endif %}
+            <form method="post" action="/register" enctype="multipart/form-data">
+                {% set previous_info = {'username':'', 'name': '', 'phone': ''} %}
+                {% if prev_info %}
+                {% set previous_info = prev_info %}
+                {% endif %}
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label fw-medium">Họ và Tên</label>
+                    <div class="input-group input-group-custom">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control form-control-lg fs-6" id="nameInput" value="{{ previous_info.name }}" name="name" placeholder="Họ và Tên" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="usernameInput" class="form-label fw-medium">Username</label>
+                    <div class="input-group input-group-custom">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" class="form-control form-control-lg fs-6" id="usernameInput" name="username" value="{{ previous_info.username }}" placeholder="Tên đăng nhập" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="passwordInput" class="form-label fw-medium">Password</label>
+                    <div class="input-group input-group-custom">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control form-control-lg fs-6" id="passwordInput" name="password" placeholder="Mật khẩu" required>
+                        <button class="btn btn-toggle-password" type="button" id="togglePasswordBtn">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="passwordConfirm" class="form-label fw-medium">Confirm Password</label>
+                    <div class="input-group input-group-custom">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control form-control-lg fs-6" id="passwordConfirm" name="confirm" placeholder="Xác nhận mật khẩu" required>
+                        <button class="btn btn-toggle-password" type="button" id="togglePasswordConfirm">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="phoneInput" class="form-label fw-medium">Số điện thoại</label>
+                    <div class="input-group input-group-custom">
+                        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                        <input type="text" class="form-control form-control-lg fs-6" id="phoneInput" name="phone" value="{{ previous_info.phone }}" placeholder="Số điện thoại" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="avatar" class="form-label fw-medium">Ảnh đại diện</label>
+                    <div class="input-group input-group-custom">
+                        <span class="input-group-text"><i class="fa-solid fa-camera"></i></span>
+                        <input type="file" class="form-control form-control-lg fs-6" id="avatar" name="avatar" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-login w-100 mb-4">Đăng Ký</button>
+
+                <div class="">
+                    <div class="text-center">
+                        <p class="text-muted">Bạn đã có tài khoản?
+                            <a href="/login" class="text-decoration-none fw-medium" style="color: #2563eb;">Đăng nhập</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
