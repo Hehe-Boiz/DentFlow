@@ -1,0 +1,46 @@
+{% extends 'layout/base_service.html' %}
+
+{% block title %}Thanh toan hoa don{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}"/>
+{% endblock %}
+
+{% block service_content %}
+    <div class="card rounded-4 p-2 display-none">
+        <div class="card-body ">
+            <div class="fw-bold  fs-5 m-2">
+                <i class="fas fa-search text-white p-2 rounded-2 bg-primary"></i>
+                <span class="fw-light text-primary">
+                Tra cuu phieu dieu tri
+            </span>
+            </div>
+
+            <form class="d-flex mt-3 " action="{{ url_for('search_pdt_view') }}" role="search">
+                <input class="form-control me-2" name="code" type="search" placeholder="Nhap ma so thanh toan"
+                       aria-label="Search">
+                <button class="btn text-white btn-outline-success bg-primary" type="submit">Tim kiem</button>
+            </form>
+            {% if phieu_dieu_tri %}
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Phiếu điều trị</h5>
+                        <div><b>Mã số:</b> {{ phieu_dieu_tri.id }}</div>
+                        <div><b>Bệnh nhân:</b> {{ phieu_dieu_tri.ho_so_benh_nhan.ho_ten }}</div>
+                        <div><b>Tổng tiền:</b> {{ phieu_dieu_tri.dich_vu.don_gia }}</div>
+                    </div>
+                </div>
+                {% include './layout/button_accept_deny.html' %}
+            {% elif request.args.get('code') %}
+                <div class="alert alert-warning mt-3">
+                    Không tìm thấy phiếu điều trị cho mã: {{ request.args.get('code') }}
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/receptionist.js') }}"></script>
+{% endblock %}
