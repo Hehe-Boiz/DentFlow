@@ -1,33 +1,47 @@
 function selectService(element, id, name) {
-    // 1. Xóa class 'selected' ở tất cả các item
+
     const allItems = document.querySelectorAll('.service-item');
     allItems.forEach(item => item.classList.remove('selected'));
 
-    // 2. Thêm class 'selected' vào item vừa bấm
     element.classList.add('selected');
 
-    // 3. Gán giá trị ID vào input ẩn (để gửi về server Flask)
     document.getElementById('selectedServiceId').value = id;
     document.getElementById('selectedServiceName').value = name;
 
-    // 4. Kích hoạt nút Tiếp tục
     document.getElementById('btnContinue').disabled = false;
 }
 
 
-// 1. Xử lý chọn Bác sĩ
+
 function selectDoctor(element, id) {
-    // Xóa class selected cũ
+
     document.querySelectorAll('.doctor-card').forEach(item => item.classList.remove('selected'));
-    // Thêm vào card mới chọn
+
     element.classList.add('selected');
-    // Gán ID vào input ẩn
+
     document.getElementById('selectedDoctorId').value = id;
-    // Kiểm tra điều kiện để enable nút tiếp tục
+
+    if(dateInput.value !== ""){
+        getSchedules(doctorInput.value, dateInput.value)
+    }
     checkFormValidity();
 }
 
-// 2. Xử lý validate form để enable nút "Tiếp tục"
+function getSchedules(id, day) {
+    fetch("/api/get-schedules", {
+        method: "post",
+        body: JSON.stringify({
+            "id": id,
+            "day": day,
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => res.json()).then(data => {
+        console.log(data)
+    });
+}
+
 const dateInput = document.getElementById('bookingDate');
 const timeInputs = document.querySelectorAll('input[name="time_slot"]');
 const doctorInput = document.getElementById('selectedDoctorId');
@@ -50,11 +64,21 @@ function checkFormValidity() {
     }
 }
 
-// Lắng nghe sự kiện thay đổi của Ngày và Giờ
-dateInput.addEventListener('change', checkFormValidity);
-timeInputs.forEach(input => {
-    input.addEventListener('change', checkFormValidity);
-});
+
+function lay_danh_sach(){
+    if (doctorInput.value !== "" && dateInput.value !== ""){
+        console.log(doctorInput.value)
+        getSchedules(doctorInput.value, dateInput.value)
+    }else{
+        console.log('nothing happen')
+    }
+}
+
+dateInput.addEventListener('change', lay_danh_sach);
+
+//timeInputs.forEach(input => {
+//    input.addEventListener('change', checkFormValidity);
+//});
 
 // Thiết lập ngày tối thiểu là hôm nay
 const today = new Date().toISOString().split('T')[0];

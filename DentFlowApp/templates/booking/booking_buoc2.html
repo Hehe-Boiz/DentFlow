@@ -63,7 +63,7 @@
                 <div class="row g-3">
                     {% for doctor in doctors %}
                     <div class="col-md-6">
-                        <div class="doctor-card" onclick="selectDoctor(this, {{ doctor.id }})">
+                        <div class="doctor-card" onclick="selectDoctor(this, '{{ doctor.ma_bac_si }}')">
                             <div>
                                 <h6 class="fw-bold mb-1">{{ doctor.ho_ten }}</h6>
                                 <div class="small text-muted">Răng hàm mặt</div>
