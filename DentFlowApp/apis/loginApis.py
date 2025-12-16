@@ -9,22 +9,11 @@ from DentFlowApp import login
 from DentFlowApp.dao import userDao
 from DentFlowApp.models import UserRole
 from DentFlowApp.admin import admin
-
+from DentFlowApp import utils
 
 @app.route("/")
-def hello_world():
-    can_do = {}
-    if current_user.is_authenticated:
-        if current_user.vai_tro == UserRole.USER:
-            can_do['Hồ sơ của tôi'] = '#'
-            can_do['Lịch hẹn của tôi'] = '#'
-        else:
-            for item in admin.menu():
-                if item.is_accessible():
-                    if item.name != 'Home' and item.name != 'Đăng xuất':
-                        can_do[item.name] = item.get_url()
-    print(can_do)
-    return render_template("index.html", can_do=can_do)
+def index():
+    return render_template("index.html", can_do=utils.user_can_do())
 
 @app.route('/login')
 def login_view():

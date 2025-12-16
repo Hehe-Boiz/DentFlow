@@ -1,0 +1,127 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Đặt lịch khám{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}"/>
+{% endblock %}
+
+{% block content %}
+
+<div class="booking-header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="/" class="btn-back">
+            <i class="fas fa-arrow-left me-2"></i> Quay lại
+        </a>
+        <div class="fw-bold text-primary fs-5">
+            <i class="fas fa-tooth"></i> DENTALFLOW
+        </div>
+        <div style="width: 80px;"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="stepper-wrapper">
+        <div class="step-item active">
+            <div class="step-circle">1</div>
+            <div class="step-text">Dịch vụ</div>
+        </div>
+        <div class="step-item">
+            <div class="step-circle">2</div>
+            <div class="step-text">Thời gian</div>
+        </div>
+        <div class="step-item">
+            <div class="step-circle">3</div>
+            <div class="step-text">Xác nhận</div>
+        </div>
+    </div>
+
+    <div class="booking-card">
+
+        <div class="user-info-box">
+            <div class="avatar-circle">
+                <i class="far fa-user"></i>
+            </div>
+            <div>
+                <div class="small text-muted">Đặt lịch cho</div>
+                <div class="fw-bold text-dark">
+                    {{ current_user.ho_ten if current_user.is_authenticated else 'Khách Vãng Lai' }}
+                </div>
+                <div class="small text-muted">0912345678</div>
+            </div>
+        </div>
+
+        <h4 class="mb-3 fw-bold">Chọn dịch vụ</h4>
+        <p class="text-muted mb-4">Bạn muốn sử dụng dịch vụ nào?</p>
+
+        <form action="#" method="POST">
+            <input type="hidden" name="service_id" id="selectedServiceId" required>
+
+            <div class="service-list-container mb-4">
+
+                <div class="service-item" onclick="selectService(this, 1)">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="fw-bold mb-0">Khám và tư vấn tổng quát</h6>
+                        <span class="service-price">200.000đ</span>
+                    </div>
+                    <p class="text-muted small mb-2">Khám và tư vấn toàn diện về tình trạng răng miệng.</p>
+                    <div class="service-duration">
+                        <i class="far fa-clock me-1"></i> 30 phút
+                    </div>
+                </div>
+
+                <div class="service-item" onclick="selectService(this, 2)">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="fw-bold mb-0">Trám răng Composite thẩm mỹ</h6>
+                        <span class="service-price">350.000đ</span>
+                    </div>
+                    <p class="text-muted small mb-2">Trám răng bằng vật liệu Composite cao cấp, màu sắc tự nhiên.</p>
+                    <div class="service-duration">
+                        <i class="far fa-clock me-1"></i> 45 phút
+                    </div>
+                </div>
+
+                <div class="service-item" onclick="selectService(this, 3)">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="fw-bold mb-0">Nhổ răng thường</h6>
+                        <span class="service-price">300.000đ</span>
+                    </div>
+                    <p class="text-muted small mb-2">Nhổ răng với công nghệ an toàn, ít đau.</p>
+                    <div class="service-duration">
+                        <i class="far fa-clock me-1"></i> 30 phút
+                    </div>
+                </div>
+                <div class="service-item" onclick="selectService(this, 4)">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="fw-bold mb-0">Lấy cao răng siêu âm</h6>
+                        <span class="service-price">150.000đ</span>
+                    </div>
+                    <p class="text-muted small mb-2">Làm sạch mảng bám, giúp răng sáng bóng.</p>
+                    <div class="service-duration">
+                        <i class="far fa-clock me-1"></i> 20 phút
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-3" id="btnContinue" disabled>
+                Tiếp tục
+            </button>
+        </form>
+
+    </div>
+
+    <div class="container" style="max-width: 800px;">
+        <div class="mt-4 p-3 bg-white rounded-3 border">
+            <h6 class="fw-bold text-primary mb-2"><i class="fas fa-question-circle me-1"></i> Cần hỗ trợ?</h6>
+            <div class="small text-muted">Hotline: <span class="text-dark fw-bold">1900.1234</span></div>
+            <div class="small text-muted">Email: <a href="#" class="text-decoration-none">contact@pearldental.vn</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+{% endblock %}

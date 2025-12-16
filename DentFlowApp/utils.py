@@ -1,6 +1,21 @@
 from datetime import datetime
-from DentFlowApp.models import LichHen, Thuoc
+from DentFlowApp.models import LichHen, Thuoc, UserRole
 from DentFlowApp import db
+from flask_login import current_user
+from DentFlowApp.admin import admin
+
+def user_can_do():
+    can_do = {}
+    if current_user.is_authenticated:
+        if current_user.vai_tro == UserRole.USER:
+            can_do['Hồ sơ của tôi'] = '#'
+            can_do['Lịch hẹn của tôi'] = '#'
+        else:
+            for item in admin.menu():
+                if item.is_accessible():
+                    if item.name != 'Home' and item.name != 'Đăng xuất':
+                        can_do[item.name] = item.get_url()
+    return can_do
 
 
 class ValidationUtils:
