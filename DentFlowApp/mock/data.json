@@ -2,87 +2,176 @@
   "users": [
     {
       "username": "admin",
-      "password": "123456",
+      "password": "123",
       "ho_ten": "Quản Trị Viên",
       "vai_tro": "ADMIN",
       "so_dien_thoai": "0909000000",
-      "avatar": "https://via.placeholder.com/150"
+      "gioi_tinh": "NAM",
+      "avatar": ""
     },
     {
-      "username": "letan",
-      "password": "123456",
-      "ho_ten": "Lễ Tân",
+      "username": "letan_1",
+      "password": "123",
+      "ho_ten": "Lễ Tân A",
       "vai_tro": "RECEPTIONIST",
       "so_dien_thoai": "0909000001",
-      "avatar": "https://via.placeholder.com/150"
+      "gioi_tinh": "NU",
+      "avatar": ""
+    },
+    {
+      "username": "thungan_1",
+      "password": "123",
+      "ho_ten": "Thu Ngân B",
+      "vai_tro": "CASHIER",
+      "so_dien_thoai": "0909000002",
+      "gioi_tinh": "NU",
+      "avatar": ""
     },
     {
       "username": "bacsi_a",
-      "password": "123456",
-      "ho_ten": "Bác Sĩ A",
+      "password": "123",
+      "ho_ten": "Nguyễn Văn A",
       "vai_tro": "DOCTOR",
       "so_dien_thoai": "0909000003",
-      "avatar": "https://via.placeholder.com/150"
+      "gioi_tinh": "NAM",
+      "avatar": ""
     },
     {
       "username": "bacsi_b",
-      "password": "123456",
-      "ho_ten": "Bác Sĩ B",
+      "password": "123",
+      "ho_ten": "Trần Thị B",
       "vai_tro": "DOCTOR",
       "so_dien_thoai": "0909000004",
-      "avatar": "https://via.placeholder.com/150"
+      "gioi_tinh": "NU",
+      "avatar": ""
+    },
+    {
+      "username": "benhnhan_a",
+      "password": "123",
+      "ho_ten": "Lê Văn Khách",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0912345678",
+      "gioi_tinh": "NAM",
+      "avatar": ""
+    },
+    {
+      "username": "benhnhan_b",
+      "password": "123",
+      "ho_ten": "Nguyễn Thị Bệnh",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0987654321",
+      "gioi_tinh": "NU",
+      "avatar": ""
+    }
+  ],
+  "staffs": [
+    {
+      "ma_nv": "NV01",
+      "username_lien_ket": "letan_1",
+      "dia_chi": "Q1, TP.HCM",
+      "muc_luong": 8000000,
+      "nam_sinh": 1995
+    },
+    {
+      "ma_nv": "NV02",
+      "username_lien_ket": "thungan_1",
+      "dia_chi": "Q3, TP.HCM",
+      "muc_luong": 9000000,
+      "nam_sinh": 1992
     }
   ],
   "doctors": [
     {
-      "ma_bac_si": "BS001",
-      "ho_ten": "Nguyễn Văn A",
-      "so_dien_thoai": "0909000003",
-      "loai_bac_si": "TOAN_THOI_GIAN",
+      "ma_bac_si": "BS01",
       "username_lien_ket": "bacsi_a",
-      "luong_co_ban": 15000000
+      "loai_bac_si": "TOAN_THOI_GIAN",
+      "luong_co_ban": 20000000
     },
     {
-      "ma_bac_si": "BS002",
-      "ho_ten": "Trần Thị B",
-      "so_dien_thoai": "0909000004",
-      "loai_bac_si": "BAN_THOI_GIAN",
+      "ma_bac_si": "BS02",
       "username_lien_ket": "bacsi_b",
-      "muc_luong_gio": 200000
+      "loai_bac_si": "BAN_THOI_GIAN",
+      "muc_luong_gio": 300000
+    }
+  ],
+  "patients": [
+    {
+      "username_lien_ket": "benhnhan_a",
+      "dia_chi": "Q5, TP.HCM"
+    },
+    {
+      "username_lien_ket": "benhnhan_b",
+      "dia_chi": "Hà Nội"
     }
   ],
   "services": [
-    { "ten_dich_vu": "Cạo vôi răng", "don_gia": 200000 },
-    { "ten_dich_vu": "Trám răng", "don_gia": 500000 },
-    { "ten_dich_vu": "Nhổ răng", "don_gia": 300000 },
-    { "ten_dich_vu": "Tẩy trắng răng", "don_gia": 1500000 }
+    {
+      "ten_dich_vu": "Cạo vôi răng",
+      "don_gia": 200000
+    },
+    {
+      "ten_dich_vu": "Trám răng",
+      "don_gia": 500000
+    },
+    {
+      "ten_dich_vu": "Nhổ răng",
+      "don_gia": 300000
+    },
+    {
+      "ten_dich_vu": "Tẩy trắng răng",
+      "don_gia": 1500000
+    }
   ],
   "medicines": [
     {
       "ten_thuoc": "Paracetamol 500mg",
       "batches": [
-        { "han_dung_ngay": 365, "so_luong": 100 }
+        {
+          "han_dung_ngay": 365,
+          "so_luong": 500
+        }
       ]
     },
     {
       "ten_thuoc": "Amoxicillin 500mg",
       "batches": [
-        { "han_dung_ngay": 700, "so_luong": 200 }
+        {
+          "han_dung_ngay": 700,
+          "so_luong": 1000
+        }
       ]
     }
   ],
-  "patients": [
+  "schedules": [
     {
-      "ho_ten": "Lê Văn C",
-      "so_dien_thoai": "0912345678",
-      "gioi_tinh": "NAM",
-      "dia_chi": "TP.HCM"
+      "ma_bac_si": "BS01",
+      "ngay_offset": 0,
+      "gio_bat_dau": "08:00",
+      "gio_ket_thuc": "17:00",
+      "trang_thai": "SAN_SANG"
     },
     {
-      "ho_ten": "Phạm Thị D",
-      "so_dien_thoai": "0987654321",
-      "gioi_tinh": "NU",
-      "dia_chi": "Hà Nội"
+      "ma_bac_si": "BS02",
+      "ngay_offset": 1,
+      "gio_bat_dau": "17:00",
+      "gio_ket_thuc": "20:00",
+      "trang_thai": "SAN_SANG"
+    }
+  ],
+  "appointments": [
+    {
+      "ma_bac_si": "BS01",
+      "patient_username": "benhnhan_a",
+      "service_name": "Cạo vôi răng",
+      "ngay_offset": 1,
+      "gio_kham": "09:00"
+    },
+    {
+      "ma_bac_si": "BS02",
+      "patient_username": "benhnhan_b",
+      "service_name": "Trám răng",
+      "ngay_offset": 1,
+      "gio_kham": "18:00"
     }
   ]
 }
