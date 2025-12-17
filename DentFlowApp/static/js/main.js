@@ -17,3 +17,58 @@ function getDataProfile(so_dien_thoai, ho_ten, user_id) {
     ht.style.backgroundColor = "#e9ecef";
     sdt.style.backgroundColor = "#e9ecef";
 }
+
+function searchPdt() {
+    const maso = document.getElementById('input_maso').value.trim(); // Lưu ý ID input phải đúng
+    const resultDiv = document.getElementById('result_container');
+    const errorDiv = document.getElementById('error_alert'); // Sửa lại ID cho khớp HTML
+    const loader = document.getElementById('loading_spinner');
+
+    resultDiv.style.display = 'none';
+    errorDiv.style.display = 'none';
+
+    if (!maso) {
+        alert("Vui lòng nhập mã phiếu!");
+        return;
+    }
+
+    loader.style.display = 'block';
+    fetch(`/api/phieu-dieu-tri/search?code=${maso}`)
+        .then(response => {
+            if (!response.ok) throw new Error('Lỗi kết nối hoặc không có quyền');
+            return response.json();
+        })
+        .then(respData => {
+            loader.style.display = 'none';
+            if (respData.status === 'success' && respData.data.length > 0) {
+                const item = respData.data[0];
+
+                document.getElementById('pdt_id').innerText = item['id'];
+
+                document.getElementById('pdt_ho_ten').innerText = item['ho_so_benh_nhan.ho_ten'];
+                document.getElementById('pdt_dich_vu').innerText = item['dich_vu.ten_dich_vu'];
+                const donGia = item['dich_vu.don_gia'];
+                document.getElementById('pdt_dongia').innerText = new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(donGia);
+
+                document.getElementById('pdt_ghichu').innerText = item.ghi_chu || 'Không có';
+                resultDiv.style.display = 'block';
+            } else {
+                errorDiv.innerText = "Không tìm thấy phiếu điều trị này.";
+                errorDiv.style.display = 'block';
+            }
+        })
+        .catch(err => {
+            loader.style.display = 'none';
+            console.error(err);
+            errorDiv.innerText = "Lỗi hệ thống, vui lòng thử lại.";
+            errorDiv.style.display = 'block';
+        });
+}
+
+function isBlock(id) {
+    const el = document.getElementById(id)
+    return el && el.style.display === 'block'
+}

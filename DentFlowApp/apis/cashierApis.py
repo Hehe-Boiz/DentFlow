@@ -1,0 +1,24 @@
+import http
+from DentFlowApp import app
+from flask import render_template
+from flask_login import current_user, login_required
+from DentFlowApp import utils
+from DentFlowApp.models import UserRole
+
+
+@app.route('/cashier', methods=['GET'])
+@login_required
+def cashier_view():
+    if current_user.is_authenticated and current_user.vai_tro == UserRole.CASHIER:
+        can_do = utils.user_can_do()
+        return render_template('cashier.html', can_do=can_do)
+    return http.HTTPStatus.FORBIDDEN
+
+
+@app.route('/cashier/tra-cuu', methods=['GET'])
+@login_required
+def cashier_phieu_dieu_tri_search():
+    if current_user.is_authenticated and current_user.vai_tro == UserRole.CASHIER:
+        can_do = utils.user_can_do()
+        return render_template('cashier_search_pdt.html', can_do=can_do)
+    return http.HTTPStatus.FORBIDDEN

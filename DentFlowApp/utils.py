@@ -4,6 +4,7 @@ from DentFlowApp import db
 from flask_login import current_user
 from DentFlowApp.admin import admin
 
+
 def user_can_do():
     can_do = {}
     if current_user.is_authenticated:
