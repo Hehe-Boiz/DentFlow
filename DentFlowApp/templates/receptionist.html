@@ -1,0 +1,19 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Receptionist view{% endblock %}
+
+{% block content %}
+    <div class="btn-group mb-4">
+        <button class="btn btn-primary"
+                onclick="goToReceptionist(this)"
+                data-url="{{ url_for('receptionist_phieu_dieu_tri_search') }}">
+            Tra cứu phiếu điều trị
+        </button>
+
+        <button class="btn btn-primary"
+                onclick="goToReceptionist(this)"
+                data-url="{{ url_for('register_patient_view') }}">
+            Tạo hồ sơ người dùng
+        </button>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'layout/base_service.html' %}
+
+{% block title %}Tìm kiếm phiếu điều trị{% endblock %}
+{% block service_content %}
+    {% include 'phieu_dieu_tri_search_service.html' %}
+
+    <div class="d-flex justify-content-end gap-2 mt-3">
+        <button type="button" class="btn btn-success">
+            Xác nhận
+        </button>
+        <button type="button" class="btn btn-danger">
+            Hủy xác nhận
+        </button>
+    </div>
+{% endblock %}

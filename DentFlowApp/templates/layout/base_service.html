@@ -7,10 +7,9 @@
 {% block content %}
     <div class="booking-header mb-4">
         <div class="d-flex justify-content-between align-items-center">
-            <a href="/" class="btn-back">
+            <a href="/{{ current_user.vai_tro.name | lower }}" class="btn-back">
                 <i class="fas fa-arrow-left me-2"></i> Quay lại
             </a>
-
             <div class="fw-bold text-primary fs-5">
                 <i class="fas fa-tooth"></i> DENTALFLOW
             </div>
@@ -19,23 +18,6 @@
         </div>
     </div>
 
-    <div class="btn-group mb-4">
-        <button class="btn btn-primary"
-                onclick="goToReceptionist(this)"
-                data-url="{{ url_for('search_treatment_slips') }}">
-            Tra cứu phiếu điều trị
-        </button>
-
-        <button class="btn btn-primary"
-                onclick="goToReceptionist(this)"
-                data-url="{{ url_for('register_patient_view') }}">
-            Tạo hồ sơ người dùng
-        </button>
-
-        <button class="btn btn-primary">
-            Thanh toán
-        </button>
-    </div>
 
     {% block service_content %}{% endblock %}
 {% endblock %}

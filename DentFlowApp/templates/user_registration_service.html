@@ -1,12 +1,34 @@
 {% extends 'layout/base_service.html' %}
 
-{% block title %}Thanh toan hoa don{% endblock %}
+{% block title %}Tao ho so nguoi dung{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}"/>
 {% endblock %}
 
 {% block service_content %}
+    <div class="container mt-3 ">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+
+                        {% if category == 'success' %}
+                            <i class="fa-solid fa-check-circle me-2"></i>
+                        {% elif category == 'warning' %}
+                            <i class="fa-solid fa-exclamation-triangle me-2"></i>
+                        {% else %}
+                            <i class="fa-solid fa-bug me-2"></i>
+                        {% endif %}
+
+                        {{ message }}
+
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
     <div class="row g-3 ">
         {% include "search_user_service.html" %}
         {% include "create_user_profile.html" %}

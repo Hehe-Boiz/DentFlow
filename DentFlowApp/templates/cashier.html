@@ -1,0 +1,17 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Cashier view{% endblock %}
+
+{% block content %}
+    <div class="btn-group mb-4">
+        <button class="btn btn-primary"
+                onclick="goToReceptionist(this)"
+                data-url="{{ url_for('cashier_phieu_dieu_tri_search') }}">
+            Tra cứu phiếu điều trị
+        </button>
+
+        <button class="btn btn-primary">
+            Thanh toán
+        </button>
+    </div>
+{% endblock %}
