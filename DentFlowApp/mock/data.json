@@ -57,59 +57,11 @@
       "avatar": ""
     },
     {
-      "username": "benhnhan_c",
-      "password": "123",
-      "ho_ten": "Phạm Văn Cường",
-      "vai_tro": "USER",
-      "so_dien_thoai": "0901112223",
-      "avatar": ""
-    },
-    {
-      "username": "benhnhan_d",
-      "password": "123",
-      "ho_ten": "Trần Thị Dung",
-      "vai_tro": "USER",
-      "so_dien_thoai": "0904445556",
-      "avatar": ""
-    },
-    {
-      "username": "benhnhan_e",
-      "password": "123",
-      "ho_ten": "Lê Hoàng Nam",
-      "vai_tro": "USER",
-      "so_dien_thoai": "0907778889",
-      "avatar": ""
-    },
-    {
-      "username": "benhnhan_f",
-      "password": "123",
-      "ho_ten": "Nguyễn Thu Hà",
-      "vai_tro": "USER",
-      "so_dien_thoai": "0909990001",
-      "avatar": ""
-    },
-    {
-      "username": "benhnhan_g",
-      "password": "123",
-      "ho_ten": "Hoàng Văn Em",
-      "vai_tro": "USER",
-      "so_dien_thoai": "0909990002",
-      "avatar": ""
-    },
-    {
       "username": "user_moi_1",
       "password": "123",
       "ho_ten": "Nguyễn Văn Mới",
       "vai_tro": "USER",
       "so_dien_thoai": "0999888777",
-      "avatar": ""
-    },
-    {
-      "username": "user_moi_2",
-      "password": "123",
-      "ho_ten": "Trần Thị Chưa Khám",
-      "vai_tro": "USER",
-      "so_dien_thoai": "0999888666",
       "avatar": ""
     }
   ],
@@ -167,39 +119,18 @@
       "username_lien_ket": "benhnhan_b"
     },
     {
-      "ho_ten": "Phạm Văn Cường",
+      "ho_ten": "Phạm Văn Cường (Vãng lai)",
       "so_dien_thoai": "0901112223",
       "gioi_tinh": "NAM",
       "dia_chi": "Thủ Đức, TP.HCM",
-      "username_lien_ket": "benhnhan_c"
+      "username_lien_ket": null
     },
     {
-      "ho_ten": "Trần Thị Dung",
+      "ho_ten": "Trần Thị Dung (Vãng lai)",
       "so_dien_thoai": "0904445556",
       "gioi_tinh": "NU",
       "dia_chi": "Bình Thạnh, TP.HCM",
-      "username_lien_ket": "benhnhan_d"
-    },
-    {
-      "ho_ten": "Lê Hoàng Nam",
-      "so_dien_thoai": "0907778889",
-      "gioi_tinh": "NAM",
-      "dia_chi": "Quận 7, TP.HCM",
-      "username_lien_ket": "benhnhan_e"
-    },
-    {
-      "ho_ten": "Nguyễn Thu Hà",
-      "so_dien_thoai": "0909990001",
-      "gioi_tinh": "NU",
-      "dia_chi": "Gò Vấp, TP.HCM",
-      "username_lien_ket": "benhnhan_f"
-    },
-    {
-      "ho_ten": "Hoàng Văn Em",
-      "so_dien_thoai": "0909990002",
-      "gioi_tinh": "KHAC",
-      "dia_chi": "Đồng Nai",
-      "username_lien_ket": "benhnhan_g"
+      "username_lien_ket": null
     }
   ],
   "services": [
@@ -236,6 +167,15 @@
         {
           "han_dung_ngay": 700,
           "so_luong": 1000
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Ibuprofen 400mg",
+      "batches": [
+        {
+          "han_dung_ngay": 365,
+          "so_luong": 200
         }
       ]
     }
@@ -277,13 +217,6 @@
       "service_name": "Nhổ răng",
       "ngay_offset": 0,
       "gio_kham": "10:30"
-    },
-    {
-      "ma_bac_si": "BS02",
-      "patient_phone": "0904445556",
-      "service_name": "Tẩy trắng răng",
-      "ngay_offset": 1,
-      "gio_kham": "19:00"
     }
   ]
 }
