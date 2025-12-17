@@ -7,83 +7,8 @@
 {% endblock %}
 
 {% block service_content %}
-    {% include "search_user_service.html" %}
-    <div class="card ">
-        <div class="card-header fw-bold text-white bg-primary text-xl-center ">
-            Tao ho so nguoi dung
-        </div>
-        <div class="card-body">
-            <div class="row g-3 mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Họ tên</label>
-                    <input
-                            name="ho_ten"
-                            type="text"
-                            class="form-control"
-                            placeholder="Nguyễn Văn A"
-                            required
-                    >
-                </div>
-
-                <div class="col-md-6">
-                    <label class="form-label">Số điện thoại</label>
-                    <input
-                            name="so_dien_thoai"
-                            type="tel"
-                            class="form-control"
-                            placeholder="09xxxxxxxx"
-                            pattern="[0-9]{10}"
-                            required
-                    >
-                </div>
-
-                <div class="col-12">
-                    <label class="form-label">Địa chỉ</label>
-                    <input
-                            name="dia_chi"
-                            type="text"
-                            class="form-control"
-                            placeholder="Số nhà, đường, quận..."
-                    >
-                </div>
-
-                <div class="col-md-6">
-                    <label class="form-label d-block">Giới tính</label>
-                    <div class="form-check form-check-inline">
-                        <input
-                                class="form-check-input"
-                                type="radio"
-                                name="gioi_tinh"
-                                id="gt-nam"
-                                value="nam"
-                                checked
-                        >
-                        <label class="form-check-label" for="gt-nam">Nam</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input
-                                class="form-check-input"
-                                type="radio"
-                                name="gioi_tinh"
-                                id="gt-nu"
-                                value="nu"
-                        >
-                        <label class="form-check-label" for="gt-nu">Nữ</label>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-        </div>
-        <div class="card-footer">
-            {% include './layout/button_accept_deny.html' %}
-        </div>
+    <div class="row g-3 ">
+        {% include "search_user_service.html" %}
+        {% include "create_user_profile.html" %}
     </div>
-{% endblock %}
-
-{% block scripts %}
-    <script src="{{ url_for('static', filename='js/receptionist.js') }}"></script>
 {% endblock %}

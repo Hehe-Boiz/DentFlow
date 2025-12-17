@@ -26,7 +26,7 @@ def register_view():
 
 map = {
     UserRole.ADMIN: '/admin',
-    UserRole.RECEPTIONIST: '/receptionist/search_pdt_view',
+    UserRole.RECEPTIONIST: '/receptionist/phieu-dieu-tri/search',
     UserRole.USER: '/',
 }
 
@@ -41,7 +41,7 @@ def login_process():
         login_user(user=u)
 
     next = request.args.get('next')
-    return redirect(next if next else map[u.vai_tro])
+    return redirect(next if next else map[UserRole.RECEPTIONIST])
 
 
 @app.route('/register', methods=['post'])

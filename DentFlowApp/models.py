@@ -2,15 +2,16 @@ from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, Enum as sqlEnum, DateTime, Date, Time, Double, ForeignKey, Float
 from sqlalchemy.orm import relationship
 from DentFlowApp import db, app
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import enum
 
 
 # ENUMS
 class GioiTinh(enum.Enum):
-    NAM = 1
-    NU = 2
-    KHAC = 3
+    NAM = "Nam"
+    NU = "Nu"
+    KHAC = "Khac"
 
 
 class UserRole(enum.Enum):
@@ -22,22 +23,22 @@ class UserRole(enum.Enum):
 
 
 class TrangThaiLamViec(enum.Enum):
-    DANG_BAN = 1
-    SAN_SANG = 2
-    NGHI = 3
+    DANG_BAN = "Đang bận"
+    SAN_SANG = "Sẵn sàng"
+    NGHI = "Nghỉ"
 
 
 class LoaiBacSi(enum.Enum):
-    TOAN_THOI_GIAN = 1
-    BAN_THOI_GIAN = 2
+    TOAN_THOI_GIAN = "Toàn thời gian"
+    BAN_THOI_GIAN = "Bán thời gian"
 
 
 # MODELS
 class BaseModel(db.Model):
     __abstract__ = True
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ngay_tao = Column(DateTime, default=datetime.now)
-    ngay_cap_nhat = Column(DateTime, onupdate=datetime.now, default=datetime.now)
+    ngay_tao = Column(DateTime, default=datetime.now())
+    ngay_cap_nhat = Column(DateTime, onupdate=datetime.now(), default=datetime.now())
 
 
 class NguoiDung(BaseModel, UserMixin):
@@ -47,7 +48,6 @@ class NguoiDung(BaseModel, UserMixin):
     ho_ten = Column(String(100), nullable=False)
     so_dien_thoai = Column(String(15))
     avatar = Column(String(255))
-    gioi_tinh = Column(sqlEnum(GioiTinh))
     vai_tro = Column(sqlEnum(UserRole), default=UserRole.USER)
 
     # Lấy hồ sơ bênh nhân từ người dùng NguoiDung.ho_so_benh_nhan
@@ -56,8 +56,10 @@ class NguoiDung(BaseModel, UserMixin):
 
 class NhanVien(db.Model):
     ma_nv = Column(String(5), primary_key=True)
+    ho_ten = Column(String(100), nullable=False)
     ngay_sinh = Column(DateTime)
     nam_sinh = Column(Integer)
+    so_dien_thoai = Column(String(15), nullable=False)
     dia_chi = Column(String(255), nullable=False)
     muc_luong = Column(Float)
     ngay_vao_lam = Column(DateTime, default=datetime.now())
@@ -68,10 +70,14 @@ class NhanVien(db.Model):
 
 class HoSoBenhNhan(BaseModel):
     __tablename__ = 'ho_so_benh_nhan'
+    ho_ten = Column(String(100), nullable=False)
+    so_dien_thoai = Column(String(15))
+    ngay_tao = Column(DateTime, default=datetime.utcnow)
     dia_chi = Column(String(255))
+    gioi_tinh = Column(sqlEnum(GioiTinh))
 
     # Tài khoản của người dùng (Nếu có)
-    nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=True)
+    nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
 
     # lịch hẹn và phiếu điều trị tra cứu từ hồ sơ
     lich_hen_ds = relationship('LichHen', backref='ho_so_benh_nhan', lazy=True)
@@ -81,6 +87,9 @@ class HoSoBenhNhan(BaseModel):
 class BacSi(db.Model):
     __tablename__ = 'bac_si'
     ma_bac_si = Column(String(5), primary_key=True)  # Map với maBacSi
+    ho_ten = Column(String(100), nullable=False)
+    so_dien_thoai = Column(String(15))
+    avatar = Column(String(255))
     loai_bac_si = Column(sqlEnum(LoaiBacSi))
 
     # Tài khoản của bác sĩ

@@ -6,7 +6,6 @@
       "ho_ten": "Quản Trị Viên",
       "vai_tro": "ADMIN",
       "so_dien_thoai": "0909000000",
-      "gioi_tinh": "NAM",
       "avatar": ""
     },
     {
@@ -15,7 +14,6 @@
       "ho_ten": "Lễ Tân A",
       "vai_tro": "RECEPTIONIST",
       "so_dien_thoai": "0909000001",
-      "gioi_tinh": "NU",
       "avatar": ""
     },
     {
@@ -24,7 +22,6 @@
       "ho_ten": "Thu Ngân B",
       "vai_tro": "CASHIER",
       "so_dien_thoai": "0909000002",
-      "gioi_tinh": "NU",
       "avatar": ""
     },
     {
@@ -33,7 +30,6 @@
       "ho_ten": "Nguyễn Văn A",
       "vai_tro": "DOCTOR",
       "so_dien_thoai": "0909000003",
-      "gioi_tinh": "NAM",
       "avatar": ""
     },
     {
@@ -42,7 +38,6 @@
       "ho_ten": "Trần Thị B",
       "vai_tro": "DOCTOR",
       "so_dien_thoai": "0909000004",
-      "gioi_tinh": "NU",
       "avatar": ""
     },
     {
@@ -51,7 +46,6 @@
       "ho_ten": "Lê Văn Khách",
       "vai_tro": "USER",
       "so_dien_thoai": "0912345678",
-      "gioi_tinh": "NAM",
       "avatar": ""
     },
     {
@@ -60,13 +54,70 @@
       "ho_ten": "Nguyễn Thị Bệnh",
       "vai_tro": "USER",
       "so_dien_thoai": "0987654321",
-      "gioi_tinh": "NU",
+      "avatar": ""
+    },
+    {
+      "username": "benhnhan_c",
+      "password": "123",
+      "ho_ten": "Phạm Văn Cường",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0901112223",
+      "avatar": ""
+    },
+    {
+      "username": "benhnhan_d",
+      "password": "123",
+      "ho_ten": "Trần Thị Dung",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0904445556",
+      "avatar": ""
+    },
+    {
+      "username": "benhnhan_e",
+      "password": "123",
+      "ho_ten": "Lê Hoàng Nam",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0907778889",
+      "avatar": ""
+    },
+    {
+      "username": "benhnhan_f",
+      "password": "123",
+      "ho_ten": "Nguyễn Thu Hà",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0909990001",
+      "avatar": ""
+    },
+    {
+      "username": "benhnhan_g",
+      "password": "123",
+      "ho_ten": "Hoàng Văn Em",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0909990002",
+      "avatar": ""
+    },
+    {
+      "username": "user_moi_1",
+      "password": "123",
+      "ho_ten": "Nguyễn Văn Mới",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0999888777",
+      "avatar": ""
+    },
+    {
+      "username": "user_moi_2",
+      "password": "123",
+      "ho_ten": "Trần Thị Chưa Khám",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0999888666",
       "avatar": ""
     }
   ],
   "staffs": [
     {
       "ma_nv": "NV01",
+      "ho_ten": "Lễ Tân A",
+      "so_dien_thoai": "0909000001",
       "username_lien_ket": "letan_1",
       "dia_chi": "Q1, TP.HCM",
       "muc_luong": 8000000,
@@ -74,6 +125,8 @@
     },
     {
       "ma_nv": "NV02",
+      "ho_ten": "Thu Ngân B",
+      "so_dien_thoai": "0909000002",
       "username_lien_ket": "thungan_1",
       "dia_chi": "Q3, TP.HCM",
       "muc_luong": 9000000,
@@ -83,12 +136,16 @@
   "doctors": [
     {
       "ma_bac_si": "BS01",
+      "ho_ten": "Nguyễn Văn A",
+      "so_dien_thoai": "0909000003",
       "username_lien_ket": "bacsi_a",
       "loai_bac_si": "TOAN_THOI_GIAN",
       "luong_co_ban": 20000000
     },
     {
       "ma_bac_si": "BS02",
+      "ho_ten": "Trần Thị B",
+      "so_dien_thoai": "0909000004",
       "username_lien_ket": "bacsi_b",
       "loai_bac_si": "BAN_THOI_GIAN",
       "muc_luong_gio": 300000
@@ -96,12 +153,53 @@
   ],
   "patients": [
     {
-      "username_lien_ket": "benhnhan_a",
-      "dia_chi": "Q5, TP.HCM"
+      "ho_ten": "Lê Văn Khách",
+      "so_dien_thoai": "0912345678",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Q5, TP.HCM",
+      "username_lien_ket": "benhnhan_a"
     },
     {
-      "username_lien_ket": "benhnhan_b",
-      "dia_chi": "Hà Nội"
+      "ho_ten": "Nguyễn Thị Bệnh",
+      "so_dien_thoai": "0987654321",
+      "gioi_tinh": "NU",
+      "dia_chi": "Hà Nội",
+      "username_lien_ket": "benhnhan_b"
+    },
+    {
+      "ho_ten": "Phạm Văn Cường",
+      "so_dien_thoai": "0901112223",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Thủ Đức, TP.HCM",
+      "username_lien_ket": "benhnhan_c"
+    },
+    {
+      "ho_ten": "Trần Thị Dung",
+      "so_dien_thoai": "0904445556",
+      "gioi_tinh": "NU",
+      "dia_chi": "Bình Thạnh, TP.HCM",
+      "username_lien_ket": "benhnhan_d"
+    },
+    {
+      "ho_ten": "Lê Hoàng Nam",
+      "so_dien_thoai": "0907778889",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Quận 7, TP.HCM",
+      "username_lien_ket": "benhnhan_e"
+    },
+    {
+      "ho_ten": "Nguyễn Thu Hà",
+      "so_dien_thoai": "0909990001",
+      "gioi_tinh": "NU",
+      "dia_chi": "Gò Vấp, TP.HCM",
+      "username_lien_ket": "benhnhan_f"
+    },
+    {
+      "ho_ten": "Hoàng Văn Em",
+      "so_dien_thoai": "0909990002",
+      "gioi_tinh": "KHAC",
+      "dia_chi": "Đồng Nai",
+      "username_lien_ket": "benhnhan_g"
     }
   ],
   "services": [
@@ -161,17 +259,31 @@
   "appointments": [
     {
       "ma_bac_si": "BS01",
-      "patient_username": "benhnhan_a",
+      "patient_phone": "0912345678",
       "service_name": "Cạo vôi răng",
       "ngay_offset": 1,
       "gio_kham": "09:00"
     },
     {
       "ma_bac_si": "BS02",
-      "patient_username": "benhnhan_b",
+      "patient_phone": "0987654321",
       "service_name": "Trám răng",
       "ngay_offset": 1,
       "gio_kham": "18:00"
+    },
+    {
+      "ma_bac_si": "BS01",
+      "patient_phone": "0901112223",
+      "service_name": "Nhổ răng",
+      "ngay_offset": 0,
+      "gio_kham": "10:30"
+    },
+    {
+      "ma_bac_si": "BS02",
+      "patient_phone": "0904445556",
+      "service_name": "Tẩy trắng răng",
+      "ngay_offset": 1,
+      "gio_kham": "19:00"
     }
   ]
 }
