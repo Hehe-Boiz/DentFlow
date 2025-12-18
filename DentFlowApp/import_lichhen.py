@@ -92,7 +92,7 @@ def create_patient_and_appointment_data():
 
                 # Random giờ khám (08:00 - 17:00)
                 hour = random.randint(8, 16)
-                minute = random.choice([0, 15, 30, 45])
+                minute = random.choice([0, 30])
                 appt_time = time(hour, minute)
 
                 # Chọn random bác sĩ và dịch vụ

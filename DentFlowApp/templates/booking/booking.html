@@ -8,33 +8,14 @@
 
 {% block content %}
 
-<div class="booking-header">
-    <div class="container d-flex justify-content-between align-items-center">
-        <a href="/" class="btn-back">
-            <i class="fas fa-arrow-left me-2"></i> Quay lại
-        </a>
-        <div class="fw-bold text-primary fs-5">
-            <i class="fas fa-tooth"></i> DENTALFLOW
-        </div>
-        <div style="width: 80px;"></div>
-    </div>
-</div>
+{% block service_header %}
+{% include 'layout/service_header.html' %}
+{% endblock %}
 
 <div class="container">
-    <div class="stepper-wrapper">
-        <div class="step-item active">
-            <div class="step-circle">1</div>
-            <div class="step-text">Dịch vụ</div>
-        </div>
-        <div class="step-item">
-            <div class="step-circle">2</div>
-            <div class="step-text">Thời gian</div>
-        </div>
-        <div class="step-item">
-            <div class="step-circle">3</div>
-            <div class="step-text">Xác nhận</div>
-        </div>
-    </div>
+    {% block booking_process %}
+    {% include 'booking/booking_process.html' %}
+    {% endblock %}
 
     <div class="booking-card">
 

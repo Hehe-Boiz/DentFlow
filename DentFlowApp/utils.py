@@ -9,6 +9,8 @@ def user_can_do(User):
     if User.vai_tro == UserRole.USER:
         can_do['Hồ sơ của tôi'] = '#'
         can_do['Lịch hẹn của tôi'] = '#'
+    if User.vai_tro == UserRole.RECEPTIONIST:
+        can_do['Trang lễ tân'] = '/receptionist'
     else:
         for item in admin.menu():
             if item.is_accessible():

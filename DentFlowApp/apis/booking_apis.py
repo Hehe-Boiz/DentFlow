@@ -67,20 +67,22 @@ def booking_3_view():
         ten_bac_si = booking_data['doctor_name']
         bac_si_id = booking_data['doctor_id']
 
+
         # Format lại ngày giờ cho đẹp
         ngay_dat = booking_data['booking_date']  # YYYY-MM-DD
         gio_kham = booking_data['time_slot']
-
         # --- XỬ LÝ KHI BẤM NÚT "XÁC NHẬN ĐẶT LỊCH" (POST) ---
         if request.method == 'POST':
-                print(current_user.ho_so_benh_nhan)
+                ghi_chu = request.form.get('note')
+                print(ghi_chu)
                 try:
                         lichhen_dao.add_appointment(
                                 ho_so_benh_nhan_id=current_user.ho_so_benh_nhan.id,
                                 ngay_dat=ngay_dat,
                                 gio_kham=gio_kham,
                                 bac_si_id=bac_si_id,
-                                dich_vu_id=dich_vu_id
+                                dich_vu_id=dich_vu_id,
+                                ghi_chu=ghi_chu
                         )
                         del session['booking_data']
                         flash('Đặt lịch thành công!' 'booking_completed')

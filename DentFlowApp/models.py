@@ -25,6 +25,11 @@ class TrangThaiLamViec(enum.Enum):
     SAN_SANG = "Sẵn sàng"
     NGHI = "Nghỉ"
 
+class TrangThaiLichHen(enum.Enum):
+    DAT_LICH_THANH_CONG = "Đặt lịch thành công"
+    CHO_KHAM = "Chờ khám"
+    DA_KHAM = "Đã khám"
+
 class LoaiBacSi(enum.Enum):
     TOAN_THOI_GIAN = "Toàn thời gian"
     BAN_THOI_GIAN = "Bán thời gian"
@@ -108,7 +113,7 @@ class LichLamViec(BaseModel):
     ngay_lam = db.Column(Date, nullable=False)
     gio_bat_dau = Column(Time, nullable=False)
     gio_ket_thuc = Column(Time, nullable=False)
-    trang_thai = Column(sqlEnum(TrangThaiLamViec))
+    trang_thai = Column(sqlEnum(TrangThaiLamViec), default=TrangThaiLamViec.SAN_SANG)
 
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
 
@@ -121,6 +126,10 @@ class DichVu(BaseModel):
     lich_hen_ds = relationship('LichHen', backref='dich_vu', lazy=True)
     phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='dich_vu', lazy=True)
 
+class ChiTietDichVu(db.Model):
+    __tablename__ = 'chi_tiet_dich_vu'
+    id = Column(Integer, ForeignKey(DichVu.id), primary_key=True)
+    noi_dung_chi_tiet = Column(String(255), nullable=True)
 
 class LichHen(BaseModel):
     __tablename__ = 'lich_hen'
@@ -131,7 +140,9 @@ class LichHen(BaseModel):
 
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
     dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=True)
+    trang_thai = Column(sqlEnum(TrangThaiLichHen), default=TrangThaiLichHen.DAT_LICH_THANH_CONG)
 
+    ghi_chu = Column(String(100), nullable=True)
 
 class PhieuDieuTri(BaseModel):
     __tablename__ = 'phieu_dieu_tri'

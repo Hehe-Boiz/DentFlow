@@ -8,28 +8,28 @@ from DentFlowApp.dao.lichhen_dao import get_appointment_by_day_by_doctor
 from DentFlowApp.models import LichLamViec
 
 
-@app.route('/api/get-schedules', methods=['post'])
-def get_schedules():
-    bac_si_id = request.json.get('id')
-    ngay = request.json.get('day')
-    lich_kha_dung = get_schedules_is_ready_by_day_by_doctor(bac_si_id=bac_si_id, ngay=ngay)
-    print(bac_si_id, ngay)
-    print(get_schedules_is_ready_by_day_by_doctor(bac_si_id=bac_si_id, ngay=ngay))
-    lich_tra_ve = {}
-    index = 0
-    for lich in lich_kha_dung:
-        lich_tra_ve[index] = {
-            'ma_bac_si': lich.bac_si_id,
-            'ngay_lam': lich.ngay_lam.strftime('%d/%m/%Y'),
-            'gio_bat_dau': lich.gio_bat_dau.strftime('%H:%M'),
-            'gio_ket_thuc': lich.gio_ket_thuc.strftime('%H:%M'),
-            'trang_thai': lich.trang_thai.value
-        }
-        index += 1
-    print(lich_tra_ve)
-    return jsonify(lich_tra_ve)
+# @app.route('/api/get-schedules', methods=['post'])
+# def get_schedules():
+#     bac_si_id = request.json.get('id')
+#     ngay = request.json.get('day')
+#     lich_kha_dung = get_schedules_is_ready_by_day_by_doctor(bac_si_id=bac_si_id, ngay=ngay)
+#     print(bac_si_id, ngay)
+#     print(get_schedules_is_ready_by_day_by_doctor(bac_si_id=bac_si_id, ngay=ngay))
+#     lich_tra_ve = {}
+#     index = 0
+#     for lich in lich_kha_dung:
+#         lich_tra_ve[index] = {
+#             'ma_bac_si': lich.bac_si_id,
+#             'ngay_lam': lich.ngay_lam.strftime('%d/%m/%Y'),
+#             'gio_bat_dau': lich.gio_bat_dau.strftime('%H:%M'),
+#             'gio_ket_thuc': lich.gio_ket_thuc.strftime('%H:%M'),
+#             'trang_thai': lich.trang_thai.value
+#         }
+#         index += 1
+#     print(lich_tra_ve)
+#     return jsonify(lich_tra_ve)
 
-@app.route('/api/get-available-time-slots', methods=['POST'])
+@app.route('/api/lay-thoi-gian-trong', methods=['POST'])
 def get_available_slots():
     data = request.json
     bac_si_id = data.get('id')

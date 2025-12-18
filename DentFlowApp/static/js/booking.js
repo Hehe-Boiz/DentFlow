@@ -32,7 +32,7 @@ function selectDoctor(element, id, name) {
 }
 
 function getAvailableTimeSlots(id, day) {
-    fetch("/api/get-available-time-slots", {
+    fetch("/api/lay-thoi-gian-trong", {
         method: "post",
         body: JSON.stringify({
             "id": id,

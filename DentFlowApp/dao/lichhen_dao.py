@@ -12,13 +12,14 @@ def get_appointment_by_id(id):
 def get_appointment_by_day_by_doctor(ngay, bac_si_id):
     return LichHen.query.filter(LichHen.bac_si_id == bac_si_id, LichHen.ngay_dat == ngay).all()
 
-def add_appointment(ho_so_benh_nhan_id, bac_si_id, dich_vu_id,ngay_dat,gio_kham):
+def add_appointment(ho_so_benh_nhan_id, bac_si_id, dich_vu_id,ngay_dat,gio_kham,ghi_chu):
     lich_hen_moi = LichHen(
-        ho_so_benh_nhan_id=ho_so_benh_nhan_id,  # Hoặc patient_id tùy model bạn
+        ho_so_benh_nhan_id=ho_so_benh_nhan_id,
         bac_si_id=bac_si_id,
         dich_vu_id=dich_vu_id,
         ngay_dat=ngay_dat,
-        gio_kham=gio_kham,  # Lưu ý convert nếu DB lưu dạng Time object
+        gio_kham=gio_kham,
+        ghi_chu=ghi_chu
     )
     db.session.add(lich_hen_moi)
     try:
