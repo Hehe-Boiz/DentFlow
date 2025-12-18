@@ -1,4 +1,7 @@
-from DentFlowApp import app
+from DentFlowApp import app,db
 if __name__ == "__main__":
     from DentFlowApp import admin
+
+    # with app.app_context():
+    #     db.create_all()
     app.run()

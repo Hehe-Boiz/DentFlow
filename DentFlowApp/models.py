@@ -37,7 +37,6 @@ class BaseModel(db.Model):
     ngay_cap_nhat = Column(DateTime, onupdate=datetime.now(), default=datetime.now())
 
 class NguoiDung(BaseModel, UserMixin):
-
     __tablename__ = 'nguoi_dung'
     username = Column(String(50), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
@@ -125,7 +124,7 @@ class DichVu(BaseModel):
 
 class LichHen(BaseModel):
     __tablename__ = 'lich_hen'
-    ngay_dat = Column(DateTime, default=datetime.now())
+    ngay_dat = Column(Date, default=datetime.now())
     gio_kham = Column(Time, nullable=False)
 
     ho_so_benh_nhan_id = Column(Integer, ForeignKey('ho_so_benh_nhan.id'), nullable=False)
@@ -184,22 +183,22 @@ class LieuLuongSuDung(BaseModel):
     so_luong = Column(Integer, nullable=False)
     huong_dan = Column(String(255))
 
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        import hashlib
-        u = [
-             NguoiDung(ho_ten='receptionist', vai_tro=UserRole.RECEPTIONIST, so_dien_thoai='0123456',
-                  avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
-                  username='receptionist', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest())),
-            NguoiDung(ho_ten='cashier', vai_tro=UserRole.CASHIER, so_dien_thoai='0123456',
-                      avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
-                      username='cashier', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
-            ,
-            NguoiDung(ho_ten='user', vai_tro=UserRole.USER, so_dien_thoai='0123456',
-                      avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
-                      username='user', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
-             ]
-        for user in u:
-            db.session.add(user)
-        db.session.commit()
+# if __name__ == '__main__':
+#     with app.app_context():
+#         db.create_all()
+#         # import hashlib
+#         # u = [
+#         #      NguoiDung(ho_ten='receptionist', vai_tro=UserRole.RECEPTIONIST, so_dien_thoai='0123456',
+#         #           avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
+#         #           username='receptionist', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest())),
+#         #     NguoiDung(ho_ten='cashier', vai_tro=UserRole.CASHIER, so_dien_thoai='0123456',
+#         #               avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
+#         #               username='cashier', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
+#         #     ,
+#         #     NguoiDung(ho_ten='user', vai_tro=UserRole.USER, so_dien_thoai='0123456',
+#         #               avatar='https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg',
+#         #               username='user', password=str(hashlib.md5("123456".encode('utf-8')).hexdigest()))
+#         #      ]
+#         # for user in u:
+#         #     db.session.add(user)
+#         # db.session.commit()

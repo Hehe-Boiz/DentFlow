@@ -4,7 +4,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/booking_buoc2.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/booking_2.css') }}"/>
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 <div class="booking-header">
     <div class="container d-flex justify-content-between align-items-center">
         <a href="/booking" class="btn-back"><i class="fas fa-arrow-left me-2"></i> Quay lại</a>
-        <div class="fw-bold text-primary fs-5"><i class="fas fa-tooth"></i> DENTALFLOW </div>
+        <div class="fw-bold text-primary fs-5"><i class="fas fa-tooth"></i> DENTALFLOW</div>
         <div style="width: 80px;"></div>
     </div>
 </div>
@@ -43,7 +43,7 @@
                 </div>
                 {% if 'booking_data' in session %}
                 <div class="small text-primary"><i class="fas fa-tooth me-1"></i> Dịch vụ đã chọn: {{
-                    session['booking_data']['ten_dich_vu'] }}
+                    session['booking_data']['service_name'] }}
                 </div>
                 {% else %}
                 <div class="small text-primary"><i class="fas fa-tooth me-1"></i>
@@ -55,15 +55,18 @@
 
         <h4 class="mb-4 fw-bold">Chọn bác sĩ và thời gian</h4>
 
-        <form action="/booking_buoc2" method="POST" id="bookingFormStep2">
+        <form action="/booking/choose-time-and-doctor" method="POST" id="bookingFormStep2">
             <input type="hidden" name="doctor_id" id="selectedDoctorId" required>
-
+            <input type="hidden" name="doctor_name" id="selectedDoctorName" required>
+            <div id="formErrorMessage" class="alert alert-danger d-none mb-3" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i> Vui lòng chọn đầy đủ: Bác sĩ, Ngày và Giờ khám!
+            </div>
             <div class="mb-4">
                 <label class="form-label fw-bold">Bác sĩ <span class="text-danger">*</span></label>
                 <div class="row g-3">
                     {% for doctor in doctors %}
                     <div class="col-md-6">
-                        <div class="doctor-card" onclick="selectDoctor(this, '{{ doctor.ma_bac_si }}')">
+                        <div class="doctor-card" onclick="selectDoctor(this, '{{ doctor.ma_bac_si }}', '{{ doctor.ho_ten }}')">
                             <div>
                                 <h6 class="fw-bold mb-1">{{ doctor.ho_ten }}</h6>
                                 <div class="small text-muted">Răng hàm mặt</div>
@@ -83,14 +86,16 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Giờ khám <span class="text-danger">*</span></label>
-                    <div class="row g-2">
-                        {% for slot in time_slots %}
-                        <div class="col-6 col-sm-4">
-                            <input type="radio" class="btn-check" name="time_slot" id="slot{{ loop.index }}"
-                                   value="{{ slot }}" required autocomplete="off">
-                            <label class="btn time-slot-btn" for="slot{{ loop.index }}">{{ slot }}</label>
-                        </div>
-                        {% endfor %}
+
+                    <div id="slotWaitingMessage" class="text-muted small border rounded p-3 bg-light">
+                        <i class="fas fa-info-circle me-1"></i> Vui lòng chọn Bác sĩ và Ngày khám để xem lịch.
+                    </div>
+
+                    <div id="timeSlotContainer" class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-2 d-none">
+                    </div>
+
+                    <div id="noSlotMessage" class="alert alert-warning d-none text-center small p-2" role="alert">
+                        <i class="fas fa-exclamation-triangle me-1"></i> Bác sĩ không có lịch vào ngày này.
                     </div>
                 </div>
             </div>
@@ -100,8 +105,7 @@
                    class="btn btn-outline-secondary px-4 py-2 fw-medium rounded-3">
                     Quay lại
                 </a>
-                <button type="submit" class="btn btn-primary px-5 py-2 fw-bold rounded-3" id="btnContinueStep2"
-                        disabled>
+                <button type="button" class="btn btn-primary px-5 py-2 fw-bold rounded-3" id="btnContinueStep2" onclick="checkFormValidity()">
                     Tiếp tục
                 </button>
             </div>
@@ -119,5 +123,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
 {% endblock %}

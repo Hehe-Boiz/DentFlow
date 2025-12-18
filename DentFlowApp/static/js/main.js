@@ -12,3 +12,5 @@ function getSchedules(id, day) {
         console.log(data)
     });
 }
+
+

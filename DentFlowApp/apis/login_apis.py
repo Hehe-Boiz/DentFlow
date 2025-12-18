@@ -6,7 +6,7 @@ from DentFlowApp import app,db
 from flask import request, redirect, render_template, session
 from flask_login import login_user, logout_user, current_user, AnonymousUserMixin
 from DentFlowApp import login
-from DentFlowApp.dao import userDao
+from DentFlowApp.dao import user_dao
 from DentFlowApp.models import UserRole
 from DentFlowApp.admin import admin
 from DentFlowApp import utils
@@ -28,7 +28,7 @@ def login_process():
     username = request.form.get('username')
     password = request.form.get('password')
 
-    u = userDao.auth_user(username=username, password=password)
+    u = user_dao.auth_user(username=username, password=password)
     if u:
         login_user(user=u)
         session['can_do'] = utils.user_can_do(u)
@@ -51,8 +51,8 @@ def register_process():
         return render_template('register.html', err_msg=err_msg, prev_info=prev_info)
 
     try:
-        userDao.add_user(ho_ten=data.get('name'), so_dien_thoai=data.get('phone'), username=data.get('username'), password=password, avatar=request.files.get('avatar'))
-        u = userDao.auth_user(username=data.get('username'), password=password)
+        user_dao.add_user(ho_ten=data.get('name'), so_dien_thoai=data.get('phone'), username=data.get('username'), password=password, avatar=request.files.get('avatar'))
+        u = user_dao.auth_user(username=data.get('username'), password=password)
         if u:
             login_user(user=u)
         return redirect('/')
@@ -77,4 +77,4 @@ def logout_admin():
 
 @login.user_loader
 def load_user(user_id):
-    return userDao.get_user_by_id(user_id)
+    return user_dao.get_user_by_id(user_id)
