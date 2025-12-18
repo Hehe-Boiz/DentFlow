@@ -1,0 +1,82 @@
+<form class="card col-6 p-0" action="/receptionist/patients/register" method="post">
+    <div class="card-header fw-bold text-white bg-primary text-xl-center ">
+        Tao ho so nguoi dung
+    </div>
+    <div class="card-body ">
+        <div class="row g-3 p-2 mb-3">
+            <input id="input_user_id" name="user_id" type="hidden">
+            <div class="col-md-6">
+                <label class="form-label">Họ tên</label>
+                <input
+                        name="ho_ten"
+                        type="text"
+                        class="form-control"
+                        placeholder="Nguyễn Văn A"
+                        id="input_ho_ten"
+                        required
+                >
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Số điện thoại</label>
+                <input
+                        name="so_dien_thoai"
+                        type="tel"
+                        class="form-control"
+                        placeholder="09xxxxxxxx"
+                        pattern="[0-9]{10}"
+                        id="input_so_dien_thoai"
+                        required
+                >
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Địa chỉ</label>
+                <input
+                        name="dia_chi"
+                        type="text"
+                        class="form-control"
+                        placeholder="Số nhà, đường, quận..."
+                >
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label d-block">Giới tính</label>
+                <div class="form-check form-check-inline">
+                    <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gioi_tinh"
+                            id="gt-nam"
+                            value="Nam"
+                            checked
+                    >
+                    <label class="form-check-label" for="gt-nam">Nam</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gioi_tinh"
+                            id="gt-nu"
+                            value="Nu"
+                    >
+                    <label class="form-check-label" for="gt-nu">Nữ</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input
+                            class="form-check-input"
+                            type="radio"
+                            name="gioi_tinh"
+                            id="gt-khac"
+                            value="Khac"
+                    >
+                    <label class="form-check-label" for="gt-khac">Khac</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">
+        Xác nhận
+    </button>
+</form>

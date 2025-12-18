@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Cashier view{% endblock %}
+
+{% block content %}
+    <div class="booking-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="/" class="btn-back">
+                <i class="fas fa-arrow-left me-2"></i> Quay lại
+            </a>
+            <div class="fw-bold text-primary fs-5">
+                <i class="fas fa-tooth"></i> DENTALFLOW
+            </div>
+            <div style="width: 80px;"></div>
+        </div>
+    </div>
+    <div class="btn-group mb-4">
+        <button class="btn btn-primary"
+                onclick="goToURL(this)"
+                data-url="{{ url_for('cashier_phieu_dieu_tri_search') }}">
+            Tra cứu phiếu điều trị
+        </button>
+
+        <button class="btn btn-primary">
+            Thanh toán
+        </button>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/service.js') }}"></script>
+{% endblock %}

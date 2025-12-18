@@ -1,0 +1,62 @@
+<div class="card rounded-4 p-2">
+    <div class="card-body">
+        <div class="fw-bold fs-5 m-2">
+            <i class="fas fa-search text-white p-2 rounded-2 bg-primary"></i>
+            <span class="fw-light text-primary">
+                    Tra cứu phiếu điều trị
+                </span>
+        </div>
+
+        <div class="d-flex mt-3" role="search">
+            <input class="form-control me-2" id="input_maso" name="id" type="search"
+                   placeholder="Nhập mã số phiếu (VD: 1)"
+                   aria-label="Search">
+            <button class="btn text-white btn-outline-success bg-primary"
+                    type="button" onclick="searchPdt()">
+                Tìm kiếm
+            </button>
+        </div>
+
+        <div id="result_container" class="card mt-3 border-primary" style="display: none;">
+            <div class="card-header bg-primary text-white">
+                Thông tin phiếu
+            </div>
+
+
+            <div class="card-body">
+                <h5 class="card-title text-primary fw-bold">Phiếu điều trị</h5>
+                <table class="table mt-3 table-bordered text-center"
+                       style="max-height: 450px; overflow-y: auto; border: 1px solid #dee2e6;">
+                    <thead>
+                    <tr>
+                        <th scope="col">Mã phiếu</th>
+                        <th scope="col">Họ tên</th>
+                        <th scope="col">Dịch vụ</th>
+                        <th scope="col">Tổng tiền</th>
+                        <th scope="col">Ghi chú</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><span id="pdt_id"></span></td>
+                        <td><span id="pdt_ho_ten" class="fs-5"></span></td>
+                        <td><span id="pdt_dich_vu"></span></td>
+                        <td><span id="pdt_dongia" class="text-danger fw-bold fs-5"></span></td>
+                        <td><span id="pdt_ghichu"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="error_alert" class="alert alert-warning mt-3" style="display: none;">
+            Không tìm thấy phiếu điều trị!
+        </div>
+
+        <div id="loading_spinner" class="text-center mt-3" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
