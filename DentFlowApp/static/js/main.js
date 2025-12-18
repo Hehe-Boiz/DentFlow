@@ -72,3 +72,32 @@ function isBlock(id) {
     const el = document.getElementById(id)
     return el && el.style.display === 'block'
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    // 1. Lấy các phần tử cần thiết
+    const inputName = document.getElementById('searchName');
+    const inputPhone = document.getElementById('searchPhone');
+    const btnSearch = document.getElementById('btnSearch');
+
+    // Kiểm tra nếu các element này thực sự tồn tại (đề phòng lỗi trang khác dùng file này)
+    if (!inputName || !inputPhone || !btnSearch) return;
+
+    // 2. Hàm kiểm tra
+    function checkInputs() {
+        const nameValue = inputName.value.trim();
+        const phoneValue = inputPhone.value.trim();
+
+        if (nameValue !== "" || phoneValue !== "") {
+            btnSearch.disabled = false;
+        } else {
+            btnSearch.disabled = true;
+        }
+    }
+
+    // 3. Lắng nghe sự kiện
+    inputName.addEventListener('input', checkInputs);
+    inputPhone.addEventListener('input', checkInputs);
+
+    // 4. Chạy kiểm tra ban đầu
+    checkInputs();
+});
