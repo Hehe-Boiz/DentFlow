@@ -15,7 +15,7 @@ from DentFlowApp.models import UserRole, GioiTinh, HoSoBenhNhan
 def receptionist():
     if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
         can_do = utils.user_can_do()
-        return render_template('receptionist.html', can_do=can_do)
+        return render_template('receptionist/receptionist.html', can_do=can_do)
     return http.HTTPStatus.FORBIDDEN
 
 
@@ -24,7 +24,7 @@ def receptionist():
 def receptionist_phieu_dieu_tri_search():
     if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
         can_do = utils.user_can_do()
-        return render_template('receptionist_search_pdt.html', can_do=can_do)
+        return render_template('receptionist/receptionist_search_pdt.html', can_do=can_do)
     return http.HTTPStatus.FORBIDDEN
 
 
@@ -44,7 +44,7 @@ def register_patient_view():
 
         if so_dien_thoai or ho_ten:
             profiles = receptionistDao.get_profile_users_by_sdt_hoten(so_dien_thoai, ho_ten, UserRole.USER, page=page)
-        return render_template('user_registration_service.html', can_do=can_do, profiles=profiles,
+        return render_template('receptionist/user_registration_service.html', can_do=can_do, profiles=profiles,
                                selected_profile=selected_profile)
     return http.HTTPStatus.FORBIDDEN
 
