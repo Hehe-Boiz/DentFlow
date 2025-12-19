@@ -12,6 +12,13 @@ class GioiTinh(enum.Enum):
     NU = "Nu"
     KHAC = "Khac"
 
+class DonViThuoc(enum.Enum):
+    VIEN = "viên"
+    VI = "vỉ"
+    ONG = "ống"
+    CHAI = "chai"
+    GOI = "gói"
+    HOP = "hộp"
 
 class UserRole(enum.Enum):
     ADMIN = 1
@@ -167,7 +174,7 @@ class HoaDon(BaseModel):
 class Thuoc(BaseModel):
     __tablename__ = 'thuoc'
     ten_thuoc = Column(String(100), nullable=False)
-
+    don_vi = Column(sqlEnum(DonViThuoc), nullable=False, default=DonViThuoc.VIEN)
     cac_lo_thuoc = relationship('LoThuoc', backref='thuoc', lazy=True)
 
 class LoThuoc(db.Model):
