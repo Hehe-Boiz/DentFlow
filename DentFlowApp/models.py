@@ -136,6 +136,7 @@ class LichHen(BaseModel):
     ngay_dat = Column(Date, default=datetime.now())
     gio_kham = Column(Time, nullable=False)
 
+
     ho_so_benh_nhan_id = Column(Integer, ForeignKey('ho_so_benh_nhan.id'), nullable=False)
 
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
