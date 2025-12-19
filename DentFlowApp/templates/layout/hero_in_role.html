@@ -3,11 +3,18 @@
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
       <div>
         <h2 class="text-2xl md:text-3xl mb-2">
+          {% if bacsi %}
           Chào bác sĩ {{ bacsi.ho_ten }}! 👨‍⚕️
+          {% endif %}
+          {% if letan %}
+          Chào {{ current_user.ho_ten }}!
+          {% endif %}
         </h2>
+        {% if bacsi %}
         <p class="text-blue-100">
           Hôm nay bạn có {{ count_lich_kham }} bệnh nhân cần khám
         </p>
+        {% endif %}
       </div>
 
       <div class="mt-4 md:mt-0 flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3">

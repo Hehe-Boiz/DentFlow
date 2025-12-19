@@ -1,0 +1,15 @@
+<div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+    {% if 'stats_cards' in session %}
+    {% for info, quantity in session['stats_cards'].items() %}
+    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-600">{{ info }}</p>
+                <p class="text-2xl text-blue-600 mt-1">{{ quantity }}</p>
+            </div>
+            <!-- icon ... -->
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
