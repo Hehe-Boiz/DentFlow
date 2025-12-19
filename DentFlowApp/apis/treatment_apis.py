@@ -16,6 +16,12 @@ def treatment_view():
     count_lich_cho_kham = max(count_lich_kham - count_lich_da_kham, 0)
     bacsi = bacsi_dao.get_doctors_by_id(bacsi_id)
     count_tong_lich_hen = len(lich_hen_dao.get_tong_lich_hen_theo_bac_si())
+    session['stats_cards'] = {
+        "Lịch hôm nay": count_lich_kham,
+        "Chờ khám": count_lich_cho_kham,
+        "Hoàn thành": count_lich_da_kham,
+        "Tổng lịch hẹn": count_tong_lich_hen
+    }
     print(patients)
     return  render_template(
         'treatments/treatment.html',
