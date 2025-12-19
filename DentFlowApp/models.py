@@ -52,7 +52,7 @@ class NguoiDung(BaseModel, UserMixin):
 
     #Lấy hồ sơ bênh nhân từ người dùng NguoiDung.ho_so_benh_nhan
     ho_so_benh_nhan = relationship('HoSoBenhNhan', backref='nguoi_dung', uselist=False)
-
+    bac_si = relationship('BacSi', backref='nguoi_dung', uselist=False)
 
 class NhanVien(db.Model):
     ma_nv = Column(String(5), primary_key=True)

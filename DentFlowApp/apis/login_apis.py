@@ -32,6 +32,8 @@ def login_process():
     if u:
         login_user(user=u)
         session['can_do'] = utils.user_can_do(u)
+        if u.vai_tro == UserRole.DOCTOR:
+            return redirect('/treatment')
 
     next = request.args.get('next')
     return redirect(next if next else '/')

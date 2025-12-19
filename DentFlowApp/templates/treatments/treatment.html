@@ -1,0 +1,85 @@
+{% extends 'layout/base.html' %}
+
+{% block styles %}
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}"/>-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/treatment.css') }}"/>
+{% endblock %}
+
+{% block hero %}
+{% include 'treatments/hero_in_role.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Lịch hôm nay</p>
+                <p class="text-2xl text-blue-600 mt-1">{{ count_lich_kham }}</p>
+            </div>
+            <!-- icon ... -->
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Chờ khám</p>
+                <p class="text-2xl text-orange-600 mt-1">{{ count_lich_cho_kham }}</p>
+            </div>
+            <!-- icon ... -->
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Hoàn thành</p>
+                <p class="text-2xl text-green-600 mt-1">{{ count_lich_da_kham }}</p>
+            </div>
+            <!-- icon ... -->
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-600">Tổng lịch hẹn</p>
+                <p class="text-2xl text-purple-600 mt-1">{{ count_tong_lich_hen }}</p>
+            </div>
+            <!-- icon ... -->
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-t-xl border border-gray-200 border-b-0">
+    <div class="flex space-x-1 p-2 overflow-x-auto">
+        <button data-tab="tab-today"
+                class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap text-gray-600 hover:bg-gray-100">
+            <i class="fa-regular fa-calendar w-4 h-4 inline mr-2"></i>
+            Lịch hôm nay
+        </button>
+        <button data-tab="tab-work"
+                class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap text-gray-600 hover:bg-gray-100">
+            <i class="fa-regular fa-calendar-days w-4 h-4 inline mr-2"></i>
+            Lịch làm việc
+        </button>
+        <button data-tab="tab-treatment"
+                class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap bg-blue-600 text-white shadow-md">
+            <i class="fa-regular fa-file-lines w-4 h-4 inline mr-2"></i>
+            Lập phiếu điều trị
+        </button>
+    </div>
+</div>
+
+<div class="bg-white rounded-b-xl border border-gray-200 p-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {% include 'treatments/tab_treatment.html' %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/create_treatment.js') }}"></script>
+{% endblock %}

@@ -1,8 +1,10 @@
-from datetime import datetime
-from DentFlowApp.models import LichHen, Thuoc, UserRole
+from datetime import datetime, timedelta
+from DentFlowApp.models import LichHen, Thuoc, UserRole, LoThuoc
 from DentFlowApp import db
 from flask_login import current_user
 from DentFlowApp.admin import admin
+from DentFlowApp.dao import thuoc_dao
+
 
 def user_can_do(User):
     can_do = {}
@@ -74,6 +76,40 @@ class ValidationUtils:
             return False, f"Thuốc {thuoc.ten_thuoc} đã hết hạn sử dụng (Hạn: {thuoc.ngay_he_han})."
 
         return True, "Thuốc hợp lệ."
+
+    @staticmethod
+    def tim_lo_thuoc_tot_nhat(thuoc_id, so_ngay_dung):
+        """
+        Tìm lô thuốc phù hợp nhất (Auto).
+        Trả về: (Success: bool, Data: dict/None, Message: str)
+        """
+        try:
+            # 1. Tìm lô đáp ứng đủ số ngày (Ưu tiên lô date gần nhất để đẩy hàng cũ đi - FEFO)
+            lo_phu_hop = thuoc_dao.get_lo_thuoc_phu_hop(thuoc_id, so_ngay_dung)
+
+            if lo_phu_hop:
+                return True, lo_phu_hop, "Tìm thấy lô thuốc phù hợp."
+
+            # 2. Nếu không có lô nào đủ, tìm lô có hạn xa nhất để xem tối đa kê được bao lâu
+            lo_xa_nhat = thuoc_dao.get_lo_co_han_xa_nhat(thuoc_id)
+
+            if not lo_xa_nhat:
+                return False, None, "Thuốc này đã hết hàng hoặc hết hạn sử dụng."
+
+            # Tính số ngày tối đa
+            ngay_hien_tai = datetime.now().date()
+            han_su_dung_date = lo_xa_nhat.han_su_dung
+            if isinstance(han_su_dung_date, datetime):
+                han_su_dung_date = han_su_dung_date.date()
+
+            so_ngay_toi_da = (han_su_dung_date - ngay_hien_tai).days
+            if so_ngay_toi_da < 0:
+                return False, None, "Thuốc đã hết hạn."
+
+            return False, None, f"Không có lô đủ hạn. Lô tốt nhất chỉ dùng được tối đa {so_ngay_toi_da} ngày."
+
+        except Exception as e:
+            return False, None, str(e)
 
 
 class CalculationUtils:
