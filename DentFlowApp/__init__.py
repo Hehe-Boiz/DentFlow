@@ -18,4 +18,11 @@ login = LoginManager(app=app)
 login.login_view = 'login_view'
 db = SQLAlchemy(app=app)
 
-from DentFlowApp.apis import login_apis, booking_apis, schedule_apis, cashier_apis, receptionist_apis, service_apis
+from DentFlowApp.apis import (login_apis,
+                              booking_apis,
+                              schedule_apis,
+                              cashier_apis,
+                              receptionist_apis,
+                              service_apis,
+                              treatment_apis,
+                              )

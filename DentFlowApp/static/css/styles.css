@@ -1,4 +1,14 @@
-body {
-    background-color: whitesmoke;
-    color: darkblue;
+/*body {*/
+/*    background-color: whitesmoke;*/
+/*    color: darkblue;*/
+/*}*/
+
+.py-6 {
+  padding: 1.5rem 0;
+}
+
+@media (min-width: 48rem) {
+  .md\:py-8 {
+    padding: 2rem 0;
+  }
 }

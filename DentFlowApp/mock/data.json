@@ -92,5 +92,66 @@
       "gioi_tinh": "NU",
       "dia_chi": "Hà Nội"
     }
+  ],
+  "appointments": [
+    {
+      "ngay_dat": "2024-12-20",
+      "gio_kham": "08:00",
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DA_KHAM",
+      "ghi_chu": "Khám định kỳ"
+    },
+    {
+      "ngay_dat": "2024-12-20",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Đau răng hàm dưới"
+    },
+    {
+      "ngay_dat": "2024-12-20",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": "Khách hẹn trước 1 tuần"
+    },
+    {
+      "ngay_dat": "2025-12-19",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": "Khách hẹn trước 1 tuần"
+    }
+  ],
+  "work_schedules": [
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2024-12-20",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2024-12-20",
+      "gio_bat_dau": "13:00:00",
+      "gio_ket_thuc": "21:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-19",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "21:00:00",
+      "trang_thai": "SAN_SANG"
+    }
   ]
 }

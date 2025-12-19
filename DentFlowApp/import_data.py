@@ -5,7 +5,7 @@ from DentFlowApp import app, db
 from DentFlowApp.models import (
     NguoiDung, UserRole, GioiTinh, LoaiBacSi,
     BacSi, BacSiFullTime, BacSiPartTime,
-    Thuoc, LoThuoc, DichVu, HoSoBenhNhan
+    Thuoc, LoThuoc, DichVu, HoSoBenhNhan, LichHen, TrangThaiLichHen, LichLamViec, TrangThaiLamViec
 )
 
 
@@ -27,6 +27,8 @@ def import_json_data():
     print("--- Đã reset database ---")
 
     user_map = {}
+    service_map = {}  # Map để lưu: ten_dich_vu -> id
+    patient_map = {} # Map để lưu: so_dien_thoai -> id
 
     # 1. Import Users
     print("Đang import Users...")
@@ -72,6 +74,8 @@ def import_json_data():
         # Đã sửa khớp với model: ten_dich_vu, don_gia
         sv = DichVu(ten_dich_vu=s['ten_dich_vu'], don_gia=s['don_gia'])
         db.session.add(sv)
+        db.session.flush()  # Flush để lấy ID ngay lập tức
+        service_map[s['ten_dich_vu']] = sv.id
 
     # 4. Import Thuốc
     print("Đang import Thuốc...")
@@ -98,8 +102,63 @@ def import_json_data():
             dia_chi=p['dia_chi']
         )
         db.session.add(bn)
+        db.session.flush()
+        patient_map[p['so_dien_thoai']] = bn.id
 
     db.session.commit()
+
+    # 6. Import Lịch hẹn (MỚI THÊM)
+    print("Đang import Lịch hẹn...")
+    for apt in data.get('appointments', []):
+        # Tìm ID bệnh nhân qua SĐT
+        bn_id = patient_map.get(apt['benh_nhan_sdt'])
+        # Tìm ID dịch vụ qua tên
+        dv_id = service_map.get(apt['dich_vu_ten'])
+
+        if bn_id and dv_id:
+            try:
+                # Xử lý ngày giờ
+                ngay = datetime.strptime(apt['ngay_dat'], '%Y-%m-%d').date()
+                gio = datetime.strptime(apt['gio_kham'], '%H:%M').time()
+
+                lich_hen = LichHen(
+                    ngay_dat=ngay,
+                    gio_kham=gio,
+                    ho_so_benh_nhan_id=bn_id,
+                    bac_si_id=apt['bac_si_id'],
+                    dich_vu_id=dv_id,
+                    trang_thai=getattr(TrangThaiLichHen, apt['trang_thai']),
+                    ghi_chu=apt.get('ghi_chu', '')
+                )
+                db.session.add(lich_hen)
+            except ValueError as e:
+                print(f"Lỗi format ngày giờ cho lịch hẹn: {e}")
+        else:
+            print(f"Không tìm thấy Bệnh nhân ({apt['benh_nhan_sdt']}) hoặc Dịch vụ ({apt['dich_vu_ten']})")
+
+    db.session.commit()
+
+    # 7. Import Lịch làm việc (MỚI THÊM)
+    print("Đang import Lịch làm việc...")
+    for ws in data.get('work_schedules', []):
+        try:
+            ngay = datetime.strptime(ws['ngay_lam'], '%Y-%m-%d').date()
+            bat_dau = datetime.strptime(ws['gio_bat_dau'], '%H:%M:%S').time()
+            ket_thuc = datetime.strptime(ws['gio_ket_thuc'], '%H:%M:%S').time()
+
+            lich_truc = LichLamViec(
+                ngay_lam=ngay,
+                gio_bat_dau=bat_dau,
+                gio_ket_thuc=ket_thuc,
+                bac_si_id=ws['bac_si_id'],
+                trang_thai=getattr(TrangThaiLamViec, ws['trang_thai'])
+            )
+            db.session.add(lich_truc)
+        except Exception as e:
+            print(f"Lỗi import lịch trực: {e}")
+
+    db.session.commit()
+    print("--- Đã cập nhật lịch làm việc! ---")
     print("--- Hoàn tất import dữ liệu! ---")
 
 

@@ -1,5 +1,6 @@
 from DentFlowApp.models import LichLamViec, BacSi, TrangThaiLamViec
 from DentFlowApp import db
+from datetime import date
 
 def get_schedules():
     return LichLamViec.query.all()
@@ -11,7 +12,18 @@ def get_schedules_by_bac_si_id(id):
         for lich in danh_sach_lich:
             print(f"Ngày: {lich.ngay}, Giờ: {lich.gio_bat_dau} - {lich.gio_ket_thuc}")
     return bac_si
+
 def get_schedules_is_ready_by_day_by_doctor(ngay , bac_si_id):
     lich_kha_dung = LichLamViec.query.filter(LichLamViec.ngay_lam == ngay, LichLamViec.bac_si_id == bac_si_id
                                              , LichLamViec.trang_thai == TrangThaiLamViec.SAN_SANG).all()
     return lich_kha_dung
+
+def get_lich_by_bac_si_id(id):
+    return LichLamViec.query.filter(LichLamViec.bac_si_id == id).first()
+
+def get_lich_truc_hom_nay(bac_si_id):
+    # Lấy lịch trực của bác sĩ đúng vào ngày hôm nay
+    return LichLamViec.query.filter(
+        LichLamViec.bac_si_id == bac_si_id,
+        LichLamViec.ngay_lam == date.today()
+    ).first()
