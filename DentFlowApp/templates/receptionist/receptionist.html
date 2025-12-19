@@ -4,6 +4,8 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/receptionist_page.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/tab_schedule.css') }}"/>
 {% endblock %}
 
 {% block hero %}
@@ -12,20 +14,56 @@
 
 
 {% block content %}
-    <div class="btn-group mb-4">
-        <button class="btn btn-primary"
-                onclick="goToURL(this)"
-                data-url="{{ url_for('receptionist_phieu_dieu_tri_search') }}">
-            Tra cứu phiếu điều trị
-        </button>
 
-        <button class="btn btn-primary"
-                onclick="goToURL(this)"
-                data-url="{{ url_for('register_patient_view') }}">
-            Tạo hồ sơ người dùng
-        </button>
+{% block stats_cards %}
+{% include 'layout/stats_cards.html' %}
+{% endblock %}
+<div class="card border-0 shadow-sm mt-4">
+    <div class="card-body p-4">
+
+        <ul class="nav nav-pills custom-tab-bar mb-4" id="pills-tab" role="tablist">
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link tab-text active" id="pills-schedule-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-schedule" type="button" role="tab">
+                    <i class="far fa-calendar-alt"></i> Tra cứu lịch hẹn
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link tab-text" id="pills-profile-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-profile" type="button" role="tab">
+                    <i class="far fa-calendar-check"></i> Hồ sơ bệnh nhân
+                </button>
+            </li>
+
+            <li class="nav-item ms-auto" role="presentation">
+                <button class="nav-link tab-button" id="pills-booking-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-booking" type="button" role="tab">
+                    <i class="fas fa-file-medical me-2"></i> Đặt lịch khám mới
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="pills-schedule" role="tabpanel">
+                {% include 'receptionist/tab_schedule.html' %}
+            </div>
+
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel">
+                <div class="alert alert-light border">Nội dung hồ sơ...</div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-booking" role="tabpanel">
+                <div class="alert alert-primary">Form đặt lịch...</div>
+            </div>
+
+        </div>
+
     </div>
+</div>
 {% endblock %}
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/service.js') }}"></script>
 {% endblock %}

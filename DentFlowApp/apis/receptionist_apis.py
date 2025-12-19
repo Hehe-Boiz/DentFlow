@@ -1,7 +1,7 @@
 import http
 import re
 from DentFlowApp import app, db
-from flask import request, redirect, render_template, url_for, flash
+from flask import request, redirect, render_template, url_for, flash, session
 from flask_login import current_user, login_required
 from datetime import datetime
 from DentFlowApp.dao import receptionistDao, user_dao
@@ -13,6 +13,11 @@ from DentFlowApp.models import UserRole, GioiTinh, HoSoBenhNhan
 def receptionist():
     flash('none')
     if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
+        session['stats_cards'] = {
+            "Lịch hôm nay": 0,
+            "Chờ xác nhận": 0,
+            "Tổng lịch hẹn": 0
+        }
         return render_template('receptionist/receptionist.html', letan=True, now=datetime.now().strftime("%d/%m/%Y"))
     return http.HTTPStatus.FORBIDDEN
 
