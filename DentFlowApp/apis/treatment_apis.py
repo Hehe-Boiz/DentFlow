@@ -94,3 +94,8 @@ def get_lo_phu_hop(thuoc_id):
         print(e)
         return jsonify({'status': 'error', 'message': 'Lỗi server khi tìm thuốc'}), 500
 
+@app.route('/treatment', methods=['POST'])
+@login_required
+def create_treatment():
+    patient_id = request.form.get("patient_id", type=int)
+    chan_doan = request.form.get("chan_doan")

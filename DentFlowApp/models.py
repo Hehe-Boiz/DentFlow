@@ -131,7 +131,7 @@ class DichVu(BaseModel):
     don_gia = Column(Float, nullable=False)
 
     lich_hen_ds = relationship('LichHen', backref='dich_vu', lazy=True)
-    phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='dich_vu', lazy=True)
+    phieu_dieu_tri_ds = relationship('ChiTietPhieuDieuTri', backref='dich_vu', lazy=True)
 
 class ChiTietDichVu(db.Model):
     __tablename__ = 'chi_tiet_dich_vu'
@@ -158,10 +158,18 @@ class PhieuDieuTri(BaseModel):
 
     ho_so_benh_nhan_id = Column(Integer, ForeignKey('ho_so_benh_nhan.id'), nullable=False)
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
-    dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=False)
+    # dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=False)
 
     hoa_don = relationship('HoaDon', backref='phieu_dieu_tri', uselist=False)
     don_thuoc = relationship('DonThuoc', backref='phieu_dieu_tri', uselist=False)
+
+    chi_tiet_dich_vu = relationship('ChiTietPhieuDieuTri', backref='phieu_dieu_tri', lazy=True)
+
+class ChiTietPhieuDieuTri(BaseModel):
+    __tablename__ = 'chi_tiet_phieu_dieu_tri'
+
+    phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id'), nullable=False)
+    dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=False)
 
 
 class HoaDon(BaseModel):

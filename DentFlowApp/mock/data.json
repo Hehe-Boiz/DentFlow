@@ -68,14 +68,74 @@
   "medicines": [
     {
       "ten_thuoc": "Paracetamol 500mg",
+      "don_vi": "VIEN",
       "batches": [
-        { "han_dung_ngay": 365, "so_luong": 100 }
+        {
+          "han_dung_ngay": 365,
+          "so_luong": 100
+        },
+        {
+          "han_dung_ngay": 180,
+          "so_luong": 60
+        }
       ]
     },
     {
       "ten_thuoc": "Amoxicillin 500mg",
+      "don_vi": "VIEN",
       "batches": [
-        { "han_dung_ngay": 700, "so_luong": 200 }
+        {
+          "han_dung_ngay": 700,
+          "so_luong": 200
+        },
+        {
+          "han_dung_ngay": 365,
+          "so_luong": 120
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Ibuprofen 400mg",
+      "don_vi": "VIEN",
+      "batches": [
+        {
+          "han_dung_ngay": 540,
+          "so_luong": 150
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Augmentin 625mg",
+      "don_vi": "VIEN",
+      "batches": [
+        {
+          "han_dung_ngay": 500,
+          "so_luong": 80
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Chlorhexidine 0.12% (súc miệng)",
+      "don_vi": "CHAI",
+      "batches": [
+        {
+          "han_dung_ngay": 365,
+          "so_luong": 40
+        },
+        {
+          "han_dung_ngay": 200,
+          "so_luong": 25
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Vitamin C 500mg",
+      "don_vi": "VI",
+      "batches": [
+        {
+          "han_dung_ngay": 900,
+          "so_luong": 60
+        }
       ]
     }
   ],
