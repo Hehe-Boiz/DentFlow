@@ -420,6 +420,27 @@
       "gio_bat_dau": "08:00:00",
       "gio_ket_thuc": "21:00:00",
       "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-20",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "23:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-21",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "23:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-22",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "23:00:00",
+      "trang_thai": "SAN_SANG"
     }
   ]
 }

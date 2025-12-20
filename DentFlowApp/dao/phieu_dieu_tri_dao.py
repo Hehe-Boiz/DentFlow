@@ -22,7 +22,7 @@ def add_phieu_dieu_tri(patient_id, chan_doan, ghi_chu, bac_si_id):
 
 def add_phieu_dieu_tri_flush(patient_id, chan_doan, ghi_chu, bac_si_id):
     phieu_dieu_tri = PhieuDieuTri(
-        patient_id=patient_id,
+        ho_so_benh_nhan_id=patient_id,
         chan_doan=chan_doan,
         ghi_chu=ghi_chu,
         bac_si_id=bac_si_id

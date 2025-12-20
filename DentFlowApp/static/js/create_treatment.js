@@ -424,6 +424,7 @@ const btnSaveTreatment = document.getElementById('btn-save-treatment');
 btnSaveTreatment.addEventListener('click', async function () {
     const selectPatientElement = document.querySelector('select[name="patient_id"]')
     const patientId = selectPatientElement ? selectPatientElement.value : null;
+    console.log(patientId)
     if (!patientId) {
         alert("Vui lòng chọn lịch khám/bệnh nhân trước khi lưu!");
         selectPatientElement.focus(); // Đưa con trỏ chuột về ô select
@@ -477,6 +478,10 @@ btnSaveTreatment.addEventListener('click', async function () {
         if (result.status === 'success') {
             alert("Tạo phiếu thành công!");
             window.location.reload();
+            selectPatientElement.value =""
+            chanDoanInput.value=""
+            ghiChuInput.value=""
+
         } else {
             alert("Lỗi: " + result.message);
         }
