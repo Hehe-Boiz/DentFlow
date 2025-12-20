@@ -103,7 +103,8 @@ def import_json_data():
             ho_ten=p['ho_ten'],
             so_dien_thoai=p['so_dien_thoai'],  # Đã sửa khớp với model
             gioi_tinh=getattr(GioiTinh, p['gioi_tinh']),
-            dia_chi=p['dia_chi']
+            dia_chi=p['dia_chi'],
+            ngay_sinh= datetime.strptime(p["ngay_sinh"], "%Y-%m-%d").date()
         )
         db.session.add(bn)
         db.session.flush()
