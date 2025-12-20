@@ -1,6 +1,14 @@
 {
   "users": [
     {
+      "username": "thungan",
+      "password": "123456",
+      "ho_ten": "Trần Thị Thu Ngân",
+      "vai_tro": "CASHIER",
+      "so_dien_thoai": "0909000002",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
       "username": "admin",
       "password": "123456",
       "ho_ten": "Quản Trị Viên",
@@ -652,7 +660,9 @@
       "ngay_tao": "2025-12-20 08:30:00",
       "chan_doan": "Cao răng nhiều, viêm nướu nhẹ",
       "ghi_chu": "Dặn bệnh nhân đánh răng kỹ hơn",
-      "dich_vu_su_dung": ["Cạo vôi răng"],
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -661,7 +671,9 @@
       "ngay_tao": "2025-12-20 09:00:00",
       "chan_doan": "Sâu răng hàm dưới R36, R37",
       "ghi_chu": "Đã trám composite",
-      "dich_vu_su_dung": ["Trám răng"],
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -670,7 +682,9 @@
       "ngay_tao": "2025-12-20 09:45:00",
       "chan_doan": "Viêm tủy cấp tính răng R46",
       "ghi_chu": "Bệnh nhân đau nhiều, đã gây tê",
-      "dich_vu_su_dung": ["Điều trị tủy"],
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -679,7 +693,10 @@
       "ngay_tao": "2025-12-20 14:30:00",
       "chan_doan": "Nhu cầu thẩm mỹ",
       "ghi_chu": "Tẩy trắng 2 hàm",
-      "dich_vu_su_dung": ["Tẩy trắng răng", "Cạo vôi răng"],
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng",
+        "Cạo vôi răng"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -688,7 +705,9 @@
       "ngay_tao": "2025-12-21 09:30:00",
       "chan_doan": "Sâu răng cửa nhẹ",
       "ghi_chu": "Trám thẩm mỹ",
-      "dich_vu_su_dung": ["Trám răng"],
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -697,7 +716,9 @@
       "ngay_tao": "2025-12-21 10:00:00",
       "chan_doan": "Răng khôn mọc lệch 90 độ",
       "ghi_chu": "Tiểu phẫu khó, dặn uống thuốc đầy đủ",
-      "dich_vu_su_dung": ["Nhổ răng"],
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
       "da_thanh_toan": true
     }
   ]
