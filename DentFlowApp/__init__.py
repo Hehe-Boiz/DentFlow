@@ -11,6 +11,7 @@ load_dotenv()
 app.secret_key = os.getenv('APP_SECRET_KEY')
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+app.config["PAGE_SIZE"] = 8
 cloudinary.config(cloud_name=os.getenv('CLOUD_NAME'), api_key=os.getenv('CLOUD_API_KEY'),
                   api_secret=os.getenv('CLOUD_API_SECRET'))
 
@@ -25,4 +26,5 @@ from DentFlowApp.apis import (login_apis,
                               receptionist_apis,
                               service_apis,
                               treatment_apis,
+                              profile_apis
                               )

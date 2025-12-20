@@ -1,0 +1,61 @@
+/* Container chung để căn chỉnh */
+.custom-tab-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Khoảng cách giữa các mục */
+    border-bottom: 1px solid #f0f0f0; /* Đường kẻ mờ bên dưới (nếu thích) */
+    padding-bottom: 15px;
+}
+
+/* --- PHONG CÁCH 1: TEXT TAB (Cho Tra cứu & Hồ sơ) --- */
+.nav-pills .nav-link.tab-text {
+    background: transparent !important; /* Xóa nền xám mặc định */
+    color: #6b7280; /* Màu chữ xám (Gray-500) */
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0; /* Xóa padding để gọn như text */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.nav-pills .nav-link.tab-text i {
+    font-size: 1.1rem;
+    margin-right: 8px; /* Khoảng cách icon */
+    color: #4b5563; /* Icon đậm hơn chữ chút */
+}
+
+/* Khi Active (Đang chọn): Đổi màu chữ sang xanh */
+.nav-pills .nav-link.tab-text.active {
+    color: #2563eb !important; /* Màu xanh thương hiệu */
+    background: transparent !important;
+}
+.nav-pills .nav-link.tab-text.active i {
+    color: #2563eb;
+}
+
+/* --- PHONG CÁCH 2: BUTTON TAB (Cho Đặt lịch) --- */
+/* Đẩy nút này sang phải hoặc để gần tùy ý, ở đây mình để gần giống hình mẫu */
+.nav-pills .nav-link.tab-button {
+    background-color: #2563eb !important; /* Nền xanh dương đậm */
+    color: white !important;
+    font-weight: 600;
+    padding: 10px 24px; /* Nút to và cao */
+    border-radius: 12px; /* Bo góc mềm mại */
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2); /* Đổ bóng nhẹ */
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.nav-pills .nav-link.tab-button:hover {
+    background-color: #1d4ed8 !important; /* Hover thì đậm hơn chút */
+    transform: translateY(-1px);
+}
+
+/* Khi Active nút này: Giữ nguyên màu (hoặc thêm viền vàng nếu muốn) */
+.nav-pills .nav-link.tab-button.active {
+    background-color: #1e40af !important; /* Xanh đậm hơn nữa để biết đang chọn */
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.2); /* Hiệu ứng lún xuống */
+

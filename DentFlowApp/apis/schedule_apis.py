@@ -3,8 +3,8 @@ from xml.dom.expatbuilder import theDOMImplementation
 from flask import request, jsonify
 from datetime import datetime,timedelta
 from DentFlowApp import app
-from DentFlowApp.dao.lichlamviec_dao import get_schedules_is_ready_by_day_by_doctor
-from DentFlowApp.dao.lichhen_dao import get_appointment_by_day_by_doctor
+from DentFlowApp.dao.lichlamviec_dao import get_lich_san_sang_theo_ngay_theo_bac_si
+from DentFlowApp.dao.lich_hen_dao import get_lich_hen_theo_ngay_theo_bac_si
 from DentFlowApp.models import LichLamViec
 
 
@@ -37,8 +37,8 @@ def get_available_slots():
 
     # 1. Tìm Lịch Làm Việc của bác sĩ trong ngày đó
     # (Code này dựa trên model LichLamViec của bạn)
-    lich_kha_dung = get_schedules_is_ready_by_day_by_doctor(ngay=ngay,bac_si_id=bac_si_id)
-    lich_hen_da_dat = get_appointment_by_day_by_doctor(ngay=ngay, bac_si_id=bac_si_id)
+    lich_kha_dung = get_lich_san_sang_theo_ngay_theo_bac_si(ngay=ngay,bac_si_id=bac_si_id)
+    lich_hen_da_dat = get_lich_hen_theo_ngay_theo_bac_si(ngay=ngay, bac_si_id=bac_si_id)
 
     print(lich_hen_da_dat)
     thoi_gian_da_dat = [ lh.gio_kham.strftime('%H:%M') for lh in lich_hen_da_dat ]

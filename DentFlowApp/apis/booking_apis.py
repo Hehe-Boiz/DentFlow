@@ -2,7 +2,7 @@ from DentFlowApp import app,db
 from flask import request, redirect, render_template, session, flash
 from flask_login import current_user, login_required
 from DentFlowApp import utils
-from DentFlowApp.dao import dichvu_dao, bacsi_dao, lichhen_dao
+from DentFlowApp.dao import dichvu_dao, bacsi_dao, lich_hen_dao
 
 
 @app.route('/booking')
@@ -76,7 +76,7 @@ def booking_3_view():
                 ghi_chu = request.form.get('note')
                 print(ghi_chu)
                 try:
-                        lichhen_dao.add_appointment(
+                        lich_hen_dao.add_lich_hen(
                                 ho_so_benh_nhan_id=current_user.ho_so_benh_nhan.id,
                                 ngay_dat=ngay_dat,
                                 gio_kham=gio_kham,

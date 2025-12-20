@@ -1,0 +1,102 @@
+<div class="tab-pane fade show active" id="pills-schedule" role="tabpanel">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold text-secondary mb-0">Danh sách hồ sơ bệnh nhân</h5>
+        <div class="input-group" style="max-width: 300px;">
+            <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+            <input type="text" class="form-control border-start-0 ps-0" placeholder="Tìm theo tên">
+        </div>
+    </div>
+    <div class="profile-list">
+        {% if ho_so %}
+        {% for hs in ho_so %}
+        <div class="profile-item d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <div class="w-100">
+                <div class="patient-name">{{ hs.ho_ten }}</div>
+                <div class="info-line"><i class="fa-solid fa-phone"></i> SĐT: {{ hs.so_dien_thoai }}</div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-primary btn-md rounded-pill px-3 text-nowrap fw-medium"
+                        data-bs-toggle="modal"
+                        data-bs-target="#patientModal"
+                        onclick="fillModalData({{ hs.id }})"
+                >
+                    Xem chi tiết
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% if pages > 1 %}
+    <ul class="pagination mt-2">
+        {% for i in range(1, pages + 1) %}
+        <li class="page-item"><a class="page-link" href="/receptionist?tab=profile&page={{i}}">{{ i }}</a></li>
+        {% endfor %}
+    </ul>
+        {% endif %}
+</div>
+
+<div class="modal fade" id="patientModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Hồ sơ bệnh nhân</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <form id="patientForm" method="POST" action="">
+                <div class="modal-body">
+                    <input type="hidden" name="patient_id" id="modal_id">
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small">Họ và tên</label>
+                            <input type="text" class="form-control fw-bold" name="ho_ten" id="modal_ho_ten" disabled required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small">Giới tính</label>
+                            <select class="form-select" name="gioi_tinh" id="modal_gioi_tinh" disabled>
+                                <option value="NAM">Nam</option>
+                                <option value="NU">Nữ</option>
+                                <option value="KHAC">Khác</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small">Ngày sinh</label>
+                            <input type="date" class="form-control" name="ngay_sinh" id="modal_ngay_sinh" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small">CCCD/CMND</label>
+                            <input type="text" class="form-control" name="cccd" id="modal_cccd" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small">Số điện thoại</label>
+                            <input type="text" class="form-control" name="so_dien_thoai" id="modal_sdt" disabled required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small">Email</label>
+                            <input type="email" class="form-control" name="email" id="modal_email" disabled>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-muted small">Địa chỉ</label>
+                            <textarea class="form-control" name="dia_chi" id="modal_dia_chi" rows="2" disabled></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-warning" id="btnEnableEdit" onclick="enableEditMode()">
+                        <i class="fas fa-edit me-1"></i> Chỉnh sửa
+                    </button>
+
+                    <button type="submit" class="btn btn-primary d-none" id="btnSave">
+                        <i class="fas fa-save me-1"></i> Lưu thay đổi
+                    </button>
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
