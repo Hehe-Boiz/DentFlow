@@ -167,6 +167,7 @@ class LichHen(BaseModel):
 class PhieuDieuTri(BaseModel):
     __tablename__ = 'phieu_dieu_tri'
     ghi_chu = Column(String(255), nullable=True)
+    chan_doan = Column(String(255), nullable=True)
 
     ho_so_benh_nhan_id = Column(Integer, ForeignKey('ho_so_benh_nhan.id'), nullable=False)
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
@@ -179,9 +180,9 @@ class PhieuDieuTri(BaseModel):
 
 class ChiTietPhieuDieuTri(BaseModel):
     __tablename__ = 'chi_tiet_phieu_dieu_tri'
-
     phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id'), nullable=False)
     dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=False)
+    don_gia = Column(Integer, nullable=False)
 
 
 class HoaDon(BaseModel):

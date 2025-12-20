@@ -39,6 +39,30 @@
       "vai_tro": "DOCTOR",
       "so_dien_thoai": "0909000004",
       "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "bacsi_c",
+      "password": "123",
+      "ho_ten": "BS. Lê Hoàng C",
+      "vai_tro": "DOCTOR",
+      "so_dien_thoai": "0909000005",
+      "avatar": "https://i.pravatar.cc/150?u=bsc"
+    },
+    {
+      "username": "benhnhan1",
+      "password": "123",
+      "ho_ten": "Lê Văn C",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0912345678",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "benhnhan2",
+      "password": "123",
+      "ho_ten": "Phạm Thị D",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0987654321",
+      "avatar": "https://i.pravatar.cc/150?u=bn2"
     }
   ],
   "doctors": [
@@ -57,13 +81,45 @@
       "loai_bac_si": "BAN_THOI_GIAN",
       "username_lien_ket": "bacsi_b",
       "muc_luong_gio": 200000
+    },
+    {
+      "ma_bac_si": "BS003",
+      "ho_ten": "Lê Hoàng C",
+      "so_dien_thoai": "0909000005",
+      "loai_bac_si": "TOAN_THOI_GIAN",
+      "username_lien_ket": "bacsi_c",
+      "luong_co_ban": 18000000
     }
   ],
   "services": [
-    { "ten_dich_vu": "Cạo vôi răng", "don_gia": 200000 },
-    { "ten_dich_vu": "Trám răng", "don_gia": 500000 },
-    { "ten_dich_vu": "Nhổ răng", "don_gia": 300000 },
-    { "ten_dich_vu": "Tẩy trắng răng", "don_gia": 1500000 }
+    {
+      "ten_dich_vu": "Cạo vôi răng",
+      "don_gia": 200000
+    },
+    {
+      "ten_dich_vu": "Trám răng",
+      "don_gia": 500000
+    },
+    {
+      "ten_dich_vu": "Nhổ răng",
+      "don_gia": 300000
+    },
+    {
+      "ten_dich_vu": "Tẩy trắng răng",
+      "don_gia": 1500000
+    },
+    {
+      "ten_dich_vu": "Điều trị tủy",
+      "don_gia": 1200000
+    },
+    {
+      "ten_dich_vu": "Phục hình răng sứ",
+      "don_gia": 5000000
+    },
+    {
+      "ten_dich_vu": "Niềng răng mắc cài",
+      "don_gia": 35000000
+    }
   ],
   "medicines": [
     {
@@ -137,6 +193,36 @@
           "so_luong": 60
         }
       ]
+    },
+    {
+      "ten_thuoc": "Listerine Cool Mint",
+      "don_vi": "CHAI",
+      "batches": [
+        {
+          "han_dung_ngay": 720,
+          "so_luong": 100
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Rodogyl",
+      "don_vi": "VI",
+      "batches": [
+        {
+          "han_dung_ngay": 300,
+          "so_luong": 50
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Medrol 4mg",
+      "don_vi": "VIEN",
+      "batches": [
+        {
+          "han_dung_ngay": 600,
+          "so_luong": 200
+        }
+      ]
     }
   ],
   "patients": [
@@ -151,67 +237,468 @@
       "so_dien_thoai": "0987654321",
       "gioi_tinh": "NU",
       "dia_chi": "Hà Nội"
-    }
-  ],
-  "appointments": [
-    {
-      "ngay_dat": "2024-12-20",
-      "gio_kham": "08:00",
-      "benh_nhan_sdt": "0987654321",
-      "bac_si_id": "BS001",
-      "dich_vu_ten": "Cạo vôi răng",
-      "trang_thai": "DA_KHAM",
-      "ghi_chu": "Khám định kỳ"
     },
     {
-      "ngay_dat": "2024-12-20",
-      "gio_kham": "09:30",
-      "benh_nhan_sdt": "0912345678",
-      "bac_si_id": "BS001",
-      "dich_vu_ten": "Nhổ răng",
-      "trang_thai": "DAT_LICH_THANH_CONG",
-      "ghi_chu": "Đau răng hàm dưới"
+      "ho_ten": "Nguyễn Hoàng Nam",
+      "so_dien_thoai": "0933445566",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Hải Phòng"
     },
     {
-      "ngay_dat": "2024-12-20",
-      "gio_kham": "14:00",
-      "benh_nhan_sdt": "0912345678",
-      "bac_si_id": "BS002",
-      "dich_vu_ten": "Tẩy trắng răng",
-      "trang_thai": "CHO_KHAM",
-      "ghi_chu": "Khách hẹn trước 1 tuần"
+      "ho_ten": "Trần Thanh Thảo",
+      "so_dien_thoai": "0944556677",
+      "gioi_tinh": "NU",
+      "dia_chi": "Đà Nẵng"
     },
     {
-      "ngay_dat": "2025-12-19",
-      "gio_kham": "14:00",
-      "benh_nhan_sdt": "0987654321",
-      "bac_si_id": "BS001",
-      "dich_vu_ten": "Tẩy trắng răng",
-      "trang_thai": "CHO_KHAM",
-      "ghi_chu": "Khách hẹn trước 1 tuần"
+      "ho_ten": "Lý Gia Kiệt",
+      "so_dien_thoai": "0955667788",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Cần Thơ"
+    },
+    {
+      "ho_ten": "Võ Minh Anh",
+      "so_dien_thoai": "0966778899",
+      "gioi_tinh": "NU",
+      "dia_chi": "Quận 3, TP.HCM"
+    },
+    {
+      "ho_ten": "Đặng Thu Hà",
+      "so_dien_thoai": "0977889900",
+      "gioi_tinh": "NU",
+      "dia_chi": "Long An"
+    },
+    {
+      "ho_ten": "Bùi Xuân Huấn",
+      "so_dien_thoai": "0922334455",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Lào Cai"
+    },
+    {
+      "ho_ten": "Phan Văn Đức",
+      "so_dien_thoai": "0911223344",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Bình Dương"
+    },
+    {
+      "ho_ten": "Trương Thị Mỹ Linh",
+      "so_dien_thoai": "0922334466",
+      "gioi_tinh": "NU",
+      "dia_chi": "Đồng Nai"
+    },
+    {
+      "ho_ten": "Hoàng Quốc Việt",
+      "so_dien_thoai": "0933445577",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Vũng Tàu"
+    },
+    {
+      "ho_ten": "Ngô Thị Bích Ngọc",
+      "so_dien_thoai": "0944556688",
+      "gioi_tinh": "NU",
+      "dia_chi": "Tây Ninh"
+    },
+    {
+      "ho_ten": "Đỗ Minh Tâm",
+      "so_dien_thoai": "0955667799",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Bến Tre"
+    },
+    {
+      "ho_ten": "Dương Thúy Hằng",
+      "so_dien_thoai": "0966778800",
+      "gioi_tinh": "NU",
+      "dia_chi": "Tiền Giang"
+    },
+    {
+      "ho_ten": "Lâm Chấn Khang",
+      "so_dien_thoai": "0977889911",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Vĩnh Long"
+    },
+    {
+      "ho_ten": "Hồ Ngọc Hà",
+      "so_dien_thoai": "0988990022",
+      "gioi_tinh": "NU",
+      "dia_chi": "Quảng Bình"
     }
   ],
   "work_schedules": [
     {
       "bac_si_id": "BS001",
-      "ngay_lam": "2024-12-20",
+      "ngay_lam": "2025-12-20",
       "gio_bat_dau": "08:00:00",
       "gio_ket_thuc": "17:00:00",
       "trang_thai": "SAN_SANG"
     },
     {
       "bac_si_id": "BS002",
-      "ngay_lam": "2024-12-20",
+      "ngay_lam": "2025-12-20",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-20",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-21",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-21",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-21",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-22",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-22",
       "gio_bat_dau": "13:00:00",
       "gio_ket_thuc": "21:00:00",
       "trang_thai": "SAN_SANG"
     },
     {
-      "bac_si_id": "BS001",
-      "ngay_lam": "2025-12-19",
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-22",
       "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "12:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-23",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-23",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-23",
+      "gio_bat_dau": "13:00:00",
       "gio_ket_thuc": "21:00:00",
       "trang_thai": "SAN_SANG"
+    }
+  ],
+  "appointments": [
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "08:00",
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DA_KHAM",
+      "ghi_chu": "Bệnh nhân đến sớm"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "08:30",
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DA_KHAM",
+      "ghi_chu": "Trám 2 lỗ sâu"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "09:00",
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "DA_KHAM",
+      "ghi_chu": "Đau nhức dữ dội"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Niềng răng mắc cài",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Tư vấn lần đầu"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "10:00",
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": "Răng lung lay"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Gói cao cấp"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "15:00",
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "08:00",
+      "benh_nhan_sdt": "0922334455",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Phục hình răng sứ",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Làm cầu răng"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "08:30",
+      "benh_nhan_sdt": "0911223344",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "09:00",
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Sâu răng cửa"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Răng số 8"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "10:30",
+      "benh_nhan_sdt": "0944556688",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Tái khám"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0955667799",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Niềng răng mắc cài",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Gắn mắc cài"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "15:30",
+      "benh_nhan_sdt": "0966778800",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "08:15",
+      "benh_nhan_sdt": "0977889911",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "09:00",
+      "benh_nhan_sdt": "0988990022",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Phục hình răng sứ",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Bọc sứ 4 răng"
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "10:00",
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Mòn cổ răng"
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Lần 2"
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "15:00",
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Nhổ răng sữa cho bé"
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "08:00",
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "08:30",
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Niềng răng mắc cài",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Siết răng định kỳ"
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "10:30",
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0922334455",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Phục hình răng sứ",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Kiểm tra mão sứ"
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "15:00",
+      "benh_nhan_sdt": "0911223344",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "16:00",
+      "benh_nhan_sdt": "0988990022",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    }
+  ],
+  "treatments": [
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-20 08:30:00",
+      "chan_doan": "Cao răng nhiều, viêm nướu nhẹ",
+      "ghi_chu": "Dặn bệnh nhân đánh răng kỹ hơn",
+      "dich_vu_su_dung": ["Cạo vôi răng"],
+      "da_thanh_toan": true
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-20 09:00:00",
+      "chan_doan": "Sâu răng hàm dưới R36, R37",
+      "ghi_chu": "Đã trám composite",
+      "dich_vu_su_dung": ["Trám răng"],
+      "da_thanh_toan": true
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-20 09:45:00",
+      "chan_doan": "Viêm tủy cấp tính răng R46",
+      "ghi_chu": "Bệnh nhân đau nhiều, đã gây tê",
+      "dich_vu_su_dung": ["Điều trị tủy"],
+      "da_thanh_toan": true
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-20 14:30:00",
+      "chan_doan": "Nhu cầu thẩm mỹ",
+      "ghi_chu": "Tẩy trắng 2 hàm",
+      "dich_vu_su_dung": ["Tẩy trắng răng", "Cạo vôi răng"],
+      "da_thanh_toan": true
+    },
+    {
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-21 09:30:00",
+      "chan_doan": "Sâu răng cửa nhẹ",
+      "ghi_chu": "Trám thẩm mỹ",
+      "dich_vu_su_dung": ["Trám răng"],
+      "da_thanh_toan": true
+    },
+    {
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-21 10:00:00",
+      "chan_doan": "Răng khôn mọc lệch 90 độ",
+      "ghi_chu": "Tiểu phẫu khó, dặn uống thuốc đầy đủ",
+      "dich_vu_su_dung": ["Nhổ răng"],
+      "da_thanh_toan": true
     }
   ]
 }

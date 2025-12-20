@@ -1,6 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import joinedload
+
 from DentFlowApp.models import HoSoBenhNhan, LichHen, TrangThaiLichHen
 from DentFlowApp import db,app
 from flask_login import current_user
@@ -56,9 +59,7 @@ def del_lich_hen(lich_hen_id):
     except Exception as ex:
         db.session.rollback()
         raise Exception(str(ex))
-def get_lich_hen_theo_bac_si():
-    bacsi_id = current_user.bac_si.ma_bac_si
-    print(bacsi_id)
+def get_lich_hen_theo_bac_si(bacsi_id):
     lich_bac_si = lichlamviec_dao.get_lich_truc_hom_nay(bacsi_id)
     if not lich_bac_si:
         print(f"Bác sĩ {bacsi_id} không có lịch trực hôm nay.")
