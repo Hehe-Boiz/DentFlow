@@ -9,10 +9,39 @@ now = datetime.now()
 formatted = now.strftime("%d/%m/%Y")
 
 
+# @app.route('/treatment')
+# def treatment_view():
+#     bacsi_id = current_user.bac_si.ma_bac_si
+#     patients = lich_hen_dao.get_lich_hen_theo_bac_si()
+#     services = dichvu_dao.get_services()
+#     count_lich_kham = len(patients)
+#     count_lich_da_kham = len(lich_hen_dao.get_lich_hen_da_kham_theo_bac_si())
+#     count_lich_cho_kham = max(count_lich_kham - count_lich_da_kham, 0)
+#     bacsi = bacsi_dao.get_doctors_by_id(bacsi_id)
+#     count_tong_lich_hen = len(lich_hen_dao.get_tong_lich_hen_theo_bac_si())
+#     session['stats_cards'] = {
+#         "Lịch hôm nay": count_lich_kham,
+#         "Chờ khám": count_lich_cho_kham,
+#         "Hoàn thành": count_lich_da_kham,
+#         "Tổng lịch hẹn": count_tong_lich_hen
+#     }
+#     print(patients)
+#     return render_template(
+#         'treatments/treatment.html',
+#         patients=patients,
+#         services=services,
+#         count_lich_kham=count_lich_kham,
+#         count_lich_da_kham=count_lich_da_kham,
+#         count_lich_cho_kham=count_lich_cho_kham,
+#         count_tong_lich_hen=count_tong_lich_hen,
+#         bacsi=bacsi,
+#         now=formatted
+#     )
+
 @app.route('/treatment')
 def treatment_view():
     bacsi_id = current_user.bac_si.ma_bac_si
-    patients = lich_hen_dao.get_lich_hen_theo_bac_si()
+    patients = lich_hen_dao.get_lich_hen_theo_bac_si(bacsi_id)
     services = dichvu_dao.get_services()
     count_lich_kham = len(patients)
     count_lich_da_kham = len(lich_hen_dao.get_lich_hen_da_kham_theo_bac_si())
@@ -37,7 +66,6 @@ def treatment_view():
         bacsi=bacsi,
         now=formatted
     )
-
 
 @app.get("/treatments/ke-don")
 def ke_don_partial():
@@ -176,3 +204,15 @@ def create_treatment():
         db.session.rollback()  # Hoàn tác nếu lỗi
         print(f"Error creating treatment: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
+# @app.get("/tabs/today")
+# def tabs_today():
+#     return render_template("treatments/tab_schedule_today.html")
+#
+# @app.get("/tabs/work")
+# def tabs_work():
+#     return render_template("treatments/tab_schedule.html")
+#
+# @app.get("/tabs/treatment")
+# def tabs_treatment():
+#     return render_template("treatments/tab_treatment.html")

@@ -7,7 +7,7 @@ from DentFlowApp.models import (
     BacSi, BacSiFullTime, BacSiPartTime,
     Thuoc, LoThuoc, DichVu, HoSoBenhNhan, LichHen,
     TrangThaiLichHen, LichLamViec, TrangThaiLamViec,
-    DonViThuoc
+    DonViThuoc, ChiTietPhieuDieuTri, HoaDon, PhieuDieuTri
 )
 
 
@@ -31,6 +31,7 @@ def import_json_data():
     user_map = {}
     service_map = {}
     patient_map = {}
+    service_price_map = {}
 
     # 1. Import Users
     print("Đang import Users...")
@@ -46,7 +47,6 @@ def import_json_data():
         db.session.add(user)
         db.session.flush()
         user_map[u['username']] = user
-
 
     # 2. Import Bác sĩ
     print("Đang import Bác sĩ...")
@@ -78,6 +78,7 @@ def import_json_data():
         db.session.add(sv)
         db.session.flush()  # Flush để lấy ID ngay lập tức
         service_map[s['ten_dich_vu']] = sv.id
+        service_price_map[s['ten_dich_vu']] = s['don_gia']
 
     # 4. Import Thuốc
     print("Đang import Thuốc...")
@@ -159,6 +160,51 @@ def import_json_data():
             db.session.add(lich_truc)
         except Exception as e:
             print(f"Lỗi import lịch trực: {e}")
+
+    # 8. Import Phiếu Điều Trị & Hóa Đơn (MỚI)
+    print("8. Đang import Phiếu Điều Trị & Hóa Đơn...")
+    for trt in data.get('treatments', []):
+        bn_id = patient_map.get(trt['benh_nhan_sdt'])
+        if bn_id:
+            try:
+                # Tạo phiếu điều trị
+                ngay_tao = datetime.strptime(trt['ngay_tao'], '%Y-%m-%d %H:%M:%S')
+                pdt = PhieuDieuTri(
+                    chan_doan=trt['chan_doan'],
+                    ghi_chu=trt.get('ghi_chu', ''),
+                    ho_so_benh_nhan_id=bn_id,
+                    bac_si_id=trt['bac_si_id'],
+                    ngay_tao=ngay_tao
+                )
+                db.session.add(pdt)
+                db.session.flush()  # Để lấy ID phiếu điều trị
+
+                # Tạo chi tiết dịch vụ và tính tổng tiền
+                tong_tien = 0
+                for dv_ten in trt['dich_vu_su_dung']:
+                    dv_id = service_map.get(dv_ten)
+                    don_gia = service_price_map.get(dv_ten, 0)
+
+                    if dv_id:
+                        ct_pdt = ChiTietPhieuDieuTri(
+                            phieu_dieu_tri_id=pdt.id,
+                            dich_vu_id=dv_id,
+                            don_gia=don_gia
+                        )
+                        db.session.add(ct_pdt)
+                        tong_tien += don_gia
+
+                # Tạo hóa đơn nếu đã thanh toán
+                if trt.get('da_thanh_toan', False):
+                    hoa_don = HoaDon(
+                        tong_tien=tong_tien,
+                        ngay_thanh_toan=ngay_tao + timedelta(minutes=30),
+                        phieu_dieu_tri_id=pdt.id
+                    )
+                    db.session.add(hoa_don)
+
+            except Exception as e:
+                print(f"Lỗi import phiếu điều trị: {e}")
 
     db.session.commit()
     print("--- Đã cập nhật lịch làm việc! ---")

@@ -1,18 +1,3 @@
-const buttons = document.querySelectorAll('.tab-btn');
-const tabs = document.querySelectorAll('.tab-content');
-
-buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const target = btn.dataset.tab;
-
-        // Ẩn tất cả tab
-        tabs.forEach(tab => tab.classList.add('hidden'));
-
-        // Hiện tab được chọn
-        document.getElementById(target).classList.remove('hidden');
-    });
-});
-
 const btn = document.getElementById("btn-ke-don");
 const container = document.getElementById("ke-don-container");
 let loaded = false;
