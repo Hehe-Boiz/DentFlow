@@ -5,7 +5,9 @@ from DentFlowApp import app, db
 from DentFlowApp.models import (
     NguoiDung, UserRole, GioiTinh, LoaiBacSi,
     BacSi, BacSiFullTime, BacSiPartTime,
-    Thuoc, LoThuoc, DichVu, HoSoBenhNhan, LichHen, TrangThaiLichHen, LichLamViec, TrangThaiLamViec
+    Thuoc, LoThuoc, DichVu, HoSoBenhNhan, LichHen,
+    TrangThaiLichHen, LichLamViec, TrangThaiLamViec,
+    DonViThuoc
 )
 
 
@@ -28,7 +30,7 @@ def import_json_data():
 
     user_map = {}
     service_map = {}  # Map để lưu: ten_dich_vu -> id
-    patient_map = {} # Map để lưu: so_dien_thoai -> id
+    patient_map = {}  # Map để lưu: so_dien_thoai -> id
 
     # 1. Import Users
     print("Đang import Users...")
@@ -80,7 +82,8 @@ def import_json_data():
     # 4. Import Thuốc
     print("Đang import Thuốc...")
     for m in data.get('medicines', []):
-        thuoc = Thuoc(ten_thuoc=m['ten_thuoc'])  # Đã sửa khớp với model
+        don_vi_enum = DonViThuoc[m['don_vi']]
+        thuoc = Thuoc(ten_thuoc=m['ten_thuoc'], don_vi=don_vi_enum)  # Đã sửa khớp với model
         db.session.add(thuoc)
         db.session.flush()
 

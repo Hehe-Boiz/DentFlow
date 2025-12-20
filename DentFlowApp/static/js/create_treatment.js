@@ -34,6 +34,8 @@ btn.addEventListener("click", async () => {
 
     initTimeButtons();
     checkLoThuoc();
+    inputUnit();
+    initAddMedicineEvent();
 });
 
 const serviceSelect = document.getElementById('service-select');
@@ -50,6 +52,24 @@ if (serviceSelect && priceInput) {
         // Cập nhật vào ô nhập liệu Chi phí
         priceInput.value = price || 0;
     });
+}
+
+function inputUnit() {
+    const thuocSelect = document.getElementById('select-ten-thuoc');
+    const unitInput = document.getElementById('input-don-vi');
+
+    if (thuocSelect && unitInput) {
+        thuocSelect.addEventListener('change', function () {
+            // Lấy option đang được chọn
+            const selectedOption = this.options[this.selectedIndex];
+            // Lấy giá trị từ thuộc tính data-unit
+            const unit = selectedOption.getAttribute('data-unit');
+            console.log(unit);
+
+            // Cập nhật vào ô nhập liệu Chi phí
+            unitInput.value = unit || "viên";
+        });
+    }
 }
 
 // thêm dịch vụ
@@ -177,7 +197,11 @@ function checkLoThuoc() {
         inputHanSuDung.value = '';
         inputHanSuDung.classList.remove('text-red-600', 'font-bold');
 
-        if (!thuocId || !soNgay || soNgay <= 0 ||) {
+        // if (!thuocId || !soNgay || soNgay <= 0) {
+        //     return;
+        // }
+
+        if (soNgay <= 0) {
             return;
         }
 
@@ -223,5 +247,140 @@ function checkLoThuoc() {
     // Gán sự kiện
     selectThuoc.addEventListener('change', fetchLoThuocPhuHop); // Gọi ngay khi đổi thuốc
     inputSoNgay.addEventListener('input', handleInput);       // Gọi debounce khi nhập số ngày
+
+}
+
+let danhSachThuocKeDon = [];
+
+// Hàm khởi tạo sự kiện cho nút Thêm Thuốc
+function initAddMedicineEvent() {
+    const btnThemThuoc = document.getElementById('id-add-thuoc'); // Nút thêm thuốc
+
+    if (btnThemThuoc) {
+        // Xóa event cũ để tránh bị double click nếu gọi hàm nhiều lần
+        const newBtn = btnThemThuoc.cloneNode(true);
+        btnThemThuoc.parentNode.replaceChild(newBtn, btnThemThuoc);
+
+        newBtn.addEventListener('click', function () {
+            handleAddMedicine();
+        });
+    }
+}
+
+function handleAddMedicine() {
+    // 1. Lấy các Element
+    const selectThuoc = document.getElementById('select-ten-thuoc');
+    const inputLieuDung = document.querySelector('input[type="number"][placeholder="2"]'); // Input Liều dùng
+    const inputDonVi = document.getElementById('input-don-vi');
+    const inputSoNgay = document.getElementById('input-so-ngay');
+    const selectThoiDiem = document.getElementById('select-thoi-diem');
+
+    // Lấy nút thời gian (Sáng/Trưa/Chiều/Tối) đang được chọn (có class bg-blue-600)
+    const activeTimeBtn = document.querySelector('.time-btn.bg-blue-600');
+
+    // 2. Validate dữ liệu
+    if (!selectThuoc.value) {
+        alert("Vui lòng chọn tên thuốc!");
+        return;
+    }
+    if (!inputLieuDung.value || inputLieuDung.value <= 0) {
+        alert("Vui lòng nhập liều dùng hợp lệ!");
+        return;
+    }
+    // if (inputSoNgay.value <= 0) {
+    //     alert("Vui lòng nhập số ngày hợp lệ!");
+    //     return;
+    // }
+
+    // 3. Tạo object thuốc
+    const thuocItem = {
+        id: selectThuoc.value,
+        ten_thuoc: selectThuoc.options[selectThuoc.selectedIndex].text.trim(),
+        lieu_dung: inputLieuDung.value,
+        don_vi: inputDonVi.value,
+        so_ngay: inputSoNgay.value,
+        buoi_uong: activeTimeBtn ? activeTimeBtn.innerText.trim() : 'Sáng', // Mặc định Sáng nếu ko chọn
+        thoi_diem: selectThoiDiem.value || 'Sau ăn' // Mặc định Sau ăn nếu ko chọn
+    };
+
+    // 4. Thêm vào mảng
+    danhSachThuocKeDon.push(thuocItem);
+
+    // 5. Render lại giao diện
+    renderMedicineList();
+
+    // 6. Reset form (tuỳ chọn)
+    inputLieuDung.value = '';
+    // inputSoNgay.value = ''; // Thường số ngày giữ nguyên thì tiện hơn
+    selectThuoc.value = '';
+    inputDonVi.value = '';
+    document.getElementById('input-han-su-dung').value = ''; // Reset ô hạn sử dụng
+}
+
+function renderMedicineList() {
+    const container = document.getElementById('list-thuoc-container');
+    const listBody = document.getElementById('list-thuoc-body');
+
+    // Nếu không có thuốc nào thì ẩn bảng đi
+    if (danhSachThuocKeDon.length === 0) {
+        container.classList.add('hidden');
+        return;
+    }
+
+    container.classList.remove('hidden');
+    listBody.innerHTML = ''; // Xóa nội dung cũ
+
+    // Duyệt mảng và tạo HTML
+    danhSachThuocKeDon.forEach((thuoc, index) => {
+        const rowHtml = `
+            <div class="p-4 flex items-start justify-between hover:bg-gray-50 gap-4">
+                <div class="flex-1 space-y-2">
+                    <p class="text-sm text-gray-900 font-medium">
+                        ${index + 1}. ${thuoc.ten_thuoc}
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-2 text-xs text-gray-600">
+                        <span class="bg-blue-50 text-blue-700 px-3 py-2 rounded border border-blue-100">
+                            ${thuoc.lieu_dung} ${thuoc.don_vi}/lần
+                        </span>
+
+                        <span class="text-gray-300">-</span>
+
+                        <span class="bg-gray-100 px-3 py-2 rounded">
+                            ${thuoc.buoi_uong}
+                        </span>
+
+                        <span class="text-gray-300">-</span>
+
+                        <span class="bg-gray-100 px-3 py-2 rounded">
+                            ${thuoc.thoi_diem}
+                        </span>
+
+                        <span class="text-gray-300">-</span>
+
+                        <span class="bg-green-50 text-green-700 px-3 py-2 rounded border border-green-100">
+                            ${thuoc.so_ngay} ngày
+                        </span>
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    onclick="removeMedicine(${index})"
+                    class="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded transition-colors flex-shrink-0"
+                    title="Xóa thuốc này"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                </button>
+            </div>
+        `;
+        listBody.insertAdjacentHTML('beforeend', rowHtml);
+    });
+}
+
+// Hàm xóa thuốc khỏi danh sách
+function removeMedicine(index) {
+    danhSachThuocKeDon.splice(index, 1); // Xóa phần tử tại index
+    renderMedicineList(); // Vẽ lại bảng
 
 }
