@@ -112,11 +112,12 @@ if (btnAdd) {
 
         // 2. Tạo hàng mới
         const row = document.createElement('tr');
+        row.dataset.serviceId = serviceId
         row.className = "hover:bg-gray-50 transition-colors";
         row.innerHTML = `
                 <td class="py-3 px-4 text-sm">${stt}</td>
                 <td class="py-3 px-4 text-sm text-gray-900">${serviceName}</td>
-                <td class="py-3 px-4 text-sm text-emerald-700 font-medium">${formatCurrency(price)}</td>
+                <td class="py-3 px-4 text-sm text-emerald-700 font-medium" data-price="${price}">${formatCurrency(price)}</td>
                 <td class="py-3 px-4 text-sm text-gray-600">${note}</td>
                 <td class="py-3 px-4">
                     <button type="button" class="btn-delete text-red-600 hover:text-red-800 p-2 rounded" data-price="${price}">
@@ -208,11 +209,9 @@ function checkLoThuoc() {
         inputHanSuDung.value = "Đang tìm kiếm...";
 
         fetch(`/api/thuoc/${thuocId}/lo-phu-hop`, {
-            method: 'POST',
-            headers: {
+            method: 'POST', headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({so_ngay_dung: soNgay})
+            }, body: JSON.stringify({so_ngay_dung: soNgay})
         })
             .then(response => response.json())
             .then(data => {
@@ -274,6 +273,7 @@ function handleAddMedicine() {
     const inputDonVi = document.getElementById('input-don-vi');
     const inputSoNgay = document.getElementById('input-so-ngay');
     const selectThoiDiem = document.getElementById('select-thoi-diem');
+    const inputGhiChu = document.getElementById('ghi-chu-thuoc');
 
     // Lấy nút thời gian (Sáng/Trưa/Chiều/Tối) đang được chọn (có class bg-blue-600)
     const activeTimeBtn = document.querySelector('.time-btn.bg-blue-600');
@@ -299,8 +299,9 @@ function handleAddMedicine() {
         lieu_dung: inputLieuDung.value,
         don_vi: inputDonVi.value,
         so_ngay: inputSoNgay.value,
-        buoi_uong: activeTimeBtn ? activeTimeBtn.innerText.trim() : 'Sáng', // Mặc định Sáng nếu ko chọn
-        thoi_diem: selectThoiDiem.value || 'Sau ăn' // Mặc định Sau ăn nếu ko chọn
+        buoi_uong: activeTimeBtn ? activeTimeBtn.innerText.trim() : '', // Mặc định Sáng nếu ko chọn
+        thoi_diem: selectThoiDiem.value,
+        ghi_chu: inputGhiChu.value,
     };
 
     // 4. Thêm vào mảng
@@ -332,48 +333,82 @@ function renderMedicineList() {
 
     // Duyệt mảng và tạo HTML
     danhSachThuocKeDon.forEach((thuoc, index) => {
+        const parts = [];
+
+        if (thuoc.lieu_dung && thuoc.don_vi) {
+            parts.push(`
+        <span class="bg-blue-50 text-blue-700 px-3 py-2 rounded border border-blue-100">
+            ${thuoc.lieu_dung} ${thuoc.don_vi}/lần
+        </span>
+    `);
+        }
+
+        if (thuoc.buoi_uong) {
+            parts.push(`
+        <span class="bg-gray-100 px-3 py-2 rounded">
+            ${thuoc.buoi_uong}
+        </span>
+    `);
+        }
+
+        if (thuoc.thoi_diem) {
+            parts.push(`
+        <span class="bg-gray-100 px-3 py-2 rounded">
+            ${thuoc.thoi_diem}
+        </span>
+    `);
+        }
+
+        if (thuoc.so_ngay) {
+            parts.push(`
+        <span class="bg-green-50 text-green-700 px-3 py-2 rounded border border-green-100">
+            ${thuoc.so_ngay} ngày
+        </span>
+    `);
+        }
+
+        if (thuoc.ghi_chu) {
+            parts.push(`
+        <span class="bg-yellow-50 text-yellow-700 px-3 py-2 rounded border border-yellow-100">
+            ${thuoc.ghi_chu}
+        </span>
+    `);
+        }
+
+        const infoHtml = parts.join(`
+    <span class="text-gray-300">-</span>`);
         const rowHtml = `
             <div class="p-4 flex items-start justify-between hover:bg-gray-50 gap-4">
                 <div class="flex-1 space-y-2">
                     <p class="text-sm text-gray-900 font-medium">
                         ${index + 1}. ${thuoc.ten_thuoc}
                     </p>
-
+        
                     <div class="flex flex-wrap items-center gap-2 text-xs text-gray-600">
-                        <span class="bg-blue-50 text-blue-700 px-3 py-2 rounded border border-blue-100">
-                            ${thuoc.lieu_dung} ${thuoc.don_vi}/lần
-                        </span>
-
-                        <span class="text-gray-300">-</span>
-
-                        <span class="bg-gray-100 px-3 py-2 rounded">
-                            ${thuoc.buoi_uong}
-                        </span>
-
-                        <span class="text-gray-300">-</span>
-
-                        <span class="bg-gray-100 px-3 py-2 rounded">
-                            ${thuoc.thoi_diem}
-                        </span>
-
-                        <span class="text-gray-300">-</span>
-
-                        <span class="bg-green-50 text-green-700 px-3 py-2 rounded border border-green-100">
-                            ${thuoc.so_ngay} ngày
-                        </span>
+                        ${infoHtml}
                     </div>
                 </div>
-
+        
                 <button
                     type="button"
                     onclick="removeMedicine(${index})"
                     class="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded transition-colors flex-shrink-0"
                     title="Xóa thuốc này"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             className="lucide lucide-trash-2">
+            <path d="M3 6h18"/>
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+            <line x1="10" x2="10" y1="11" y2="17"/>
+            <line x1="14" x2="14" y1="11" y2="17"/>
+        </svg>
                 </button>
             </div>
         `;
+
+
         listBody.insertAdjacentHTML('beforeend', rowHtml);
     });
 }
@@ -382,5 +417,77 @@ function renderMedicineList() {
 function removeMedicine(index) {
     danhSachThuocKeDon.splice(index, 1); // Xóa phần tử tại index
     renderMedicineList(); // Vẽ lại bảng
-
 }
+
+// Lấy thông tin và gửi về server
+const btnSaveTreatment = document.getElementById('btn-save-treatment');
+btnSaveTreatment.addEventListener('click', async function () {
+    const selectPatientElement = document.querySelector('select[name="patient_id"]')
+    const patientId = selectPatientElement ? selectPatientElement.value : null;
+    if (!patientId) {
+        alert("Vui lòng chọn lịch khám/bệnh nhân trước khi lưu!");
+        selectPatientElement.focus(); // Đưa con trỏ chuột về ô select
+        return;
+    }
+
+    const chanDoanInput = document.querySelector('textarea[name="chan_doan"]');
+    const chanDoan = chanDoanInput ? chanDoanInput.value : "";
+
+    if (chanDoan === "") {
+        alert("Vui lòng nhập chfẩn đoán");
+        chanDoanInput.focus();
+        return;
+    }
+
+    const ghiChuInput = document.querySelector('textarea[name="ghi-chu-chu-y"]');
+    const ghiChu = ghiChuInput ? ghiChuInput.value : "";
+
+    const services = [];
+    const containerServices = document.getElementById("service-list-container")
+    if (!containerServices.classList.contains("hidden")) {
+        const rows = document.querySelectorAll('#service-table-body tr');
+
+        rows.forEach(row => {
+            const sId = row.getAttribute('data-service-id');
+            const priceCell = row.querySelector('td[data-price]'); // Tìm td có data-price
+            const sPrice = priceCell ? priceCell.getAttribute('data-price') : 0;
+
+            if (sId) services.push({id: sId, price: parseFloat(sPrice)});
+        });
+    }
+
+    try {
+        // Hiệu ứng loading
+        const originalText = btnSaveTreatment.innerText;
+        btnSaveTreatment.innerText = "Đang xử lý...";
+        btnSaveTreatment.disabled = true;
+
+        const response = await fetch('/treatment', {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+                patient_id: patientId,
+                chan_doan: chanDoan,
+                ghi_chu: ghiChu,
+                services: services,
+                medicines: danhSachThuocKeDon
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            alert("Tạo phiếu thành công!");
+            window.location.reload();
+        } else {
+            alert("Lỗi: " + result.message);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Lỗi kết nối server");
+    } finally {
+        // Reset nút bấm
+        btnSaveTreatment.innerText = "Lưu phiếu điều trị";
+        btnSaveTreatment.disabled = false;
+    }
+
+})

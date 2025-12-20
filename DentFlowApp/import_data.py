@@ -29,8 +29,8 @@ def import_json_data():
     print("--- Đã reset database ---")
 
     user_map = {}
-    service_map = {}  # Map để lưu: ten_dich_vu -> id
-    patient_map = {}  # Map để lưu: so_dien_thoai -> id
+    service_map = {}
+    patient_map = {}
 
     # 1. Import Users
     print("Đang import Users...")
@@ -44,9 +44,9 @@ def import_json_data():
             avatar=u['avatar']
         )
         db.session.add(user)
+        db.session.flush()
         user_map[u['username']] = user
 
-    db.session.commit()
 
     # 2. Import Bác sĩ
     print("Đang import Bác sĩ...")

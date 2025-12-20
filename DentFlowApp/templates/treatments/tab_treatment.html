@@ -24,7 +24,8 @@
                             class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
                         <option value="">-- Chọn lịch khám --</option>
                         {% for patient in patients %}
-                        <option value="{{ patient.id }}">{{ patient.ho_ten }} - {{ patient.thoi_diem_kham_str }}
+                        <option value="{{ patient.ho_so_benh_nhan_id }}">{{ patient.ho_ten }} - {{
+                            patient.thoi_diem_kham_str }}
                         </option>
                         {% endfor %}
                     </select>
@@ -37,6 +38,17 @@
                     </label>
                     <textarea name="chan_doan" placeholder="Nhập kết quả chẩn đoán chi tiết của bác sĩ..." rows="4"
                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white"></textarea>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <label class="flex items-center space-x-2 text-sm text-gray-700 mb-2">
+                        <i class="fa-regular fa-note-sticky fa-xl w-4 h-4 text-gray-500 text-blue-600"
+                           style="color: #155DFCFF;"></i>
+                        <span>Ghi chú nếu có tiền sử bệnh, dị ứng</span>
+                    </label>
+                    <textarea name="ghi-chu-chu-y"
+                              placeholder="Nhập ghi chú về tiền sử bệnh, dị ứng..." rows="4"
+                              class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 bg-white text-sm"></textarea>
                 </div>
 
                 <div class="border-2 border-dashed border-gray-300 rounded-xl p-4 bg-white">
@@ -130,7 +142,7 @@
                     <div id="ke-don-container"></div>
                 </div>
 
-                <button type="submit"
+                <button type="submit" id="btn-save-treatment"
                         class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3.5 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
