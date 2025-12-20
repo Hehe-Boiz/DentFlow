@@ -36,6 +36,7 @@ def login_process():
             return redirect('/treatment')
 
     next = request.args.get('next')
+
     return redirect(next if next else '/')
 
 @app.route('/register', methods=['post'])

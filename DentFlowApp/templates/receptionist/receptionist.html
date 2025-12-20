@@ -6,53 +6,59 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/receptionist_page.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/tab_schedule.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/tab_profile.css') }}"/>
 {% endblock %}
 
 {% block hero %}
 {% include 'layout/hero_in_role.html' %}
 {% endblock %}
 
-
 {% block content %}
 
 {% block stats_cards %}
 {% include 'layout/stats_cards.html' %}
 {% endblock %}
+
+
 <div class="card border-0 shadow-sm mt-4">
     <div class="card-body p-4">
 
-        <ul class="nav nav-pills custom-tab-bar mb-4" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills custom-tab-bar mb-4">
 
-            <li class="nav-item" role="presentation">
-                <button class="nav-link tab-text active" id="pills-schedule-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-schedule" type="button" role="tab">
+            <li class="nav-item">
+                <a href="/receptionist?tab=schedule"
+                   class="nav-link tab-text {{ 'active' if active_tab == 'schedule' else '' }}">
                     <i class="far fa-calendar-alt"></i> Tra cứu lịch hẹn
-                </button>
+                </a>
             </li>
 
-            <li class="nav-item" role="presentation">
-                <button class="nav-link tab-text" id="pills-profile-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-profile" type="button" role="tab">
+            <li class="nav-item">
+                <a href="/receptionist?tab=profile"
+                   class="nav-link tab-text {{ 'active' if active_tab == 'profile' else '' }}">
                     <i class="far fa-calendar-check"></i> Hồ sơ bệnh nhân
-                </button>
+                </a>
             </li>
 
-            <li class="nav-item ms-auto" role="presentation">
-                <button class="nav-link tab-button" id="pills-booking-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-booking" type="button" role="tab">
+            <li class="nav-item ms-auto">
+                <a href="/receptionist"
+                   class="nav-link tab-button">
                     <i class="fas fa-file-medical me-2"></i> Đặt lịch khám mới
-                </button>
+                </a>
             </li>
         </ul>
 
-        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-content">
 
-            <div class="tab-pane fade show active" id="pills-schedule" role="tabpanel">
+            <div class="tab-pane fade {{ 'show active' if active_tab == 'schedule' else '' }}">
+                {% if lich_hen %}
                 {% include 'receptionist/tab_schedule.html' %}
+                {% endif %}
             </div>
 
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel">
-                <div class="alert alert-light border">Nội dung hồ sơ...</div>
+            <div class="tab-pane fade {{ 'show active' if active_tab == 'profile' else '' }}">
+                {% if ho_so %}
+                {% include 'receptionist/tab_profile.html' %}
+                {% endif %}
             </div>
 
             <div class="tab-pane fade" id="pills-booking" role="tabpanel">
@@ -66,4 +72,5 @@
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/receptionist.js') }}"></script>
 {% endblock %}

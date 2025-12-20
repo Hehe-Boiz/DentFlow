@@ -9,8 +9,8 @@ import enum
 #ENUMS
 class GioiTinh(enum.Enum):
     NAM = "Nam"
-    NU = "Nu"
-    KHAC = "Khac"
+    NU = "Nữ"
+    KHAC = "Khác"
 
 class DonViThuoc(enum.Enum):
     VIEN = "viên"
@@ -77,17 +77,30 @@ class NhanVien(db.Model):
 class HoSoBenhNhan(BaseModel):
     __tablename__ = 'ho_so_benh_nhan'
     ho_ten = Column(String(100), nullable=False)
-    so_dien_thoai = Column(String(15))
-    ngay_tao = Column(DateTime, default=datetime.utcnow)
-    dia_chi = Column(String(255))
-    gioi_tinh = Column(sqlEnum(GioiTinh))
-
+    so_dien_thoai = Column(String(15), nullable=False)
+    ngay_tao = Column(DateTime, default=datetime.now())
+    dia_chi = Column(String(255), nullable=True)
+    gioi_tinh = Column(sqlEnum(GioiTinh), nullable=True)
+    email = Column(String(50),nullable=True)
+    ngay_sinh = Column(DateTime, nullable=True)
+    CCCD = Column(String(12), nullable=True)
     #Tài khoản của người dùng (Nếu có)
     nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
 
     #lịch hẹn và phiếu điều trị tra cứu từ hồ sơ
     lich_hen_ds = relationship('LichHen', backref='ho_so_benh_nhan', lazy=True)
     phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='ho_so_benh_nhan', lazy=True)
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'ho_ten': self.ho_ten,
+            'so_dien_thoai': self.so_dien_thoai,
+            'email': self.email or '',
+            'ngay_sinh': self.ngay_sinh.strftime('%Y-%m-%d') if self.ngay_sinh else '',
+            'gioi_tinh': self.gioi_tinh.name if self.gioi_tinh else '',
+            'cccd': self.CCCD or '',
+            'dia_chi': self.dia_chi or ''
+        }
 
 
 class BacSi(db.Model):
@@ -142,7 +155,6 @@ class LichHen(BaseModel):
     __tablename__ = 'lich_hen'
     ngay_dat = Column(Date, default=datetime.now())
     gio_kham = Column(Time, nullable=False)
-
 
     ho_so_benh_nhan_id = Column(Integer, ForeignKey('ho_so_benh_nhan.id'), nullable=False)
 

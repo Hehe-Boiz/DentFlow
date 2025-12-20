@@ -3,16 +3,16 @@ from sqlalchemy.exc import IntegrityError
 from DentFlowApp.models import LichHen
 from DentFlowApp import db
 
-def get_appointment():
+def get_lich_hen():
     return LichHen.query.all()
 
-def get_appointment_by_id(id):
+def get_lich_hen_theo_id(id):
     return LichHen.query.get(id)
 
-def get_appointment_by_day_by_doctor(ngay, bac_si_id):
+def get_lich_hen_theo_ngay_theo_bac_si(ngay, bac_si_id):
     return LichHen.query.filter(LichHen.bac_si_id == bac_si_id, LichHen.ngay_dat == ngay).all()
 
-def add_appointment(ho_so_benh_nhan_id, bac_si_id, dich_vu_id,ngay_dat,gio_kham,ghi_chu):
+def add_lich_hen(ho_so_benh_nhan_id, bac_si_id, dich_vu_id,ngay_dat,gio_kham,ghi_chu):
     lich_hen_moi = LichHen(
         ho_so_benh_nhan_id=ho_so_benh_nhan_id,
         bac_si_id=bac_si_id,

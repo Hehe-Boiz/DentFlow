@@ -1,11 +1,12 @@
 import http
+import math
 import re
 from DentFlowApp import app, db
-from flask import request, redirect, render_template, url_for, flash, session
+from flask import request, redirect, render_template, url_for, flash, session, jsonify
 from flask_login import current_user, login_required
 from datetime import datetime
-from DentFlowApp.dao import receptionistDao, user_dao
-from DentFlowApp.models import UserRole, GioiTinh, HoSoBenhNhan
+from DentFlowApp.dao import receptionistDao, user_dao, lich_hen_dao,ho_so_benh_nhan_dao
+from DentFlowApp.models import UserRole, GioiTinh, HoSoBenhNhan, TrangThaiLichHen
 
 
 @app.route('/receptionist', methods=['GET'])
@@ -13,14 +14,26 @@ from DentFlowApp.models import UserRole, GioiTinh, HoSoBenhNhan
 def receptionist():
     flash('none')
     if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
+        active_tab = request.args.get('tab', 'schedule')
         session['stats_cards'] = {
             "Lịch hôm nay": 0,
             "Chờ xác nhận": 0,
             "Tổng lịch hẹn": 0
         }
-        return render_template('receptionist/receptionist.html', letan=True, now=datetime.now().strftime("%d/%m/%Y"))
+        lich_hen = None
+        ho_so = None
+        if active_tab == 'schedule':
+            lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)))
+        if active_tab == 'profile':
+            ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)))
+        return render_template('receptionist/receptionist.html',
+                               active_tab=active_tab,
+                               letan=True,
+                               lich_hen=lich_hen,
+                               ho_so=ho_so,
+                               pages=math.ceil(lich_hen_dao.get_tong_lich_hen() / app.config['PAGE_SIZE']),
+                               now=datetime.now().strftime("%d/%m/%Y"))
     return http.HTTPStatus.FORBIDDEN
-
 
 @app.route('/receptionist/tra-cuu', methods=['GET'])
 @login_required
@@ -89,3 +102,66 @@ def create_patient_profile():
         return redirect(url_for('register_patient_view'))
 
     return http.HTTPStatus.NOT_FOUND
+
+@app.route('/receptionist/appointment/<int:lich_hen_id>', methods=['PUT'])
+def accept_booked_appointment(lich_hen_id):
+    if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
+        try:
+            lich_hen = lich_hen_dao.get_lich_hen_theo_id(lich_hen_id)
+            lich_hen.trang_thai = TrangThaiLichHen.CHO_KHAM
+            print(lich_hen)
+            db.session.commit()
+            return jsonify({'status': 'success', 'msg': 'Xác nhận thành công'})
+        except Exception as ex:
+            db.session.rollback()
+            return jsonify({'status': 'error', 'msg': str(ex)})
+
+@app.route('/receptionist/appointment/<int:lich_hen_id>', methods=['DELETE'])
+def delete_booked_appointment(lich_hen_id):
+    if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
+        try:
+            if lich_hen_dao.del_lich_hen(lich_hen_id):
+                return jsonify({'status': 'success','msg': 'Xóa thành công'})
+            else:
+                return jsonify({'status': 'error', 'msg': 'Không có lịch hẹn cần xóa'})
+        except Exception as ex:
+            return jsonify({'status': 'error', 'msg': str(ex)})
+
+@app.route('/receptionist/update-profiles/<int:ho_so_id>', methods=['POST'])
+def update_profile_receptionist_page(ho_so_id):
+    if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
+        try:
+            ngay_sinh = request.form.get('ngay_sinh')
+            print(ngay_sinh)
+            if ngay_sinh != "":
+                ngay_sinh = datetime.strptime(ngay_sinh, '%Y-%m-%d')
+            else:
+                print('test')
+                ngay_sinh = None
+            gioi_tinh = request.form.get('gioi_tinh')
+            if gioi_tinh == 'NAM':
+                gioi_tinh = GioiTinh.NAM
+            elif gioi_tinh == 'NU':
+                gioi_tinh = GioiTinh.NU
+            else:
+                gioi_tinh = GioiTinh.KHAC
+            if ho_so_benh_nhan_dao.update_ho_so(
+                ho_so_id=ho_so_id,
+                ho_ten=request.form.get('ho_ten'),
+                so_dien_thoai=request.form.get('so_dien_thoai'),
+                dia_chi=request.form.get('dia_chi'),
+                email=request.form.get('email'),
+                CCCD=request.form.get('dia_chi'),
+                gioi_tinh=gioi_tinh,
+                ngay_sinh=ngay_sinh
+            ):
+                print(ho_so_benh_nhan_dao.get_ho_so_theo_id(ho_so_id))
+                flash('Cập nhật thành công', 'success')
+            else:
+                print('fail')
+                flash('Cập nhật thất bại', 'error')
+        except Exception as ex:
+            print('Loi')
+            flash(str(ex),'error')
+    return redirect('/receptionist?tab=profile')
+
