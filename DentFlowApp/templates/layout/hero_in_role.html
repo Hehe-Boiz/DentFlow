@@ -1,32 +1,35 @@
 <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-  <div class="container mx-auto px-4 py-8 md:py-12">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-      <div>
-        <h2 class="text-2xl md:text-3xl mb-2">
-          {% if bacsi %}
-          Chào bác sĩ {{ bacsi.ho_ten }}! 👨‍⚕️
-          {% endif %}
-          {% if letan %}
-          Chào {{ current_user.ho_ten }}!
-          {% endif %}
-        </h2>
-        {% if bacsi %}
-        <p class="text-blue-100">
-          Hôm nay bạn có {{ count_lich_kham }} bệnh nhân cần khám
-        </p>
-        {% endif %}
-      </div>
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+                <h2 class="text-2xl md:text-3xl mb-2">
+                    {% if bacsi %}
+                        Chào bác sĩ {{ bacsi.ho_ten }}! 👨‍⚕️
+                    {% endif %}
+                    {% if letan %}
+                        Chào {{ current_user.ho_ten }}!
+                    {% endif %}
+                    {% if thungan %}
+                        Chào thu ngân {{ current_user.ho_ten }}
+                    {% endif %}
+                </h2>
+                {% if bacsi %}
+                    <p class="text-blue-100">
+                        Hôm nay bạn có {{ count_lich_kham }} bệnh nhân cần khám
+                    </p>
+                {% endif %}
+            </div>
 
-      <div class="mt-4 md:mt-0 flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3">
-        <!-- icon clock -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="lucide lucide-clock w-5 h-5" aria-hidden="true">
-          <path d="M12 6v6l4 2"></path>
-          <circle cx="12" cy="12" r="10"></circle>
-        </svg>
-        <span>{{ now }}</span>
-      </div>
+            <div class="mt-4 md:mt-0 flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3">
+                <!-- icon clock -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide lucide-clock w-5 h-5" aria-hidden="true">
+                    <path d="M12 6v6l4 2"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span>{{ now }}</span>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

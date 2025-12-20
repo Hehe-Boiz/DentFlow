@@ -2,30 +2,74 @@
 
 {% block title %}Cashier view{% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+{% endblock %}
+
+{% block hero %}
+    {% include 'layout/hero_in_role.html' %}
+{% endblock %}
+
 {% block content %}
-    <div class="booking-header">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a href="/" class="btn-back">
-                <i class="fas fa-arrow-left me-2"></i> Quay lại
-            </a>
-            <div class="fw-bold text-primary fs-5">
-                <i class="fas fa-tooth"></i> DENTALFLOW
-            </div>
-            <div style="width: 80px;"></div>
+    <div class="card border-0 shadow-sm mt-4">
+        <div class="card-body p-4">
+            <ul class="nav nav-pills custom-tab-bar ">
+                <li class="nav-item">
+                    <a href="/cashier?tab=search"
+                       class="nav-link tab-text {{ 'active' if active_tab == 'schedule' else '' }}">
+                        <h5 class="text-primary"><i class="fas fa-search"></i> Tra cứu phiếu điều trị</h5>
+                    </a>
+                </li>
+                <li class="nav-item ms-auto">
+                    <a href="/cashier?tab=paycheck-history"
+                       class="nav-link tab-button">
+                        <h5 class="text-primary"><i class="fa fa-history" aria-hidden="true"></i> Lịch sử thanh toán
+                        </h5>
+
+
+                    </a>
+                </li>
+            </ul>
+            {% include 'layout/phieu_dieu_tri_search_service.html' %}
         </div>
     </div>
-    <div class="btn-group mb-4">
-        <button class="btn btn-primary"
-                onclick="goToURL(this)"
-                data-url="{{ url_for('cashier_phieu_dieu_tri_search') }}">
-            Tra cứu phiếu điều trị
-        </button>
 
-        <button class="btn btn-primary">
-            Thanh toán
-        </button>
-    </div>
+    {% if pagination and pagination.items %}
+        {% include 'cashier/cho_thanh_toan.html' %}
+
+        {% if pagination.pages > 1 %}
+            <nav aria-label="Page navigation" class="mt-4 pb-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                        <a class="page-link border-0 shadow-sm rounded-circle me-1"
+                           href="{{ url_for('cashier_view', page=pagination.prev_num) if pagination.has_prev else '#' }}">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+
+                    <li class="page-item active">
+                    <span class="page-link border-0 shadow-sm rounded-pill px-3 mx-2">
+                        Trang {{ pagination.page }} / {{ pagination.pages }}
+                    </span>
+                    </li>
+
+                    <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                        <a class="page-link border-0 shadow-sm rounded-circle ms-1"
+                           href="{{ url_for('cashier_view', page=pagination.next_num) if pagination.has_next else '#' }}">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        {% endif %}
+
+    {% else %}
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-check-circle fa-3x mb-3 opacity-25"></i>
+            <p class="fs-5">Hiện tại không có bệnh nhân nào chờ thanh toán.</p>
+        </div>
+    {% endif %}
 {% endblock %}
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/service.js') }}"></script>
+
 {% endblock %}

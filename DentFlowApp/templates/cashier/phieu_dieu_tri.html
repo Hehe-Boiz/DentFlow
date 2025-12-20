@@ -1,0 +1,38 @@
+<div class="card m-4 mt-0 rounded-sm">
+    <div class="card-header bg-white">
+        <h5 class="fw-light b text-primary mb-0">
+            <i class="fa fa-user-circle"></i> {{ phieu_dieu_tri.ho_so_benh_nhan.ho_ten }}
+        </h5>
+        <span class="badge bg-warning text-black-50 fw-light">Chờ thanh toán</span>
+    </div>
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h5 class="fw-bold text-dark mb-1">
+                    {{ phieu_dieu_tri.chi_tiet_dich_vu[0].dich_vu.ten_dich_vu }}
+                </h5>
+
+                <div class="d-flex text-muted small mt-2">
+                    <div class="me-3">
+                        <i class="fa fa-user-md me-1"></i>
+                        {{ phieu_dieu_tri.bac_si.ho_ten }}
+                    </div>
+                    <div>
+                        <i class="fa fa-clock-o me-1"></i>
+                        {{ phieu_dieu_tri.ngay_cap_nhat }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 text-end border-start ps-3">
+                <span class="text-secondary small d-block">Tạm tính</span>
+                <span class="fs-4 fw-bold text-danger">
+                {{ "{:,.0f}".format(phieu_dieu_tri.chi_tiet_dich_vu[0].don_gia).replace(',', '.') }} ₫
+            </span>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer p-0 border-0 bg-white text-right">
+        <button type="button" class="btn bg-primary text-white ">Thanh toán</button>
+    </div>
+</div>
