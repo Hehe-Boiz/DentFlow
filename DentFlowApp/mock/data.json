@@ -230,97 +230,113 @@
       "ho_ten": "Lê Văn C",
       "so_dien_thoai": "0912345678",
       "gioi_tinh": "NAM",
-      "dia_chi": "TP.HCM"
+      "dia_chi": "TP.HCM",
+      "ngay_sinh": "1990-05-15"
     },
     {
       "ho_ten": "Phạm Thị D",
       "so_dien_thoai": "0987654321",
       "gioi_tinh": "NU",
-      "dia_chi": "Hà Nội"
+      "dia_chi": "Hà Nội",
+      "ngay_sinh": "1995-08-20"
     },
     {
       "ho_ten": "Nguyễn Hoàng Nam",
       "so_dien_thoai": "0933445566",
       "gioi_tinh": "NAM",
-      "dia_chi": "Hải Phòng"
+      "dia_chi": "Hải Phòng",
+      "ngay_sinh": "1988-12-10"
     },
     {
       "ho_ten": "Trần Thanh Thảo",
       "so_dien_thoai": "0944556677",
       "gioi_tinh": "NU",
-      "dia_chi": "Đà Nẵng"
+      "dia_chi": "Đà Nẵng",
+      "ngay_sinh": "1992-03-25"
     },
     {
       "ho_ten": "Lý Gia Kiệt",
       "so_dien_thoai": "0955667788",
       "gioi_tinh": "NAM",
-      "dia_chi": "Cần Thơ"
+      "dia_chi": "Cần Thơ",
+      "ngay_sinh": "1985-07-07"
     },
     {
       "ho_ten": "Võ Minh Anh",
       "so_dien_thoai": "0966778899",
       "gioi_tinh": "NU",
-      "dia_chi": "Quận 3, TP.HCM"
+      "dia_chi": "Quận 3, TP.HCM",
+      "ngay_sinh": "1998-11-30"
     },
     {
       "ho_ten": "Đặng Thu Hà",
       "so_dien_thoai": "0977889900",
       "gioi_tinh": "NU",
-      "dia_chi": "Long An"
+      "dia_chi": "Long An",
+      "ngay_sinh": "1993-02-14"
     },
     {
       "ho_ten": "Bùi Xuân Huấn",
       "so_dien_thoai": "0922334455",
       "gioi_tinh": "NAM",
-      "dia_chi": "Lào Cai"
+      "dia_chi": "Lào Cai",
+      "ngay_sinh": "1980-09-05"
     },
     {
       "ho_ten": "Phan Văn Đức",
       "so_dien_thoai": "0911223344",
       "gioi_tinh": "NAM",
-      "dia_chi": "Bình Dương"
+      "dia_chi": "Bình Dương",
+      "ngay_sinh": "1996-06-18"
     },
     {
       "ho_ten": "Trương Thị Mỹ Linh",
       "so_dien_thoai": "0922334466",
       "gioi_tinh": "NU",
-      "dia_chi": "Đồng Nai"
+      "dia_chi": "Đồng Nai",
+      "ngay_sinh": "1991-04-22"
     },
     {
       "ho_ten": "Hoàng Quốc Việt",
       "so_dien_thoai": "0933445577",
       "gioi_tinh": "NAM",
-      "dia_chi": "Vũng Tàu"
+      "dia_chi": "Vũng Tàu",
+      "ngay_sinh": "1987-01-30"
     },
     {
       "ho_ten": "Ngô Thị Bích Ngọc",
       "so_dien_thoai": "0944556688",
       "gioi_tinh": "NU",
-      "dia_chi": "Tây Ninh"
+      "dia_chi": "Tây Ninh",
+      "ngay_sinh": "1994-10-12"
     },
     {
       "ho_ten": "Đỗ Minh Tâm",
       "so_dien_thoai": "0955667799",
       "gioi_tinh": "NAM",
-      "dia_chi": "Bến Tre"
+      "dia_chi": "Bến Tre",
+      "ngay_sinh": "1989-08-08"
     },
     {
       "ho_ten": "Dương Thúy Hằng",
       "so_dien_thoai": "0966778800",
       "gioi_tinh": "NU",
-      "dia_chi": "Tiền Giang"
+      "dia_chi": "Tiền Giang",
+      "ngay_sinh": "1997-05-05"
     },
     {
       "ho_ten": "Lâm Chấn Khang",
       "so_dien_thoai": "0977889911",
       "gioi_tinh": "NAM",
-      "dia_chi": "Vĩnh Long"
+      "dia_chi": "Vĩnh Long",
+      "ngay_sinh": "1982-12-24"
     },
     {
       "ho_ten": "Hồ Ngọc Hà",
       "so_dien_thoai": "0988990022",
       "gioi_tinh": "NU",
-      "dia_chi": "Quảng Bình"
+      "dia_chi": "Quảng Bình",
+      "ngay_sinh": "1984-11-25"
     }
   ],
   "work_schedules": [
@@ -348,7 +364,7 @@
     {
       "bac_si_id": "BS001",
       "ngay_lam": "2025-12-21",
-      "gio_bat_dau": "08:00:00",
+      "gio_bat_dau": "00:00:00",
       "gio_ket_thuc": "17:00:00",
       "trang_thai": "SAN_SANG"
     },
@@ -652,7 +668,9 @@
       "ngay_tao": "2025-12-20 08:30:00",
       "chan_doan": "Cao răng nhiều, viêm nướu nhẹ",
       "ghi_chu": "Dặn bệnh nhân đánh răng kỹ hơn",
-      "dich_vu_su_dung": ["Cạo vôi răng"],
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -661,7 +679,9 @@
       "ngay_tao": "2025-12-20 09:00:00",
       "chan_doan": "Sâu răng hàm dưới R36, R37",
       "ghi_chu": "Đã trám composite",
-      "dich_vu_su_dung": ["Trám răng"],
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -670,7 +690,9 @@
       "ngay_tao": "2025-12-20 09:45:00",
       "chan_doan": "Viêm tủy cấp tính răng R46",
       "ghi_chu": "Bệnh nhân đau nhiều, đã gây tê",
-      "dich_vu_su_dung": ["Điều trị tủy"],
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -679,7 +701,10 @@
       "ngay_tao": "2025-12-20 14:30:00",
       "chan_doan": "Nhu cầu thẩm mỹ",
       "ghi_chu": "Tẩy trắng 2 hàm",
-      "dich_vu_su_dung": ["Tẩy trắng răng", "Cạo vôi răng"],
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng",
+        "Cạo vôi răng"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -688,7 +713,9 @@
       "ngay_tao": "2025-12-21 09:30:00",
       "chan_doan": "Sâu răng cửa nhẹ",
       "ghi_chu": "Trám thẩm mỹ",
-      "dich_vu_su_dung": ["Trám răng"],
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
       "da_thanh_toan": true
     },
     {
@@ -697,7 +724,9 @@
       "ngay_tao": "2025-12-21 10:00:00",
       "chan_doan": "Răng khôn mọc lệch 90 độ",
       "ghi_chu": "Tiểu phẫu khó, dặn uống thuốc đầy đủ",
-      "dich_vu_su_dung": ["Nhổ răng"],
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
       "da_thanh_toan": true
     }
   ]

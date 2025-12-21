@@ -82,7 +82,7 @@ class HoSoBenhNhan(BaseModel):
     dia_chi = Column(String(255), nullable=True)
     gioi_tinh = Column(sqlEnum(GioiTinh), nullable=True)
     email = Column(String(50),nullable=True)
-    ngay_sinh = Column(DateTime, nullable=True)
+    ngay_sinh = Column(Date, nullable=True)
     CCCD = Column(String(12), nullable=True)
     #Tài khoản của người dùng (Nếu có)
     nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
