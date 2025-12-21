@@ -1,6 +1,14 @@
 {
   "users": [
     {
+      "username": "thungan",
+      "password": "123456",
+      "ho_ten": "Trần Thị Thu Ngân",
+      "vai_tro": "CASHIER",
+      "so_dien_thoai": "0909000002",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
       "username": "admin",
       "password": "123456",
       "ho_ten": "Quản Trị Viên",
@@ -364,7 +372,7 @@
     {
       "bac_si_id": "BS001",
       "ngay_lam": "2025-12-21",
-      "gio_bat_dau": "00:00:00",
+      "gio_bat_dau": "08:00:00",
       "gio_ket_thuc": "17:00:00",
       "trang_thai": "SAN_SANG"
     },

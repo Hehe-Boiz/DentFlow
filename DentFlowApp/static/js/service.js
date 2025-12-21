@@ -35,7 +35,7 @@ function searchPdt() {
     }
 
     loader.style.display = 'block';
-    fetch(`/api/phieu-dieu-tri/search?code=${maso}`)
+    fetch(`/api/phieu-dieu-tri/search?id=${maso}`)
         .then(response => {
             if (!response.ok) throw new Error('Lỗi kết nối hoặc không có quyền');
             return response.json();
@@ -44,7 +44,8 @@ function searchPdt() {
             loader.style.display = 'none';
             if (respData.status === 'success' && respData.data.length > 0) {
                 const item = respData.data[0];
-
+                let trang_thai = document.getElementById('pdt_trang_thai');
+                trang_thai.className = 'badge rounded-pill';
                 document.getElementById('pdt_id').innerText = item['id'];
 
                 document.getElementById('pdt_ho_ten').innerText = item['ho_so_benh_nhan.ho_ten'];
@@ -54,7 +55,16 @@ function searchPdt() {
                     style: 'currency',
                     currency: 'VND'
                 }).format(donGia);
-
+                if (item['trang_thai'] === 'DA_THANH_TOAN') {
+                    trang_thai.innerText = 'Đã thanh toán'
+                    trang_thai.classList.add('bg-success')
+                } else if (item['trang_thai'] === 'CHUA_THANH_TOAN') {
+                    trang_thai.innerText = 'Chờ thanh toán'
+                    trang_thai.classList.add('bg-warning')
+                } else {
+                    trang_thai.innerText = 'Hoàn tiền'
+                    trang_thai.classList.add('badge bg-primary')
+                }
                 document.getElementById('pdt_ghichu').innerText = item.ghi_chu || 'Không có';
                 resultDiv.style.display = 'block';
             } else {
