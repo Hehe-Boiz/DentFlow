@@ -47,7 +47,7 @@ def add_lich_hen(ho_so_benh_nhan_id, bac_si_id, dich_vu_id,ngay_dat,gio_kham,ghi
         db.session.commit()
     except IntegrityError:
         db.session.rollback()
-        raise Exception('Co loi xay ra')
+        raise Exception('Có lỗi xảy ra')
 
 def del_lich_hen(lich_hen_id):
     lich_hen = get_lich_hen_theo_id(lich_hen_id)

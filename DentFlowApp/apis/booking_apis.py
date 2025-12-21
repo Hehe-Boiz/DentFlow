@@ -8,7 +8,7 @@ from DentFlowApp.dao import dichvu_dao, bacsi_dao, lich_hen_dao
 @app.route('/booking')
 @login_required
 def booking_view():
-        services = dichvu_dao.get_services()
+        services = dichvu_dao.get_dich_vu()
         return render_template('booking/booking.html', services=services)
 
 @app.route('/booking/choose-service', methods=['post'])

@@ -3,7 +3,6 @@ const doctorInput = document.getElementById('selectedDoctorId');
 const btnContinue = document.getElementById('btnContinueStep2');
 
 
-
 function selectService(element, id, name) {
 
     const allItems = document.querySelectorAll('.service-item');

@@ -679,7 +679,7 @@
       "dich_vu_su_dung": [
         "Cạo vôi răng"
       ],
-      "da_thanh_toan": true
+      "trang_thai_thanh_toan": "DA_THANH_TOAN"
     },
     {
       "benh_nhan_sdt": "0987654321",
@@ -690,7 +690,7 @@
       "dich_vu_su_dung": [
         "Trám răng"
       ],
-      "da_thanh_toan": true
+      "trang_thai_thanh_toan": "DA_THANH_TOAN"
     },
     {
       "benh_nhan_sdt": "0933445566",
@@ -701,7 +701,7 @@
       "dich_vu_su_dung": [
         "Điều trị tủy"
       ],
-      "da_thanh_toan": true
+      "trang_thai_thanh_toan": "DA_THANH_TOAN"
     },
     {
       "benh_nhan_sdt": "0966778899",
@@ -713,7 +713,7 @@
         "Tẩy trắng răng",
         "Cạo vôi răng"
       ],
-      "da_thanh_toan": true
+      "trang_thai_thanh_toan": "DA_THANH_TOAN"
     },
     {
       "benh_nhan_sdt": "0922334466",
@@ -724,7 +724,7 @@
       "dich_vu_su_dung": [
         "Trám răng"
       ],
-      "da_thanh_toan": true
+      "trang_thai_thanh_toan": "DA_THANH_TOAN"
     },
     {
       "benh_nhan_sdt": "0933445577",
@@ -735,7 +735,7 @@
       "dich_vu_su_dung": [
         "Nhổ răng"
       ],
-      "da_thanh_toan": true
+      "trang_thai_thanh_toan": "DA_THANH_TOAN"
     }
   ]
 }

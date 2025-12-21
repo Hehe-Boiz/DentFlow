@@ -4,6 +4,7 @@ from DentFlowApp import db
 from flask_login import current_user
 from DentFlowApp.admin import admin
 from DentFlowApp.dao import thuoc_dao
+import re
 
 
 def user_can_do(User):
@@ -141,3 +142,25 @@ class CalculationUtils:
             "vat": tien_vat,
             "tong_thanh_toan": tong_thanh_toan
         }
+
+
+def validate_thong_tin_benh_nhan(ho_ten, sdt, email=None):
+
+    ho_ten = ho_ten.strip() if ho_ten else ""
+    sdt = sdt.strip() if sdt else ""
+    email = email.strip() if email else ""
+
+    if not ho_ten:
+        return False, "Họ tên không được để trống."
+
+    if any(char.isdigit() for char in ho_ten):
+        return False, "Họ tên không được chứa số."
+
+    if not re.match(r"^0\d{9}$", sdt):
+        return False, "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0."
+
+    if email:
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            return False, "Email không đúng định dạng."
+
+    return True, None

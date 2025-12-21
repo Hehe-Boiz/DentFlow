@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/receptionist_page.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/tab_schedule.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/tab_profile.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/receptionist/create_profile_modal.css') }}"/>
 {% endblock %}
 
 {% block hero %}
@@ -40,10 +41,9 @@
             </li>
 
             <li class="nav-item ms-auto">
-                <a href="/receptionist"
-                   class="nav-link tab-button">
+                <button type="button" class="nav-link tab-button" data-bs-toggle="modal" data-bs-target="#bookingModal">
                     <i class="fas fa-file-medical me-2"></i> Đặt lịch khám mới
-                </a>
+                </button>
             </li>
         </ul>
 
@@ -69,6 +69,13 @@
 
     </div>
 </div>
+
+{% block booking_modal %}
+{% include 'receptionist/booking_modal.html'%}
+{% endblock %}
+{% block create_profile_modal %}
+{% include 'receptionist/create_profile_modal.html'%}
+{% endblock %}
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/service.js') }}"></script>

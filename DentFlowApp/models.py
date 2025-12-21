@@ -72,24 +72,22 @@ class NguoiDung(BaseModel, UserMixin):
     avatar = Column(String(255))
     vai_tro = Column(sqlEnum(UserRole), default=UserRole.USER)
 
-    # Lấy hồ sơ bênh nhân từ người dùng NguoiDung.ho_so_benh_nhan
+    #Lấy hồ sơ bênh nhân từ người dùng NguoiDung.ho_so_benh_nhan
     ho_so_benh_nhan = relationship('HoSoBenhNhan', backref='nguoi_dung', uselist=False)
     bac_si = relationship('BacSi', backref='nguoi_dung', uselist=False)
-
 
 class NhanVien(db.Model):
     ma_nv = Column(String(5), primary_key=True)
     ho_ten = Column(String(100), nullable=False)
     ngay_sinh = Column(DateTime)
     nam_sinh = Column(Integer)
-    so_dien_thoai = Column(String(15), nullable=False)
+    so_dien_thoai = Column(String(15),nullable=False)
     dia_chi = Column(String(255), nullable=False)
     muc_luong = Column(Float)
     ngay_vao_lam = Column(DateTime, default=datetime.now())
 
-    # Mỗi nhân viên có 1 tài khoản
+    #Mỗi nhân viên có 1 tài khoản
     nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=True)
-
 
 class HoSoBenhNhan(BaseModel):
     __tablename__ = 'ho_so_benh_nhan'
@@ -101,13 +99,12 @@ class HoSoBenhNhan(BaseModel):
     email = Column(String(50),nullable=True)
     ngay_sinh = Column(Date, nullable=True)
     CCCD = Column(String(12), nullable=True)
-    # Tài khoản của người dùng (Nếu có)
+    #Tài khoản của người dùng (Nếu có)
     nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
 
-    # lịch hẹn và phiếu điều trị tra cứu từ hồ sơ
+    #lịch hẹn và phiếu điều trị tra cứu từ hồ sơ
     lich_hen_ds = relationship('LichHen', backref='ho_so_benh_nhan', lazy=True)
     phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='ho_so_benh_nhan', lazy=True)
-
     def to_dict(self):
         return {
             'id': self.id,
@@ -129,24 +126,22 @@ class BacSi(db.Model):
     avatar = Column(String(255))
     loai_bac_si = Column(sqlEnum(LoaiBacSi))
 
-    # Tài khoản của bác sĩ
+    #Tài khoản của bác sĩ
     nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=True)
 
-    # Lấy các lịch hẹn cũng như phiếu điều trị để phục vụ việc lọc thanh toán hay đặt lịch
+    #Lấy các lịch hẹn cũng như phiếu điều trị để phục vụ việc lọc thanh toán hay đặt lịch
     lich_lam_viec_ds = relationship('LichLamViec', backref='bac_si', lazy=True)
     lich_hen_ds = relationship('LichHen', backref='bac_si', lazy=True)
     phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='bac_si', lazy=True)
 
 
 class BacSiFullTime(db.Model):
-    ma_bac_si = Column(String(5), ForeignKey(BacSi.ma_bac_si), primary_key=True)
+    ma_bac_si =Column(String(5), ForeignKey(BacSi.ma_bac_si), primary_key=True)
     luong_co_ban = Column(Float, nullable=True)
-
 
 class BacSiPartTime(db.Model):
     ma_bac_si = Column(String(5), ForeignKey(BacSi.ma_bac_si), primary_key=True)
     muc_luong_gio = Column(Float, nullable=True)
-
 
 class LichLamViec(BaseModel):
     __tablename__ = 'lich_lam_viec'
@@ -166,12 +161,10 @@ class DichVu(BaseModel):
     lich_hen_ds = relationship('LichHen', backref='dich_vu', lazy=True)
     phieu_dieu_tri_ds = relationship('ChiTietPhieuDieuTri', backref='dich_vu', lazy=True)
 
-
 class ChiTietDichVu(db.Model):
     __tablename__ = 'chi_tiet_dich_vu'
     id = Column(Integer, ForeignKey(DichVu.id), primary_key=True)
     noi_dung_chi_tiet = Column(String(255), nullable=True)
-
 
 class LichHen(BaseModel):
     __tablename__ = 'lich_hen'
@@ -186,14 +179,12 @@ class LichHen(BaseModel):
 
     ghi_chu = Column(String(100), nullable=True)
 
-
 class PhieuDieuTri(BaseModel):
     __tablename__ = 'phieu_dieu_tri'
     ghi_chu = Column(String(255), nullable=True)
     chan_doan = Column(String(255), nullable=True)
     trang_thai_thanh_toan = Column(sqlEnum(TrangThaiThanhToan), nullable=False,
                                    default=TrangThaiThanhToan.CHUA_THANH_TOAN)
-
     ho_so_benh_nhan_id = Column(Integer, ForeignKey('ho_so_benh_nhan.id'), nullable=False)
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
     # dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=False)
@@ -202,7 +193,6 @@ class PhieuDieuTri(BaseModel):
     don_thuoc = relationship('DonThuoc', backref='phieu_dieu_tri', uselist=False)
 
     chi_tiet_dich_vu = relationship('ChiTietPhieuDieuTri', backref='phieu_dieu_tri', lazy=True)
-
 
 class ChiTietPhieuDieuTri(BaseModel):
     __tablename__ = 'chi_tiet_phieu_dieu_tri'
@@ -225,7 +215,6 @@ class Thuoc(BaseModel):
     don_vi = Column(sqlEnum(DonViThuoc), nullable=False, default=DonViThuoc.VIEN)
     cac_lo_thuoc = relationship('LoThuoc', backref='thuoc', lazy=True)
 
-
 class LoThuoc(db.Model):
     __tablename__ = 'lo_thuoc'
     id = Column(Integer, primary_key=True)
@@ -240,7 +229,6 @@ class DonThuoc(BaseModel):
     __tablename__ = 'don_thuoc'
     ngay_boc_thuoc = Column(DateTime, default=datetime.now())
     phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id'), nullable=False, unique=True)
-
 
 # Bảng trung gian giữa đơn thuốc và thuốc cho biết liều lượng
 class LieuLuongSuDung(BaseModel):

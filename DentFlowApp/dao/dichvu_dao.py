@@ -1,9 +1,15 @@
+from sqlalchemy.orm import joinedload
+
 from DentFlowApp.models import DichVu, ChiTietPhieuDieuTri
-from DentFlowApp import db
+from DentFlowApp import db,app
 
 
-def get_services():
-    return DichVu.query.all()
+def get_dich_vu(page=-1):
+    query = DichVu.query
+    if page >= 1:
+        start = (page - 1) * app.config['PAGE_SIZE']
+        query = query.slice(start, start + app.config['PAGE_SIZE'])
+    return query.all()
 
 
 def get_services_by_id(id):
