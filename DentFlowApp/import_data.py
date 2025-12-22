@@ -1,7 +1,7 @@
 import json
 import hashlib
 from datetime import datetime, timedelta
-from DentFlowApp import app, db
+from DentFlowApp import app, db, bcrypt
 
 # 1. CẬP NHẬT IMPORT: Thêm PhuongThucThanhToan
 from DentFlowApp.models import (
@@ -15,7 +15,7 @@ from DentFlowApp.models import (
 
 
 def hash_pass(password):
-    return str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
+    return bcrypt.generate_password_hash(password.strip()).decode('utf-8')
 
 
 def import_json_data():

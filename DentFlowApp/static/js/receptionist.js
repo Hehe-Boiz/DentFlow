@@ -25,6 +25,9 @@ function confirmBookedAppointment(lichHenId) {
                        class="btn btn-outline-primary btn-md px-3 fw-medium rounded-pill d-flex align-items-center text-nowrap">
                         <i class="fas fa-print me-2"></i> Xuất phiếu
                     </a>
+                    <button class="btn btn-danger btn-md rounded-pill px-3 text-nowrap fw-medium" onclick="deleteBookedAppointment(${lichHenId})">
+                        Hủy lịch
+                    </button>
                 `;
 
                 // Thêm chút hiệu ứng CSS cho mượt (Optional)

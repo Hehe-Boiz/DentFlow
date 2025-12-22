@@ -14,7 +14,7 @@ from DentFlowApp.decorators import receptionist_required
 @receptionist_required
 def receptionist():
     flash('none')
-    active_tab = request.args.get('tab', 'schedule')
+    active_tab = request.args.get('tab','schedule')
     session['stats_cards'] = {
         "Lịch hôm nay": 0,
         "Chờ xác nhận": 0,
@@ -22,10 +22,11 @@ def receptionist():
     }
     lich_hen = None
     ho_so = None
+    kw = request.args.get('kw')
     if active_tab == 'schedule':
-        lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)))
+        lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)),kw=kw)
     if active_tab == 'profile':
-        ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)))
+        ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)),kw=kw)
     return render_template('receptionist/receptionist.html',
                            active_tab=active_tab,
                            letan=True,

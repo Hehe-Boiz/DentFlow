@@ -12,12 +12,16 @@ from flask_login import current_user
 from DentFlowApp.dao import lichlamviec_dao
 from sqlalchemy import func
 
-def get_lich_hen(page=1):
+def get_lich_hen(page=1, ho_so_benh_nhan_id=None, kw=None):
     query = LichHen.query
     query = query.options(
         joinedload(LichHen.ho_so_benh_nhan),
         joinedload(LichHen.bac_si)
-    )
+    ).order_by(LichHen.ngay_dat.desc(), LichHen.gio_kham.desc())
+    if kw:
+        query = query.filter(HoSoBenhNhan.ho_ten.contains(kw))
+    if ho_so_benh_nhan_id:
+        query = query.filter(LichHen.ho_so_benh_nhan_id.__eq__(ho_so_benh_nhan_id))
     if page:
         start = (page - 1) * app.config['PAGE_SIZE']
         query = query.slice(start, start + app.config['PAGE_SIZE'])
@@ -55,7 +59,7 @@ def del_lich_hen(lich_hen_id):
         return False
     print(lich_hen)
     try:
-        db.session.delete(lich_hen)
+        lich_hen.trang_thai = TrangThaiLichHen.HUY
         db.session.commit()
         return True
     except Exception as ex:

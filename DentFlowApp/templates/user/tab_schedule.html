@@ -1,0 +1,48 @@
+<div class="tab-pane fade" id="tab-booking">
+    {% if lich_hen %}
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+            <tr>
+                <th>Thời gian đặt</th>
+                <th>Giờ khám</th>
+                <th>Dịch vụ</th>
+                <th>Bác sĩ</th>
+                <th>Trạng thái</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for lich in lich_hen %}
+            <tr>
+                <td>
+                    {{ lich.ngay_dat.strftime('%d/%m/%Y') }}
+                </td>
+                <td class="fw-bold">{{ lich.gio_kham.strftime('%H:%M') }}</td>
+                <td>{{ lich.dich_vu.ten_dich_vu }}</td>
+                <td>
+                    BS. {{ lich.bac_si.ho_ten }}
+                </td>
+                <td>
+                    {% if lich.trang_thai.name == 'DAT_LICH_THANH_CONG' %}
+                    <span class="badge bg-warning text-dark">Chờ xác nhận</span>
+                    {% elif lich.trang_thai.name == 'CHO_KHAM' %}
+                    <span class="badge bg-primary">Đã xác nhận</span>
+                    {% elif lich.trang_thai.name == 'DA_KHAM' %}
+                    <span class="badge bg-success">Hoàn thành</span>
+                    {% else %}
+                    <span class="badge bg-danger">Đã hủy</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted">
+        <i class="far fa-calendar-times fa-3x mb-3"></i>
+        <p>Bạn chưa có lịch hẹn nào.</p>
+        <a href="/booking" class="btn btn-primary btn-sm">Đặt lịch ngay</a>
+    </div>
+    {% endif %}
+</div>

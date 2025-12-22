@@ -2,12 +2,12 @@ from logging import addLevelName
 
 from sqlalchemy.exc import IntegrityError
 
-from DentFlowApp import app,db
-from flask import request, redirect, render_template, session
+from DentFlowApp import app,db, bcrypt
+from flask import request, redirect, render_template, session, flash
 from flask_login import login_user, logout_user, current_user, AnonymousUserMixin
 from DentFlowApp import login
 from DentFlowApp.dao import user_dao
-from DentFlowApp.models import UserRole
+from DentFlowApp.models import UserRole, NguoiDung
 from DentFlowApp.admin import admin
 from DentFlowApp import utils
 
@@ -27,7 +27,7 @@ def register_view():
 def login_process():
     username = request.form.get('username')
     password = request.form.get('password')
-
+    print(password)
     u = user_dao.auth_user(username=username, password=password)
     if u:
         login_user(user=u)
@@ -36,7 +36,7 @@ def login_process():
             return redirect('/treatment')
 
     next = request.args.get('next')
-
+    print(next)
     return redirect(next if next else '/')
 
 @app.route('/register', methods=['post'])
@@ -58,6 +58,7 @@ def register_process():
         u = user_dao.auth_user(username=data.get('username'), password=password)
         if u:
             login_user(user=u)
+            session['can_do'] = utils.user_can_do(u)
         return redirect('/')
     except IntegrityError as e:
         db.session.rollback()
@@ -68,6 +69,7 @@ def register_process():
 
 @app.route('/logout')
 def logout_process():
+    del session['can_do']
     logout_user()
     return redirect('/')
 
@@ -78,6 +80,32 @@ def logout_admin():
     return redirect('/admin')
 
 
+@app.route('/change-password', methods=['POST'])
+def change_password():
+    username = request.form.get('username')
+    old_password = request.form.get('old_password')
+    new_password = request.form.get('new_password')
+    confirm_password = request.form.get('confirm_password')
+
+    u = user_dao.auth_user(username=username, password=old_password)
+
+    if u:
+        if new_password != confirm_password:
+            err_msg = 'Mật khẩu mới không khớp với nhau!'
+            flash(err_msg, 'failed')
+            return redirect('/user')
+        hashed_password = bcrypt.generate_password_hash(new_password.strip()).decode('utf-8')
+        user_dao.update_user(user=u,password=hashed_password)
+        flash('Đổi mật khẩu thành công', 'failed')
+        return redirect('/user')
+    else:
+        flash('Mật khẩu tài khoản hiện tại không khớp', 'failed')
+        return redirect('/user')
+
+
 @login.user_loader
 def load_user(user_id):
     return user_dao.get_user_by_id(user_id)
+
+
+
