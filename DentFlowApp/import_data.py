@@ -10,7 +10,7 @@ from DentFlowApp.models import (
     Thuoc, LoThuoc, DichVu, HoSoBenhNhan, LichHen,
     TrangThaiLichHen, LichLamViec, TrangThaiLamViec,
     DonViThuoc, ChiTietPhieuDieuTri, HoaDon, PhieuDieuTri,
-    TrangThaiThanhToan, PhuongThucThanhToan  # <-- Quan trọng
+    TrangThaiThanhToan, PhuongThucThanhToan, NhanVien  # <-- Quan trọng
 )
 
 
@@ -55,7 +55,29 @@ def import_json_data():
         # Tìm một thu ngân để gán mặc định cho hóa đơn
         if user.vai_tro == UserRole.CASHIER and cashier_id is None:
             cashier_id = user.id
+    # 1.5. Import Nhân viên (CẬP NHẬT MỚI)
+    print("1.5. Đang import Nhân viên...")
+    for emp in data.get('employees', []):
+        try:
+            # Tìm account user tương ứng (nếu có)
+            linked_user = user_map.get(emp['username_lien_ket'])
 
+            nhan_vien = NhanVien(
+                ma_nv=emp['ma_nv'],
+                ho_ten=emp['ho_ten'],
+                ngay_sinh=datetime.strptime(emp['ngay_sinh'], '%Y-%m-%d'),
+                nam_sinh=emp['nam_sinh'],
+                so_dien_thoai=emp['so_dien_thoai'],
+                dia_chi=emp['dia_chi'],
+                muc_luong=emp['muc_luong'],
+                ngay_vao_lam=datetime.strptime(emp['ngay_vao_lam'], '%Y-%m-%d %H:%M:%S'),
+                nguoi_dung_id=linked_user.id if linked_user else None
+            )
+            db.session.add(nhan_vien)
+        except Exception as e:
+            print(f"Lỗi import nhân viên {emp['ho_ten']}: {e}")
+
+    db.session.commit()  # Commit để lưu nhân viên
     # 2. Import Bác sĩ
     print("2. Đang import Bác sĩ...")
     for d in data.get('doctors', []):

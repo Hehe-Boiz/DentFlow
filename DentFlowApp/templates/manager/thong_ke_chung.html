@@ -1,0 +1,20 @@
+<div class="card mt-4 border-0">
+    <div class="card-body p-0">
+        <div class="row g-4 pb-4">
+            {% for card in cards %}
+                {{ stat_card(
+                title=card['title'],
+                value=card['value'],
+                sub_text=card['sub_text'],
+                icon=card['icon'],
+                class=card['class']
+                ) }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="card mt-4 border-0 p-0">
+    <div class="card-body p-0">
+        {% include 'manager/thong_ke.html' %}
+    </div>
+</div>

@@ -1,10 +1,13 @@
 # FOR ROLE MANAGER
 
 from DentFlowApp import app
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 
-from DentFlowApp.dao.hoadon_dao import get_all_hoa_don_trong_thang, get_soluong_hoa_don_trong_thang, \
-    get_tong_doanh_thu_trong_thang, get_trung_binh_doanh_thu_trong_thang, get_doanh_thu_trong_ngay
+from DentFlowApp.dao.hoadon_dao import get_ds_hoa_don_trong_thang, get_soluong_hoa_don_trong_thang, \
+    get_tong_doanh_thu_trong_thang, get_trung_binh_doanh_thu_trong_thang, get_doanh_thu_trong_ngay, \
+    get_doanh_thu_bac_si_trong_thang
+from DentFlowApp.dao.nhanvien_dao import get_ds_nhan_vien
+from DentFlowApp.dao.thungan_dao import get_ds_phieu_dieu_tri_da_thanh_toan
 from DentFlowApp.decorators import manager_required
 import datetime
 
@@ -18,28 +21,28 @@ def format_vnd(value):
 @app.route('/manager', methods=['GET'])
 @manager_required
 def manager_view():
-    ds_hoadon = get_all_hoa_don_trong_thang()
-
+    ds_hoadon = get_ds_hoa_don_trong_thang()
+    active_tab = request.args.get('tab', 'thong-ke')
     cards = [
         {
             'title': 'Doanh thu hôm nay',
             'value': format_vnd(get_doanh_thu_trong_ngay()),  # Gọi hàm vừa viết
             'sub_text': datetime.datetime.now().strftime("Ngày %d/%m/%Y"),  # Hiện ngày tháng năm
-            'class': 'bg-warning text-dark',  # Màu vàng cho nổi bật (hoặc bg-info text-white)
+            'class': 'bg-warning bg-gradient text-dark',  # Màu vàng cho nổi bật (hoặc bg-info text-white)
             'icon': 'fas fa-calendar-day'  # Icon lịch ngày
         },
         {
             'title': 'Tổng doanh thu',
             'value': format_vnd(get_tong_doanh_thu_trong_thang()),
             'sub_text': 'Trong tháng qua',
-            'class': 'bg-danger text-white',
+            'class': 'bg-danger bg-gradient text-white',
             'icon': 'fas fa-chart-bar'
         },
         {
             'title': 'Tổng hóa đơn',
             'value': get_soluong_hoa_don_trong_thang(),
             'sub_text': 'Đã thanh toán trong tháng qua',
-            'class': 'bg-primary text-white',
+            'class': 'bg-primary bg-gradient text-white',
 
             'icon': 'fa-solid fa-receipt'
         },
@@ -47,19 +50,20 @@ def manager_view():
             'title': 'Trung bình hóa đơn',
             'value': format_vnd(get_trung_binh_doanh_thu_trong_thang()),
             'sub_text': 'Giá trị trung bình',
-            'class': 'bg-success text-white',
+            'class': 'bg-success bg-gradient text-white',
 
             'icon': 'fas fa-tachometer-average'
         },
     ]
-    return render_template('manager/manager.html', quanly=True, ds_hoadon=ds_hoadon, cards=cards)
+
+    return render_template('manager/manager.html', active_tab=active_tab, quanly=True, ds_hoadon=ds_hoadon, cards=cards)
 
 
-@app.route('/manager/statistics', methods=['GET'])
+@app.route('/manager/statistics/monthly', methods=['GET'])
 @manager_required
 def manager_statistics_view():
     try:
-        ds_hoadon = get_all_hoa_don_trong_thang()
+        ds_hoadon = get_ds_hoa_don_trong_thang()
         data = list()
         for hoa_don in ds_hoadon:
             data.append({
@@ -70,5 +74,45 @@ def manager_statistics_view():
             'status': 'success',
             'data': data
         })
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
+
+
+@app.route('/manager/statistics/doctors', methods=['GET'])
+@manager_required
+def manager_statistics_doctors_view():
+    try:
+        thong_ke_bs = get_doanh_thu_bac_si_trong_thang()
+        data = list()
+        for ten_bac_si, so_lieu in thong_ke_bs.items():
+            data.append({
+                'ten_bac_si': ten_bac_si,
+                'tong_doanh_thu': so_lieu['tong_doanh_thu'],
+                'so_luot_kham': so_lieu['so_luot_kham'],
+                'trung_binh_kham': so_lieu['trung_binh_kham'],
+            })
+        return jsonify({
+            'status': 'success',
+            'data': data
+        }), 200
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
+
+
+@app.route('/manager/nhan-vien', methods=['GET'])
+@manager_required
+def manage_nhanvien_view():
+    try:
+        ds_nhanvien = get_ds_nhan_vien()
+        data = list()
+        for nhan_vien in ds_nhanvien:
+            data.append({
+                'ma_nhan_vien': nhan_vien.ma_nv,
+                'ho_ten': nhan_vien.ho_ten,
+                'nam_sinh': nhan_vien.nam_sinh,
+                'so_dien_thoai': nhan_vien.so_dien_thoai,
+                'ngay_vao_lam': nhan_vien.ngay_vao_lam,
+            })
+        return jsonify({'status': 'success', 'data': data}), 200
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 403

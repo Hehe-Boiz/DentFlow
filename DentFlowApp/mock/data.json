@@ -3,7 +3,7 @@
     {
       "username": "quanly",
       "password": "123456",
-      "ho_ten": "Quanr",
+      "ho_ten": "Nguyễn Văn Quản",
       "vai_tro": "MANAGER",
       "so_dien_thoai": "091919169",
       "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
@@ -21,21 +21,13 @@
       "password": "123456",
       "ho_ten": "Quản Trị Viên",
       "vai_tro": "ADMIN",
-      "so_dien_thoai": "0909000000",
-      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
-    },
-    {
-      "username": "user",
-      "password": "123456",
-      "ho_ten": "Nguyễn Bá Tân",
-      "vai_tro": "USER",
-      "so_dien_thoai": "0909000000",
+      "so_dien_thoai": "0909999999",
       "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
     },
     {
       "username": "letan",
       "password": "123456",
-      "ho_ten": "Lễ Tân",
+      "ho_ten": "Lê Thị Tân",
       "vai_tro": "RECEPTIONIST",
       "so_dien_thoai": "0909000001",
       "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
@@ -79,6 +71,71 @@
       "vai_tro": "USER",
       "so_dien_thoai": "0987654321",
       "avatar": "https://i.pravatar.cc/150?u=bn2"
+    },
+    {
+      "username": "user",
+      "password": "123456",
+      "ho_ten": "Nguyễn Bá Tân",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0909000000",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    }
+  ],
+  "employees": [
+    {
+      "ma_nv": "NV001",
+      "ho_ten": "Nguyễn Văn Quản",
+      "ngay_sinh": "1985-01-01",
+      "nam_sinh": 1985,
+      "so_dien_thoai": "091919169",
+      "dia_chi": "Quận 1, TP.HCM",
+      "muc_luong": 25000000,
+      "ngay_vao_lam": "2020-01-01 08:00:00",
+      "username_lien_ket": "quanly"
+    },
+    {
+      "ma_nv": "NV002",
+      "ho_ten": "Trần Thị Thu Ngân",
+      "ngay_sinh": "1995-05-15",
+      "nam_sinh": 1995,
+      "so_dien_thoai": "0909000002",
+      "dia_chi": "Quận 3, TP.HCM",
+      "muc_luong": 8000000,
+      "ngay_vao_lam": "2023-06-01 08:00:00",
+      "username_lien_ket": "thungan"
+    },
+    {
+      "ma_nv": "NV003",
+      "ho_ten": "Lê Thị Tân",
+      "ngay_sinh": "1998-10-20",
+      "nam_sinh": 1998,
+      "so_dien_thoai": "0909000001",
+      "dia_chi": "Quận Bình Thạnh, TP.HCM",
+      "muc_luong": 7500000,
+      "ngay_vao_lam": "2024-02-15 08:00:00",
+      "username_lien_ket": "letan"
+    },
+    {
+      "ma_nv": "NV004",
+      "ho_ten": "Quản Trị Viên",
+      "ngay_sinh": "1990-12-12",
+      "nam_sinh": 1990,
+      "so_dien_thoai": "0909999999",
+      "dia_chi": "Server Room",
+      "muc_luong": 20000000,
+      "ngay_vao_lam": "2019-01-01 08:00:00",
+      "username_lien_ket": "admin"
+    },
+    {
+      "ma_nv": "NV005",
+      "ho_ten": "Phạm Văn Lao (Lao Công)",
+      "ngay_sinh": "1975-03-10",
+      "nam_sinh": 1975,
+      "so_dien_thoai": "0908887777",
+      "dia_chi": "Quận 4, TP.HCM",
+      "muc_luong": 6000000,
+      "ngay_vao_lam": "2021-05-01 08:00:00",
+      "username_lien_ket": ""
     }
   ],
   "doctors": [

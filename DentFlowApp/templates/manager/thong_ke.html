@@ -1,26 +1,28 @@
-<div class="p-4 bg-white border-top-0">
+<div class=" bg-white border-top-0">
 
-    <div class="row g-4 pb-4">
-        {% for card in cards %}
-            {{ stat_card(
-                title=card['title'],
-                value=card['value'],
-                sub_text=card['sub_text'],
-                icon=card['icon'],
-                class=card['class']
-                ) }}
-        {% endfor %}
-    </div>
-
-    <div class="card border-0">
-        <div class="card-body border-0">
-            <div class="row gap-3 flex-nowrap flex">
-                <div class="border-1 rounded-lg  pb-5 pl-2 pr-2 " style="height: 300px; width: 100%;">
-                    <h5 class="text-center mt-2">Biểu đồ doanh thu trong tháng</h5>
-                    <canvas id="chart-bar-monthly"></canvas>
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow overflow-hidden rounded-xl">
+                <div class="card-header bg-white border-0 py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Biểu đồ doanh thu trong tháng</h6>
                 </div>
-                <div class="col-md-6 col-lg-6">
-                    <canvas id="chart-bar-daily"></canvas>
+                <div class="card-body">
+                    <div style="height: 400px;">
+                        <canvas id="chart-bar-monthly"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4 ">
+            <div class="card shadow rounded-xl">
+                <div class="card-header bg-white border-0 py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Tỷ trọng theo Bác sĩ</h6>
+                </div>
+                <div class="card-body ">
+                    <div style="height: 400px; position: relative;">
+                        <canvas id="chart-doctors"></canvas>
+                    </div>
                 </div>
             </div>
         </div>

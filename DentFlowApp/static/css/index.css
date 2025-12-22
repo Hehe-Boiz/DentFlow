@@ -818,6 +818,21 @@
         display: table;
     }
 
+    .tab-button {
+        transition: all .8s !important;
+    }
+
+    .tab-button:hover {
+        background-color: #f8f9fc !important; /* Nền sáng nhẹ */
+        color: #4e73df; /* Chữ màu xanh chủ đạo */
+    }
+
+    .tab-button:active {
+        background-color: #4e73df;
+        color: #ffffff;
+        box-shadow: 0 4px 10px rgba(78, 115, 223, 0.3); /* Bóng đổ mềm */
+    }
+
     .h-1 {
         height: calc(var(--spacing) * 1);
     }
@@ -1048,6 +1063,34 @@
         list-style-position: inside;
     }
 
+    .list-group-item {
+        transition: all 0.2s ease-in-out;
+        border-left: 4px solid transparent; /* Tạo chỗ trống trước cho viền */
+    }
+
+    .card-hover {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    /* 2. Hiệu ứng khi di chuột vào */
+    .card-hover:hover {
+        /* Nhấc thẻ lên trên 5px */
+        transform: translateY(-5px);
+
+        /* Tăng độ đậm của bóng đổ để tạo cảm giác nổi khối 3D */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+
+        /* Đổi con trỏ chuột thành hình bàn tay */
+        cursor: pointer;
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fc !important; /* Màu nền xám xanh rất nhạt */
+        border-left-color: #4e73df !important; /* Viền trái hiện màu xanh chủ đạo */
+        cursor: pointer; /* Đổi con trỏ thành bàn tay */
+        padding-left: 1.5rem; /* Đẩy chữ sang phải một chút tạo động lực */
+    }
+
     .list-disc {
         list-style-type: disc;
     }
@@ -1230,6 +1273,15 @@
 
     .rounded-2xl {
         border-radius: var(--radius-2xl);
+    }
+
+    .rounded-xl {
+        border-radius: 20px !important; /* Độ cong 20px là chuẩn đẹp nhất hiện nay */
+        overflow: hidden; /* Bắt buộc để cắt phần thừa của header bên trong */
+    }
+
+    .card-hover:hover {
+
     }
 
     .rounded-3xl {
