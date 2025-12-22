@@ -1,6 +1,14 @@
 {
   "users": [
     {
+      "username": "quanly",
+      "password": "123456",
+      "ho_ten": "Quanr",
+      "vai_tro": "MANAGER",
+      "so_dien_thoai": "091919169",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
       "username": "thungan",
       "password": "123456",
       "ho_ten": "Trần Thị Thu Ngân",

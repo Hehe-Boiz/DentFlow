@@ -16,6 +16,8 @@ def user_can_do(User):
         can_do['Trang lễ tân'] = '/receptionist'
     if User.vai_tro == UserRole.CASHIER:
         can_do['Trang thu ngân'] = '/cashier'
+    if User.vai_tro == UserRole.MANAGER:
+        can_do['Trang quản lý'] = '/manager'
     else:
         for item in admin.menu():
             if item.is_accessible():
@@ -145,7 +147,6 @@ class CalculationUtils:
 
 
 def validate_thong_tin_benh_nhan(ho_ten, sdt, email=None):
-
     ho_ten = ho_ten.strip() if ho_ten else ""
     sdt = sdt.strip() if sdt else ""
     email = email.strip() if email else ""
