@@ -2,7 +2,7 @@ import cloudinary
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from dotenv import  load_dotenv
+from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
@@ -27,5 +27,6 @@ from DentFlowApp.apis import (login_apis,
                               service_apis,
                               treatment_apis,
                               profile_apis,
-                              doctor_apis
+                              doctor_apis,
+                              user_apis, report_statitics_apis
                               )

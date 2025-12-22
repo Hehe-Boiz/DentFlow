@@ -11,7 +11,39 @@
 {% endblock %}
 
 {% block content %}
+    <div class="card ">
+        <div class="card-header bg-white ">
+            <ul class="nav nav-pills custom-tab-bar ">
+                <li class="nav-item ">
+                    <a href="/manager?tab=thong-ke"
+                       class="nav-link tab-button">
+                        <h5 class="text-primary m-0"><i class="fa fa-bar-chart" aria-hidden="true"></i> Thống kê doanh
+                            thu
+                        </h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/manager"
+                       class="nav-link">
+                        <h5 class="text-primary m-0"><i class="fa-solid fa-file"></i> Báo cáo </h5>
+                    </a>
+                </li>
 
+                <li class="nav-item ">
+                    <a href="/manager?tab=nhan-vien"
+                       class="nav-link tab-button">
+                        <h5 class="text-primary m-0"><i class="fa-solid fa-user"></i> Nhân sự
+                        </h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            {% include 'manager/thong_ke.html' %}
+        </div>
+        <div class="card-footer"></div>
+    </div>
 {% endblock %}
 {% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}
