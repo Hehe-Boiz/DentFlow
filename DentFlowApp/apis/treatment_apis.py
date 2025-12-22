@@ -194,3 +194,4 @@ def create_treatment():
 # @app.get("/tabs/treatment")
 # def tabs_treatment():
 #     return render_template("treatments/tab_treatment.html")
+

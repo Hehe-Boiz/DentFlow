@@ -43,6 +43,7 @@ class TrangThaiLichHen(enum.Enum):
     DAT_LICH_THANH_CONG = "Đặt lịch thành công"
     CHO_KHAM = "Chờ khám"
     DA_KHAM = "Đã khám"
+    HUY = "Hủy"
 
 
 class LoaiBacSi(enum.Enum):
