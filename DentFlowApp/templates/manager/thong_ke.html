@@ -1,19 +1,28 @@
 <div class="p-4 bg-white border-top-0">
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Doanh thu tháng</h5>
-                    <p class="card-text fs-3 fw-bold">450.000.000 đ</p>
+
+    <div class="row g-4 pb-4">
+        {% for card in cards %}
+            {{ stat_card(
+                title=card['title'],
+                value=card['value'],
+                sub_text=card['sub_text'],
+                icon=card['icon'],
+                class=card['class']
+                ) }}
+        {% endfor %}
+    </div>
+
+    <div class="card border-0">
+        <div class="card-body border-0">
+            <div class="row gap-3 flex-nowrap flex">
+                <div class="border-1 rounded-lg  pb-5 pl-2 pr-2 " style="height: 300px; width: 100%;">
+                    <h5 class="text-center mt-2">Biểu đồ doanh thu trong tháng</h5>
+                    <canvas id="chart-bar-monthly"></canvas>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <canvas id="chart-bar-daily"></canvas>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h5>Biểu đồ doanh thu</h5>
-            <canvas id="revenueChart" style="height: 300px;">
-            </canvas>
         </div>
     </div>
 </div>

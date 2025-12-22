@@ -681,6 +681,241 @@
     {
       "benh_nhan_sdt": "0912345678",
       "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-01 08:30:00",
+      "chan_doan": "Vôi răng bám nhiều",
+      "ghi_chu": "Vệ sinh kỹ",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-01 10:00:00",
+      "chan_doan": "Răng ố vàng do thực phẩm",
+      "ghi_chu": "Tẩy trắng công nghệ mới",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-02 09:15:00",
+      "chan_doan": "Sâu răng R47",
+      "ghi_chu": "Trám composite",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-03 14:00:00",
+      "chan_doan": "Mất răng R36",
+      "ghi_chu": "Tư vấn làm cầu răng sứ",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-04 08:45:00",
+      "chan_doan": "Viêm tủy hồi phục",
+      "ghi_chu": "Điều trị nội nha",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-05 10:30:00",
+      "chan_doan": "Răng hô nhẹ, lệch lạc",
+      "ghi_chu": "Thanh toán đợt 1 niềng răng",
+      "dich_vu_su_dung": [
+        "Niềng răng mắc cài"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-06 15:20:00",
+      "chan_doan": "Răng lung lay độ 3",
+      "ghi_chu": "Nhổ bỏ",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0922334455",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-07 09:00:00",
+      "chan_doan": "Sâu men răng",
+      "ghi_chu": "",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0911223344",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-08 11:00:00",
+      "chan_doan": "Nhu cầu thẩm mỹ",
+      "ghi_chu": "Bọc sứ 2 răng cửa",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-09 14:30:00",
+      "chan_doan": "Viêm nướu",
+      "ghi_chu": "",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-10 16:00:00",
+      "chan_doan": "Sâu răng hàm lớn",
+      "ghi_chu": "Đã trám xong",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0944556688",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-12 08:00:00",
+      "chan_doan": "Đau nhức về đêm",
+      "ghi_chu": "Điều trị tủy xong",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0955667799",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-13 10:15:00",
+      "chan_doan": "Mẻ răng cửa",
+      "ghi_chu": "Trám thẩm mỹ",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0966778800",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-14 13:45:00",
+      "chan_doan": "Răng số 8 mọc thẳng",
+      "ghi_chu": "Nhổ dự phòng",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0977889911",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-15 09:30:00",
+      "chan_doan": "Vệ sinh răng miệng định kỳ",
+      "ghi_chu": "",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0988990022",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-16 15:00:00",
+      "chan_doan": "Muốn làm lại nụ cười",
+      "ghi_chu": "Làm 4 răng sứ",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-17 11:00:00",
+      "chan_doan": "Đau răng hàm",
+      "ghi_chu": "Sâu răng lớn",
+      "dich_vu_su_dung": [
+        "Điều trị tủy",
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-18 14:00:00",
+      "chan_doan": "Niềng răng (trả góp đợt 2)",
+      "ghi_chu": "Tái khám siết răng",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-19 16:30:00",
+      "chan_doan": "Răng xỉn màu",
+      "ghi_chu": "Tẩy trắng nhanh",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
       "ngay_tao": "2025-12-20 08:30:00",
       "chan_doan": "Cao răng nhiều, viêm nướu nhẹ",
       "ghi_chu": "Dặn bệnh nhân đánh răng kỹ hơn",

@@ -242,7 +242,8 @@ class HoaDon(BaseModel):
     __tablename__ = 'hoa_don'
     tong_tien = Column(Float)
     ngay_thanh_toan = Column(DateTime, default=datetime.now())
-
+    nhan_vien_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='CASCADE'), nullable=False)
+    phuong_thuc_thanh_toan = Column(sqlEnum(PhuongThucThanhToan), nullable=False)
     phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id', ondelete='CASCADE'), nullable=False,
                                unique=True)
 

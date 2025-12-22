@@ -164,7 +164,7 @@ def import_json_data():
         except Exception as e:
             print(f"Lỗi import lịch trực: {e}")
 
-    # 8. Import Phiếu Điều Trị & Hóa Đơn (CẬP NHẬT LOGIC)
+    # 8. Import Phiếu Điều Trị & Hóa Đơn
     print("8. Đang import Phiếu Điều Trị & Hóa Đơn...")
     for trt in data.get('treatments', []):
         bn_id = patient_map.get(trt['benh_nhan_sdt'])
@@ -174,7 +174,8 @@ def import_json_data():
                 json_status = trt.get('trang_thai_thanh_toan', 'CHUA_THANH_TOAN')
                 payment_status_enum = getattr(TrangThaiThanhToan, json_status)
 
-                ngay_tao = datetime.strptime(trt['ngay_tao'], '%Y-%m-%d %H:%M:%S')
+                # Parse ngày tạo từ JSON (Đây là dữ liệu lịch sử)
+                ngay_tao_lich_su = datetime.strptime(trt['ngay_tao'], '%Y-%m-%d %H:%M:%S')
 
                 # 8.2 Tạo Phiếu Điều Trị
                 pdt = PhieuDieuTri(
@@ -182,7 +183,7 @@ def import_json_data():
                     ghi_chu=trt.get('ghi_chu', ''),
                     ho_so_benh_nhan_id=bn_id,
                     bac_si_id=trt['bac_si_id'],
-                    ngay_tao=ngay_tao,
+                    ngay_tao=ngay_tao_lich_su,  # Quan trọng: Gán ngày cũ cho phiếu
                     trang_thai_thanh_toan=payment_status_enum
                 )
                 db.session.add(pdt)
@@ -198,7 +199,8 @@ def import_json_data():
                         ct_pdt = ChiTietPhieuDieuTri(
                             phieu_dieu_tri_id=pdt.id,
                             dich_vu_id=dv_id,
-                            don_gia=don_gia
+                            don_gia=don_gia,
+                            ngay_tao=ngay_tao_lich_su  # Gán ngày cũ cho chi tiết (nếu model có dùng)
                         )
                         db.session.add(ct_pdt)
                         tong_tien += don_gia
@@ -209,13 +211,20 @@ def import_json_data():
                     method_str = trt.get('phuong_thuc_thanh_toan', 'TIEN_MAT')
                     method_enum = getattr(PhuongThucThanhToan, method_str)
 
-                    if cashier_id:  # Đảm bảo có nhân viên thu ngân
+                    if cashier_id:
+                        # Giả lập thời gian thanh toán là 30 phút sau khi tạo phiếu
+                        thoi_gian_thanh_toan = ngay_tao_lich_su + timedelta(minutes=30)
+
                         hoa_don = HoaDon(
                             tong_tien=tong_tien,
-                            ngay_thanh_toan=ngay_tao + timedelta(minutes=30),
                             phieu_dieu_tri_id=pdt.id,
-                            phuong_thuc_thanh_toan=method_enum,  # <-- Trường mới bắt buộc
-                            nhan_vien_id=cashier_id  # <-- Trường bắt buộc trong model NguoiDung
+                            phuong_thuc_thanh_toan=method_enum,
+                            nhan_vien_id=cashier_id,
+
+                            # --- SỬA LỖI TẠI ĐÂY ---
+                            # Truyền tham số ngay_tao để override default=datetime.now()
+                            ngay_tao=thoi_gian_thanh_toan,  # Ngày tạo hóa đơn trong DB
+                            ngay_thanh_toan=thoi_gian_thanh_toan  # Ngày thanh toán thực tế
                         )
                         db.session.add(hoa_don)
                     else:
@@ -223,7 +232,6 @@ def import_json_data():
 
             except Exception as e:
                 print(f"Lỗi import phiếu điều trị: {e}")
-
     db.session.commit()
     print("--- Hoàn tất import dữ liệu! ---")
 
