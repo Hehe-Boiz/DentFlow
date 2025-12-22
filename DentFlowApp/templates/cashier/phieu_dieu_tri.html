@@ -35,12 +35,13 @@
             <div class="col-md-4 text-end border-start ps-3">
                 <span class="text-secondary small d-block">Tạm tính</span>
                 <span class="fs-4 fw-bold text-danger">
-                {{ "{:,.0f}".format(phieu_dieu_tri.chi_tiet_dich_vu[0].don_gia).replace(',', '.') }} ₫
+                {{ "{:,.0f}".format(phieu_dieu_tri.get_tong_tien).replace(',', '.') }} ₫
             </span>
             </div>
         </div>
     </div>
     <div class="card-footer p-0 border-0 bg-white text-right">
-        <button type="button" class="btn bg-primary text-white ">Thanh toán</button>
+        <span type="button" class="btn bg-primary text-white ">
+            <a href="{{ url_for('cashier_thanh_toan', id=phieu_dieu_tri.id) }}" class="text-white text-decoration-none">Thanh toán</a></span>
     </div>
 </div>

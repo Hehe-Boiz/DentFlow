@@ -3,14 +3,14 @@ import hashlib
 from datetime import datetime, timedelta
 from DentFlowApp import app, db
 
-# 1. CẬP NHẬT IMPORT: Thêm TrangThaiThanhToan
+# 1. CẬP NHẬT IMPORT: Thêm PhuongThucThanhToan
 from DentFlowApp.models import (
     NguoiDung, UserRole, GioiTinh, LoaiBacSi,
     BacSi, BacSiFullTime, BacSiPartTime,
     Thuoc, LoThuoc, DichVu, HoSoBenhNhan, LichHen,
     TrangThaiLichHen, LichLamViec, TrangThaiLamViec,
     DonViThuoc, ChiTietPhieuDieuTri, HoaDon, PhieuDieuTri,
-    TrangThaiThanhToan  # <-- Quan trọng
+    TrangThaiThanhToan, PhuongThucThanhToan  # <-- Quan trọng
 )
 
 
@@ -35,6 +35,7 @@ def import_json_data():
     service_map = {}
     patient_map = {}
     service_price_map = {}
+    cashier_id = None  # Lưu ID thu ngân để gán vào hóa đơn
 
     # 1. Import Users
     print("1. Đang import Users...")
@@ -50,6 +51,10 @@ def import_json_data():
         db.session.add(user)
         db.session.flush()
         user_map[u['username']] = user
+
+        # Tìm một thu ngân để gán mặc định cho hóa đơn
+        if user.vai_tro == UserRole.CASHIER and cashier_id is None:
+            cashier_id = user.id
 
     # 2. Import Bác sĩ
     print("2. Đang import Bác sĩ...")
@@ -106,7 +111,7 @@ def import_json_data():
             so_dien_thoai=p['so_dien_thoai'],
             gioi_tinh=getattr(GioiTinh, p['gioi_tinh']),
             dia_chi=p['dia_chi'],
-            ngay_sinh= datetime.strptime(p["ngay_sinh"], "%Y-%m-%d").date()
+            ngay_sinh=datetime.strptime(p["ngay_sinh"], "%Y-%m-%d").date()
         )
         db.session.add(bn)
         db.session.flush()
@@ -159,13 +164,13 @@ def import_json_data():
         except Exception as e:
             print(f"Lỗi import lịch trực: {e}")
 
-    # 8. Import Phiếu Điều Trị & Hóa Đơn (ĐÃ CẬP NHẬT)
+    # 8. Import Phiếu Điều Trị & Hóa Đơn (CẬP NHẬT LOGIC)
     print("8. Đang import Phiếu Điều Trị & Hóa Đơn...")
     for trt in data.get('treatments', []):
         bn_id = patient_map.get(trt['benh_nhan_sdt'])
         if bn_id:
             try:
-                # 8.1 Xử lý trạng thái thanh toán từ String JSON sang Enum Python
+                # 8.1 Xử lý trạng thái thanh toán
                 json_status = trt.get('trang_thai_thanh_toan', 'CHUA_THANH_TOAN')
                 payment_status_enum = getattr(TrangThaiThanhToan, json_status)
 
@@ -178,7 +183,7 @@ def import_json_data():
                     ho_so_benh_nhan_id=bn_id,
                     bac_si_id=trt['bac_si_id'],
                     ngay_tao=ngay_tao,
-                    trang_thai_thanh_toan=payment_status_enum  # <-- Gán Enum vào đây
+                    trang_thai_thanh_toan=payment_status_enum
                 )
                 db.session.add(pdt)
                 db.session.flush()
@@ -200,12 +205,21 @@ def import_json_data():
 
                 # 8.4 Tạo hóa đơn CHỈ KHI trạng thái là ĐÃ THANH TOÁN
                 if payment_status_enum == TrangThaiThanhToan.DA_THANH_TOAN:
-                    hoa_don = HoaDon(
-                        tong_tien=tong_tien,
-                        ngay_thanh_toan=ngay_tao + timedelta(minutes=30),
-                        phieu_dieu_tri_id=pdt.id
-                    )
-                    db.session.add(hoa_don)
+                    # Lấy phương thức thanh toán từ JSON (mặc định TIEN_MAT)
+                    method_str = trt.get('phuong_thuc_thanh_toan', 'TIEN_MAT')
+                    method_enum = getattr(PhuongThucThanhToan, method_str)
+
+                    if cashier_id:  # Đảm bảo có nhân viên thu ngân
+                        hoa_don = HoaDon(
+                            tong_tien=tong_tien,
+                            ngay_thanh_toan=ngay_tao + timedelta(minutes=30),
+                            phieu_dieu_tri_id=pdt.id,
+                            phuong_thuc_thanh_toan=method_enum,  # <-- Trường mới bắt buộc
+                            nhan_vien_id=cashier_id  # <-- Trường bắt buộc trong model NguoiDung
+                        )
+                        db.session.add(hoa_don)
+                    else:
+                        print("Cảnh báo: Không tìm thấy nhân viên CASHIER để gán cho hóa đơn!")
 
             except Exception as e:
                 print(f"Lỗi import phiếu điều trị: {e}")

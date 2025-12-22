@@ -20,7 +20,7 @@
                     <td>{{ phieu_dieu_tri.ngay_cap_nhat }}</td>
                     <td>
                         <span class="fs-6 fw-bold text-danger">
-                {{ "{:,.0f}".format(phieu_dieu_tri.chi_tiet_dich_vu[0].don_gia).replace(',', '.') }} ₫</td>
+                            {{ "{:,.0f}".format(phieu_dieu_tri.get_tong_tien).replace(',', '.') }} ₫ </span></td>
                     <td><span class="badge bg-success">Thành công</span></td>
                 </tr>
             {% endfor %}

@@ -108,4 +108,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 4. Chạy kiểm tra ban đầu
     checkInputs();
+
 });
