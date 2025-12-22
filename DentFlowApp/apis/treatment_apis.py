@@ -2,8 +2,8 @@ from DentFlowApp import app, db
 from flask import request, redirect, render_template, session, jsonify
 from flask_login import current_user, login_required
 from DentFlowApp import utils
-from DentFlowApp.dao import lich_hen_dao, dichvu_dao, bacsi_dao, thuoc_dao, phieu_dieu_tri_dao
-from datetime import datetime
+from DentFlowApp.dao import lich_hen_dao, dichvu_dao, bacsi_dao, thuoc_dao, phieu_dieu_tri_dao, lichlamviec_dao
+from datetime import date, datetime, timedelta
 
 now = datetime.now()
 formatted = now.strftime("%d/%m/%Y")
@@ -38,12 +38,13 @@ formatted = now.strftime("%d/%m/%Y")
 #         now=formatted
 #     )
 
-@app.route('/treatment')
-def treatment_view():
-    bacsi_id = current_user.bac_si.ma_bac_si
-    patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_time(bacsi_id)
-    print(len(patients))
-    return render_template("treatments/treatment.html", patients=patients)
+# @app.route('/treatment')
+# def treatment_view():
+#     bacsi_id = current_user.bac_si.ma_bac_si
+#     patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_time(bacsi_id)
+#     print(len(patients))
+#     return render_template("treatments/treatment.html", patients=patients)
+
 
 @app.get("/treatments/ke-don")
 def ke_don_partial():
@@ -183,6 +184,7 @@ def create_treatment():
         print(f"Error creating treatment: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
+
 # @app.get("/tabs/today")
 # def tabs_today():
 #     return render_template("treatments/tab_schedule_today.html")
@@ -195,3 +197,62 @@ def create_treatment():
 # def tabs_treatment():
 #     return render_template("treatments/tab_treatment.html")
 
+def get_monday(d: date) -> date:
+    # Thứ 2 = 0, CN = 6
+    return d - timedelta(days=d.weekday())
+
+
+def get_week_dates(monday: date):
+    return [monday + timedelta(days=i) for i in range(7)]
+
+
+@app.route("/treatment")
+def schedule_week():
+    day_str = request.args.get("day")
+    if day_str:
+        base_day = datetime.strptime(day_str, "%Y-%m-%d").date()
+    else:
+        base_day = date.today()
+
+    monday = get_monday(base_day)
+    days = get_week_dates(monday)
+
+    times = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
+    system_hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+
+    ds_lich = lichlamviec_dao.get_lich_lam_viec_by_bac_si_tuan_nay(current_user.bac_si.ma_bac_si)
+    ds_lich_hen= lich_hen_dao.get_tong_lich_hen_in_tuan_by_bac_si(current_user.bac_si.ma_bac_si)
+    working_slots = {}
+    lich_hen_slots = {}
+    for lich in ds_lich:
+        start_time_bs = lich.gio_bat_dau
+        end_time_bs = lich.gio_ket_thuc
+
+        for h in system_hours:
+            slot_start = datetime.strptime(f"{h:02d}:00", "%H:%M").time()
+            slot_end = datetime.strptime(f"{h + 1:02d}:00", "%H:%M").time()
+
+            if start_time_bs < slot_end and end_time_bs > slot_start:
+                key = f"{lich.ngay_lam.strftime('%Y-%m-%d')}_{h:02d}:00"
+
+                note = ""
+
+                if start_time_bs >= slot_start and start_time_bs < slot_end:
+                    if start_time_bs.minute > 0:
+                        note = f"Bắt đầu: {start_time_bs.strftime('%H:%M')}"
+
+                elif end_time_bs > slot_start and end_time_bs <= slot_end:
+                    if end_time_bs.minute > 0:
+                        note = f"Kết thúc: {end_time_bs.strftime('%H:%M')}"
+
+                working_slots[key] = note
+
+    for lh in ds_lich_hen:
+        h = lh.gio_kham.hour
+
+        if h in system_hours:
+            key = f"{lh.ngay_dat.strftime('%Y-%m-%d')}_{h:02d}:00"
+            lich_hen_slots[key] = lich_hen_slots.get(key, 0) + 1
+
+
+    return render_template("treatments/treatment.html", monday=monday, days=days, times=times, working_slots=working_slots, lich_hen_slots=lich_hen_slots)

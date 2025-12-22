@@ -4,6 +4,8 @@ from DentFlowApp import db
 from flask_login import current_user
 from DentFlowApp.admin import admin
 from DentFlowApp.dao import thuoc_dao
+from datetime import date, datetime, timedelta
+
 
 
 def user_can_do(User):
@@ -139,3 +141,11 @@ class CalculationUtils:
             "vat": tien_vat,
             "tong_thanh_toan": tong_thanh_toan
         }
+
+def get_monday(d: date) -> date:
+    # Thứ 2 = 0, CN = 6
+    return d - timedelta(days=d.weekday())
+
+
+def get_sunday(monday: date) -> date:
+    return monday + timedelta(days=6)
