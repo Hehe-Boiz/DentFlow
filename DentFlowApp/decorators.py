@@ -24,3 +24,9 @@ def receptionist_required(f):
 
 def doctor_required(f):
     return role_required([UserRole.DOCTOR])(f)
+
+def cashier_required(f):
+    return role_required([UserRole.CASHIER])(f)
+
+def manager_required(f):
+    return role_required([UserRole.MANAGER])(f)

@@ -31,6 +31,7 @@ class UserRole(enum.Enum):
     RECEPTIONIST = 3
     DOCTOR = 4
     CASHIER = 5
+    MANAGER = 6
 
 
 class TrangThaiLamViec(enum.Enum):
