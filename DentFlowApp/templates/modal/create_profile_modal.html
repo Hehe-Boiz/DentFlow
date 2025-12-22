@@ -1,5 +1,6 @@
 <div class="modal fade" id="createProfileModal" tabindex="-1" aria-hidden="true" style="z-index: 1060;">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable"> <div class="modal-content">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
 
             <div class="modal-header border-bottom-0 pb-0">
                 <h5 class="modal-title fw-bold text-uppercase">Thêm mới khách hàng</h5>
@@ -14,8 +15,10 @@
                                 <div class="col-12">
                                     <div class="row g-3">
                                         <div class="col-12">
-                                            <label class="form-label small fw-bold">Họ tên <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control fw-bold text-primary" name="ho_ten" id="new_hoten" required placeholder="Nhập họ tên khách hàng...">
+                                            <label class="form-label small fw-bold">Họ tên <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control fw-bold text-primary" name="ho_ten"
+                                                   id="new_hoten" required placeholder="Nhập họ tên khách hàng...">
                                         </div>
 
                                         <div class="col-md-6">
@@ -31,22 +34,27 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label small text-muted">Số điện thoại <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="so_dien_thoai" id="new_sdt" required>
+                                            <label class="form-label small text-muted">Số điện thoại <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="so_dien_thoai" id="new_sdt"
+                                                   required>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label small text-muted">CCCD <span class="text-danger">*</span></label>
+                                            <label class="form-label small text-muted">CCCD <span
+                                                    class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="CCCD" id="new_CCCD">
                                         </div>
 
                                         <div class="col-12">
                                             <label class="form-label small text-muted">Email</label>
-                                            <input type="email" class="form-control" name="email" id="new_email" placeholder="Nhập email...">
+                                            <input type="email" class="form-control" name="email" id="new_email"
+                                                   placeholder="Nhập email...">
                                         </div>
 
                                         <div class="col-12">
                                             <label class="form-label small text-muted">Địa chỉ</label>
-                                            <input type="text" class="form-control" name="dia_chi" id="new_diachi" placeholder="Số nhà, đường, phường/xã...">
+                                            <input type="text" class="form-control" name="dia_chi" id="new_diachi"
+                                                   placeholder="Số nhà, đường, phường/xã...">
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +63,6 @@
                     </div>
                 </form>
             </div>
-
             <div class="modal-footer bg-white">
                 <button type="button" class="btn btn-light border px-4" data-bs-dismiss="modal">Hủy bỏ</button>
                 <button type="button" class="btn btn-primary px-4 fw-bold" onclick="saveFullProfile()">

@@ -27,5 +27,7 @@ from DentFlowApp.apis import (login_apis,
                               service_apis,
                               treatment_apis,
                               profile_apis,
-                              doctor_apis
+                              doctor_apis,
+                              user_apis
                               )
+

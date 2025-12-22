@@ -1,0 +1,36 @@
+<div class="tab-pane fade show active" id="tab-account">
+    <h6 class="text-uppercase text-muted mb-3 small fw-bold">Thông tin đăng nhập</h6>
+    <form id="formAccount"  enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Tên đăng nhập</label>
+            <input type="text" class="form-control bg-light" value="{{ current_user.username }}"
+                   readonly>
+        </div>
+        <div>
+            <label for="avatarInput" class="btn btn-outline-primary btn-sm mb-1">
+                <i class="fas fa-camera me-1"></i> Tải ảnh mới
+            </label>
+            <input type="file" id="avatarInput" name="avatar" class="d-none" onchange="">
+            <span class="small text-muted">Cho phép JPG, PNG. Tối đa 2MB.</span>
+        </div>
+        <hr class="my-4">
+        <h6 class="text-uppercase text-muted mb-3 small fw-bold">Đổi mật khẩu</h6>
+        <div class="mb-3">
+            <label class="form-label">Mật khẩu cũ</label>
+            <input type="password" class="form-control" name="old_password">
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Mật khẩu mới</label>
+                <input type="password" class="form-control" name="new_password">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Nhập lại mật khẩu mới</label>
+                <input type="password" class="form-control" name="confirm_password">
+            </div>
+        </div>
+        <button type="button" onclick="changePassword()" class="btn btn-primary">
+            <i class="fas fa-key me-2"></i>Cập nhật mật khẩu
+        </button>
+    </form>
+</div>

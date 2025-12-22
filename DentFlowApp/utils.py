@@ -10,7 +10,7 @@ import re
 def user_can_do(User):
     can_do = {}
     if User.vai_tro == UserRole.USER:
-        can_do['Hồ sơ của tôi'] = '#'
+        can_do['Hồ sơ của tôi'] = '/user'
         can_do['Lịch hẹn của tôi'] = '#'
     if User.vai_tro == UserRole.RECEPTIONIST:
         can_do['Trang lễ tân'] = '/receptionist'

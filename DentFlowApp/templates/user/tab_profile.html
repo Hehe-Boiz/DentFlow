@@ -1,0 +1,85 @@
+<div class="tab-pane fade" id="tab-profile">
+    {% if ho_so %}
+    <form id="formProfile"  action="/api/update-profile/{{ ho_so.id }}" method="post">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Họ và tên</label>
+                <input type="text" class="form-control" name="ho_ten"
+                       value="{{ ho_so.ho_ten }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Số điện thoại</label>
+                <input type="text" class="form-control" name="so_dien_thoai"
+                       value="{{ ho_so.so_dien_thoai }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Ngày sinh</label>
+                <input type="date" class="form-control" name="ngay_sinh"
+                       value="{{ ho_so.ngay_sinh }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Giới tính</label>
+                <select class="form-select" name="gioi_tinh">
+                    <option value="">Chọn giới tính</option>
+                    <option value="NAM"
+                    {% if ho_so.gioi_tinh.value == 'Nam' %}
+                    selected
+                    {% endif %}>Nam</option>
+                    <option value="NU"
+                    {% if ho_so.gioi_tinh.value == 'Nữ' %}
+                    selected
+                    {% endif %}
+                    >Nữ</option>
+                    <option value="KHAC"
+                    {% if ho_so.gioi_tinh.value == 'Khác' %}
+                    selected
+                    {% endif %}
+                    >Khác</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">CCCD</label>
+                <input type="text" class="form-control" name="CCCD"
+                       value="{{ ho_so.CCCD }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Email</label>
+                <input type="text" class="form-control" name="email"
+                       value="{{ ho_so.email }}">
+            </div>
+            <div class="col-12">
+                <label class="form-label fw-bold">Địa chỉ</label>
+                <input type="text" class="form-control" name="dia_chi"
+                       value="{{ ho_so.dia_chi }}">
+            </div>
+        </div>
+        <div class="mt-4 text-end">
+            <button type="submit"
+                    class="btn btn-success text-white fw-bold">
+                <i class="fas fa-save me-2"></i> Lưu hồ sơ
+            </button>
+        </div>
+    </form>
+    {% else %}
+    <div class="d-flex flex-column align-items-center justify-content-center py-5 text-center">
+
+        <div class="mb-3 p-4 bg-light rounded-circle shadow-sm" style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-file-medical fa-3x text-secondary opacity-50"></i>
+        </div>
+
+        <h5 class="fw-bold text-dark mb-2">Bạn chưa có hồ sơ bệnh nhân</h5>
+        <p class="text-muted mb-4" style="max-width: 400px;">
+            Vui lòng tạo hồ sơ để bắt đầu đặt lịch khám và theo dõi lịch sử điều trị tại phòng khám.
+        </p>
+
+        <button class="btn btn-primary btn-md px-5 fw-bold shadow-sm rounded-pill"
+                data-bs-toggle="modal"
+                data-bs-target="#createProfileModal">
+            <i class="fas fa-plus-circle me-2"></i> Tạo hồ sơ ngay
+        </button>
+    </div>
+    {% block create_profile_modal %}
+    {% include 'modal/create_profile_modal.html' %}
+    {% endblock %}
+    {% endif %}
+</div>
