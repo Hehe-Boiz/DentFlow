@@ -192,8 +192,8 @@ class PhieuDieuTri(BaseModel):
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
     # dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=False)
 
-    hoa_don = relationship('HoaDon', backref='phieu_dieu_tri', uselist=False, cascade="all delete-orphan")
-    don_thuoc = relationship('DonThuoc', backref='phieu_dieu_tri', uselist=False, cascade="all delete-orphan")
+    hoa_don = relationship('HoaDon', backref='phieu_dieu_tri', uselist=False, cascade="all, delete-orphan")
+    don_thuoc = relationship('DonThuoc', backref='phieu_dieu_tri', uselist=False, cascade="all, delete-orphan")
 
     chi_tiet_dich_vu = relationship('ChiTietPhieuDieuTri', backref='phieu_dieu_tri', lazy=True, cascade="all, delete-orphan")
 
