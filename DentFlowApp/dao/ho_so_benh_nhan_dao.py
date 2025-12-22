@@ -30,6 +30,7 @@ def add_ho_so(ho_ten,so_dien_thoai,dia_chi="",gioi_tinh=None,email="",ngay_sinh=
     try:
         print('hello')
         db.session.commit()
+        return ho_so
     except IntegrityError as ex:
         db.session.rollback()
         raise Exception('Hồ sơ đã tồn tại trong hệ thống')

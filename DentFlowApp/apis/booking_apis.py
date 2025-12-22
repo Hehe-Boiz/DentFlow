@@ -2,7 +2,7 @@ from DentFlowApp import app,db
 from flask import request, redirect, render_template, session, flash
 from flask_login import current_user, login_required
 from DentFlowApp import utils
-from DentFlowApp.dao import dichvu_dao, bacsi_dao, lich_hen_dao
+from DentFlowApp.dao import dichvu_dao, bacsi_dao, lich_hen_dao,ho_so_benh_nhan_dao
 
 
 @app.route('/booking')
@@ -76,8 +76,18 @@ def booking_3_view():
                 ghi_chu = request.form.get('note')
                 print(ghi_chu)
                 try:
+                        ho_so_id = None
+                        if current_user.ho_so_benh_nhan is None:
+                                ho_so_nguoi_dung = ho_so_benh_nhan_dao.add_ho_so(
+                                        ho_ten=current_user.ho_ten,
+                                        so_dien_thoai=current_user.so_dien_thoai
+                                )
+                                ho_so_id = ho_so_nguoi_dung.id
+                                print('Add Oke')
+                        else:
+                                ho_so_id = current_user.ho_so_nguoi_dung.id
                         lich_hen_dao.add_lich_hen(
-                                ho_so_benh_nhan_id=current_user.ho_so_benh_nhan.id,
+                                ho_so_benh_nhan_id=ho_so_id,
                                 ngay_dat=ngay_dat,
                                 gio_kham=gio_kham,
                                 bac_si_id=bac_si_id,
@@ -89,6 +99,7 @@ def booking_3_view():
                         return redirect('/')
 
                 except Exception as e:
+                        print(e)
                         flash('Lỗi: ' + str(e), 'danger')
 
         # --- GET REQUEST: Render giao diện ---

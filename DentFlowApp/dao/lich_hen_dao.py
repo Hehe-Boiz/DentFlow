@@ -120,7 +120,7 @@ def get_lich_hen_theo_bac_si_today_time(bacsi_id):
             LichHen.gio_kham <= lich_bac_si.gio_ket_thuc,
             or_(
                 LichHen.trang_thai == TrangThaiLichHen.CHO_KHAM,
-                LichHen.trang_thai == TrangThaiLichHen.DAT_LICH_THANH_CONG
+                LichHen.trang_thai == TrangThaiLichHen.DA_KHAM
             ),
         )
         .distinct()  # phòng trường hợp 1 bệnh nhân có nhiều lịch trong khung giờ

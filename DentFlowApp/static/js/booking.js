@@ -40,9 +40,10 @@ function getAvailableTimeSlots(id, day) {
         headers: {
             "Content-Type": "application/json"
         }
-    }).then(res => res.json()).then(data => {
-        renderSlots(data)
-    });
+    }).then(res => res.json())
+      .then(data => {
+        renderSlots(data.data)
+    }).catch(err => console.err('Lỗi load thời gian', err));
 }
 
 function layDanhSach(){
