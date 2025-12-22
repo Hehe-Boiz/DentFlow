@@ -1063,6 +1063,15 @@
         list-style-position: inside;
     }
 
+    .btn-hover {
+        /* Các thuộc tính cơ bản khác... */
+        transition: all 0.8s ease !important; /* Giúp hiệu ứng chuyển động mượt */
+    }
+
+    .btn-hover:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Tạo bóng mờ phía dưới */
+    }
+
     .list-group-item {
         transition: all 0.2s ease-in-out;
         border-left: 4px solid transparent; /* Tạo chỗ trống trước cho viền */

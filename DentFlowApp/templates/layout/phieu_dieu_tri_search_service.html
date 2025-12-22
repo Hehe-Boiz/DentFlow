@@ -10,40 +10,80 @@
 
 </div>
 
-<div id="result_container" class="card m-3 border-primary" style="display: none;">
-    <div class="card-header bg-primary text-white">
-        Thông tin phiếu
-    </div>
+<div id="result_container" class="card m-3 border-0 p-0" style="display: none;">
 
-    <div class="card-body">
-        <h5 class="card-title text-primary fw-bold">Phiếu điều trị</h5>
-        <table class="table mt-3 table-bordered text-center"
-               style="max-height: 450px; overflow-y: auto; border: 1px solid #dee2e6;">
-            <thead>
-            <tr>
-                <th scope="col">Mã phiếu</th>
-                <th scope="col">Họ tên</th>
-                <th scope="col">Dịch vụ</th>
-                <th scope="col">Tổng tiền</th>
-                <th scope="col">Trạng thái</th>
-                <th scope="col">Ghi chú</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><span id="pdt_id"></span></td>
-                <td><span id="pdt_ho_ten" class="fs-5"></span></td>
-                <td><span id="pdt_dich_vu"></span></td>
-                <td><span id="pdt_dongia" class="text-danger fw-bold fs-5"></span></td>
-                <td><span id="pdt_trang_thai"></span></td>
-                <td><span id="pdt_ghichu"></span></td>
-            </tr>
-            </tbody>
-        </table>
+
+    <div class="card-body p-0">
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+            <div class="card-header bg-primary bg-gradient text-white p-3 d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-file-invoice-dollar me-2"></i> Phiếu điều trị</h5>
+                <span class="badge bg-white text-primary fs-6">
+            #<span id="pdt_id">...</span>
+        </span>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <div class="avatar-placeholder mb-2 text-primary">
+                        <i class="fas fa-user-circle fa-3x"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-1">
+                        <span id="pdt_ho_ten">Đang tải...</span>
+                    </h4>
+                    <div class="text-muted small">Khách hàng</div>
+                </div>
+
+                <hr class="opacity-25 my-4">
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="text-muted small text-uppercase fw-bold mb-1">Dịch vụ sử dụng</label>
+                        <div class="d-flex align-items-center text-primary">
+                            <i class="fas fa-tooth me-2 fs-5"></i>
+                            <span id="pdt_dich_vu" class="fs-5 fw-medium">...</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="text-muted small text-uppercase fw-bold mb-1">Tổng chi phí</label>
+                        <div class="d-flex align-items-center text-danger">
+                            <i class="fas fa-money-bill-wave me-2 fs-5"></i>
+                            <span id="pdt_dongia" class="fs-4 fw-bold">...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-3 p-3 mt-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 mb-2 mb-md-0">
+                            <small class="text-muted d-block mb-1">Trạng thái thanh toán:</small>
+                            <span id="pdt_trang_thai" class="badge rounded-pill bg-secondary">
+                                Chưa xác định
+                            </span>
+
+                        </div>
+                        <div class="col-md-4">
+                            <small class="text-muted d-block mb-1">Ghi chú bác sĩ:</small>
+                            <div class="d-flex text-dark">
+                                <i class="fas fa-sticky-note me-2 mt-1 text-secondary"></i>
+                                <span id="pdt_ghichu" class="fst-italic">Không có ghi chú</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-right" id="btn-thanh-toan">
+                               <span type="button" class="btn btn-hover bg-primary  m-2 text-white ">
+                                <a id="a-thanh-toan"
+                                   class="text-white text-decoration-none">Thanh toán</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="error_alert" class="alert alert-warning mt-3" style="display: none;">
+
+</div>
+<div id="error_alert_div" class=" p-3 alert-warning m-3" style="display: none;">
     Không tìm thấy phiếu điều trị!
 </div>
 
