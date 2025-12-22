@@ -8,39 +8,36 @@ from datetime import datetime
 from DentFlowApp.dao import receptionistDao, user_dao, lich_hen_dao,ho_so_benh_nhan_dao
 from DentFlowApp.models import UserRole, GioiTinh, HoSoBenhNhan, TrangThaiLichHen
 from DentFlowApp.utils import validate_thong_tin_benh_nhan
+from DentFlowApp.decorators import receptionist_required
 
 @app.route('/receptionist', methods=['GET'])
-@login_required
+@receptionist_required
 def receptionist():
     flash('none')
-    if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
-        active_tab = request.args.get('tab', 'schedule')
-        session['stats_cards'] = {
-            "Lịch hôm nay": 0,
-            "Chờ xác nhận": 0,
-            "Tổng lịch hẹn": 0
-        }
-        lich_hen = None
-        ho_so = None
-        if active_tab == 'schedule':
-            lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)))
-        if active_tab == 'profile':
-            ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)))
-        return render_template('receptionist/receptionist.html',
-                               active_tab=active_tab,
-                               letan=True,
-                               lich_hen=lich_hen,
-                               ho_so=ho_so,
-                               pages=math.ceil(lich_hen_dao.get_tong_lich_hen() / app.config['PAGE_SIZE']),
-                               now=datetime.now().strftime("%Y-%m-%d"))
-    return http.HTTPStatus.FORBIDDEN
+    active_tab = request.args.get('tab', 'schedule')
+    session['stats_cards'] = {
+        "Lịch hôm nay": 0,
+        "Chờ xác nhận": 0,
+        "Tổng lịch hẹn": 0
+    }
+    lich_hen = None
+    ho_so = None
+    if active_tab == 'schedule':
+        lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)))
+    if active_tab == 'profile':
+        ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)))
+    return render_template('receptionist/receptionist.html',
+                           active_tab=active_tab,
+                           letan=True,
+                           lich_hen=lich_hen,
+                           ho_so=ho_so,
+                           pages=math.ceil(lich_hen_dao.get_tong_lich_hen() / app.config['PAGE_SIZE']),
+                           now=datetime.now().strftime("%Y-%m-%d"))
 
 @app.route('/receptionist/tra-cuu', methods=['GET'])
-@login_required
+@receptionist_required
 def receptionist_phieu_dieu_tri_search():
-    if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
-        return render_template('receptionist/receptionist_search_pdt.html')
-    return http.HTTPStatus.FORBIDDEN
+    return render_template('receptionist/receptionist_search_pdt.html')
 #
 #
 # @app.route('/receptionist/patients/register', methods=['GET'])
@@ -103,158 +100,53 @@ def receptionist_phieu_dieu_tri_search():
 #
 #     return http.HTTPStatus.NOT_FOUND
 @app.route('/receptionist/add-appointment', methods=['POST'])
-@login_required
+@receptionist_required
 def add_appointment():
-    if current_user.vai_tro == UserRole.RECEPTIONIST:
-        try:
-            ho_so_id = request.form.get('ho_so_id')
-            bac_si_id = request.form.get('bac_si_id')
-            ngay_dat = request.form.get('ngay_dat')
-            gio_kham = request.form.get('gio_kham')
-            dich_vu_id = request.form.get('dich_vu_id')
-            ghi_chu = request.form.get('ghi_chu')
-            lich_hen_dao.add_lich_hen(
-                ho_so_benh_nhan_id=ho_so_id,
-                ngay_dat=ngay_dat,
-                gio_kham=gio_kham,
-                bac_si_id=bac_si_id,
-                dich_vu_id=dich_vu_id,
-                ghi_chu=ghi_chu
-            )
-            flash("Tạo lịch thành công", 'success')
-            print('success')
-            return redirect('/receptionist')
-        except Exception as ex:
-            print('loi')
+    try:
+        ho_so_id = request.form.get('ho_so_id')
+        bac_si_id = request.form.get('bac_si_id')
+        ngay_dat = request.form.get('ngay_dat')
+        gio_kham = request.form.get('gio_kham')
+        dich_vu_id = request.form.get('dich_vu_id')
+        ghi_chu = request.form.get('ghi_chu')
+        lich_hen_dao.add_lich_hen(
+            ho_so_benh_nhan_id=ho_so_id,
+            ngay_dat=ngay_dat,
+            gio_kham=gio_kham,
+            bac_si_id=bac_si_id,
+            dich_vu_id=dich_vu_id,
+            ghi_chu=ghi_chu
+        )
+        flash("Tạo lịch thành công", 'success')
+        print('success')
+        return redirect('/receptionist')
+    except Exception as ex:
+        print('loi')
     return redirect('/receptionist')
 
 
 @app.route('/receptionist/appointment/<int:lich_hen_id>', methods=['PUT'])
+@receptionist_required
 def accept_booked_appointment(lich_hen_id):
-    if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
-        try:
-            lich_hen = lich_hen_dao.get_lich_hen_theo_id(lich_hen_id)
-            lich_hen.trang_thai = TrangThaiLichHen.CHO_KHAM
-            print(lich_hen)
-            db.session.commit()
-            return jsonify({'status': 'success', 'msg': 'Xác nhận thành công'})
-        except Exception as ex:
-            db.session.rollback()
-            return jsonify({'status': 'error', 'msg': str(ex)})
+    try:
+        lich_hen = lich_hen_dao.get_lich_hen_theo_id(lich_hen_id)
+        lich_hen.trang_thai = TrangThaiLichHen.CHO_KHAM
+        print(lich_hen)
+        db.session.commit()
+        return jsonify({'status': 'success', 'msg': 'Xác nhận thành công'})
+    except Exception as ex:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'msg': str(ex)})
 
 @app.route('/receptionist/appointment/<int:lich_hen_id>', methods=['DELETE'])
+@receptionist_required
 def delete_booked_appointment(lich_hen_id):
-    if current_user.is_authenticated and current_user.vai_tro == UserRole.RECEPTIONIST:
-        try:
-            if lich_hen_dao.del_lich_hen(lich_hen_id):
-                return jsonify({'status': 'success','msg': 'Xóa thành công'})
-            else:
-                return jsonify({'status': 'error', 'msg': 'Không có lịch hẹn cần xóa'})
-        except Exception as ex:
-            return jsonify({'status': 'error', 'msg': str(ex)})
+    try:
+        if lich_hen_dao.del_lich_hen(lich_hen_id):
+            return jsonify({'status': 'success','msg': 'Xóa thành công'})
+        else:
+            return jsonify({'status': 'error', 'msg': 'Không có lịch hẹn cần xóa'})
+    except Exception as ex:
+        return jsonify({'status': 'error', 'msg': str(ex)})
 
-@app.route('/receptionist/update-profiles/<int:ho_so_id>', methods=['POST'])
-@login_required
-def update_profile_receptionist_page(ho_so_id):
-    if current_user.vai_tro == UserRole.RECEPTIONIST:
-        try:
-            ngay_sinh = request.form.get('ngay_sinh')
-            print(ngay_sinh)
-            if ngay_sinh != "":
-                ngay_sinh = datetime.strptime(ngay_sinh, '%Y-%m-%d')
-            else:
-                print('test')
-                ngay_sinh = None
-            gioi_tinh = request.form.get('gioi_tinh')
-            if gioi_tinh == 'NAM':
-                gioi_tinh = GioiTinh.NAM
-            elif gioi_tinh == 'NU':
-                gioi_tinh = GioiTinh.NU
-            else:
-                gioi_tinh = GioiTinh.KHAC
-            ho_ten = request.form.get('ho_ten')
-            so_dien_thoai = request.form.get('so_dien_thoai')
-            email = request.form.get('email')
-            CCCD = request.form.get('CCCD')
-            dia_chi = request.form.get('dia_chi')
-            is_valid, error_msg = validate_thong_tin_benh_nhan(ho_ten, so_dien_thoai, email)
-            if not is_valid:
-                return jsonify({
-                    'status': 'error',
-                    'err_msg': 'err_msg'
-                })
-            if ho_so_benh_nhan_dao.update_ho_so(
-                ho_so_id=ho_so_id,
-                ho_ten=ho_ten,
-                so_dien_thoai=so_dien_thoai,
-                dia_chi=dia_chi,
-                email=email,
-                CCCD=CCCD,
-                gioi_tinh=gioi_tinh,
-                ngay_sinh=ngay_sinh
-            ):
-                print(ho_so_benh_nhan_dao.get_ho_so_theo_id(ho_so_id))
-                flash('Cập nhật thành công', 'success')
-            else:
-                print('fail')
-                flash('Cập nhật thất bại', 'error')
-        except Exception as ex:
-            print('Loi')
-            flash(str(ex),'error')
-    return redirect('/receptionist?tab=profile')
-
-@app.route('/receptionist/create-profiles', methods=['POST'])
-@login_required
-def create_profile_receptionist_page():
-    if current_user.vai_tro == UserRole.RECEPTIONIST:
-        try:
-            ngay_sinh = request.json.get('ngay_sinh')
-            print(ngay_sinh)
-            if ngay_sinh != "":
-                ngay_sinh = datetime.strptime(ngay_sinh, '%Y-%m-%d')
-            else:
-                print('test')
-                ngay_sinh = None
-            gioi_tinh = request.json.get('gioi_tinh')
-            if gioi_tinh == 'NAM':
-                print('work')
-                gioi_tinh = GioiTinh.NAM
-            elif gioi_tinh == 'NU':
-                gioi_tinh = GioiTinh.NU
-            else:
-                gioi_tinh = GioiTinh.KHAC
-            ho_ten = request.json.get('ho_ten')
-            so_dien_thoai = request.json.get('so_dien_thoai')
-            email = request.json.get('email')
-            CCCD = request.json.get('CCCD')
-            dia_chi = request.json.get('dia_chi')
-            print("good")
-            is_valid, error_msg = validate_thong_tin_benh_nhan(ho_ten=ho_ten, sdt=so_dien_thoai, email=email)
-            if not is_valid:
-                print('work')
-                return jsonify({
-                    'status': 'error',
-                    'msg': f'{error_msg}'
-                })
-            ho_so_benh_nhan_dao.add_ho_so(
-                    ho_ten=ho_ten,
-                    so_dien_thoai=so_dien_thoai,
-                    dia_chi=dia_chi,
-                    email=email,
-                    CCCD=CCCD,
-                    gioi_tinh=gioi_tinh,
-                    ngay_sinh=ngay_sinh
-            )
-            flash('Tạo thành công', 'success')
-            return jsonify({
-                'status': 'success',
-                'msg': 'Tạo thành công'
-            })
-        except Exception as ex:
-            print('Loi')
-            return jsonify({
-                'status': 'error',
-                'msg': 'Co loi xay ra'
-            })
-    return redirect('/receptionist')
 

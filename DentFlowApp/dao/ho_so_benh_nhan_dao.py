@@ -15,7 +15,7 @@ def get_ho_so(page=1, kw=None):
 
 def get_ho_so_theo_id(id):
     return HoSoBenhNhan.query.get(id)
-def add_ho_so(ho_ten,so_dien_thoai,dia_chi="",gioi_tinh=None,email="",ngay_sinh=None,CCCD=""):
+def add_ho_so(ho_ten,so_dien_thoai,dia_chi="",gioi_tinh=None,email="",ngay_sinh=None,CCCD="",nguoi_dung_id=None):
     ho_so = HoSoBenhNhan(
         ho_ten=ho_ten,
         so_dien_thoai=so_dien_thoai,
@@ -23,7 +23,8 @@ def add_ho_so(ho_ten,so_dien_thoai,dia_chi="",gioi_tinh=None,email="",ngay_sinh=
         gioi_tinh=gioi_tinh,
         email=email,
         ngay_sinh=ngay_sinh,
-        CCCD=CCCD
+        CCCD=CCCD,
+        nguoi_dung_id=nguoi_dung_id
     )
 
     db.session.add(ho_so)
