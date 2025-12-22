@@ -1,10 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const BANK_CONFIG = {
-        BANK_ID: 'Agribank',       // Ngân hàng MB (hoặc VCB, ACB...)
-        ACCOUNT_NO: '5606205423919', // Số tài khoản
-        TEMPLATE: 'compact'  // Giao diện QR
-    };
-
+    const BANK_CONFIG = window.BANK_ENV_CONFIG;
     const dsBtn = document.querySelectorAll('.btn-pt');
     const hiddenInput = document.getElementById('paymentMethodInput');
     const qrArea = document.getElementById('qrCodeArea');
@@ -50,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let url = `https://img.vietqr.io/image/${BANK_CONFIG.BANK_ID}-${BANK_CONFIG.ACCOUNT_NO}-${BANK_CONFIG.TEMPLATE}.png?amount=${amount}&addInfo=${content}`;
                 qrImage.src = url;
             } else if (method === '3') {
-                qrImage.src = "/static/images/momo-qr.jpg";
+                qrImage.src = "/static/images/momo.png";
             }
         }
     }

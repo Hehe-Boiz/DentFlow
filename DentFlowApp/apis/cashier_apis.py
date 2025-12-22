@@ -1,4 +1,6 @@
 import http
+import os
+
 from DentFlowApp import app, db
 from flask import render_template, request, jsonify
 from flask_login import current_user, login_required
@@ -38,7 +40,12 @@ def cashier_phieu_dieu_tri_search():
 def cashier_thanh_toan(id):
     if current_user.is_authenticated and current_user.vai_tro == UserRole.CASHIER:
         phieu_dieu_tri = get_phieu_dieu_tri_by_id(id)
-        return render_template('cashier/thanh_toan.html', phieu_dieu_tri=phieu_dieu_tri)
+        bank_config = {
+            'bank_id': os.getenv('BANK_ID'),
+            'account_numb': os.getenv('ACCOUNT_NUMB'),
+            'template': os.getenv('TEMPLATE'),
+        }
+        return render_template('cashier/thanh_toan.html', phieu_dieu_tri=phieu_dieu_tri, bank_config=bank_config)
     return http.HTTPStatus.FORBIDDEN
 
 
@@ -51,6 +58,7 @@ def cashier_xac_nhan_thanh_toan(id):
             tong_tien = request.form.get('tong-tien-thu')
             phuong_thuc_thanh_toan_selected = request.form.get('phuong_thuc_thanh_toan')
             phuong_thuc_thanh_toan = PhuongThucThanhToan.TIEN_MAT
+
             if phuong_thuc_thanh_toan_selected == '2':
                 phuong_thuc_thanh_toan = PhuongThucThanhToan.CHUYEN_KHOAN_VIETQR
             elif PhuongThucThanhToan.TIEN_MAT == '3':

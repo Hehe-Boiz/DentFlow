@@ -116,5 +116,12 @@
 {% endblock %}
 
 {% block scripts %}
+    <script>
+        window.BANK_ENV_CONFIG = {
+            BANK_ID: "{{ bank_config.bank_id }}",
+            ACCOUNT_NO: "{{ bank_config.account_numb }}",
+            TEMPLATE: "{{ bank_config.template }}"
+        };
+    </script>
     <script src="{{ url_for('static', filename='js/cashier.js') }}"></script>
 {% endblock %}
