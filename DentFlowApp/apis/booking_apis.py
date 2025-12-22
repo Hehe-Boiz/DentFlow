@@ -85,7 +85,7 @@ def booking_3_view():
                                 ho_so_id = ho_so_nguoi_dung.id
                                 print('Add Oke')
                         else:
-                                ho_so_id = current_user.ho_so_nguoi_dung.id
+                                ho_so_id = current_user.ho_so_benh_nhan.id
                         lich_hen_dao.add_lich_hen(
                                 ho_so_benh_nhan_id=ho_so_id,
                                 ngay_dat=ngay_dat,

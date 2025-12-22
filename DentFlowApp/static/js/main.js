@@ -58,4 +58,13 @@ function saveFullProfile() {
     })
     .catch(err => console.error(err));
 }
-
+//Tự động tắt các alert sau 4s
+const alerts = document.querySelectorAll('.alert');
+alerts.forEach(function(alert) {
+    // Sau 4 giây (4000ms) thì tự tắt
+    setTimeout(function() {
+        // Dùng Bootstrap API để tắt mượt mà
+        let bsAlert = new bootstrap.Alert(alert);
+        bsAlert.close();
+    }, 4000);
+});

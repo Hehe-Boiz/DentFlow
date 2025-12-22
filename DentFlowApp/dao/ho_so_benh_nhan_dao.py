@@ -5,7 +5,7 @@ from DentFlowApp import app, db
 
 
 def get_ho_so(page=1, kw=None):
-    query = HoSoBenhNhan.query
+    query = HoSoBenhNhan.query.order_by(HoSoBenhNhan.ngay_tao.desc())
     if kw:
         query = query.filter(HoSoBenhNhan.ho_ten.contains(kw))
     if page:

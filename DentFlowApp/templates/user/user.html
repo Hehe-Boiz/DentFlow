@@ -4,10 +4,27 @@
 
 {% block content %}
 <div class="container py-2">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm border-0" role="alert" id="myAlert">
+                    {% if category == 'success' %}
+                        <i class="fas fa-check-circle me-2"></i>
+                    {% elif category == 'failed' %}
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                    {% else %}
+                        <i class="fas fa-info-circle me-2"></i>
+                    {% endif %}
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm text-center p-4 border-0">
-                <h5 class="fw-bold mb-0">{{ current_user.ho_ten or current_user.username }}</h5>
+                <h5 class="fw-bold mb-0">{{ current_user.username }}</h5>
                 <p class="text-muted small">Tham gia từ: {{ current_user.ngay_tao}}</p>
                 <div class="position-relative d-inline-block mx-auto mb-3">
                     <img id="sidebarAvatar"
@@ -51,57 +68,9 @@
                         {% include 'user/tab_profile.html'%}
                         {% endblock %}
 
-                        <div class="tab-pane fade" id="tab-booking">
-                            {% if lich_hen_list %}
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th>Thời gian</th>
-                                        <th>Dịch vụ</th>
-                                        <th>Bác sĩ</th>
-                                        <th>Trạng thái</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for lich in lich_hen_list %}
-                                    <tr>
-                                        <td>
-                                            <div class="fw-bold">{{ lich.ngay_hen.strftime('%d/%m/%Y') }}</div>
-                                            <div class="small text-muted">{{ lich.gio_hen }}</div>
-                                        </td>
-                                        <td>{{ lich.dich_vu.ten_dich_vu if lich.dich_vu else 'Khám tổng quát' }}</td>
-                                        <td>
-                                            {% if lich.bac_si %}
-                                            BS. {{ lich.bac_si.ho_ten }}
-                                            {% else %}
-                                            <span class="text-muted fst-italic">Chưa chỉ định</span>
-                                            {% endif %}
-                                        </td>
-                                        <td>
-                                            {% if lich.trang_thai.name == 'CHO_XAC_NHAN' %}
-                                            <span class="badge bg-warning text-dark">Chờ xác nhận</span>
-                                            {% elif lich.trang_thai.name == 'DA_XAC_NHAN' %}
-                                            <span class="badge bg-primary">Đã xác nhận</span>
-                                            {% elif lich.trang_thai.name == 'HOAN_THANH' %}
-                                            <span class="badge bg-success">Hoàn thành</span>
-                                            {% else %}
-                                            <span class="badge bg-danger">Đã hủy</span>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            {% else %}
-                            <div class="text-center py-5 text-muted">
-                                <i class="far fa-calendar-times fa-3x mb-3"></i>
-                                <p>Bạn chưa có lịch hẹn nào.</p>
-                                <a href="/" class="btn btn-primary btn-sm">Đặt lịch ngay</a>
-                            </div>
-                            {% endif %}
-                        </div>
+                        {% block tab_schedule %}
+                        {% include 'user/tab_schedule.html'%}
+                        {% endblock %}
 
                     </div>
                 </div>
@@ -110,4 +79,7 @@
     </div>
 </div>
 
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
 {% endblock %}

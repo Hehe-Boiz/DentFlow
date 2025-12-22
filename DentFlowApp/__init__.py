@@ -1,5 +1,6 @@
 import cloudinary
 from flask import Flask
+from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from dotenv import  load_dotenv
@@ -18,6 +19,8 @@ cloudinary.config(cloud_name=os.getenv('CLOUD_NAME'), api_key=os.getenv('CLOUD_A
 login = LoginManager(app=app)
 login.login_view = 'login_view'
 db = SQLAlchemy(app=app)
+bcrypt = Bcrypt(app=app)
+
 
 from DentFlowApp.apis import (login_apis,
                               booking_apis,
