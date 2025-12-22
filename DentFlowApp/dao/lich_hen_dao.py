@@ -55,7 +55,7 @@ def del_lich_hen(lich_hen_id):
         return False
     print(lich_hen)
     try:
-        db.session.delete(lich_hen)
+        lich_hen.trang_thai = TrangThaiLichHen.HUY
         db.session.commit()
         return True
     except Exception as ex:
