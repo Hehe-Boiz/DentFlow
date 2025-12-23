@@ -80,7 +80,8 @@ def booking_3_view():
                         if current_user.ho_so_benh_nhan is None:
                                 ho_so_nguoi_dung = ho_so_benh_nhan_dao.add_ho_so(
                                         ho_ten=current_user.ho_ten,
-                                        so_dien_thoai=current_user.so_dien_thoai
+                                        so_dien_thoai=current_user.so_dien_thoai,
+                                        nguoi_dung_id=current_user.id
                                 )
                                 ho_so_id = ho_so_nguoi_dung.id
                                 print('Add Oke')
@@ -95,12 +96,12 @@ def booking_3_view():
                                 ghi_chu=ghi_chu
                         )
                         del session['booking_data']
-                        flash('Đặt lịch thành công!' 'booking_completed')
+                        flash('Đặt lịch thành công!','success')
                         return redirect('/')
 
                 except Exception as e:
                         print(e)
-                        flash('Lỗi: ' + str(e), 'danger')
+                        flash('Lỗi: ' + str(e), 'failed')
 
         # --- GET REQUEST: Render giao diện ---
         return render_template('booking/booking_3.html',

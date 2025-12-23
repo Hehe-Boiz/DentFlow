@@ -52,7 +52,7 @@
             <form action="/booking/choose-time-and-doctor" method="POST" id="bookingFormStep2">
                 <input type="hidden" name="doctor_id" id="selectedDoctorId" required>
                 <input type="hidden" name="doctor_name" id="selectedDoctorName" required>
-                <div id="formErrorMessage" class="alert alert-danger d-none mb-3" role="alert">
+                <div id="formErrorMessage" class="alert alert-danger d-none mb-3">
                     <i class="fas fa-exclamation-circle me-2"></i> Vui lòng chọn đầy đủ: Bác sĩ, Ngày và Giờ khám!
                 </div>
                 <div class="mb-4">
@@ -80,18 +80,16 @@
                                required>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">Giờ khám <span class="text-danger">*</span></label>
-
+                        <div class="form-label fw-bold">Giờ khám <span class="text-danger">*</span></div>
+                        <div id="noSlotMessage" class="alert alert-warning text-center small p-2 d-none">
+                            <i class="fas fa-exclamation-triangle me-1"></i> Bác sĩ đã kín lịch hoặc không có lịch vào
+                            ngày này.
+                        </div>
                         <div id="slotWaitingMessage" class="text-muted small border rounded p-3 bg-light">
                             <i class="fas fa-info-circle me-1"></i> Vui lòng chọn Bác sĩ và Ngày khám để xem lịch.
                         </div>
 
                         <div id="timeSlotContainer" class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-2 d-none">
-                        </div>
-
-                        <div id="noSlotMessage" class="alert alert-warning d-none text-center small p-2" role="alert">
-                            <i class="fas fa-exclamation-triangle me-1"></i> Bác sĩ đã kín lịch hoặc không có lịch vào
-                            ngày này.
                         </div>
                     </div>
                 </div>
