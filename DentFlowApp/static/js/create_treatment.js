@@ -1,19 +1,17 @@
+import { formatCurrency } from "./utils";
+
 const btn = document.getElementById("btn-ke-don");
 const container = document.getElementById("ke-don-container");
 let loaded = false;
 
 btn.addEventListener("click", async () => {
-    // Nếu đã load rồi thì toggle ẩn/hiện
     if (loaded) {
         container.classList.toggle("hidden");
         return;
     }
-
-    // Gọi server lấy HTML
     const res = await fetch("/treatments/ke-don");
     const html = await res.text();
 
-    // Nhét HTML vào sau button
     container.innerHTML = html;
     loaded = true;
 
@@ -28,13 +26,10 @@ const priceInput = document.getElementById('service-price');
 
 if (serviceSelect && priceInput) {
     serviceSelect.addEventListener('change', function () {
-        // Lấy option đang được chọn
         const selectedOption = this.options[this.selectedIndex];
 
-        // Lấy giá trị từ thuộc tính data-price
         const price = selectedOption.getAttribute('data-price');
 
-        // Cập nhật vào ô nhập liệu Chi phí
         priceInput.value = price || 0;
     });
 }
@@ -45,13 +40,10 @@ function inputUnit() {
 
     if (thuocSelect && unitInput) {
         thuocSelect.addEventListener('change', function () {
-            // Lấy option đang được chọn
             const selectedOption = this.options[this.selectedIndex];
-            // Lấy giá trị từ thuộc tính data-unit
             const unit = selectedOption.getAttribute('data-unit');
             console.log(unit);
 
-            // Cập nhật vào ô nhập liệu Chi phí
             unitInput.value = unit || "viên";
         });
     }
@@ -66,10 +58,7 @@ const listContainer = document.getElementById('service-list-container');
 let totalAmount = 0;
 let stt = 0;
 
-// Hàm format tiền tệ (Ví dụ: 350000 -> 350.000 đ)
-const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('vi-VN').format(amount) + ' đ';
-};
+
 
 if (btnAdd) {
     btnAdd.addEventListener('click', function () {
@@ -91,11 +80,9 @@ if (btnAdd) {
             listContainer.classList.remove('hidden');
         }
 
-        // 1. Tăng STT và cập nhật tổng tiền
         stt++;
         totalAmount += price;
 
-        // 2. Tạo hàng mới
         const row = document.createElement('tr');
         row.dataset.serviceId = serviceId
         row.className = "hover:bg-gray-50 transition-colors";
@@ -113,36 +100,29 @@ if (btnAdd) {
 
         tableBody.appendChild(row);
 
-        // 3. Cập nhật hiển thị tổng tiền
         totalDisplay.innerText = formatCurrency(totalAmount);
 
-        // 4. Xử lý sự kiện xóa hàng
         row.querySelector('.btn-delete').addEventListener('click', function () {
             const priceToRemove = parseFloat(this.getAttribute('data-price'));
             totalAmount -= priceToRemove;
 
-            // 2. Cập nhật hiển thị tổng tiền
             totalDisplay.innerText = formatCurrency(totalAmount);
 
-            // 3. Xóa hàng khỏi giao diện
             row.remove();
 
-            // 4. Đánh lại số thứ tự (STT) cho các hàng còn lại
             const rows = tableBody.querySelectorAll('tr');
-            stt = rows.length; // Cập nhật lại biến đếm stt toàn cục
+            stt = rows.length;
             rows.forEach((r, index) => {
                 r.querySelector('td:first-child').innerText = index + 1;
             });
 
-            // 5. Kiểm tra ẩn bảng nếu hết dịch vụ
             if (rows.length === 0) {
                 listContainer.classList.add('hidden');
                 stt = 0;
-                totalAmount = 0; // Đảm bảo tổng về 0
+                totalAmount = 0;
             }
         });
 
-        // 5. Reset ô nhập sau khi thêm
         serviceSelect.value = "";
         priceInput.value = 0;
         noteInput.value = "";
@@ -178,7 +158,6 @@ function checkLoThuoc() {
         const thuocId = selectThuoc.value;
         const soNgay = inputSoNgay.value;
 
-        // Reset UI states
         warningBox.classList.add('hidden');
         inputHanSuDung.value = '';
         inputHanSuDung.classList.remove('text-red-600', 'font-bold');
@@ -193,7 +172,7 @@ function checkLoThuoc() {
 
         inputHanSuDung.value = "Đang tìm kiếm...";
 
-        fetch(`/api/thuoc/${thuocId}/lo-phu-hop`, {
+        fetch(`/treatment/thuoc/${thuocId}/lo-phu-hop`, {
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({so_ngay_dung: soNgay})
@@ -201,17 +180,14 @@ function checkLoThuoc() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    // Tìm thấy lô phù hợp
                     const lo = data.data;
                     inputHanSuDung.value = `${lo.han_su_dung} (Lô: ${lo.so_lo})`;
                     inputHanSuDung.classList.remove('text-red-600');
                     inputHanSuDung.classList.add('text-green-700');
                 } else {
-                    // Không tìm thấy hoặc có cảnh báo (hết hạn, ko đủ ngày)
                     inputHanSuDung.value = "Không khả dụng";
                     inputHanSuDung.classList.add('text-red-600', 'font-bold');
 
-                    // Hiển thị warning box với nội dung từ server
                     warningText.innerText = data.message || "Không tìm thấy lô thuốc phù hợp.";
                     warningBox.classList.remove('hidden');
                 }
@@ -222,15 +198,13 @@ function checkLoThuoc() {
             });
     }
 
-    // Hàm debounce để delay gọi API
     function handleInput() {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(fetchLoThuocPhuHop, 500); // Đợi 500ms sau khi ngừng nhập
+        debounceTimer = setTimeout(fetchLoThuocPhuHop, 500);
     }
 
-    // Gán sự kiện
-    selectThuoc.addEventListener('change', fetchLoThuocPhuHop); // Gọi ngay khi đổi thuốc
-    inputSoNgay.addEventListener('input', handleInput);       // Gọi debounce khi nhập số ngày
+    selectThuoc.addEventListener('change', fetchLoThuocPhuHop);
+    inputSoNgay.addEventListener('input', handleInput);
 
 }
 
@@ -252,7 +226,6 @@ function initAddMedicineEvent() {
 }
 
 function handleAddMedicine() {
-    // 1. Lấy các Element
     const selectThuoc = document.getElementById('select-ten-thuoc');
     const inputLieuDung = document.querySelector('input[type="number"][placeholder="2"]'); // Input Liều dùng
     const inputDonVi = document.getElementById('input-don-vi');
@@ -260,10 +233,8 @@ function handleAddMedicine() {
     const selectThoiDiem = document.getElementById('select-thoi-diem');
     const inputGhiChu = document.getElementById('ghi-chu-thuoc');
 
-    // Lấy nút thời gian (Sáng/Trưa/Chiều/Tối) đang được chọn (có class bg-blue-600)
     const activeTimeBtn = document.querySelector('.time-btn.bg-blue-600');
 
-    // 2. Validate dữ liệu
     if (!selectThuoc.value) {
         alert("Vui lòng chọn tên thuốc!");
         return;
@@ -277,25 +248,21 @@ function handleAddMedicine() {
     //     return;
     // }
 
-    // 3. Tạo object thuốc
     const thuocItem = {
         id: selectThuoc.value,
         ten_thuoc: selectThuoc.options[selectThuoc.selectedIndex].text.trim(),
         lieu_dung: inputLieuDung.value,
         don_vi: inputDonVi.value,
         so_ngay: inputSoNgay.value,
-        buoi_uong: activeTimeBtn ? activeTimeBtn.innerText.trim() : '', // Mặc định Sáng nếu ko chọn
+        buoi_uong: activeTimeBtn ? activeTimeBtn.innerText.trim() : '',
         thoi_diem: selectThoiDiem.value,
         ghi_chu: inputGhiChu.value,
     };
 
-    // 4. Thêm vào mảng
     danhSachThuocKeDon.push(thuocItem);
 
-    // 5. Render lại giao diện
     renderMedicineList();
 
-    // 6. Reset form (tuỳ chọn)
     inputLieuDung.value = '';
     // inputSoNgay.value = ''; // Thường số ngày giữ nguyên thì tiện hơn
     selectThuoc.value = '';
@@ -398,13 +365,11 @@ function renderMedicineList() {
     });
 }
 
-// Hàm xóa thuốc khỏi danh sách
 function removeMedicine(index) {
-    danhSachThuocKeDon.splice(index, 1); // Xóa phần tử tại index
-    renderMedicineList(); // Vẽ lại bảng
+    danhSachThuocKeDon.splice(index, 1);
+    renderMedicineList();
 }
 
-// Lấy thông tin và gửi về server
 const btnSaveTreatment = document.getElementById('btn-save-treatment');
 btnSaveTreatment.addEventListener('click', async function () {
     const selectPatientElement = document.querySelector('select[name="patient_id"]')
@@ -412,7 +377,7 @@ btnSaveTreatment.addEventListener('click', async function () {
     console.log(patientId)
     if (!patientId) {
         alert("Vui lòng chọn lịch khám/bệnh nhân trước khi lưu!");
-        selectPatientElement.focus(); // Đưa con trỏ chuột về ô select
+        selectPatientElement.focus();
         return;
     }
 
@@ -443,7 +408,6 @@ btnSaveTreatment.addEventListener('click', async function () {
     }
 
     try {
-        // Hiệu ứng loading
         const originalText = btnSaveTreatment.innerText;
         btnSaveTreatment.innerText = "Đang xử lý...";
         btnSaveTreatment.disabled = true;

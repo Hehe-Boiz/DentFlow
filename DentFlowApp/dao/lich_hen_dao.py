@@ -1,11 +1,10 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
-
 from DentFlowApp.models import HoSoBenhNhan, LichHen, TrangThaiLichHen
-from DentFlowApp import db,app
+from DentFlowApp import db, app
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
-from sqlalchemy import or_
+from sqlalchemy import or_, extract
 from DentFlowApp.models import HoSoBenhNhan, LichHen, TrangThaiLichHen, DichVu, LichLamViec
 from DentFlowApp import db, app
 from flask_login import current_user
@@ -13,6 +12,7 @@ from DentFlowApp.dao import lichlamviec_dao
 from sqlalchemy import func
 from DentFlowApp.utils import get_monday, get_sunday
 from datetime import date
+
 
 def get_lich_hen(page=1, ho_so_benh_nhan_id=None, kw=None):
     query = LichHen.query
@@ -41,7 +41,8 @@ def get_lich_hen_theo_id(id):
 def get_lich_hen_theo_ngay_theo_bac_si(ngay, bac_si_id):
     return LichHen.query.filter(LichHen.bac_si_id == bac_si_id, LichHen.ngay_dat == ngay).all()
 
-def add_lich_hen(ho_so_benh_nhan_id, bac_si_id, dich_vu_id,ngay_dat,gio_kham,ghi_chu):
+
+def add_lich_hen(ho_so_benh_nhan_id, bac_si_id, dich_vu_id, ngay_dat, gio_kham, ghi_chu):
     lich_hen_moi = LichHen(
         ho_so_benh_nhan_id=ho_so_benh_nhan_id,
         bac_si_id=bac_si_id,
@@ -56,6 +57,7 @@ def add_lich_hen(ho_so_benh_nhan_id, bac_si_id, dich_vu_id,ngay_dat,gio_kham,ghi
     except IntegrityError:
         db.session.rollback()
         raise Exception('Có lỗi xảy ra')
+
 
 def del_lich_hen(lich_hen_id):
     lich_hen = get_lich_hen_theo_id(lich_hen_id)
@@ -184,11 +186,27 @@ def get_tong_lich_hen_in_tuan_by_bac_si(bacsi_id):
         LichHen.bac_si_id == bacsi_id,
         LichHen.ngay_dat >= start_date,
         LichHen.ngay_dat <= end_date,
-        or_(
-            LichHen.trang_thai == TrangThaiLichHen.CHO_KHAM,
-            LichHen.trang_thai == TrangThaiLichHen.DAT_LICH_THANH_CONG,
-        )
+        # or_(
+        #     LichHen.trang_thai == TrangThaiLichHen.CHO_KHAM,
+        #     LichHen.trang_thai == TrangThaiLichHen.DAT_LICH_THANH_CONG,
+        # )
     )
 
     return benh_nhan
 
+
+def get_lich_hen_by_bac_si_and_slot(bacsi_id, ngay_dat, gio_h):
+    lich_hen = (LichHen.query
+                .options(
+        joinedload(LichHen.ho_so_benh_nhan),
+        joinedload(LichHen.dich_vu)
+    )
+                .filter(
+        LichHen.bac_si_id == bacsi_id,
+        LichHen.ngay_dat == ngay_dat,
+        extract('hour', LichHen.gio_kham) == gio_h,
+    )
+                .order_by(LichHen.gio_kham.asc())
+                .all()
+                )
+    return lich_hen
