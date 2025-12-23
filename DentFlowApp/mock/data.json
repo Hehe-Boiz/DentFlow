@@ -745,7 +745,14 @@
         "Cạo vôi răng"
       ],
       "trang_thai_thanh_toan": "DA_THANH_TOAN",
-      "phuong_thuc_thanh_toan": "TIEN_MAT"
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Listerine Cool Mint",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng 2 lần/ngày sau khi đánh răng"
+        }
+      ]
     },
     {
       "benh_nhan_sdt": "0987654321",
@@ -793,7 +800,19 @@
         "Điều trị tủy"
       ],
       "trang_thai_thanh_toan": "DA_THANH_TOAN",
-      "phuong_thuc_thanh_toan": "TIEN_MAT"
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau, cách nhau tối thiểu 4-6 tiếng"
+        },
+        {
+          "ten_thuoc": "Amoxicillin 500mg",
+          "so_luong": 15,
+          "huong_dan": "Sáng 1 viên, Chiều 1 viên, Tối 1 viên sau ăn"
+        }
+      ]
     },
     {
       "benh_nhan_sdt": "0966778899",
@@ -817,7 +836,19 @@
         "Nhổ răng"
       ],
       "trang_thai_thanh_toan": "DA_THANH_TOAN",
-      "phuong_thuc_thanh_toan": "TIEN_MAT"
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 6,
+          "huong_dan": "Uống khi đau, không quá 4 viên/ngày"
+        },
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 6,
+          "huong_dan": "Uống 1 viên sau ăn trưa, 1 viên sau ăn tối (chống viêm)"
+        }
+      ]
     },
     {
       "benh_nhan_sdt": "0922334455",
@@ -855,7 +886,19 @@
         "Cạo vôi răng"
       ],
       "trang_thai_thanh_toan": "DA_THANH_TOAN",
-      "phuong_thuc_thanh_toan": "TIEN_MAT"
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Vitamin C 500mg",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên sau ăn"
+        },
+        {
+          "ten_thuoc": "Chlorhexidine 0.12% (súc miệng)",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng sáng, tối. Không được uống"
+        }
+      ]
     },
     {
       "benh_nhan_sdt": "0933445577",
@@ -879,7 +922,19 @@
         "Điều trị tủy"
       ],
       "trang_thai_thanh_toan": "DA_THANH_TOAN",
-      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống khi đau"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 14,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (Kháng sinh)"
+        }
+      ]
     },
     {
       "benh_nhan_sdt": "0955667799",
@@ -904,7 +959,14 @@
         "Nhổ răng"
       ],
       "trang_thai_thanh_toan": "DA_THANH_TOAN",
-      "phuong_thuc_thanh_toan": "TIEN_MAT"
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 5,
+          "huong_dan": "Uống khi đau"
+        }
+      ]
     },
     {
       "benh_nhan_sdt": "0977889911",
@@ -944,7 +1006,19 @@
         "Trám răng"
       ],
       "trang_thai_thanh_toan": "DA_THANH_TOAN",
-      "phuong_thuc_thanh_toan": "TIEN_MAT"
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống khi đau"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 20,
+          "huong_dan": "Sáng 2 viên, Tối 2 viên (chống nhiễm trùng răng miệng)"
+        }
+      ]
     },
     {
       "benh_nhan_sdt": "0987654321",
@@ -1002,7 +1076,24 @@
       "dich_vu_su_dung": [
         "Điều trị tủy"
       ],
-      "trang_thai_thanh_toan": "CHUA_THANH_TOAN"
+      "trang_thai_thanh_toan": "CHUA_THANH_TOAN",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau dữ dội"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên"
+        }
+      ]
     },
     {
       "benh_nhan_sdt": "0966778899",
@@ -1036,7 +1127,29 @@
       "dich_vu_su_dung": [
         "Nhổ răng"
       ],
-      "trang_thai_thanh_toan": "CHUA_THANH_TOAN"
+      "trang_thai_thanh_toan": "CHUA_THANH_TOAN",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên sau ăn (giảm sưng)"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 14,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (uống hết liều)"
+        },
+        {
+          "ten_thuoc": "Medrol 4mg",
+          "so_luong": 5,
+          "huong_dan": "Uống 1 lần vào buổi sáng sau ăn (kháng viêm mạnh)"
+        }
+      ]
     }
   ]
 }
