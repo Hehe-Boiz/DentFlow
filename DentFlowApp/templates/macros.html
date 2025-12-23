@@ -15,7 +15,6 @@
     </div>
 {% endmacro %}
 {% macro service_header(url) %}
-
     <div class="booking-header">
         <div class="container d-flex justify-content-between align-items-center">
             <a href="{{ url }}" class="btn-back">
@@ -25,6 +24,32 @@
                 <i class="fas fa-tooth"></i> DENTALFLOW
             </div>
             <div style="width: 80px;"></div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro hero_in_role(sub_text, time_now, class_name) %}
+    <div class="{{ class_name }} text-white">
+        <div class="container mx-auto px-4 py-8 md:py-12">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h2 class="text-2xl md:text-3xl mb-2">
+                        {{ sub_text }}
+                    </h2>
+                </div>
+
+                <div class="mt-4 md:mt-0 flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3">
+                    <!-- icon clock -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round"
+                         class="lucide lucide-clock w-5 h-5" aria-hidden="true">
+                        <path d="M12 6v6l4 2"></path>
+                        <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                    <span>{{ time_now }}</span>
+                </div>
+            </div>
         </div>
     </div>
 {% endmacro %}
