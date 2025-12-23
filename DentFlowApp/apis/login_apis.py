@@ -37,6 +37,7 @@ def login_process():
 
     next = request.args.get('next')
     print(next)
+    flash("Đăng nhập thành công", 'success')
     return redirect(next if next else '/')
 
 @app.route('/register', methods=['post'])
@@ -44,27 +45,38 @@ def register_process():
     data = request.form
     password = data.get('password')
     confirm = data.get('confirm')
-    if password != confirm:
-        err_msg = 'Mật khẩu không khớp!'
+    ho_ten = data.get('name')
+    so_dien_thoai = data.get('phone')
+    avatar = request.files.get('avatar')
+    is_valid, error_msg = utils.validate_thong_tin_benh_nhan(ho_ten=ho_ten, sdt=so_dien_thoai,
+                                                             password=password,
+                                                             confirm_password=confirm)
+    if not is_valid:
         prev_info = {
             'username': data.get('username'),
-            'name': data.get('name'),
-            'phone': data.get('phone'),
+            'name': ho_ten,
+            'phone': so_dien_thoai,
+            'password': password,
+            'confirm': confirm,
         }
-        return render_template('register.html', err_msg=err_msg, prev_info=prev_info)
+        flash(error_msg, 'failed')
+        return render_template('register.html', prev_info=prev_info)
 
     try:
-        user_dao.add_user(ho_ten=data.get('name'), so_dien_thoai=data.get('phone'), username=data.get('username'), password=password, avatar=request.files.get('avatar'))
+        user_dao.add_user(ho_ten=ho_ten, so_dien_thoai=so_dien_thoai, username=data.get('username'), password=password, avatar=avatar)
         u = user_dao.auth_user(username=data.get('username'), password=password)
         if u:
             login_user(user=u)
             session['can_do'] = utils.user_can_do(u)
+        flash("Đăng ký người dùng thành công", 'failed')
         return redirect('/')
     except IntegrityError as e:
         db.session.rollback()
-        return render_template('register.html', err_msg="Tên người dùng hiện tại đã trùng")
+        flash("Tên người dùng hiện tại đã trùng", 'failed')
+        return render_template('register.html')
     except Exception as ex:
-        return render_template('register.html', err_msg=str(ex))
+        flash(str(ex), 'failed')
+        return render_template('register.html')
 
 
 @app.route('/logout')

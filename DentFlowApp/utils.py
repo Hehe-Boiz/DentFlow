@@ -148,7 +148,7 @@ class CalculationUtils:
         }
 
 
-def validate_thong_tin_benh_nhan(ho_ten, sdt, email=None):
+def validate_thong_tin_benh_nhan(ho_ten, sdt, email=None, password=None, confirm_password=None):
     ho_ten = ho_ten.strip() if ho_ten else ""
     sdt = sdt.strip() if sdt else ""
     email = email.strip() if email else ""
@@ -165,6 +165,15 @@ def validate_thong_tin_benh_nhan(ho_ten, sdt, email=None):
     if email:
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
             return False, "Email không đúng định dạng."
+    if password:
+        if len(password) < 6:
+            return False, "Mật khẩu phải có ít nhất 6 ký tự."
+
+        if ' ' in password:
+            return False, "Mật khẩu không được chứa khoảng trắng."
+
+        if confirm_password is not None and password != confirm_password:
+            return False, "Mật khẩu xác nhận không khớp."
 
     return True, None
 

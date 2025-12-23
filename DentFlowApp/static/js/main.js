@@ -66,5 +66,25 @@ alerts.forEach(function(alert) {
         // Dùng Bootstrap API để tắt mượt mà
         let bsAlert = new bootstrap.Alert(alert);
         bsAlert.close();
-    }, 4000);
+    }, 5000);
 });
+
+
+//Ẩn hiện mật khẩu password
+const toggleBtn = document.querySelectorAll('.btn-toggle-password');
+toggleBtn.forEach(button => {
+    button.addEventListener('click', function () {
+            let passwordInput = document.querySelector(this.getAttribute('data-target'));
+            let icon = this.querySelector('i');
+            let type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            if (type === 'text') {
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+})

@@ -24,6 +24,9 @@
 {% endblock %}
 
 <section class="container mx-auto px-4 py-6 flex-fill md:py-8">
+    {% block alert %}
+    {% include 'layout/alert.html' %}
+    {% endblock %}
     {% block content required %}
     {% endblock %}
 </section>
