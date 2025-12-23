@@ -45,7 +45,7 @@ def get_available_slots():
         thoi_gian_da_dat = [ lh.gio_kham.strftime('%H:%M') for lh in lich_hen_da_dat ]
         thoi_gian_trong = []
         if len(thoi_gian_da_dat) >= 5:
-            return jsonify({'status': 'success', 'data': thoi_gian_trong}), http.HTTPStatus.OK
+            return jsonify({'status': 'success', 'data': thoi_gian_trong}), 200
         thoi_gian_hien_co = {}
         # thoi_gian_bat_dau = []
         # thoi_gian_ket_thuc = []
@@ -58,7 +58,7 @@ def get_available_slots():
             index += 1
             # thoi_gian_bat_dau.append(lich.gio_bat_dau.strftime('%H:%M'))
             # thoi_gian_ket_thuc.append(lich.gio_ket_thuc.strftime('%H:%M'))
-
+        print(thoi_gian_hien_co)
         hom_nay = datetime.now()
         ngay_hom_nay = hom_nay.strftime("%Y-%m-%d")
         thoi_gian_hom_nay = hom_nay.strftime("%H:%M")
@@ -84,6 +84,6 @@ def get_available_slots():
                 thoi_gian_hien_tai += timedelta(minutes=30)
         print(thoi_gian_da_dat)
         print(thoi_gian_trong)
-        return jsonify({'status':'success', 'data': thoi_gian_trong}),http.HTTPStatus.OK
+        return jsonify({'status':'success', 'data': thoi_gian_trong}), 200
     except Exception as ex:
-        return jsonify({'status': 'error', 'msg': 'err'})
+        return jsonify({'status': 'error', 'msg': 'err'}),500

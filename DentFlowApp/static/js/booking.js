@@ -1,7 +1,15 @@
 const dateInput = document.getElementById('bookingDate');
+// Thiết lập ngày tối thiểu là hôm nay
+const today = new Date().toISOString().split('T')[0];
+dateInput.setAttribute('min', today);
+
 const doctorInput = document.getElementById('selectedDoctorId');
 const btnContinue = document.getElementById('btnContinueStep2');
 
+//Thẻ giờ khám
+const slotContainer = document.getElementById('timeSlotContainer');
+const waitingMsg = document.getElementById('slotWaitingMessage');
+const noSlotMsg = document.getElementById('noSlotMessage');
 
 function selectService(element, id, name) {
 
@@ -43,7 +51,7 @@ function getAvailableTimeSlots(id, day) {
     }).then(res => res.json())
       .then(data => {
         renderSlots(data.data)
-    }).catch(err => console.err('Lỗi load thời gian', err));
+    }).catch(err => console.log(err));
 }
 
 function layDanhSach(){
@@ -51,6 +59,13 @@ function layDanhSach(){
         console.log(doctorInput.value)
         getAvailableTimeSlots(doctorInput.value, dateInput.value)
     }else{
+        if (!slotContainer.classList.contains('d-none')){
+            slotContainer.classList.add('d-none')
+        }
+        if (!noSlotMessage.classList.contains('d-none')){
+            noSlotMsg.classList.add('d-none')
+        }
+        waitingMsg.classList.remove('d-none')
         console.log('nothing happen')
     }
 }
@@ -60,22 +75,18 @@ dateInput.addEventListener('change', function(){
 });
 
 function renderSlots(slots) {
-    const slotContainer = document.getElementById('timeSlotContainer');
-    const waitingMsg = document.getElementById('slotWaitingMessage');
-    const noSlotMsg = document.getElementById('noSlotMessage');
-
     // Xóa nội dung cũ
     slotContainer.innerHTML = '';
 
+
     if (slots.length === 0) {
-        // Trường hợp kín lịch
-        waitingMsg.classList.add('d-none');
-        slotContainer.classList.add('d-none');
+        waitingMsg.classList.add('d-none')
+        slotContainer.classList.add('d-none')
         noSlotMsg.classList.remove('d-none');
     } else {
+        waitingMsg.classList.add('d-none')
+        noSlotMsg.classList.add('d-none')
         // Trường hợp có lịch -> Hiển thị Container
-        waitingMsg.classList.add('d-none');
-        noSlotMsg.classList.add('d-none');
         slotContainer.classList.remove('d-none');
 
         // Vòng lặp tạo nút
@@ -125,6 +136,3 @@ function checkFormValidity() {
 }
 
 
-// Thiết lập ngày tối thiểu là hôm nay
-const today = new Date().toISOString().split('T')[0];
-dateInput.setAttribute('min', today);
