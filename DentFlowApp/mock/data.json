@@ -496,6 +496,139 @@
       "gio_bat_dau": "13:00:00",
       "gio_ket_thuc": "21:00:00",
       "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-27",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-27",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-27",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-28",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-28",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-28",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-29",
+      "gio_bat_dau": "08:15:00",
+      "gio_ket_thuc": "12:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-29",
+      "gio_bat_dau": "13:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-29",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "12:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-30",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-30",
+      "gio_bat_dau": "13:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-30",
+      "gio_bat_dau": "08:10:00",
+      "gio_ket_thuc": "11:45:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-31",
+      "gio_bat_dau": "13:15:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-01-01",
+      "gio_bat_dau": "08:45:00",
+      "gio_ket_thuc": "10:30:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-02-02",
+      "gio_bat_dau": "16:00:00",
+      "gio_ket_thuc": "20:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2026-01-03",
+      "gio_bat_dau": "10:00:00",
+      "gio_ket_thuc": "13:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2026-01-04",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "09:30:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2026-01-05",
+      "gio_bat_dau": "10:00:00",
+      "gio_ket_thuc": "12:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2026-01-06",
+      "gio_bat_dau": "14:00:00",
+      "gio_ket_thuc": "17:30:00",
+      "trang_thai": "SAN_SANG"
     }
   ],
   "appointments": [
@@ -590,7 +723,7 @@
       "ghi_chu": "Sâu răng cửa"
     },
     {
-      "ngay_dat": "2025-12-21",
+      "ngay_dat": "2025-12-22",
       "gio_kham": "09:30",
       "benh_nhan_sdt": "0933445577",
       "bac_si_id": "BS001",

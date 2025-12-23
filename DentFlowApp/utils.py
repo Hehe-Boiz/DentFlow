@@ -184,3 +184,7 @@ def get_monday(d: date) -> date:
 
 def get_sunday(monday: date) -> date:
     return monday + timedelta(days=6)
+
+
+def get_week_dates(monday: date):
+    return [monday + timedelta(days=i) for i in range(7)]
