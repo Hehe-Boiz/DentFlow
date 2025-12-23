@@ -4,6 +4,8 @@ from DentFlowApp import db
 from flask_login import current_user
 from DentFlowApp.admin import admin
 from DentFlowApp.dao import thuoc_dao
+from datetime import date, datetime, timedelta
+
 import re
 
 
@@ -165,3 +167,11 @@ def validate_thong_tin_benh_nhan(ho_ten, sdt, email=None):
             return False, "Email không đúng định dạng."
 
     return True, None
+
+def get_monday(d: date) -> date:
+    # Thứ 2 = 0, CN = 6
+    return d - timedelta(days=d.weekday())
+
+
+def get_sunday(monday: date) -> date:
+    return monday + timedelta(days=6)

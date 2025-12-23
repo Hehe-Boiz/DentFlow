@@ -6,11 +6,13 @@ from DentFlowApp import db,app
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 from sqlalchemy import or_
-from DentFlowApp.models import HoSoBenhNhan, LichHen, TrangThaiLichHen, DichVu
+from DentFlowApp.models import HoSoBenhNhan, LichHen, TrangThaiLichHen, DichVu, LichLamViec
 from DentFlowApp import db, app
 from flask_login import current_user
 from DentFlowApp.dao import lichlamviec_dao
 from sqlalchemy import func
+from DentFlowApp.utils import get_monday, get_sunday
+from datetime import date
 
 def get_lich_hen(page=1, ho_so_benh_nhan_id=None, kw=None):
     query = LichHen.query
@@ -27,12 +29,14 @@ def get_lich_hen(page=1, ho_so_benh_nhan_id=None, kw=None):
         query = query.slice(start, start + app.config['PAGE_SIZE'])
     return query.all()
 
+
 def get_tong_lich_hen():
     return LichHen.query.count()
 
 
 def get_lich_hen_theo_id(id):
     return LichHen.query.get(id)
+
 
 def get_lich_hen_theo_ngay_theo_bac_si(ngay, bac_si_id):
     return LichHen.query.filter(LichHen.bac_si_id == bac_si_id, LichHen.ngay_dat == ngay).all()
@@ -65,6 +69,7 @@ def del_lich_hen(lich_hen_id):
     except Exception as ex:
         db.session.rollback()
         raise Exception(str(ex))
+
 
 def get_lich_hen_theo_bac_si_today_date_time(bacsi_id):
     # print(bacsi_id)
@@ -136,7 +141,7 @@ def get_lich_hen_theo_bac_si_today_time(bacsi_id):
 
 def get_lich_hen_da_kham_theo_bac_si():
     bacsi_id = current_user.bac_si.ma_bac_si
-    lich_bac_si = lichlamviec_dao.get_lich_by_bac_si_id(bacsi_id)
+    lich_bac_si = lichlamviec_dao.get_lich_truc_hom_nay(bacsi_id)
     benh_nhan = (
         db.session.query(HoSoBenhNhan.id, HoSoBenhNhan.ho_ten)
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id)
@@ -155,7 +160,7 @@ def get_lich_hen_da_kham_theo_bac_si():
 
 def get_tong_lich_hen_theo_bac_si():
     bacsi_id = current_user.bac_si.ma_bac_si
-    lich_bac_si = lichlamviec_dao.get_lich_by_bac_si_id(bacsi_id)
+    lich_bac_si = lichlamviec_dao.get_lich_truc_hom_nay(bacsi_id)
     benh_nhan = (
         db.session.query(HoSoBenhNhan.id, HoSoBenhNhan.ho_ten)
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id)
@@ -166,6 +171,23 @@ def get_tong_lich_hen_theo_bac_si():
         )
         .distinct()  # phòng trường hợp 1 bệnh nhân có nhiều lịch trong khung giờ
         .all()
+    )
+
+    return benh_nhan
+
+
+def get_tong_lich_hen_in_tuan_by_bac_si(bacsi_id):
+    today = date.today()
+    start_date = get_monday(today)
+    end_date = get_sunday(today)
+    benh_nhan = LichHen.query.filter(
+        LichHen.bac_si_id == bacsi_id,
+        LichHen.ngay_dat >= start_date,
+        LichHen.ngay_dat <= end_date,
+        or_(
+            LichHen.trang_thai == TrangThaiLichHen.CHO_KHAM,
+            LichHen.trang_thai == TrangThaiLichHen.DAT_LICH_THANH_CONG,
+        )
     )
 
     return benh_nhan
