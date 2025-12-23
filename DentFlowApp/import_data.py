@@ -114,7 +114,7 @@ def import_json_data():
     print("4. Đang import Thuốc...")
     for m in data.get('medicines', []):
         don_vi_enum = getattr(DonViThuoc, m['don_vi'])
-        thuoc = Thuoc(ten_thuoc=m['ten_thuoc'], don_vi=don_vi_enum)
+        thuoc = Thuoc(ten_thuoc=m['ten_thuoc'], don_vi=don_vi_enum, don_gia=m['don_gia'])
         db.session.add(thuoc)
         db.session.flush()
 

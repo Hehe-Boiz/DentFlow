@@ -198,6 +198,7 @@
     {
       "ten_thuoc": "Paracetamol 500mg",
       "don_vi": "VIEN",
+      "don_gia": 1000,
       "batches": [
         {
           "han_dung_ngay": 365,
@@ -212,6 +213,7 @@
     {
       "ten_thuoc": "Amoxicillin 500mg",
       "don_vi": "VIEN",
+      "don_gia": 2500,
       "batches": [
         {
           "han_dung_ngay": 700,
@@ -226,6 +228,7 @@
     {
       "ten_thuoc": "Ibuprofen 400mg",
       "don_vi": "VIEN",
+      "don_gia": 3000,
       "batches": [
         {
           "han_dung_ngay": 540,
@@ -236,6 +239,7 @@
     {
       "ten_thuoc": "Augmentin 625mg",
       "don_vi": "VIEN",
+      "don_gia": 22000,
       "batches": [
         {
           "han_dung_ngay": 500,
@@ -246,6 +250,7 @@
     {
       "ten_thuoc": "Chlorhexidine 0.12% (súc miệng)",
       "don_vi": "CHAI",
+      "don_gia": 75000,
       "batches": [
         {
           "han_dung_ngay": 365,
@@ -260,6 +265,7 @@
     {
       "ten_thuoc": "Vitamin C 500mg",
       "don_vi": "VI",
+      "don_gia": 2000,
       "batches": [
         {
           "han_dung_ngay": 900,
@@ -270,6 +276,7 @@
     {
       "ten_thuoc": "Listerine Cool Mint",
       "don_vi": "CHAI",
+      "don_gia": 110000,
       "batches": [
         {
           "han_dung_ngay": 720,
@@ -280,6 +287,7 @@
     {
       "ten_thuoc": "Rodogyl",
       "don_vi": "VI",
+      "don_gia": 5000,
       "batches": [
         {
           "han_dung_ngay": 300,
@@ -290,6 +298,7 @@
     {
       "ten_thuoc": "Medrol 4mg",
       "don_vi": "VIEN",
+      "don_gia": 2000,
       "batches": [
         {
           "han_dung_ngay": 600,
