@@ -88,7 +88,8 @@ def manager_statistics_view():
 @manager_required
 def manager_statistics_doctors_view():
     try:
-        thong_ke_bs = get_doanh_thu_bac_si_trong_thang()
+        select_monthly = request.args.get('month', type=int)
+        thong_ke_bs = get_doanh_thu_bac_si_trong_thang(select_monthly)
 
         data = list()
         data_daily = {}

@@ -165,14 +165,19 @@ async function fetchMonthly() {
     }
 }
 
-async function fetchDoctors() {
-    const respone = await fetch('/manager/statistics/doctors')
-    const result = await respone.json()
-    if (result.status !== 'success') {
-        console.error("Lỗi dữ liệu:", result);
-    } else {
-        console.log('Data daily', result.data_daily)
-        return result
+async function fetchDoctors(month) {
+    try {
+        const response = await fetch(`/manager/statistics/doctors?month=${month}`);
+        const result = await response.json()
+        if (result.status !== 'success') {
+            console.error("Lỗi dữ liệu:", result);
+        } else {
+            console.log('Data daily', result.data_daily)
+            return result
+        }
+    } catch (error) {
+        console.error('Lỗi hệ thống:', error);
+        return 0;
     }
 }
 

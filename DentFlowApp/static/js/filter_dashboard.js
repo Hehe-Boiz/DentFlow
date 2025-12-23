@@ -135,10 +135,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             const doanh_thu = await fetchDoanhThuTheoThang(month);
             spanMonth.textContent = month
             console.log(doanh_thu)
+            spanDoanhThu.textContent = formatCurrency(0)
             if (doanh_thu) {
                 spanDoanhThu.textContent = formatCurrency(doanh_thu)
             }
-            const resultDoctors = await fetchDoctors()
+
+            const resultDoctors = await fetchDoctors(monthSelect.value)
             if (resultDoctors && resultDoctors.data_daily) {
                 cachedDoctorData.daily = resultDoctors.data_daily
                 bacsiSelect.value = "0"
@@ -158,6 +160,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (selectedBacSi !== "0") {
             if (cachedDoctorData.daily && cachedDoctorData.daily[selectedBacSi]) {
                 const doctorData = cachedDoctorData.daily[selectedBacSi];
+                console.log(monthSelect.value)
                 renderMonthlyChart(doctorData, 'monthly-chart', monthSelect.value)
             }
         } else {
