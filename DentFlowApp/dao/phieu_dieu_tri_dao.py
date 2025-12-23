@@ -4,7 +4,6 @@ from datetime import date
 from sqlalchemy.exc import IntegrityError
 
 
-
 def add_phieu_dieu_tri(patient_id, chan_doan, ghi_chu, bac_si_id):
     phieu_dieu_tri = PhieuDieuTri(
         patient_id=patient_id,
@@ -31,3 +30,7 @@ def add_phieu_dieu_tri_flush(patient_id, chan_doan, ghi_chu, bac_si_id):
     db.session.flush()
 
     return phieu_dieu_tri
+
+
+def get_phieu_dieu_tri_by_ma_bacsi(ma_bacsi):
+    query = PhieuDieuTri.query.filter_by(PhieuDieuTri.ma_bacsi == ma_bacsi).all()

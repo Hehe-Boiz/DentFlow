@@ -738,6 +738,275 @@
     {
       "benh_nhan_sdt": "0912345678",
       "bac_si_id": "BS001",
+      "ngay_tao": "2025-06-02 08:30:00",
+      "chan_doan": "Vôi răng độ 1",
+      "ghi_chu": "Vệ sinh định kỳ",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Listerine Cool Mint",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng hằng ngày"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-06-05 10:15:00",
+      "chan_doan": "Sâu răng R36, R37",
+      "ghi_chu": "Trám composite 2 xoang",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-06-10 14:00:00",
+      "chan_doan": "Viêm tủy không hồi phục R46",
+      "ghi_chu": "Điều trị nội nha xong",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 14,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (uống hết liều)"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-06-15 09:30:00",
+      "chan_doan": "Răng khấp khểnh, lệch lạc",
+      "ghi_chu": "Gắn mắc cài hàm trên",
+      "dich_vu_su_dung": [
+        "Niềng răng mắc cài"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 10,
+          "huong_dan": "Uống khi thấy ê buốt nhiều"
+        },
+        {
+          "ten_thuoc": "Chlorhexidine 0.12% (súc miệng)",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng kỹ để tránh viêm nướu"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-06-20 16:00:00",
+      "chan_doan": "Răng ố vàng, muốn thẩm mỹ",
+      "ghi_chu": "Tẩy trắng tại phòng khám",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-06-25 08:45:00",
+      "chan_doan": "Răng khôn R48 mọc lệch má",
+      "ghi_chu": "Tiểu phẫu nhổ răng khôn",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 14,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (chống nhiễm trùng)"
+        },
+        {
+          "ten_thuoc": "Medrol 4mg",
+          "so_luong": 3,
+          "huong_dan": "Uống 1 viên vào buổi sáng sau ăn (giảm sưng)"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-06-29 15:30:00",
+      "chan_doan": "Mất răng R24",
+      "ghi_chu": "Làm cầu răng sứ 3 đơn vị",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-07-05 08:30:00",
+      "chan_doan": "Vôi răng dưới nướu, viêm nướu nhẹ",
+      "ghi_chu": "Dặn bệnh nhân dùng chỉ nha khoa",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Listerine Cool Mint",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng sáng tối để giảm viêm nướu"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-07-08 14:15:00",
+      "chan_doan": "Viêm tủy cấp R46 do sâu răng lâu ngày",
+      "ghi_chu": "Đau dữ dội, đã mở tủy giảm áp",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau quá sức chịu đựng"
+        },
+        {
+          "ten_thuoc": "Amoxicillin 500mg",
+          "so_luong": 15,
+          "huong_dan": "Sáng 1 viên, Trưa 1 viên, Tối 1 viên (Kháng sinh)"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên sau ăn"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-07-12 09:00:00",
+      "chan_doan": "Thẩm mỹ răng cửa hàm trên",
+      "ghi_chu": "Làm 2 răng sứ Cercon",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-07-15 16:30:00",
+      "chan_doan": "Sâu răng R36 mặt nhai",
+      "ghi_chu": "Trám Composite",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-07-20 10:00:00",
+      "chan_doan": "Răng chen chúc, hô hàm trên",
+      "ghi_chu": "Thanh toán trọn gói niềng răng",
+      "dich_vu_su_dung": [
+        "Niềng răng mắc cài"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên sau ăn khi cảm thấy ê buốt do siết răng"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-07-25 08:00:00",
+      "chan_doan": "Răng số 8 mọc ngầm 45 độ",
+      "ghi_chu": "Tiểu phẫu",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (uống hết liều)"
+        },
+        {
+          "ten_thuoc": "Medrol 4mg",
+          "so_luong": 5,
+          "huong_dan": "Uống 1 lần vào buổi sáng sau ăn để giảm sưng tấy"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0922334455",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-07-28 15:45:00",
+      "chan_doan": "Mòn cổ chân răng R24, R25",
+      "ghi_chu": "Trám cổ răng",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
       "ngay_tao": "2025-12-01 08:30:00",
       "chan_doan": "Vôi răng bám nhiều",
       "ghi_chu": "Vệ sinh kỹ",

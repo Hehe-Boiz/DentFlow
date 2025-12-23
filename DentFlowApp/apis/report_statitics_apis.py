@@ -1,15 +1,16 @@
 # FOR ROLE MANAGER
-
 from DentFlowApp import app
 from flask import render_template, jsonify, request
 
+from DentFlowApp.dao.bacsi_dao import get_doctors
 from DentFlowApp.dao.hoadon_dao import get_ds_hoa_don_trong_thang, get_soluong_hoa_don_trong_thang, \
     get_tong_doanh_thu_trong_thang, get_trung_binh_doanh_thu_trong_thang, get_doanh_thu_trong_ngay, \
-    get_doanh_thu_bac_si_trong_thang
+    get_doanh_thu_bac_si_trong_thang, get_ds_hoa_don_trong_nam_ngay_gan_day, get_doanh_thu_trong_nam_ngay_gan_day
 from DentFlowApp.dao.nhanvien_dao import get_ds_nhan_vien
-from DentFlowApp.dao.thungan_dao import get_ds_phieu_dieu_tri_da_thanh_toan
 from DentFlowApp.decorators import manager_required
 import datetime
+
+from DentFlowApp.models import PhieuDieuTri
 
 
 def format_vnd(value):
@@ -22,7 +23,9 @@ def format_vnd(value):
 @manager_required
 def manager_view():
     ds_hoadon = get_ds_hoa_don_trong_thang()
+    now = datetime.datetime.now().strftime('%Y-%m-%d')
     active_tab = request.args.get('tab', 'thong-ke')
+    ds_bacsi = get_doctors()
     cards = [
         {
             'title': 'Doanh thu hôm nay',
@@ -56,14 +59,17 @@ def manager_view():
         },
     ]
 
-    return render_template('manager/manager.html', active_tab=active_tab, quanly=True, ds_hoadon=ds_hoadon, cards=cards)
+    return render_template('manager/trang_quanly.html', active_tab=active_tab, quanly=True, ds_hoadon=ds_hoadon,
+                           cards=cards, now=now, ds_bacsi=ds_bacsi)
 
 
 @app.route('/manager/statistics/monthly', methods=['GET'])
 @manager_required
 def manager_statistics_view():
     try:
-        ds_hoadon = get_ds_hoa_don_trong_thang()
+        select_monthly = request.args.get('month', type=int)
+        ds_hoadon = get_ds_hoa_don_trong_thang(thang_nay=select_monthly)
+
         data = list()
         for hoa_don in ds_hoadon:
             data.append({
@@ -83,17 +89,32 @@ def manager_statistics_view():
 def manager_statistics_doctors_view():
     try:
         thong_ke_bs = get_doanh_thu_bac_si_trong_thang()
+
         data = list()
-        for ten_bac_si, so_lieu in thong_ke_bs.items():
+        data_daily = {}
+
+        for ma_bac_si, so_lieu in thong_ke_bs.items():
+            tong_quat = so_lieu['tong_quat']
+            chi_tiet = so_lieu['chi_tiet']
             data.append({
-                'ten_bac_si': ten_bac_si,
-                'tong_doanh_thu': so_lieu['tong_doanh_thu'],
-                'so_luot_kham': so_lieu['so_luot_kham'],
-                'trung_binh_kham': so_lieu['trung_binh_kham'],
+                'ten_bac_si': tong_quat['ten_bac_si'],
+                'ma_bac_si': ma_bac_si,
+                'tong_doanh_thu': tong_quat['tong_doanh_thu'],
+                'so_luot_kham': tong_quat['so_luot_kham'],
+                'trung_binh_kham': tong_quat['trung_binh_kham'],
             })
+            chi_tiet_list = list()
+            for ngay_thanh_toan, tong_tien in chi_tiet.items():
+                chi_tiet_list.append({
+                    'ngay_thanh_toan': ngay_thanh_toan,
+                    'tong_tien': tong_tien
+                })
+
+            data_daily[ma_bac_si] = chi_tiet_list
         return jsonify({
             'status': 'success',
-            'data': data
+            'data': data,
+            'data_daily': data_daily
         }), 200
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 403
@@ -116,3 +137,21 @@ def manage_nhanvien_view():
         return jsonify({'status': 'success', 'data': data}), 200
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 403
+
+
+@app.route('/manager/statistics/daily-recently', methods=['GET'])
+@manager_required
+def manager_statistics_daily_recently():
+    try:
+        so_lieu = get_doanh_thu_trong_nam_ngay_gan_day()
+        data = list()
+        for ngay_thanh_toan, doanh_thu in so_lieu.items():
+            data.append({
+                'ngay_thanh_toan': ngay_thanh_toan,
+                'doanh_thu': doanh_thu,
+            })
+        return jsonify({'status': 'success', 'data': data}), 200
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 403
+
+# @app.route

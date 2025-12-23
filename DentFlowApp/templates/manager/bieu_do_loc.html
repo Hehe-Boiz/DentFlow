@@ -1,0 +1,48 @@
+<div class="card rounded-xl mt-4 shadow-lg">
+    <ul class="list-group  list-group-flush ">
+        <li class="list-group-item ">
+            <div class="p-2">
+                <h5 class="text-primary"><i class="fas fa-filter"></i>
+                    Lọc và tìm kiếm</h5>
+                <p class="text-muted">Chi tiết doanh thu từng bác sĩ</p>
+            </div>
+        </li>
+        <li class="list-group-item p-0">
+            <div class="card p-0 border-0">
+                <div class="card-body">
+                    <div class="row gap-3">
+                        <div class="col-md-12 col-lg-3" id="div_theo_bacsi">
+                            <h6 class="text-muted  ">Chọn theo bác sĩ</h6>
+                            <select class="form-select" id="select-bacsi" aria-label="-- Chọn bác sĩ --">
+                                <option selected value="0" class="text-center">-- Chọn bác sĩ --</option>
+                                {% for  bac_si in ds_bacsi %}
+                                    <option value="{{ bac_si.ma_bac_si }}">Bác sĩ {{ bac_si.ho_ten }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-lg-2" id="div_theo_bacsi_chon_thang">
+                            <h6 class="text-muted  ">Chọn tháng</h6>
+                            <select class="form-select" id="select-bacsi-thang" aria-label="-- Chọn tháng --">
+                                <option selected value="0" class="text-center">-- Chọn tháng --</option>
+                                {% for i in range(1, 13) %}
+                                    <option value="{{ loop.index }}">Tháng {{ loop.index }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-lg-3 rounded-xl" id="div_theo_bacsi">
+                            <div class="card-body  border-1 rounded-xl bg-primary text-white fw-bold">
+                                Tổng doanh thu tháng <span id="span-slected-month"></span> <br>
+                                <span id="span-tong-doanh-thu"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            {% include 'manager/bieu_do_theo_thang.html' %}
+            {% include 'manager/bieu_do_ngay.html' %}
+            {% include 'manager/chi_tiet_hoa_don.html' %}
+        </li>
+    </ul>
+</div>
