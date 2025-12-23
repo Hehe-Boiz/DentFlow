@@ -1,18 +1,13 @@
+import {initCreateTreatment} from './create_treatment.js';
+
+
 const tabApiMap = {
     "tab-treatment": "/tabs/treatment",
     "tab-today": "/tabs/today",
     "tab-work": "/tabs/work"
 };
-const buttons = document.querySelectorAll('.tab-btn');
-const contentTab = document.getElementById('content-tab')
+let buttons = document.querySelectorAll('.tab-btn');
 
-buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const target = btn.dataset.tab;
-
-
-    });
-});
 
 buttons.forEach(btn => {
     btn.addEventListener('click', async () => {
@@ -20,18 +15,74 @@ buttons.forEach(btn => {
         const url = tabApiMap[target];
 
         if (!url) return;
+        buttons.forEach(b => {
+            b.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+            b.classList.add('text-gray-600', 'hover:bg-gray-100');
+        });
+        btn.classList.remove('text-gray-600', 'hover:bg-gray-100');
+        btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
 
-        const tabEl = document.getElementById(target);
+        const tabel = document.getElementById("tab-content-container");
+        if (!tabel) return;
 
-        document.querySelectorAll(".tab-content")
-            .forEach(t => t.classList.add("hidden"));
-        tabEl.classList.remove("hidden");
+        tabel.style.opacity = "0.5";
+        tabel.style.pointerEvents = "none";
 
-        tabEl.innerHTML = "<p class='text-sm text-gray-500'>Đang tải...</p>";
+        try {
+            let res = await fetch(url);
+            if (!res.ok) throw new Error('Network response was not ok');
+            let html = await res.text();
+            tabel.innerHTML = html;
 
-        const res = await fetch(url, {cache: "no-store"});
-        tabEl.innerHTML = await res.text();
+            if (target === 'tab-treatment') {
+                initCreateTreatment();
+            }
+            if (target === 'tab-work') {
+                initCalendarWork();
+            }
+            if (target === 'tab-today') {
+                const buttons = document.querySelectorAll(".btn-phieu-dieu-tri");
+                buttons.forEach(btn => {
+                    btn.addEventListener("click", async () => {
+                        const patientId = btn.dataset.patientId;
+                        const dichVu = btn.dataset.dichvu;
+
+                        const url = `/tabs/treatment?patient_id=${patientId}&dichvu=${dichVu}`;
+                        res = await fetch(url);
+                        html = await res.text();
+                        tabel.innerHTML = html;
+                        const listContainer = document.getElementById('service-list-container');
+                        listContainer.classList.remove('hidden');
+                        initCreateTreatment()
+
+                    });
+                });
+                initToday();
+            }
+
+        } catch (error) {
+            console.error("Lỗi tải tab:", error);
+            tabel.innerHTML = `<p class="text-red-500 p-4">Không thể tải dữ liệu. Vui lòng thử lại.</p>`;
+        } finally {
+            tabel.style.opacity = "1";
+            tabel.style.pointerEvents = "auto";
+        }
     });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    let currentTabId = params.get('tab');
+
+    if (!currentTabId) {
+        currentTabId = 'tab-today';
+    }
+
+    const targetBtn = document.querySelector(`.tab-btn[data-tab="${currentTabId}"]`);
+
+    if (targetBtn) {
+        targetBtn.click();
+    }
 });
 
 const STATUS_MAP = {
@@ -47,106 +98,129 @@ const STATUS_MAP = {
     },
 };
 
+function initToday() {
+    const badges = document.querySelectorAll(".trang-thai-lich-hen");
 
-const badges = document.querySelectorAll(".trang-thai-lich-hen");
+    badges.forEach(span => {
+        const statusKey = span.getAttribute("data-trang-thai").trim();
+        console.log(statusKey)
+        const config = STATUS_MAP[statusKey];
 
-badges.forEach(span => {
-    // Lấy giá trị từ data-trang-thai (được render từ Jinja2)
-    const statusKey = span.getAttribute("data-trang-thai");
-    console.log(statusKey)
-    // Tìm cấu hình trong Map
-    const config = STATUS_MAP[statusKey];
+        if (config) {
+            span.innerHTML = ""
+            span.classList.remove(
+                "bg-green-100", "text-green-700",
+                "bg-yellow-100", "text-yellow-700",
+            );
+            span.classList.add(...config.classes);
 
-    if (config) {
-        span.innerHTML = ""
-        // Xóa các class màu mặc định (để tránh bị trùng lặp)
-        span.classList.remove(
-            "bg-green-100", "text-green-700",
-            "bg-yellow-100", "text-yellow-700",
-        );
-        span.classList.add(...config.classes);
-
-        span.innerHTML = `<i class="${config.icon}"></i>${config.text}`;
-    }
-});
-
-function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+            span.innerHTML = `<i class="${config.icon}"></i>${config.text}`;
+        }
+    });
 }
 
-function changeWeek(offset) {
+function initCalendarWork() {
     const navElement = document.getElementById('schedule-nav');
-    const currentMondayStr = navElement.getAttribute('data-monday');
+    if (navElement) {
+        const btnPrev = document.getElementById('btn-prev-week');
+        const btnNext = document.getElementById('btn-next-week');
+        const btnToday = document.getElementById('btn-this-week');
 
-    const currentMonday = new Date(currentMondayStr);
+        if (btnPrev) btnPrev.addEventListener('click', () => changeWeek(-1));
+        if (btnNext) btnNext.addEventListener('click', () => changeWeek(1));
+        if (btnToday) btnToday.addEventListener('click', () => goToThisWeek());
+    }
 
-    currentMonday.setDate(currentMonday.getDate() + (offset * 7));
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
 
-    const newDateStr = formatDate(currentMonday);
-    window.location.href = `/treatment?day=${newDateStr}`;
-}
+    async function loadWorkTab(url) {
+        const container = document.getElementById("tab-content-container");
+        container.style.opacity = "0.5";
+        try {
+            const res = await fetch(url);
+            const html = await res.text();
+            container.innerHTML = html;
+            initCalendarWork();
+        } catch (error) {
+            console.error("lỗi:", error);
+        } finally {
+            container.style.opacity = "1";
+        }
+    }
 
-function goToThisWeek() {
-    window.location.href = `/treatment`;
-}
+    function changeWeek(offset) {
+        const currentMondayStr = navElement.getAttribute('data-monday');
+        const currentMonday = new Date(currentMondayStr);
+        currentMonday.setDate(currentMonday.getDate() + (offset * 7));
+
+        const newDateStr = formatDate(currentMonday);
+        // Tải tuần mới qua AJAX
+        loadWorkTab(`/tabs/work?day=${newDateStr}`);
+    }
+
+    function goToThisWeek() {
+        loadWorkTab(`/tabs/work`);
+    }
 
 // hiện ô nhỏ
-const popup = document.getElementById("slot-popup");
-const popupTitle = document.getElementById("popup-title");
-const popupSubtitle = document.getElementById("popup-subtitle");
-const popupTotal = document.getElementById("popup-total");
-const popupContent = document.getElementById("popup-content");
-const popupClose = document.getElementById("popup-close");
+    const popup = document.getElementById("slot-popup");
+    const popupTitle = document.getElementById("popup-title");
+    const popupSubtitle = document.getElementById("popup-subtitle");
+    const popupTotal = document.getElementById("popup-total");
+    const popupContent = document.getElementById("popup-content");
+    const popupClose = document.getElementById("popup-close");
 
-function hidePopup() {
-    popup.classList.add("hidden");
-    popupContent.innerHTML = "";
-}
+    function hidePopup() {
+        popup.classList.add("hidden");
+        popupContent.innerHTML = "";
+    }
 
-function clamp(n, min, max) {
-    return Math.max(min, Math.min(max, n));
-}
+    function clamp(n, min, max) {
+        return Math.max(min, Math.min(max, n));
+    }
 
-function positionPopupNear(el) {
-    const r = el.getBoundingClientRect();
+    function positionPopupNear(el) {
+        const r = el.getBoundingClientRect();
 
-    let left = r.right + 8;
-    let top = r.top;
+        let left = r.right + 8;
+        let top = r.top;
 
-    const margin = 8;
-    const popupWidth = popup.offsetWidth || 384; // max-w-96 ~ 384px
-    const popupHeight = popup.offsetHeight || 300;
+        const margin = 8;
+        const popupWidth = popup.offsetWidth || 384;
+        const popupHeight = popup.offsetHeight || 300;
 
-    left = clamp(left, margin, window.innerWidth - popupWidth - margin);
-    top = clamp(top, margin, window.innerHeight - popupHeight - margin);
+        left = clamp(left, margin, window.innerWidth - popupWidth - margin);
+        top = clamp(top, margin, window.innerHeight - popupHeight - margin);
 
-    popup.style.left = `${left}px`;
-    popup.style.top = `${top}px`;
-}
+        popup.style.left = `${left}px`;
+        popup.style.top = `${top}px`;
+    }
 
-function renderNoAppointments() {
-    popupTotal.textContent = "0 lịch hẹn";
-    popupContent.innerHTML = `
+    function renderNoAppointments() {
+        popupTotal.textContent = "0 lịch hẹn";
+        popupContent.innerHTML = `
       <div class="p-3 rounded-lg bg-gray-50 border border-gray-200 text-sm text-gray-500">
         Không có cuộc hẹn
       </div>
     `;
-}
+    }
 
-function renderAppointments(items) {
-    popupTotal.textContent = `${items.length} lịch hẹn`;
+    function renderAppointments(items) {
+        popupTotal.textContent = `${items.length} lịch hẹn`;
 
-    popupContent.innerHTML = items.map((x, idx) => {
-        // status badge
-        const statusText = x.trang_thai_text || "Chờ khám";
-        const statusClass = (statusText.includes("Chờ"))
-            ? "bg-amber-600 text-white"
-            : (statusText.includes("Đã") ? "bg-green-600 text-white" : "bg-gray-600 text-white");
+        popupContent.innerHTML = items.map((x, idx) => {
+            // status badge
+            const statusText = x.trang_thai_text || "Chờ khám";
+            const statusClass = (statusText.includes("Chờ"))
+                ? "bg-amber-600 text-white"
+                : (statusText.includes("Đã") ? "bg-green-600 text-white" : "bg-gray-600 text-white");
 
-        return `
+            return `
         <div class="border rounded-lg p-3 bg-amber-50 border-amber-300">
           <div class="flex items-center justify-between mb-2">
             <div class="flex items-center space-x-2">
@@ -176,73 +250,73 @@ function renderAppointments(items) {
           </div>
         </div>
       `;
-    }).join("");
-}
+        }).join("");
+    }
 
-async function fetchAppointments(dateStr, timeStr) {
-    const url = `/treatment/lich-hen/slot?date=${encodeURIComponent(dateStr)}&time=${encodeURIComponent(timeStr)}`;
+    async function fetchAppointments(dateStr, timeStr) {
+        const url = `/treatment/lich-hen/slot?date=${encodeURIComponent(dateStr)}&time=${encodeURIComponent(timeStr)}`;
 
-    const res = await fetch(url, {headers: {"Accept": "application/json"}});
-    if (!res.ok) throw new Error("thất bại");
-    return await res.json();
-}
+        const res = await fetch(url, {headers: {"Accept": "application/json"}});
+        if (!res.ok) throw new Error("thất bại");
+        return await res.json();
+    }
 
-document.addEventListener("click", (e) => {
-    if (popup.classList.contains("hidden")) return;
-    const clickedInside = popup.contains(e.target);
-    const clickedCell = e.target.closest(".slot-cell");
-    if (!clickedInside && !clickedCell) hidePopup();
-});
+    document.addEventListener("click", (e) => {
+        if (popup.classList.contains("hidden")) return;
+        const clickedInside = popup.contains(e.target);
+        const clickedCell = e.target.closest(".slot-cell");
+        if (!clickedInside && !clickedCell) hidePopup();
+    });
 
-popupClose.addEventListener("click", hidePopup);
-window.addEventListener("scroll", () => {
-    if (!popup.classList.contains("hidden")) hidePopup();
-});
-window.addEventListener("resize", () => {
-    if (!popup.classList.contains("hidden")) hidePopup();
-});
+    popupClose.addEventListener("click", hidePopup);
+    window.addEventListener("scroll", () => {
+        if (!popup.classList.contains("hidden")) hidePopup();
+    });
+    window.addEventListener("resize", () => {
+        if (!popup.classList.contains("hidden")) hidePopup();
+    });
 
-document.querySelectorAll(".slot-cell").forEach(cell => {
-    cell.addEventListener("click", async (e) => {
-        e.stopPropagation();
+    document.querySelectorAll(".slot-cell").forEach(cell => {
+        cell.addEventListener("click", async (e) => {
+            e.stopPropagation();
 
-        const dateStr = cell.dataset.date;
-        const timeStr = cell.dataset.time;
+            const dateStr = cell.dataset.date;
+            const timeStr = cell.dataset.time;
 
-        popup.classList.remove("hidden");
-        popupTitle.textContent = "Lịch hẹn";
-        popupSubtitle.textContent = `${dateStr} • ${timeStr}`;
-        popupTotal.textContent = "Đang tải...";
-        popupContent.innerHTML = `
+            popup.classList.remove("hidden");
+            popupTitle.textContent = "Lịch hẹn";
+            popupSubtitle.textContent = `${dateStr} • ${timeStr}`;
+            popupTotal.textContent = "Đang tải...";
+            popupContent.innerHTML = `
         <div class="p-3 rounded-lg bg-blue-50 border border-blue-100 text-sm text-blue-700">
           Đang tải lịch hẹn...
         </div>
       `;
 
-        positionPopupNear(cell);
-
-        try {
-            const data = await fetchAppointments(dateStr, timeStr);
-
-            if (!data || data.status !== "success") {
-                renderNoAppointments();
-                return;
-            }
-
-            const items = data.items || [];
-            if (items.length === 0) renderNoAppointments();
-            else renderAppointments(items);
-
             positionPopupNear(cell);
 
-        } catch (err) {
-            popupTotal.textContent = "0 lịch hẹn";
-            popupContent.innerHTML = `
+            try {
+                const data = await fetchAppointments(dateStr, timeStr);
+
+                if (!data || data.status !== "success") {
+                    renderNoAppointments();
+                    return;
+                }
+                const items = data.items || [];
+                if (items.length === 0) renderNoAppointments();
+                else renderAppointments(items);
+
+                positionPopupNear(cell);
+
+            } catch (err) {
+                popupTotal.textContent = "0 lịch hẹn";
+                popupContent.innerHTML = `
           <div class="p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700">
             lỗi 
           </div>
         `;
-            positionPopupNear(cell);
-        }
+                positionPopupNear(cell);
+            }
+        });
     });
-});
+}

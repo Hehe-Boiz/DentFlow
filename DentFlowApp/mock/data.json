@@ -629,6 +629,20 @@
       "gio_bat_dau": "14:00:00",
       "gio_ket_thuc": "17:30:00",
       "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-24",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-25",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
     }
   ],
   "appointments": [
@@ -865,6 +879,60 @@
       "dich_vu_ten": "Điều trị tủy",
       "trang_thai": "DAT_LICH_THANH_CONG",
       "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-24",
+      "gio_kham": "08:30",
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Khách yêu cầu làm nhẹ tay"
+    },
+    {
+      "ngay_dat": "2025-12-24",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Sâu kẽ răng cửa"
+    },
+    {
+      "ngay_dat": "2025-12-24",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0955667799",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": "Tái khám lần 2"
+    },
+    {
+      "ngay_dat": "2025-12-25",
+      "gio_kham": "09:00",
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Gói tẩy trắng nhanh"
+    },
+    {
+      "ngay_dat": "2025-12-25",
+      "gio_kham": "10:30",
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Răng lung lay, bệnh nhân sợ đau"
+    },
+    {
+      "ngay_dat": "2025-12-25",
+      "gio_kham": "15:00",
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Phục hình răng sứ",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Tư vấn làm mão sứ"
     }
   ],
   "treatments": [

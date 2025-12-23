@@ -13,12 +13,12 @@ formatted = now.strftime("%d/%m/%Y")
 def treatment_view():
     bacsi_id = current_user.bac_si.ma_bac_si
     patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_date_time(bacsi_id)
-    services = dichvu_dao.get_services()
+
     count_lich_kham = len(patients)
-    count_lich_da_kham = len(lich_hen_dao.get_lich_hen_da_kham_theo_bac_si())
+    count_lich_da_kham = len(lich_hen_dao.get_lich_hen_da_kham_theo_bac_si_today(bacsi_id))
     count_lich_cho_kham = max(count_lich_kham - count_lich_da_kham, 0)
     bacsi = bacsi_dao.get_doctors_by_id(bacsi_id)
-    count_tong_lich_hen = len(lich_hen_dao.get_tong_lich_hen_theo_bac_si())
+    count_tong_lich_hen = len(lich_hen_dao.get_tong_lich_hen_theo_bac_si(bacsi_id))
     session['stats_cards'] = {
         "Lịch hôm nay": count_lich_kham,
         "Chờ khám": count_lich_cho_kham,
@@ -28,8 +28,6 @@ def treatment_view():
     print(patients)
     return render_template(
         'treatments/treatment.html',
-        patients=patients,
-        services=services,
         count_lich_kham=count_lich_kham,
         count_lich_da_kham=count_lich_da_kham,
         count_lich_cho_kham=count_lich_cho_kham,
@@ -38,12 +36,34 @@ def treatment_view():
         now=formatted
     )
 
-@app.route('/treatment')
+
+@app.route('/tabs/treatment')
+def create_treatment_view():
+    bacsi_id = current_user.bac_si.ma_bac_si
+    patients = lich_hen_dao.get_all_lich_hen_by_bac_si(bacsi_id)
+    services = dichvu_dao.get_dich_vu()
+
+    context = {
+        'patients': patients,
+        'services': services
+    }
+    benh_nhan_id = request.args.get('patient_id', type=int)
+    dich_vu_id = request.args.get('dichvu', type=int)
+    if benh_nhan_id and dich_vu_id:
+        context['selected_patient_id'] = benh_nhan_id
+        context['selected_service_id'] = dich_vu_id
+    return render_template(
+        'treatments/tab_treatment.html',
+        **context
+    )
+
+
+@app.route('/tabs/today')
 def lich_hen_today_view():
     bacsi_id = current_user.bac_si.ma_bac_si
     patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_time(bacsi_id)
     print(len(patients))
-    return render_template("treatments/treatment.html", patients=patients)
+    return render_template("treatments/tab_schedule_today.html", patients=patients)
 
 
 @app.get("/treatments/ke-don")
@@ -183,7 +203,7 @@ def create_treatment():
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
-@app.route("/treatment")
+@app.route("/tabs/work")
 def schedule_week():
     day_str = request.args.get("day")
     if day_str:
@@ -232,7 +252,7 @@ def schedule_week():
             key = f"{lh.ngay_dat.strftime('%Y-%m-%d')}_{h:02d}:00"
             lich_hen_slots[key] = lich_hen_slots.get(key, 0) + 1
 
-    return render_template("treatments/treatment.html", monday=monday, sunday=sunday, days=days, times=times,
+    return render_template("treatments/tab_schedule.html", monday=monday, sunday=sunday, days=days, times=times,
                            working_slots=working_slots, lich_hen_slots=lich_hen_slots)
 
 
