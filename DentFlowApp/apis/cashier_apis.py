@@ -21,7 +21,7 @@ def cashier_view():
                                                                            PAGE_SIZE=page_size)  # pagination
     ds_phieu_dieu_tri_da_thanh_toan = get_ds_phieu_dieu_tri_da_thanh_toan(page=page, PAGE_SIZE=page_size)
     # tong_tien = get_tong_tien_by_phieu_dieu_tri(phieu_dieu_tri)
-    return render_template('cashier/cashier.html', thungan=True, pagination=ds_phieu_dieu_tri_chua_thanh_toan,
+    return render_template('cashier/trang_thungan.html', thungan=True, pagination=ds_phieu_dieu_tri_chua_thanh_toan,
                            active_tab=active_tab,
                            pagination_tt=ds_phieu_dieu_tri_da_thanh_toan)
 
@@ -29,7 +29,7 @@ def cashier_view():
 @app.route('/cashier/tra-cuu', methods=['GET'])
 @cashier_required
 def cashier_phieu_dieu_tri_search():
-    return render_template('cashier/cashier_search_pdt.html')
+    return render_template('cashier/thanh_tim_kiem_pdt.html')
 
 
 @app.route('/cashier/thanh-toan/<int:id>', methods=['GET'])
@@ -41,7 +41,7 @@ def cashier_thanh_toan(id):
         'account_numb': os.getenv('ACCOUNT_NUMB'),
         'template': os.getenv('TEMPLATE'),
     }
-    return render_template('cashier/thanh_toan.html', phieu_dieu_tri=phieu_dieu_tri, bank_config=bank_config)
+    return render_template('cashier/trang_thanh_toan.html', phieu_dieu_tri=phieu_dieu_tri, bank_config=bank_config)
 
 
 @app.route('/cashier/chua-thanh/<int:id>', methods=['POST'])
