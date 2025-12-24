@@ -9,41 +9,61 @@ now = datetime.now()
 formatted = now.strftime("%d/%m/%Y")
 
 
-# @app.route('/treatment')
-# def treatment_view():
-#     bacsi_id = current_user.bac_si.ma_bac_si
-#     patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_date_time(bacsi_id)
-#     services = dichvu_dao.get_services()
-#     count_lich_kham = len(patients)
-#     count_lich_da_kham = len(lich_hen_dao.get_lich_hen_da_kham_theo_bac_si())
-#     count_lich_cho_kham = max(count_lich_kham - count_lich_da_kham, 0)
-#     bacsi = bacsi_dao.get_doctors_by_id(bacsi_id)
-#     count_tong_lich_hen = len(lich_hen_dao.get_tong_lich_hen_theo_bac_si())
-#     session['stats_cards'] = {
-#         "Lịch hôm nay": count_lich_kham,
-#         "Chờ khám": count_lich_cho_kham,
-#         "Hoàn thành": count_lich_da_kham,
-#         "Tổng lịch hẹn": count_tong_lich_hen
-#     }
-#     print(patients)
-#     return render_template(
-#         'treatments/treatment.html',
-#         patients=patients,
-#         services=services,
-#         count_lich_kham=count_lich_kham,
-#         count_lich_da_kham=count_lich_da_kham,
-#         count_lich_cho_kham=count_lich_cho_kham,
-#         count_tong_lich_hen=count_tong_lich_hen,
-#         bacsi=bacsi,
-#         now=formatted
-#     )
+@app.route('/treatment')
+def treatment_view():
+    bacsi_id = current_user.bac_si.ma_bac_si
+    patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_date_time(bacsi_id)
 
-# @app.route('/treatment')
-# def treatment_view():
-#     bacsi_id = current_user.bac_si.ma_bac_si
-#     patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_time(bacsi_id)
-#     print(len(patients))
-#     return render_template("treatments/treatment.html", patients=patients)
+    count_lich_kham = len(patients)
+    count_lich_da_kham = len(lich_hen_dao.get_lich_hen_da_kham_theo_bac_si_today(bacsi_id))
+    count_lich_cho_kham = max(count_lich_kham - count_lich_da_kham, 0)
+    bacsi = bacsi_dao.get_doctors_by_id(bacsi_id)
+    count_tong_lich_hen = len(lich_hen_dao.get_tong_lich_hen_theo_bac_si(bacsi_id))
+    session['stats_cards'] = {
+        "Lịch hôm nay": count_lich_kham,
+        "Chờ khám": count_lich_cho_kham,
+        "Hoàn thành": count_lich_da_kham,
+        "Tổng lịch hẹn": count_tong_lich_hen
+    }
+    print(patients)
+    return render_template(
+        'treatments/treatment.html',
+        count_lich_kham=count_lich_kham,
+        count_lich_da_kham=count_lich_da_kham,
+        count_lich_cho_kham=count_lich_cho_kham,
+        count_tong_lich_hen=count_tong_lich_hen,
+        bacsi=bacsi,
+        now=formatted
+    )
+
+
+@app.route('/tabs/treatment')
+def create_treatment_view():
+    bacsi_id = current_user.bac_si.ma_bac_si
+    patients = lich_hen_dao.get_all_lich_hen_by_bac_si(bacsi_id)
+    services = dichvu_dao.get_dich_vu()
+
+    context = {
+        'patients': patients,
+        'services': services
+    }
+    benh_nhan_id = request.args.get('patient_id', type=int)
+    dich_vu_id = request.args.get('dichvu', type=int)
+    if benh_nhan_id and dich_vu_id:
+        context['selected_patient_id'] = benh_nhan_id
+        context['selected_service_id'] = dich_vu_id
+    return render_template(
+        'treatments/tab_treatment.html',
+        **context
+    )
+
+
+@app.route('/tabs/today')
+def lich_hen_today_view():
+    bacsi_id = current_user.bac_si.ma_bac_si
+    patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_time(bacsi_id)
+    print(len(patients))
+    return render_template("treatments/tab_schedule_today.html", patients=patients)
 
 
 @app.get("/treatments/ke-don")
@@ -52,7 +72,7 @@ def ke_don_partial():
     return render_template("treatments/ke_don_thuoc.html", thuocs=thuocs)
 
 
-@app.route('/api/thuoc/<int:thuoc_id>/lo-thuoc', methods=['GET'])
+@app.route('/treatment/thuoc/<int:thuoc_id>/lo-thuoc', methods=['GET'])
 @login_required
 def get_lo_thuoc(thuoc_id):
     """Lấy tất cả lô thuốc còn hạn của một loại thuốc"""
@@ -73,7 +93,7 @@ def get_lo_thuoc(thuoc_id):
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
-@app.route('/api/thuoc/<int:thuoc_id>/lo-phu-hop', methods=['POST'])
+@app.route('/treatment/thuoc/<int:thuoc_id>/lo-phu-hop', methods=['POST'])
 @login_required
 def get_lo_phu_hop(thuoc_id):
     """Tự động chọn lô thuốc phù hợp dựa trên số ngày dùng"""
@@ -96,11 +116,10 @@ def get_lo_phu_hop(thuoc_id):
             }
             return jsonify({'status': 'success', 'data': result, 'message': message})
         else:
-            # Trả về warning để frontend hiển thị lỗi (ví dụ: chỉ còn dùng được X ngày)
             return jsonify({
                 'status': 'warning',
                 'message': message
-            }), 200  # Trả về 200 để frontend dễ xử lý logic warning
+            }), 200
 
     except Exception as e:
         print(e)
@@ -142,7 +161,6 @@ def create_treatment():
 
             for m in medicines:
 
-                # Tạo string hướng dẫn: "Sáng - Sau ăn - 3 ngày"
                 buoi_uong = m.get('buoi_uong', '').strip()
                 thoi_diem = m.get('thoi_diem', '').strip()
                 so_ngay = m.get('so_ngay', '').strip()
@@ -185,28 +203,7 @@ def create_treatment():
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
-# @app.get("/tabs/today")
-# def tabs_today():
-#     return render_template("treatments/tab_schedule_today.html")
-#
-# @app.get("/tabs/work")
-# def tabs_work():
-#     return render_template("treatments/tab_schedule.html")
-#
-# @app.get("/tabs/treatment")
-# def tabs_treatment():
-#     return render_template("treatments/tab_treatment.html")
-
-def get_monday(d: date) -> date:
-    # Thứ 2 = 0, CN = 6
-    return d - timedelta(days=d.weekday())
-
-
-def get_week_dates(monday: date):
-    return [monday + timedelta(days=i) for i in range(7)]
-
-
-@app.route("/treatment")
+@app.route("/tabs/work")
 def schedule_week():
     day_str = request.args.get("day")
     if day_str:
@@ -214,14 +211,15 @@ def schedule_week():
     else:
         base_day = date.today()
 
-    monday = get_monday(base_day)
-    days = get_week_dates(monday)
+    monday = utils.get_monday(base_day)
+    sunday = utils.get_sunday(base_day)
+    days = utils.get_week_dates(monday)
 
     times = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
     system_hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
-    ds_lich = lichlamviec_dao.get_lich_lam_viec_by_bac_si_tuan_nay(current_user.bac_si.ma_bac_si)
-    ds_lich_hen= lich_hen_dao.get_tong_lich_hen_in_tuan_by_bac_si(current_user.bac_si.ma_bac_si)
+    ds_lich = lichlamviec_dao.get_lich_lam_viec_theo_tuan(current_user.bac_si.ma_bac_si, base_day)
+    ds_lich_hen = lich_hen_dao.get_tong_lich_hen_in_tuan_by_bac_si(current_user.bac_si.ma_bac_si)
     working_slots = {}
     lich_hen_slots = {}
     for lich in ds_lich:
@@ -254,5 +252,39 @@ def schedule_week():
             key = f"{lh.ngay_dat.strftime('%Y-%m-%d')}_{h:02d}:00"
             lich_hen_slots[key] = lich_hen_slots.get(key, 0) + 1
 
+    return render_template("treatments/tab_schedule.html", monday=monday, sunday=sunday, days=days, times=times,
+                           working_slots=working_slots, lich_hen_slots=lich_hen_slots)
 
-    return render_template("treatments/treatment.html", monday=monday, days=days, times=times, working_slots=working_slots, lich_hen_slots=lich_hen_slots)
+
+@app.get("/treatment/lich-hen/slot")
+@login_required
+def api_lich_hen_slot():
+    date_str = request.args.get("date")
+    time_str = request.args.get("time")
+
+    if not date_str or not time_str:
+        return jsonify({"status": "error", "message": "Thiếu date/time"}), 400
+
+    try:
+        ngay_dat = datetime.strptime(date_str, "%Y-%m-%d").date()
+        gio_h = int(time_str.split(":")[0])
+    except Exception:
+        return jsonify({"status": "error", "message": "Sai format date/time"}), 400
+
+    bacsi_id = current_user.bac_si.ma_bac_si
+
+    ds = lich_hen_dao.get_lich_hen_by_bac_si_and_slot(bacsi_id, ngay_dat, gio_h)
+
+    items = []
+    for lh in ds:
+        items.append({
+            "id": lh.id,
+            "gio_kham": lh.gio_kham.strftime("%H:%M"),
+            "trang_thai": lh.trang_thai.name if lh.trang_thai else "",
+            "trang_thai_text": lh.trang_thai.value if lh.trang_thai else "",
+            "benh_nhan_ho_ten": lh.ho_so_benh_nhan.ho_ten if lh.ho_so_benh_nhan else "",
+            "dich_vu_ten": lh.dich_vu.ten_dich_vu if lh.dich_vu else "",
+            "ghi_chu": lh.ghi_chu or ""
+        })
+
+    return jsonify({"status": "success", "items": items})

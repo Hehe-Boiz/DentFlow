@@ -1,15 +1,16 @@
 <div class="space-y-4">
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div><h3 class="text-xl text-gray-900">Lịch làm việc tuần</h3>
-            <p class="text-sm text-gray-600 mt-1">22/12/2025 - 28/12/2025</p></div>
-        <div class="flex items-center space-x-2">
-            <button class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <p class="text-sm text-gray-600 mt-1">{{ monday }} - {{ sunday }}</p></div>
+        <div class="flex items-center space-x-2" id="schedule-nav" data-monday="{{ monday.strftime('%Y-%m-%d') }}">
+            <button id="btn-prev-week" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <i class="fa-solid fa-angle-left w-5 h-5 text-gray-600 fx-xl"></i>
             </button>
-            <button class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm">
+            <button id="btn-this-week"
+                    class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm">
                 Tuần này
             </button>
-            <button class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <button id="btn-next-week" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <i class="fa-solid fa-angle-right w-5 h-5 text-gray-600 fx-xl"></i>
             </button>
         </div>
@@ -58,7 +59,7 @@
                     <td class="px-2 py-0 border border-gray-200 cursor-pointer transition-all
                        {{ 'bg-blue-100' if is_working else 'bg-gray-50 hover:bg-green-100' }}">
 
-                        <div class="min-h-[60px] px-3 py-2 flex items-center justify-center"
+                        <div class="min-h-[60px] px-3 py-2 flex items-center justify-center slot-cell"
                              data-date="{{ date_str }}"
                              data-time="{{ time }}">
 
@@ -71,7 +72,8 @@
                                 {% if lich_hen_slots.get(key) %}
                                 <div class=" mt-0.5 flex items-center bg-green-100 text-green-800 text-xs font-semibold px-2 py-0.5 rounded-full border border-green-200 shadow-sm">
                                     <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                        <path fill-rule="evenodd"
+                                              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                               clip-rule="evenodd"></path>
                                     </svg>
 
