@@ -1,0 +1,37 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Xác nhận thanh toán{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}"/>
+{% endblock %}
+{% block content %}
+    {% from 'macros.html' import service_header %}
+    {{ service_header('/cashier') }}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-6">
+                {% if phieu_dieu_tri %}
+                    <form method="post" action={{ url_for('cashier_xac_nhan_thanh_toan', id=phieu_dieu_tri.id) }}>
+                        <input type="hidden" name="phuong_thuc_thanh_toan" id="paymentMethodInput" value="CASH">
+                        {% include 'cashier/form_thanh_toan.html' %}
+                    </form>
+                {% else %}
+                    <div class="alert alert-warning">Không tìm thấy phiếu</div>
+                {% endif %}
+            </div>
+            {% include 'cashier/phuong_thuc.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        window.BANK_ENV_CONFIG = {
+            BANK_ID: "{{ bank_config.bank_id }}",
+            ACCOUNT_NO: "{{ bank_config.account_numb }}",
+            TEMPLATE: "{{ bank_config.template }}"
+        };
+    </script>
+    <script src="{{ url_for('static', filename='js/cashier.js') }}"></script>
+{% endblock %}

@@ -3,14 +3,15 @@ import hashlib
 from datetime import datetime, timedelta
 from DentFlowApp import app, db, bcrypt
 
-# 1. CẬP NHẬT IMPORT: Thêm PhuongThucThanhToan
+# 1. CẬP NHẬT IMPORT: Thêm DonThuoc, LieuLuongSuDung
 from DentFlowApp.models import (
     NguoiDung, UserRole, GioiTinh, LoaiBacSi,
     BacSi, BacSiFullTime, BacSiPartTime,
     Thuoc, LoThuoc, DichVu, HoSoBenhNhan, LichHen,
     TrangThaiLichHen, LichLamViec, TrangThaiLamViec,
     DonViThuoc, ChiTietPhieuDieuTri, HoaDon, PhieuDieuTri,
-    TrangThaiThanhToan, PhuongThucThanhToan, NhanVien  # <-- Quan trọng
+    TrangThaiThanhToan, PhuongThucThanhToan, NhanVien,
+    DonThuoc, LieuLuongSuDung  # <-- Đã thêm 2 model này
 )
 
 
@@ -33,9 +34,10 @@ def import_json_data():
 
     user_map = {}
     service_map = {}
-    patient_map = {}
     service_price_map = {}
-    cashier_id = None  # Lưu ID thu ngân để gán vào hóa đơn
+    patient_map = {}
+    medicine_map = {}  # <-- Map tên thuốc sang ID để tra cứu nhanh
+    cashier_id = None
 
     # 1. Import Users
     print("1. Đang import Users...")
@@ -52,16 +54,14 @@ def import_json_data():
         db.session.flush()
         user_map[u['username']] = user
 
-        # Tìm một thu ngân để gán mặc định cho hóa đơn
         if user.vai_tro == UserRole.CASHIER and cashier_id is None:
             cashier_id = user.id
-    # 1.5. Import Nhân viên (CẬP NHẬT MỚI)
+
+    # 1.5. Import Nhân viên
     print("1.5. Đang import Nhân viên...")
     for emp in data.get('employees', []):
         try:
-            # Tìm account user tương ứng (nếu có)
             linked_user = user_map.get(emp['username_lien_ket'])
-
             nhan_vien = NhanVien(
                 ma_nv=emp['ma_nv'],
                 ho_ten=emp['ho_ten'],
@@ -77,7 +77,8 @@ def import_json_data():
         except Exception as e:
             print(f"Lỗi import nhân viên {emp['ho_ten']}: {e}")
 
-    db.session.commit()  # Commit để lưu nhân viên
+    db.session.commit()
+
     # 2. Import Bác sĩ
     print("2. Đang import Bác sĩ...")
     for d in data.get('doctors', []):
@@ -113,9 +114,12 @@ def import_json_data():
     print("4. Đang import Thuốc...")
     for m in data.get('medicines', []):
         don_vi_enum = getattr(DonViThuoc, m['don_vi'])
-        thuoc = Thuoc(ten_thuoc=m['ten_thuoc'], don_vi=don_vi_enum)
+        thuoc = Thuoc(ten_thuoc=m['ten_thuoc'], don_vi=don_vi_enum, don_gia=m['don_gia'])
         db.session.add(thuoc)
         db.session.flush()
+
+        # Lưu vào map để lát dùng cho đơn thuốc
+        medicine_map[m['ten_thuoc']] = thuoc.id
 
         for b in m.get('batches', []):
             lt = LoThuoc(
@@ -186,8 +190,8 @@ def import_json_data():
         except Exception as e:
             print(f"Lỗi import lịch trực: {e}")
 
-    # 8. Import Phiếu Điều Trị & Hóa Đơn
-    print("8. Đang import Phiếu Điều Trị & Hóa Đơn...")
+    # 8. Import Phiếu Điều Trị & Hóa Đơn & Đơn Thuốc
+    print("8. Đang import Phiếu Điều Trị & Hóa Đơn & Đơn Thuốc...")
     for trt in data.get('treatments', []):
         bn_id = patient_map.get(trt['benh_nhan_sdt'])
         if bn_id:
@@ -195,8 +199,6 @@ def import_json_data():
                 # 8.1 Xử lý trạng thái thanh toán
                 json_status = trt.get('trang_thai_thanh_toan', 'CHUA_THANH_TOAN')
                 payment_status_enum = getattr(TrangThaiThanhToan, json_status)
-
-                # Parse ngày tạo từ JSON (Đây là dữ liệu lịch sử)
                 ngay_tao_lich_su = datetime.strptime(trt['ngay_tao'], '%Y-%m-%d %H:%M:%S')
 
                 # 8.2 Tạo Phiếu Điều Trị
@@ -205,13 +207,13 @@ def import_json_data():
                     ghi_chu=trt.get('ghi_chu', ''),
                     ho_so_benh_nhan_id=bn_id,
                     bac_si_id=trt['bac_si_id'],
-                    ngay_tao=ngay_tao_lich_su,  # Quan trọng: Gán ngày cũ cho phiếu
+                    ngay_tao=ngay_tao_lich_su,
                     trang_thai_thanh_toan=payment_status_enum
                 )
                 db.session.add(pdt)
-                db.session.flush()
+                db.session.flush()  # Để lấy pdt.id
 
-                # 8.3 Tạo chi tiết dịch vụ và tính tổng tiền
+                # 8.3 Tạo chi tiết dịch vụ
                 tong_tien = 0
                 for dv_ten in trt['dich_vu_su_dung']:
                     dv_id = service_map.get(dv_ten)
@@ -222,38 +224,57 @@ def import_json_data():
                             phieu_dieu_tri_id=pdt.id,
                             dich_vu_id=dv_id,
                             don_gia=don_gia,
-                            ngay_tao=ngay_tao_lich_su  # Gán ngày cũ cho chi tiết (nếu model có dùng)
+                            ngay_tao=ngay_tao_lich_su
                         )
                         db.session.add(ct_pdt)
                         tong_tien += don_gia
 
-                # 8.4 Tạo hóa đơn CHỈ KHI trạng thái là ĐÃ THANH TOÁN
+                # 8.4 Xử lý Đơn thuốc (LOGIC MỚI THÊM VÀO)
+                don_thuoc_data = trt.get('don_thuoc')
+                if don_thuoc_data:
+                    # Tạo Đơn thuốc
+                    dt = DonThuoc(
+                        phieu_dieu_tri_id=pdt.id,
+                        ngay_boc_thuoc=ngay_tao_lich_su,
+                        ngay_tao=ngay_tao_lich_su
+                    )
+                    db.session.add(dt)
+                    db.session.flush()  # Lấy dt.id
+
+                    # Tạo Liều lượng sử dụng
+                    for item in don_thuoc_data:
+                        thuoc_id = medicine_map.get(item['ten_thuoc'])
+                        if thuoc_id:
+                            lieu_luong = LieuLuongSuDung(
+                                don_thuoc_id=dt.id,
+                                thuoc_id=thuoc_id,
+                                so_luong=item['so_luong'],
+                                huong_dan=item['huong_dan']
+                            )
+                            db.session.add(lieu_luong)
+                        else:
+                            print(f"Cảnh báo: Không tìm thấy thuốc '{item['ten_thuoc']}' trong kho")
+
+                # 8.5 Tạo hóa đơn
                 if payment_status_enum == TrangThaiThanhToan.DA_THANH_TOAN:
-                    # Lấy phương thức thanh toán từ JSON (mặc định TIEN_MAT)
                     method_str = trt.get('phuong_thuc_thanh_toan', 'TIEN_MAT')
                     method_enum = getattr(PhuongThucThanhToan, method_str)
 
                     if cashier_id:
-                        # Giả lập thời gian thanh toán là 30 phút sau khi tạo phiếu
                         thoi_gian_thanh_toan = ngay_tao_lich_su + timedelta(minutes=30)
-
                         hoa_don = HoaDon(
                             tong_tien=tong_tien,
                             phieu_dieu_tri_id=pdt.id,
                             phuong_thuc_thanh_toan=method_enum,
                             nhan_vien_id=cashier_id,
-
-                            # --- SỬA LỖI TẠI ĐÂY ---
-                            # Truyền tham số ngay_tao để override default=datetime.now()
-                            ngay_tao=thoi_gian_thanh_toan,  # Ngày tạo hóa đơn trong DB
-                            ngay_thanh_toan=thoi_gian_thanh_toan  # Ngày thanh toán thực tế
+                            ngay_tao=thoi_gian_thanh_toan,
+                            ngay_thanh_toan=thoi_gian_thanh_toan
                         )
                         db.session.add(hoa_don)
-                    else:
-                        print("Cảnh báo: Không tìm thấy nhân viên CASHIER để gán cho hóa đơn!")
 
             except Exception as e:
                 print(f"Lỗi import phiếu điều trị: {e}")
+
     db.session.commit()
     print("--- Hoàn tất import dữ liệu! ---")
 

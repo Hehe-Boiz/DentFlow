@@ -59,7 +59,7 @@ function saveFullProfile() {
     .catch(err => console.error(err));
 }
 //Tự động tắt các alert sau 4s
-const alerts = document.querySelectorAll('.alert');
+const alerts = document.querySelectorAll('[role="alert"]');
 alerts.forEach(function(alert) {
     // Sau 4 giây (4000ms) thì tự tắt
     setTimeout(function() {
