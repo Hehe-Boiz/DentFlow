@@ -38,14 +38,16 @@ def booking_2_view():
                 booking_date = request.form.get('booking_date')
                 time_slot = request.form.get('time_slot')
                 doctor_name = request.form.get('doctor_name')
-                # Lưu tiếp thông tin vào session
+                is_valid, err_msg = utils.validate_booking(doctor_id=doctor_id,doctor_name=doctor_name,
+                                                           time_slot=time_slot,booking_date=booking_date)
+                if not is_valid:
+                        flash(err_msg, 'danger')
+
                 booking_data['doctor_name'] = doctor_name
                 booking_data['doctor_id'] = doctor_id
                 booking_data['booking_date'] = booking_date
                 booking_data['time_slot'] = time_slot
                 session['booking_data'] = booking_data
-                # Chuyển sang bước 3 (Xác nhận)
-                # return redirect(url_for('booking_step3')) # Tạo route này sau
                 return redirect('/booking/confirm_booking')
         return render_template('booking/booking_2.html',doctors=doctors)
 
@@ -101,7 +103,7 @@ def booking_3_view():
 
                 except Exception as e:
                         print(e)
-                        flash('Lỗi: ' + str(e), 'failed')
+                        flash('Lỗi: ' + str(e), 'danger')
 
         # --- GET REQUEST: Render giao diện ---
         return render_template('booking/booking_3.html',

@@ -146,7 +146,7 @@ def update_profile_page(ho_so_id):
             flash('Cập nhật thành công', 'success')
         else:
             print('fail')
-            flash('Cập nhật thất bại', 'error')
+            flash('Cập nhật thất bại', 'danger')
     except Exception as ex:
         print('Loi')
         flash(str(ex),'error')
