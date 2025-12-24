@@ -1,4 +1,5 @@
 {% extends 'layout/base.html' %}
+{% from 'macros.html' import hero_in_role, stat_card %}
 
 {% block title %}Manager view{% endblock %}
 
@@ -7,20 +8,20 @@
 {% endblock %}
 
 {% block hero %}
-    {% include 'layout/hero_in_role.html' %}
+    {{ hero_in_role('Quản lý', now,  "fas fa-wrench" ) }}
 {% endblock %}
 
 {% block content %}
-    {% from 'macros.html' import stat_card %}
     {% include 'manager/tabs.html' %}
     {#  Dashboard và chi tiết bác sĩ  #}
     {% if active_tab == 'bao-cao' %}
         {% include 'manager/bao_cao.html' %}
     {% elif active_tab == 'nhan-vien' %}
-        {% include 'manager/chi_tiet_nhan_vien.html' %}
+        {% include 'manager/trang_quanly_nhanvien.html' %}
     {% else %}
         {% include 'manager/thong_ke_chung.html' %}
         {% include 'manager/chi_tiet_bac_si.html' %}
+        {% include 'manager/bieu_do_loc.html' %}
     {% endif %}
     {#    #}
 
@@ -29,5 +30,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
     <script src="{{ url_for('static', filename='js/nhanvien.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/filter_dashboard.js') }}"></script>
 
 {% endblock %}

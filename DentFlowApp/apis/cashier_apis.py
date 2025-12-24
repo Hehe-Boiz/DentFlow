@@ -4,6 +4,8 @@ import os
 from DentFlowApp import app, db
 from flask import render_template, request, jsonify
 from flask_login import current_user, login_required
+
+from DentFlowApp.dao.phieu_dieu_tri_dao import get_ds_thuoc_by_phieu_dieu_tri
 from DentFlowApp.dao.receptionistDao import get_phieu_dieu_tri_by_id
 from DentFlowApp.dao.thungan_dao import get_phieu_dieu_tri_chua_thanh_toan, \
     get_ds_phieu_dieu_tri_da_thanh_toan
@@ -36,15 +38,17 @@ def cashier_phieu_dieu_tri_search():
 @cashier_required
 def cashier_thanh_toan(id):
     phieu_dieu_tri = get_phieu_dieu_tri_by_id(id)
+
     bank_config = {
         'bank_id': os.getenv('BANK_ID'),
         'account_numb': os.getenv('ACCOUNT_NUMB'),
         'template': os.getenv('TEMPLATE'),
     }
-    return render_template('cashier/trang_thanh_toan.html', phieu_dieu_tri=phieu_dieu_tri, bank_config=bank_config)
+    return render_template('cashier/trang_thanh_toan.html', phieu_dieu_tri=phieu_dieu_tri, bank_config=bank_config,
+                           )
 
 
-@app.route('/cashier/chua-thanh/<int:id>', methods=['POST'])
+@app.route('/cashier/thanh-toan/<int:id>', methods=['POST'])
 @cashier_required
 def cashier_xac_nhan_thanh_toan(id):
     try:

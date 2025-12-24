@@ -221,6 +221,9 @@ class PhieuDieuTri(BaseModel):
             return 0
         for dich_vu in self.chi_tiet_dich_vu:
             tong_tien += dich_vu.don_gia
+        if self.don_thuoc:
+            for ct in self.don_thuoc.ds_thuoc:
+                tong_tien += ct.thuoc.don_gia * ct.so_luong
         return tong_tien
 
     @property
@@ -235,6 +238,7 @@ class ChiTietPhieuDieuTri(BaseModel):
     __tablename__ = 'chi_tiet_phieu_dieu_tri'
     phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id', ondelete='CASCADE'), nullable=False)
     dich_vu_id = Column(Integer, ForeignKey('dich_vu.id', ondelete='RESTRICT'), nullable=False)
+
     don_gia = Column(Integer, nullable=False)
 
 
@@ -253,6 +257,7 @@ class Thuoc(BaseModel):
     ten_thuoc = Column(String(100), nullable=False)
     don_vi = Column(sqlEnum(DonViThuoc), nullable=False, default=DonViThuoc.VIEN)
     cac_lo_thuoc = relationship('LoThuoc', backref='thuoc', lazy=True, cascade="all, delete-orphan")
+    don_gia = Column(Float, nullable=False)
 
 
 class LoThuoc(db.Model):
@@ -269,6 +274,7 @@ class DonThuoc(BaseModel):
     ngay_boc_thuoc = Column(DateTime, default=datetime.now())
     phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id', ondelete='CASCADE'), nullable=False,
                                unique=True)
+    ds_thuoc = relationship('LieuLuongSuDung', backref='don_thuoc_ref', lazy=True, cascade="all, delete-orphan")
 
 
 # Bảng trung gian giữa đơn thuốc và thuốc cho biết liều lượng
@@ -276,6 +282,8 @@ class LieuLuongSuDung(BaseModel):
     __tablename__ = 'lieu_luong_su_dung'
     don_thuoc_id = Column(Integer, ForeignKey('don_thuoc.id', ondelete='CASCADE'))
     thuoc_id = Column(Integer, ForeignKey('thuoc.id', ondelete='RESTRICT'))
+
+    thuoc = relationship('Thuoc', backref='cac_lieu_luong', lazy=True)
 
     so_luong = Column(Integer, nullable=False)
     huong_dan = Column(String(255))
