@@ -81,7 +81,6 @@ function inputUnit() {
     }
 }
 
-initServiceEvents();
 
 // thêm dịch vụ và hiện giá trị dịch vụ trên nơi chọn
 function initServiceEvents() {
@@ -128,8 +127,8 @@ function initServiceEvents() {
             totalAmount += price;
 
             const row = document.createElement('tr');
-            rolistContainer.classList.remove('hidden');
-            w.dataset.serviceId = serviceId
+            listContainer.classList.remove('hidden');
+            row.dataset.serviceId = serviceId
             row.className = "hover:bg-gray-50 transition-colors";
             row.innerHTML = `
                 <td class="py-3 px-4 text-sm">${stt}</td>

@@ -8,82 +8,192 @@ const tabApiMap = {
 };
 let buttons = document.querySelectorAll('.tab-btn');
 
+function highlightTabButton(targetTabId) {
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(b => {
+        // Reset style cũ
+        b.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+        b.classList.add('text-gray-600', 'hover:bg-gray-100');
 
-buttons.forEach(btn => {
-    btn.addEventListener('click', async () => {
-        const target = btn.dataset.tab;
-        const url = tabApiMap[target];
-
-        if (!url) return;
-        buttons.forEach(b => {
-            b.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
-            b.classList.add('text-gray-600', 'hover:bg-gray-100');
-        });
-        btn.classList.remove('text-gray-600', 'hover:bg-gray-100');
-        btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
-
-        const tabel = document.getElementById("tab-content-container");
-        if (!tabel) return;
-
-        tabel.style.opacity = "0.5";
-        tabel.style.pointerEvents = "none";
-
-        try {
-            let res = await fetch(url);
-            if (!res.ok) throw new Error('Network response was not ok');
-            let html = await res.text();
-            tabel.innerHTML = html;
-
-            if (target === 'tab-treatment') {
-                initCreateTreatment();
-            }
-            if (target === 'tab-work') {
-                initCalendarWork();
-            }
-            if (target === 'tab-today') {
-                const buttons = document.querySelectorAll(".btn-phieu-dieu-tri");
-                buttons.forEach(btn => {
-                    btn.addEventListener("click", async () => {
-                        const patientId = btn.dataset.patientId;
-                        const dichVu = btn.dataset.dichvu;
-
-                        const url = `/tabs/treatment?patient_id=${patientId}&dichvu=${dichVu}`;
-                        res = await fetch(url);
-                        html = await res.text();
-                        tabel.innerHTML = html;
-                        const listContainer = document.getElementById('service-list-container');
-                        listContainer.classList.remove('hidden');
-                        initCreateTreatment()
-
-                    });
-                });
-                initToday();
-            }
-
-        } catch (error) {
-            console.error("Lỗi tải tab:", error);
-            tabel.innerHTML = `<p class="text-red-500 p-4">Không thể tải dữ liệu. Vui lòng thử lại.</p>`;
-        } finally {
-            tabel.style.opacity = "1";
-            tabel.style.pointerEvents = "auto";
+        // Active style cho nút được chọn
+        if (b.dataset.tab === targetTabId) {
+            b.classList.remove('text-gray-600', 'hover:bg-gray-100');
+            b.classList.add('bg-blue-600', 'text-white', 'shadow-md');
         }
     });
-});
+}
 
+async function loadTabContent(target, params = "") {
+    const urlBase = tabApiMap[target];
+    if (!urlBase) return;
+
+    const url = urlBase + params; // Ghép tham số vào URL nếu có
+    const container = document.getElementById("tab-content-container");
+    if (!container) return;
+
+    // Hiệu ứng loading
+    container.style.opacity = "0.5";
+    container.style.pointerEvents = "none";
+
+    // Cập nhật nút active trên thanh menu
+    highlightTabButton(target);
+
+    try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Network response was not ok');
+        const html = await res.text();
+        container.innerHTML = html;
+
+        // --- Logic khởi tạo riêng cho từng tab ---
+
+        if (target === 'tab-treatment') {
+            initCreateTreatment();
+        }
+
+        if (target === 'tab-work') {
+            if (typeof initCalendarWork === 'function') initCalendarWork();
+        }
+
+        if (target === 'tab-today') {
+            initButtonsLichKham();
+            initToday();
+
+        }
+
+    } catch (error) {
+        console.error("Lỗi tải tab:", error);
+        container.innerHTML = `<p class="text-red-500 p-4">Không thể tải dữ liệu. Vui lòng thử lại.</p>`;
+    } finally {
+        container.style.opacity = "1";
+        container.style.pointerEvents = "auto";
+    }
+}
+
+// Hàm xử lý sự kiện click cho các nút "Lập phiếu" trong tab Lịch hôm nay
+function initButtonsLichKham() {
+    const buttons = document.querySelectorAll(".btn-phieu-dieu-tri"); // Nút Lập phiếu
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            // 1. Lấy dữ liệu từ data attribute
+            const patientId = btn.dataset.patientId || btn.getAttribute('data-patientId');
+            const dichVuId = btn.dataset.dichvu || btn.getAttribute('data-dichvu');
+
+            console.log(`Chuyển sang điều trị: BN ${patientId}, DV ${dichVuId}`);
+
+            // 2. Tạo query string
+            // Lưu ý: Tên tham số phải khớp với bên Python (benh_nhan_id, dich_vu_id)
+            const queryString = `?patient_id=${patientId}&dichvu=${dichVuId}`;
+            console.log(patientId)
+
+            // 3. Gọi hàm chuyển tab sang tab treatment với tham số
+            loadTabContent('tab-treatment', queryString);
+            initCreateTreatment()
+
+        });
+    });
+}
+
+// --- KHỞI TẠO SỰ KIỆN CHO CÁC TAB CHÍNH ---
 document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll('.tab-btn');
+
+    // Gán sự kiện click cho các tab menu
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.dataset.tab;
+            loadTabContent(target); // Gọi hàm load không tham số
+        });
+    });
+
+    // Mặc định load tab đầu tiên hoặc tab từ URL (nếu bạn muốn giữ tính năng bookmark)
     const params = new URLSearchParams(window.location.search);
-    let currentTabId = params.get('tab');
+    const currentTabId = params.get('tab') || 'tab-today'; // Mặc định là tab-today
 
-    if (!currentTabId) {
-        currentTabId = 'tab-today';
-    }
-
-    const targetBtn = document.querySelector(`.tab-btn[data-tab="${currentTabId}"]`);
-
-    if (targetBtn) {
-        targetBtn.click();
+    // Tìm nút tab tương ứng để active
+    const activeBtn = document.querySelector(`.tab-btn[data-tab="${currentTabId}"]`);
+    if (activeBtn) {
+        loadTabContent(currentTabId);
+    } else {
+        // Fallback nếu không tìm thấy tab
+        loadTabContent('tab-today');
     }
 });
+
+// buttons.forEach(btn => {
+//     btn.addEventListener('click', async () => {
+//         const target = btn.dataset.tab;
+//         const url = tabApiMap[target];
+//
+//         if (!url) return;
+//         buttons.forEach(b => {
+//             b.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+//             b.classList.add('text-gray-600', 'hover:bg-gray-100');
+//         });
+//         btn.classList.remove('text-gray-600', 'hover:bg-gray-100');
+//         btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+//
+//         const tabel = document.getElementById("tab-content-container");
+//         if (!tabel) return;
+//
+//         tabel.style.opacity = "0.5";
+//         tabel.style.pointerEvents = "none";
+//
+//         try {
+//             let res = await fetch(url);
+//             if (!res.ok) throw new Error('Network response was not ok');
+//             let html = await res.text();
+//             tabel.innerHTML = html;
+//
+//             if (target === 'tab-treatment') {
+//                 initCreateTreatment();
+//             }
+//             if (target === 'tab-work') {
+//                 initCalendarWork();
+//             }
+//             if (target === 'tab-today') {
+//                 const buttons = document.querySelectorAll(".btn-phieu-dieu-tri");
+//                 buttons.forEach(btn => {
+//                     btn.addEventListener("click", async () => {
+//                         const patientId = btn.dataset.patientId;
+//                         const dichVu = btn.dataset.dichvu;
+//
+//                         const url = `/tabs/treatment?patient_id=${patientId}&dichvu=${dichVu}`;
+//                         res = await fetch(url);
+//                         html = await res.text();
+//                         tabel.innerHTML = html;
+//                         const listContainer = document.getElementById('service-list-container');
+//                         listContainer.classList.remove('hidden');
+//                         initCreateTreatment()
+//
+//                     });
+//                 });
+//                 initToday();
+//             }
+//
+//         } catch (error) {
+//             console.error("Lỗi tải tab:", error);
+//             tabel.innerHTML = `<p class="text-red-500 p-4">Không thể tải dữ liệu. Vui lòng thử lại.</p>`;
+//         } finally {
+//             tabel.style.opacity = "1";
+//             tabel.style.pointerEvents = "auto";
+//         }
+//     });
+// });
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const params = new URLSearchParams(window.location.search);
+//     let currentTabId = params.get('tab');
+//
+//     if (!currentTabId) {
+//         currentTabId = 'tab-today';
+//     }
+//initCreateTreatment()
+//     const targetBtn = document.querySelector(`.tab-btn[data-tab="${currentTabId}"]`);
+//
+//     if (targetBtn) {
+//         targetBtn.click();
+//     }
+// });
 
 const STATUS_MAP = {
     "Đã khám": {
