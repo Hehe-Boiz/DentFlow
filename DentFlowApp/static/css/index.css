@@ -818,14 +818,6 @@
         display: table;
     }
 
-    .tab-button {
-        transition: all .8s !important;
-    }
-
-    .tab-button:hover {
-        background-color: #f8f9fc !important; /* Nền sáng nhẹ */
-        color: #4e73df; /* Chữ màu xanh chủ đạo */
-    }
 
     .tab-button:active {
         background-color: #4e73df;
@@ -1077,21 +1069,6 @@
         border-left: 4px solid transparent; /* Tạo chỗ trống trước cho viền */
     }
 
-    .card-hover {
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-
-    /* 2. Hiệu ứng khi di chuột vào */
-    .card-hover:hover {
-        /* Nhấc thẻ lên trên 5px */
-        transform: translateY(-5px);
-
-        /* Tăng độ đậm của bóng đổ để tạo cảm giác nổi khối 3D */
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
-
-        /* Đổi con trỏ chuột thành hình bàn tay */
-        cursor: pointer;
-    }
 
     .list-group-item:hover {
         background-color: #f8f9fc !important; /* Màu nền xám xanh rất nhạt */
