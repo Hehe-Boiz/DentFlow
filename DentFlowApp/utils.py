@@ -30,61 +30,6 @@ def user_can_do(User):
 
 class ValidationUtils:
     @staticmethod
-    def check_lich_kham_hop_le(bac_si_id, ngay_kham_str, gio_kham_str):
-        """
-        Kiểm tra Yêu cầu 1:
-        - Mỗi bác sĩ tối đa 5 lịch/ngày.
-        - Không trùng giờ.
-        """
-        try:
-            # Chuyển đổi string ngày thành object date (giả sử format form gửi lên là YYYY-MM-DD)
-            ngay_kham = datetime.strptime(ngay_kham_str, '%Y-%m-%d').date()
-        except ValueError:
-            return False, "Định dạng ngày không hợp lệ."
-
-        # 1. Kiểm tra số lượng lịch trong ngày
-        count_lich = LichHen.query.filter(
-            LichHen.bac_si_id == bac_si_id,
-            LichHen.ngay_kham == ngay_kham
-        ).count()
-
-        if count_lich >= 5:
-            return False, "Bác sĩ đã kín lịch (Tối đa 5 ca/ngày)."
-
-        # 2. Kiểm tra trùng giờ
-        bi_trung = LichHen.query.filter(
-            LichHen.bac_si_id == bac_si_id,
-            LichHen.ngay_kham == ngay_kham,
-            LichHen.gio_kham == gio_kham_str
-        ).first()
-
-        if bi_trung:
-            return False, f"Giờ {gio_kham_str} đã có người đặt."
-
-        return True, "Hợp lệ"
-
-    @staticmethod
-    def check_thuoc_ke_don(thuoc_id):
-        """
-        Kiểm tra Yêu cầu 3:
-        - Không kê thuốc quá hạn.
-        - Thuốc phải nằm trong danh mục được phép.
-        """
-        thuoc = Thuoc.query.get(thuoc_id)
-        if not thuoc:
-            return False, "Thuốc không tồn tại."
-
-        # Kiểm tra danh mục cho phép
-        if not thuoc.is_allowed:
-            return False, f"Thuốc {thuoc.ten_thuoc} không nằm trong danh mục được phép."
-
-        # Kiểm tra hạn sử dụng
-        if thuoc.ngay_he_han < datetime.now().date():
-            return False, f"Thuốc {thuoc.ten_thuoc} đã hết hạn sử dụng (Hạn: {thuoc.ngay_he_han})."
-
-        return True, "Thuốc hợp lệ."
-
-    @staticmethod
     def tim_lo_thuoc_tot_nhat(thuoc_id, so_ngay_dung):
         """
         Tìm lô thuốc phù hợp nhất (Auto).
@@ -174,7 +119,24 @@ def validate_thong_tin_benh_nhan(ho_ten, sdt, email=None, password=None, confirm
 
         if confirm_password is not None and password != confirm_password:
             return False, "Mật khẩu xác nhận không khớp."
+    return True, None
 
+def validate_booking(doctor_id, booking_date, time_slot, doctor_name):
+    doctor_id = doctor_id.strip() if doctor_id else ""
+    doctor_name = doctor_name.strip() if doctor_name else ""
+    booking_date = booking_date.strip() if booking_date else ""
+    time_slot = time_slot.strip() if time_slot else ""
+    if not doctor_id:
+        return False, "Không nhân được id của bác sĩ"
+
+    if not doctor_name:
+        return False, "Không nhân được tên của bác sĩ"
+
+    if not booking_date:
+        return False, "Không nhân được của ngày đặt lịch"
+
+    if not time_slot:
+        return False, "chưa giờ đặt"
     return True, None
 
 def get_monday(d: date) -> date:

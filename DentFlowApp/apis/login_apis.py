@@ -35,7 +35,7 @@ def login_process():
         if u.vai_tro == UserRole.DOCTOR:
             return redirect('/treatment')
     else:
-        flash("Đăng nhập thất bại", 'failed')
+        flash("Đăng nhập thất bại", 'danger')
         return redirect('/login')
 
     next = request.args.get('next')
@@ -71,11 +71,11 @@ def register_process():
         if u:
             login_user(user=u)
             session['can_do'] = utils.user_can_do(u)
-        flash("Đăng ký người dùng thành công", 'failed')
+        flash("Đăng ký người dùng thành công", 'success')
         return redirect('/')
     except IntegrityError as e:
         db.session.rollback()
-        flash("Tên người dùng hiện tại đã trùng", 'failed')
+        flash("Tên người dùng hiện tại đã trùng", 'danger')
         return render_template('register.html')
     except Exception as ex:
         flash(str(ex), 'failed')
@@ -114,7 +114,7 @@ def change_password():
         flash('Đổi mật khẩu thành công', 'failed')
         return redirect('/user')
     else:
-        flash('Mật khẩu tài khoản hiện tại không khớp', 'failed')
+        flash('Mật khẩu tài khoản hiện tại không khớp', 'danger')
         return redirect('/user')
 
 
