@@ -1,4 +1,5 @@
 {% extends 'layout/base.html' %}
+{% from 'macros.html' import hero_in_role %}
 
 {% block title %}Cashier view{% endblock %}
 
@@ -11,9 +12,8 @@
 {% endblock %}
 
 {% block hero %}
-    {% include 'layout/hero_in_role.html' %}
+    {{ hero_in_role('Thu ngân', time_now,  "fa-solid fa-money-bills" ) }}
 {% endblock %}
-
 {% block content %}
     <div class="card border-0 rounded-xl shadow-sm mt-4">
         <div class="card-body  p-4">
@@ -26,31 +26,31 @@
         {% if pagination_tt and pagination_tt.items %}
 
             {% include 'cashier/lich_su.html' %}
-            {#            {% if pagination_tt.pages > 1 %}#}
-            {#                <nav aria-label="Page navigation" class="mt-4 pb-5">#}
-            {#                    <ul class="pagination justify-content-center">#}
-            {#                        <li class="page-item {% if not pagination_tt.has_prev %}disabled{% endif %}">#}
-            {#                            <a class="page-link border-0 shadow-sm rounded-circle me-1"#}
-            {#                               href="{{ url_for('cashier_view', page=pagination_tt.prev_num) if pagination_tt.has_prev else '#' }}">#}
-            {#                                <i class="fas fa-chevron-left"></i>#}
-            {#                            </a>#}
-            {#                        </li>#}
-            {##}
-            {#                        <li class="page-item active">#}
-            {#                    <span class="page-link border-0 shadow-sm rounded-pill px-3 mx-2">#}
-            {#                        Trang {{ pagination_tt.page }} / {{ pagination_tt.pages }}#}
-            {#                    </span>#}
-            {#                        </li>#}
-            {##}
-            {#                        <li class="page-item {% if not pagination_tt.has_next %}disabled{% endif %}">#}
-            {#                            <a class="page-link border-0 shadow-sm rounded-circle ms-1"#}
-            {#                               href="{{ url_for('cashier_view', page=pagination_tt.next_num) if pagination_tt.has_next else '#' }}">#}
-            {#                                <i class="fas fa-chevron-right"></i>#}
-            {#                            </a>#}
-            {#                        </li>#}
-            {#                    </ul>#}
-            {#                </nav>#}
-            {#            {% endif %}#}
+            {% if pagination_tt.pages > 1 %}
+                <nav aria-label="Page navigation" class="mt-4 pb-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item {% if not pagination_tt.has_prev %}disabled{% endif %}">
+                            <a class="page-link border-0 shadow-sm rounded-circle me-1"
+                               href="{{ url_for('cashier_view', page_tt=pagination_tt.prev_num, tab='payment-history') if pagination_tt.has_prev else '#' }}">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+
+                        <li class="page-item active">
+                                <span class="page-link border-0 shadow-sm rounded-pill px-3 mx-2">
+                                    Trang {{ pagination_tt.page }} / {{ pagination_tt.pages }}
+                                </span>
+                        </li>
+
+                        <li class="page-item {% if not pagination_tt.has_next %}disabled{% endif %}">
+                            <a class="page-link border-0 shadow-sm rounded-circle ms-1"
+                               href="{{ url_for('cashier_view', page_tt=pagination_tt.next_num, tab='payment-history') if pagination_tt.has_next else '#' }}">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            {% endif %}
         {% endif %}
     {% else %}
         {% if pagination and pagination.items %}
