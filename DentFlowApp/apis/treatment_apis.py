@@ -13,7 +13,7 @@ formatted = now.strftime("%d/%m/%Y")
 def treatment_view():
     bacsi_id = current_user.bac_si.ma_bac_si
     patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_date_time(bacsi_id)
-    services = dichvu_dao.get_services()
+    services = dichvu_dao.get_dich_vu()
     count_lich_kham = len(patients)
     count_lich_da_kham = len(lich_hen_dao.get_lich_hen_da_kham_theo_bac_si())
     count_lich_cho_kham = max(count_lich_kham - count_lich_da_kham, 0)

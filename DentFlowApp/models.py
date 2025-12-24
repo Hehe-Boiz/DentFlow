@@ -261,7 +261,6 @@ class LoThuoc(db.Model):
     han_su_dung = Column(DateTime, nullable=False)
     so_luong = Column(Integer, nullable=False)
     ngay_nhap = Column(DateTime, default=datetime.now())
-
     thuoc_id = Column(Integer, ForeignKey('thuoc.id', ondelete='CASCADE'), nullable=False)
 
 

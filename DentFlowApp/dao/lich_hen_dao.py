@@ -1,9 +1,5 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
-from DentFlowApp.models import HoSoBenhNhan, LichHen, TrangThaiLichHen
-from DentFlowApp import db, app
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import joinedload
 from sqlalchemy import or_, extract
 from DentFlowApp.models import HoSoBenhNhan, LichHen, TrangThaiLichHen, DichVu, LichLamViec
 from DentFlowApp import db, app

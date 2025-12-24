@@ -34,6 +34,9 @@ def login_process():
         session['can_do'] = utils.user_can_do(u)
         if u.vai_tro == UserRole.DOCTOR:
             return redirect('/treatment')
+    else:
+        flash("Đăng nhập thất bại", 'failed')
+        return redirect('/login')
 
     next = request.args.get('next')
     print(next)
