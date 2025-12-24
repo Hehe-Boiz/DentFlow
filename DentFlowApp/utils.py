@@ -20,6 +20,8 @@ def user_can_do(User):
         can_do['Trang thu ngân'] = '/cashier'
     if User.vai_tro == UserRole.MANAGER:
         can_do['Trang quản lý'] = '/manager'
+    if User.vai_tro == UserRole.DOCTOR:
+        can_do['Trang bác sĩ'] = '/treatment'
     else:
         for item in admin.menu():
             if item.is_accessible():

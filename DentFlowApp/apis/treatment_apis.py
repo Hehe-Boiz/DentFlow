@@ -4,12 +4,14 @@ from flask_login import current_user, login_required
 from DentFlowApp import utils
 from DentFlowApp.dao import lich_hen_dao, dichvu_dao, bacsi_dao, thuoc_dao, phieu_dieu_tri_dao, lichlamviec_dao
 from datetime import date, datetime, timedelta
+from DentFlowApp.decorators import doctor_required
 
 now = datetime.now()
 formatted = now.strftime("%d/%m/%Y")
 
 
 @app.route('/treatment')
+@doctor_required
 def treatment_view():
     bacsi_id = current_user.bac_si.ma_bac_si
     patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_date_time(bacsi_id)
@@ -38,6 +40,7 @@ def treatment_view():
 
 
 @app.route('/tabs/treatment')
+@doctor_required
 def create_treatment_view():
     bacsi_id = current_user.bac_si.ma_bac_si
     patients = lich_hen_dao.get_all_lich_hen_by_bac_si(bacsi_id)
@@ -59,6 +62,7 @@ def create_treatment_view():
 
 
 @app.route('/tabs/today')
+@doctor_required
 def lich_hen_today_view():
     bacsi_id = current_user.bac_si.ma_bac_si
     patients = lich_hen_dao.get_lich_hen_theo_bac_si_today_time(bacsi_id)
@@ -67,13 +71,14 @@ def lich_hen_today_view():
 
 
 @app.get("/treatments/ke-don")
+@doctor_required
 def ke_don_partial():
     thuocs = thuoc_dao.get_thuoc_all()
     return render_template("treatments/ke_don_thuoc.html", thuocs=thuocs)
 
 
 @app.route('/treatment/thuoc/<int:thuoc_id>/lo-thuoc', methods=['GET'])
-@login_required
+@doctor_required
 def get_lo_thuoc(thuoc_id):
     """Lấy tất cả lô thuốc còn hạn của một loại thuốc"""
     try:
@@ -94,7 +99,7 @@ def get_lo_thuoc(thuoc_id):
 
 
 @app.route('/treatment/thuoc/<int:thuoc_id>/lo-phu-hop', methods=['POST'])
-@login_required
+@doctor_required
 def get_lo_phu_hop(thuoc_id):
     """Tự động chọn lô thuốc phù hợp dựa trên số ngày dùng"""
     try:
@@ -127,7 +132,7 @@ def get_lo_phu_hop(thuoc_id):
 
 
 @app.route('/treatment', methods=['POST'])
-@login_required
+@doctor_required
 def create_treatment():
     try:
         data = request.json
@@ -204,6 +209,7 @@ def create_treatment():
 
 
 @app.route("/tabs/work")
+@doctor_required
 def schedule_week():
     day_str = request.args.get("day")
     if day_str:
@@ -257,7 +263,7 @@ def schedule_week():
 
 
 @app.get("/treatment/lich-hen/slot")
-@login_required
+@doctor_required
 def api_lich_hen_slot():
     date_str = request.args.get("date")
     time_str = request.args.get("time")
