@@ -25,6 +25,7 @@ def receptionist():
     kw = request.args.get('kw')
     if active_tab == 'schedule':
         lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)),kw=kw)
+        print(lich.ho_ten for lich in lich_hen)
     if active_tab == 'profile':
         ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)),kw=kw)
     return render_template('receptionist/receptionist.html',
@@ -35,11 +36,6 @@ def receptionist():
                            pages=math.ceil(lich_hen_dao.get_tong_lich_hen() / app.config['PAGE_SIZE']),
                            now=datetime.now().strftime("%Y-%m-%d"))
 
-@app.route('/receptionist/tra-cuu', methods=['GET'])
-@receptionist_required
-def receptionist_phieu_dieu_tri_search():
-    return render_template('receptionist/receptionist_search_pdt.html')
-#
 @app.route('/receptionist/add-appointment', methods=['POST'])
 @receptionist_required
 def add_appointment():

@@ -4,7 +4,7 @@ from flask import jsonify, request, flash, redirect
 from flask_login import current_user, login_required
 
 from DentFlowApp import app
-from DentFlowApp.dao import ho_so_benh_nhan_dao
+from DentFlowApp.dao import ho_so_benh_nhan_dao, lich_hen_dao
 from DentFlowApp.models import UserRole, GioiTinh
 from DentFlowApp.utils import validate_thong_tin_benh_nhan
 
@@ -153,4 +153,17 @@ def update_profile_page(ho_so_id):
     if current_user.vai_tro == UserRole.RECEPTIONIST:
         return redirect('/receptionist?tab=profile')
     else:
+        return redirect('/user')
+
+@app.route('/api/delete-appointment/<int:lich_hen_id>', methods=["POST"])
+@login_required
+def xoa_lich_hen(lich_hen_id):
+    try:
+        if current_user.vai_tro == UserRole.USER:
+            lich_hen_dao.del_lich_hen(lich_hen_id)
+            flash("Xóa thành công lịch hẹn", "success")
+            return redirect('/user')
+        return redirect('/')
+    except Exception as ex:
+        flash("Xóa không thành công lịch hẹn", "danger")
         return redirect('/user')

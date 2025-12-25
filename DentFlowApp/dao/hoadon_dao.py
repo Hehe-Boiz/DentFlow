@@ -93,15 +93,15 @@ def get_doanh_thu_bac_si_trong_thang(thang_nay=None):
     return thong_ke_doanh_thu_bac_si
 
 
-def get_chi_tiet_hoadon_trong_thang(thang_nay=None):
+def get_so_lieu_bao_cao(thang_nay=None):
     ds_hoadon = get_ds_hoa_don_trong_thang(thang_nay)
-    ct_hoadon = {}
+    thong_ke = {}
     for hoa_don in ds_hoadon:
-        ten_bac_si = hoa_don.phieu_dieu_tri.bac_si.ho_ten
-        if ten_bac_si not in ct_hoadon:
-            ct_hoadon[ten_bac_si] = {
+        if hoa_don.id not in thong_ke:
+            thong_ke[hoa_don.id] = {
                 'ngay_thanh_toan': hoa_don.ngay_thanh_toan,
-                'benh_nhan': hoa_don.phieu_dieu_tri.ho_so_benh_nhan.ho_ten,
-                'dich_vu': [ct.ten_dich_vu for ct in hoa_don.phieu_dieu_tri.get_ds_dich_vu]
-
+                'tong_tien': 0,
             }
+        thong_ke[hoa_don.id]['tong_tien'] += hoa_don.tong_tien
+
+    return thong_ke

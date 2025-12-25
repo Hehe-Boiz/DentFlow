@@ -1,8 +1,10 @@
 import http
 import os
 
+from werkzeug.utils import redirect
+
 from DentFlowApp import app, db
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, flash
 from flask_login import current_user, login_required
 
 from DentFlowApp.dao.phieu_dieu_tri_dao import get_ds_thuoc_by_phieu_dieu_tri
@@ -11,21 +13,24 @@ from DentFlowApp.dao.thungan_dao import get_phieu_dieu_tri_chua_thanh_toan, \
     get_ds_phieu_dieu_tri_da_thanh_toan
 from DentFlowApp.decorators import cashier_required
 from DentFlowApp.models import UserRole, TrangThaiThanhToan, HoaDon, PhuongThucThanhToan
+import datetime
 
 
 @app.route('/cashier', methods=['GET'])
 @cashier_required
 def cashier_view():
     page = request.args.get('page', 1, type=int)
+    page_history = request.args.get('page_tt', 1, type=int)
     page_size = app.config['PAGE_SIZE']
+    now = datetime.datetime.now().strftime('%Y-%m-%d')
     active_tab = request.args.get('tab')
     ds_phieu_dieu_tri_chua_thanh_toan = get_phieu_dieu_tri_chua_thanh_toan(page=page,
                                                                            PAGE_SIZE=page_size)  # pagination
-    ds_phieu_dieu_tri_da_thanh_toan = get_ds_phieu_dieu_tri_da_thanh_toan(page=page, PAGE_SIZE=page_size)
+    ds_phieu_dieu_tri_da_thanh_toan = get_ds_phieu_dieu_tri_da_thanh_toan(page=page_history, PAGE_SIZE=page_size)
     # tong_tien = get_tong_tien_by_phieu_dieu_tri(phieu_dieu_tri)
     return render_template('cashier/trang_thungan.html', thungan=True, pagination=ds_phieu_dieu_tri_chua_thanh_toan,
                            active_tab=active_tab,
-                           pagination_tt=ds_phieu_dieu_tri_da_thanh_toan)
+                           pagination_tt=ds_phieu_dieu_tri_da_thanh_toan, time_now=now)
 
 
 @app.route('/cashier/tra-cuu', methods=['GET'])
@@ -66,6 +71,7 @@ def cashier_xac_nhan_thanh_toan(id):
                              phuong_thuc_thanh_toan=phuong_thuc_thanh_toan)
         db.session.add(new_hoa_don)
         db.session.commit()
-        return jsonify({'status': 'success', 'msg': 'Tạo hóa đơn thành công'})
+        flash('Thanh toán thành công', 'success')
+        return redirect('/cashier')
     except Exception as ex:
         return jsonify({'status': 'error', 'msg': str(ex)})
