@@ -112,7 +112,7 @@ class HoSoBenhNhan(BaseModel):
     ngay_sinh = Column(Date, nullable=True)
     CCCD = Column(String(12), nullable=True)
     # Tài khoản của người dùng (Nếu có)
-    nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='SET NULL'), nullable=True)
+    nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='SET NULL'), nullable=True, unique=True)
 
     # lịch hẹn và phiếu điều trị tra cứu từ hồ sơ
     lich_hen_ds = relationship('LichHen', backref='ho_so_benh_nhan', lazy=True, cascade="all, delete-orphan")
@@ -140,7 +140,7 @@ class BacSi(db.Model):
     loai_bac_si = Column(sqlEnum(LoaiBacSi))
 
     # Tài khoản của bác sĩ
-    nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id, ondelete='SET NULL'), nullable=True)
+    nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id, ondelete='SET NULL'), nullable=True, unique=True)
 
     # Lấy các lịch hẹn cũng như phiếu điều trị để phục vụ việc lọc thanh toán hay đặt lịch
     lich_lam_viec_ds = relationship('LichLamViec', backref='bac_si', lazy=True, cascade="all, delete-orphan")

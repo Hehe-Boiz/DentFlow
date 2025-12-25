@@ -1,8 +1,10 @@
 import http
 import os
 
+from werkzeug.utils import redirect
+
 from DentFlowApp import app, db
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, flash
 from flask_login import current_user, login_required
 
 from DentFlowApp.dao.phieu_dieu_tri_dao import get_ds_thuoc_by_phieu_dieu_tri
@@ -66,6 +68,7 @@ def cashier_xac_nhan_thanh_toan(id):
                              phuong_thuc_thanh_toan=phuong_thuc_thanh_toan)
         db.session.add(new_hoa_don)
         db.session.commit()
-        return jsonify({'status': 'success', 'msg': 'Tạo hóa đơn thành công'})
+        flash('Thanh toán thành công', 'success')
+        return redirect('/cashier')
     except Exception as ex:
         return jsonify({'status': 'error', 'msg': str(ex)})
