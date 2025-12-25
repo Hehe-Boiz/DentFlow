@@ -2,11 +2,6 @@
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
 }
-
-.rounded-lg {
-    border-radius: var(--radius);
-}
-
 .py-3-05 {
     padding-top: 0.75rem !important;
     padding-bottom: 0.25rem !important;
@@ -40,4 +35,3 @@
 .mt-2-5 {
     margin-top: 0.75rem;
 }
-

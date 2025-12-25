@@ -400,7 +400,8 @@ function initDeleteMedicineEvent() {
 
 function initSaveTreatmentEvent() {
     const btnSaveTreatment = document.getElementById('btn-save-treatment');
-    btnSaveTreatment.addEventListener('click', async function () {
+    btnSaveTreatment.addEventListener('click', async function (e) {
+        e.preventDefault();
         const selectPatientElement = document.querySelector('select[name="patient_id"]')
         const patientId = selectPatientElement ? selectPatientElement.value : null;
         const selectedOption = selectPatientElement.options[selectPatientElement.selectedIndex];
