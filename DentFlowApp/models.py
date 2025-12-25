@@ -17,6 +17,7 @@ class GioiTinh(enum.Enum):
     KHAC = "Khác"
 
 
+
 class DonViThuoc(enum.Enum):
     VIEN = "viên"
     VI = "vỉ"
@@ -114,7 +115,6 @@ class HoSoBenhNhan(BaseModel):
     CCCD = Column(String(12), nullable=True)
     # Tài khoản của người dùng (Nếu có)
     nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='SET NULL'), nullable=True)
-
     # lịch hẹn và phiếu điều trị tra cứu từ hồ sơ
     lich_hen_ds = relationship('LichHen', backref='ho_so_benh_nhan', lazy=True, cascade="all, delete-orphan")
     phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='ho_so_benh_nhan', lazy=True, cascade="all, delete-orphan")
@@ -130,16 +130,6 @@ class HoSoBenhNhan(BaseModel):
             'cccd': self.CCCD or '',
             'dia_chi': self.dia_chi or ''
         }
-
-@event.listens_for(HoSoBenhNhan, 'after_insert')
-def generate_ho_so_id(mapper, connection, target):
-    ma_bn = f"BN{str(target.id).zfill(6)}"
-
-    connection.execute(
-        HoSoBenhNhan.__table__.update()
-        .where(HoSoBenhNhan.id == target.id)
-        .values(ho_so_id=ma_bn)
-    )
 
 
 class BacSi(db.Model):
@@ -259,7 +249,7 @@ class HoaDon(BaseModel):
     __tablename__ = 'hoa_don'
     tong_tien = Column(Float)
     ngay_thanh_toan = Column(DateTime, default=datetime.now())
-    nhan_vien_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='SET NULL'), nullable=False)
+    nhan_vien_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     phuong_thuc_thanh_toan = Column(sqlEnum(PhuongThucThanhToan), nullable=False)
     phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id'), nullable=False,
                                unique=True)

@@ -64,7 +64,7 @@
                 <div class="service-item" onclick="selectService(this, {{ s.id }}, '{{ s.ten_dich_vu }}')">
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <h6 class="fw-bold mb-0">{{ s.ten_dich_vu }} </h6>
-                        <span class="service-price">{{ s.don_gia }} </span>
+                        <span class="service-price">{{ "{:,.0f}".format(s.don_gia).replace(',', '.') }} đ </span>
                     </div>
                     <p class="text-muted small mb-2">Khám và tư vấn toàn diện về tình trạng răng miệng.</p>
                 </div>

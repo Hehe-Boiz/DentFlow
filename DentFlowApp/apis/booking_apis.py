@@ -12,6 +12,7 @@ def booking_view():
         services = dichvu_dao.get_dich_vu(kw=kw)
         return render_template('booking/booking.html', services=services)
 
+
 @app.route('/booking/choose-service', methods=['post'])
 @login_required
 def chon_dich_vu():

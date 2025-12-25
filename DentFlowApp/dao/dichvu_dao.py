@@ -13,6 +13,8 @@ def get_dich_vu(page=-1, kw=None):
         query = query.slice(start, start + app.config['PAGE_SIZE'])
     return query.all()
 
+def get_tong_dich_vu():
+    return DichVu.query.count()
 
 def get_services_by_id(id):
     return DichVu.query.get(id)
