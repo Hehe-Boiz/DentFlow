@@ -1,16 +1,11 @@
-import http
 import os
-
 from DentFlowApp import app, db
 from flask import render_template, request, jsonify, flash, redirect
-from flask_login import current_user, login_required
-
-from DentFlowApp.dao.phieu_dieu_tri_dao import get_ds_thuoc_by_phieu_dieu_tri
+from flask_login import current_user
 from DentFlowApp.dao.receptionistDao import get_phieu_dieu_tri_by_id
-from DentFlowApp.dao.thungan_dao import get_phieu_dieu_tri_chua_thanh_toan, \
-    get_ds_phieu_dieu_tri_da_thanh_toan
+from DentFlowApp.dao.thungan_dao import get_phieu_dieu_tri_chua_thanh_toan, get_ds_phieu_dieu_tri_da_thanh_toan
 from DentFlowApp.decorators import cashier_required
-from DentFlowApp.models import UserRole, TrangThaiThanhToan, HoaDon, PhuongThucThanhToan, LoThuoc
+from DentFlowApp.models import TrangThaiThanhToan, HoaDon, PhuongThucThanhToan, LoThuoc
 import datetime
 
 
@@ -25,7 +20,6 @@ def cashier_view():
     ds_phieu_dieu_tri_chua_thanh_toan = get_phieu_dieu_tri_chua_thanh_toan(page=page,
                                                                            PAGE_SIZE=page_size)  # pagination
     ds_phieu_dieu_tri_da_thanh_toan = get_ds_phieu_dieu_tri_da_thanh_toan(page=page_history, PAGE_SIZE=page_size)
-    # tong_tien = get_tong_tien_by_phieu_dieu_tri(phieu_dieu_tri)
     return render_template('cashier/trang_thungan.html', thungan=True, pagination=ds_phieu_dieu_tri_chua_thanh_toan,
                            active_tab=active_tab,
                            pagination_tt=ds_phieu_dieu_tri_da_thanh_toan, time_now=now)
@@ -56,30 +50,31 @@ def cashier_thanh_toan(id):
 def cashier_xac_nhan_thanh_toan(id):
     try:
         phieu_dieu_tri = get_phieu_dieu_tri_by_id(id)
-        for ct in phieu_dieu_tri.chi_tiet_don_thuoc:
-            so_luong_can = ct.so_luong
-            thuoc_id = ct.thuoc_id
-            lo_thuocs = LoThuoc.query.filter(
-                LoThuoc.thuoc_id == thuoc_id,
-                LoThuoc.so_luong > 0
-            ).order_by(LoThuoc.han_dung_ngay.asc()).all()
+        if phieu_dieu_tri.don_thuoc:
+            for ct in phieu_dieu_tri.don_thuoc:
+                so_luong_can = ct.so_luong
+                thuoc_id = ct.thuoc_id
+                lo_thuocs = LoThuoc.query.filter(
+                    LoThuoc.thuoc_id == thuoc_id,
+                    LoThuoc.so_luong > 0
+                ).order_by(LoThuoc.han_dung_ngay.asc()).all()
 
-            tong_ton_kho = sum(lo.so_luong for lo in lo_thuocs)
+                tong_ton_kho = sum(lo.so_luong for lo in lo_thuocs)
 
-            if tong_ton_kho < so_luong_can:
-                flash(f"Kho không đủ thuốc: {ct.thuoc.ten_thuoc} (Cần: {so_luong_can}, Còn: {tong_ton_kho})", 'danger')
+                if tong_ton_kho < so_luong_can:
+                    flash(f"Kho không đủ thuốc: {ct.thuoc.ten_thuoc} (Cần: {so_luong_can}, Còn: {tong_ton_kho})",
+                          'danger')
 
-            # Thực hiện trừ dần
-            for lo in lo_thuocs:
-                if so_luong_can <= 0:
-                    break
+                for lo in lo_thuocs:
+                    if so_luong_can <= 0:
+                        break
 
-                if lo.so_luong >= so_luong_can:
-                    lo.so_luong -= so_luong_can
-                    so_luong_can = 0
-                else:
-                    so_luong_can -= lo.so_luong
-                    lo.so_luong = 0
+                    if lo.so_luong >= so_luong_can:
+                        lo.so_luong -= so_luong_can
+                        so_luong_can = 0
+                    else:
+                        so_luong_can -= lo.so_luong
+                        lo.so_luong = 0
         tong_tien = request.form.get('tong-tien-thu')
         phuong_thuc_thanh_toan_selected = request.form.get('phuong_thuc_thanh_toan')
         phuong_thuc_thanh_toan = PhuongThucThanhToan.TIEN_MAT
@@ -98,4 +93,4 @@ def cashier_xac_nhan_thanh_toan(id):
     except Exception as ex:
         db.session.rollback()
         flash(f"Lỗi thanh toán: {ex}", 'danger')
-        return jsonify({'status': 'error', 'msg': str(ex)})
+        return redirect('/cashier')
