@@ -17,7 +17,6 @@ class GioiTinh(enum.Enum):
     KHAC = "Khác"
 
 
-
 class DonViThuoc(enum.Enum):
     VIEN = "viên"
     VI = "vỉ"
