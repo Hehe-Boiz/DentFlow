@@ -1,0 +1,61 @@
+.rounded-xl {
+    border-radius: 20px !important;
+    overflow: hidden;
+}
+
+.card-hover {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+
+.card-hover:hover {
+
+    transform: translateY(-5px);
+
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+
+
+    cursor: pointer;
+}
+
+.tab-button {
+    transition: all .8s !important;
+}
+
+.tab-button:hover {
+    background-color: #f8f9fc !important;
+    color: #4e73df;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.dot-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background-color: #1a2b4a;
+    color: white;
+    width: 30px;
+    border-radius: 5px;
+}
+
+
+.dot:hover {
+    background-color: #4060ad;
+}

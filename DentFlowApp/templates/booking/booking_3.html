@@ -1,0 +1,118 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Đặt lịch khám{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_2.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_3.css') }}"/>
+
+{% endblock %}
+
+{% block content %}
+    {#    <div class="booking-header">#}
+    {#        <div class="container d-flex justify-content-between align-items-center">#}
+    {#            <a href="{{ url_for('index') }}" class="btn-back-header text-decoration-none text-muted"><i#}
+    {#                    class="fas fa-arrow-left me-2"></i> Trang chủ</a>#}
+    {#            <div class="fw-bold text-primary fs-5"><i class="fas fa-tooth"></i> DENTFLOW</div>#}
+    {#            <div style="width: 80px;"></div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {% from 'macros.html' import service_header %}
+    {{ service_header(url_for('index')) }}
+    <div class="container pb-5">
+        <div class="stepper-wrapper step-3-active mb-5">
+            <div class="step-item completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-text">Dịch vụ</div>
+            </div>
+            <div class="step-item completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-text">Thời gian</div>
+            </div>
+            <div class="step-item active">
+                <div class="step-circle">3</div>
+                <div class="step-text">Xác nhận</div>
+            </div>
+        </div>
+
+        <style>
+            .stepper-wrapper.step-3-active::before {
+                background: #2563eb;
+            }
+
+        </style>
+
+        <div class="booking-card mx-auto" style="max-width: 800px;">
+
+            <div class="user-info-box mb-4">
+                <div class="avatar-circle"><i class="far fa-user"></i></div>
+                <div>
+                    <div class="small text-muted">Đặt lịch cho</div>
+                    <div class="fw-bold text-dark">{{ current_user.ho_ten }}</div>
+                    <div class="small text-muted">{{ current_user.so_dien_thoai or '0912345678' }}</div>
+                </div>
+            </div>
+
+            <h4 class="fw-bold mb-2">Xác nhận thông tin</h4>
+            <p class="text-muted mb-4">Kiểm tra lại thông tin trước khi đặt lịch</p>
+
+            <form action="/booking/confirm_booking" method="POST">
+
+                <div class="confirm-box mb-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-label">Họ tên</div>
+                            <div class="info-value">{{ current_user.ho_ten }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-label">Số điện thoại</div>
+                            <div class="info-value">{{ current_user.so_dien_thoai or '09xxx' }}</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">{{ current_user.email }}</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="info-label">Dịch vụ</div>
+                            <div class="info-value text-primary">{{ ten_dich_vu }}</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="info-label">Bác sĩ</div>
+                            <div class="info-value">{{ ten_bac_si }}</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info-label">Ngày khám</div>
+                            <div class="info-value">{{ ngay_dat }}</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info-label">Giờ khám</div>
+                            <div class="info-value">{{ gio_kham }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="fw-bold mb-2">Ghi chú (không bắt buộc)</label>
+                    <textarea name="note" class="form-control note-textarea" rows="3"
+                              placeholder="Thông tin bổ sung, triệu chứng, yêu cầu đặc biệt..."></textarea>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="/booking/choose-time-and-doctor"
+                       class="btn btn-outline-secondary px-4 py-2 fw-medium rounded-3">
+                        Quay lại
+                    </a>
+                    <button type="submit" class="btn btn-primary px-4 py-2 fw-bold rounded-3 w-50">
+                        Xác nhận đặt lịch
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="container text-center mt-4 text-muted small">
+            <i class="fas fa-headset me-1"></i> Cần hỗ trợ? Hotline: <span class="fw-bold text-dark">1900.1234</span>
+        </div>
+    </div>
+
+{% endblock %}

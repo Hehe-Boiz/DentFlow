@@ -1,0 +1,113 @@
+<div class="space-y-4">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div><h3 class="text-xl text-gray-900">Lịch làm việc tuần</h3>
+            <p class="text-sm text-gray-600 mt-1">{{ monday }} - {{ sunday }}</p></div>
+        <div class="flex items-center space-x-2" id="schedule-nav" data-monday="{{ monday.strftime('%Y-%m-%d') }}">
+            <button id="btn-prev-week" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <i class="fa-solid fa-angle-left w-5 h-5 text-gray-600 fx-xl"></i>
+            </button>
+            <button id="btn-this-week"
+                    class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm">
+                Tuần này
+            </button>
+            <button id="btn-next-week" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <i class="fa-solid fa-angle-right w-5 h-5 text-gray-600 fx-xl"></i>
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-wrap items-center gap-4 text-xs">
+        <div class="flex items-center space-x-2">
+            <div class="w-4 h-4 bg-blue-100 border border-blue-300 rounded"></div>
+            <span class="text-gray-600">Giờ làm việc</span></div>
+        <div class="flex items-center space-x-2">
+            <div class="w-4 h-4 bg-green-100 border border-green-400 rounded"></div>
+            <span class="text-gray-600">Đã có lịch hẹn</span></div>
+        <div class="flex items-center space-x-2">
+            <div class="w-4 h-4 bg-gray-100 border border-gray-200 rounded"></div>
+            <span class="text-gray-600">Ngoài giờ làm việc</span></div>
+    </div>
+    <div class="border border-gray-200 rounded-xl overflow-hidden bg-white">
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[800px]">
+                <thead>
+                <tr class="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                    <th class=" py-2 px-3 text-left text-sm sticky left-0 bg-blue-600 z-10">
+                        <i class="fa-regular fa-clock fa-lg w-4 h-4 inline mr-2 "></i>
+                        Giờ
+                    </th>
+                    {% set labels = ["T2","T3","T4","T5","T6","T7","CN"] %}
+                    {% for i in range(7) %}
+                    <th class="py-2 px-2 text-center text-sm ">
+                        <div>{{ labels[i] }}</div>
+                        <div class="text-xs mt-1 font-normal">{{ days[i].strftime("%d/%m") }}</div>
+                    </th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for time in times %}
+                <tr class="bg-gray-50">
+                    <td class="py-0 px-4 text-sm text-gray-700 border-r border-gray-200 sticky left-0 bg-inherit z-10">
+                        {{ time }}
+                    </td>
+                    {% for day in days %}
+                    {% set date_str = day.strftime('%Y-%m-%d') %}
+                    {% set key = date_str ~ '_' ~ time %}
+
+                    {% set is_working = key in working_slots %}
+
+                    <td class="px-2 py-0 border border-gray-200 cursor-pointer transition-all
+                       {{ 'bg-blue-100' if is_working else 'bg-gray-50 hover:bg-green-100' }}">
+
+                        <div class="min-h-[60px] px-3 py-2 flex items-center justify-center slot-cell"
+                             data-date="{{ date_str }}"
+                             data-time="{{ time }}">
+
+                            {% if is_working%}
+                            <div class="text-center text-blue-700 text-xs">
+                                Làm việc
+                                {% if working_slots[key] %}
+                                <p class="mb-0 mt-0.5"><strong>Ghi chú:</strong> {{ working_slots[key] }}</p>
+                                {% endif %}
+                                {% if lich_hen_slots.get(key) %}
+                                <div class=" mt-0.5 flex items-center bg-green-100 text-green-800 text-xs font-semibold px-2 py-0.5 rounded-full border border-green-200 shadow-sm">
+                                    <i class="fa-solid fa-user mr-1 fa-sm"></i>
+
+                                    {{ lich_hen_slots[key] }} lịch hẹn
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            {% else %}
+                            <div class="text-center text-gray-400 text-xs">
+                                Nghỉ
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6">
+        <p class="text-sm text-gray-900 mb-3 flex items-center">
+            <i class="fa-regular fa-calendar fx-xl w-4 h-4 mr-2 text-blue-600"></i>
+            Thông tin ca làm việc
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+            <div class="flex items-center space-x-2"><span class="text-gray-600">Thứ 2 - Thứ 6:</span><span
+                    class="text-gray-900">08:00 - 17:00</span></div>
+            <div class="flex items-center space-x-2"><span class="text-gray-600">Thứ 7:</span><span
+                    class="text-gray-900">08:00 - 12:00</span></div>
+            <div class="flex items-center space-x-2"><span class="text-gray-600">Chủ nhật:</span><span
+                    class="text-red-600">Nghỉ</span></div>
+            <div class="flex items-center space-x-2"><span class="text-gray-600">Nghỉ trưa:</span><span
+                    class="text-gray-900">12:00 - 13:00</span></div>
+        </div>
+    </div>
+</div>

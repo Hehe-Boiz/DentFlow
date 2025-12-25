@@ -1,0 +1,94 @@
+<div class="d-flex p-3 " role="search">
+    <input class="form-control me-2 rounded-xl" id="input_maso" name="id" type="search"
+           placeholder="Nhập mã số phiếu (VD: 1)"
+           aria-label="Search">
+
+    <button class="btn text-white rounded-xl btn-hover bg-primary"
+            type="button"
+            onclick="searchPdt()"> Tìm kiếm
+    </button>
+
+</div>
+
+<div id="result_container" class="card m-3 border-0 p-0" style="display: none;">
+
+
+    <div class="card-body p-0">
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+            <div class="card-header bg-primary bg-gradient text-white p-3 d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-file-invoice-dollar me-2"></i> Phiếu điều trị</h5>
+                <span class="badge bg-white text-primary fs-6">
+            #<span id="pdt_id">...</span>
+        </span>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <div class="avatar-placeholder mb-2 text-primary">
+                        <i class="fas fa-user-circle fa-3x"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-1">
+                        <span id="pdt_ho_ten">Đang tải...</span>
+                    </h4>
+                    <div class="text-muted small">Khách hàng</div>
+                </div>
+
+                <hr class="opacity-25 my-4">
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="text-muted small text-uppercase fw-bold mb-1">Dịch vụ sử dụng</label>
+                        <div class="d-flex align-items-center text-primary">
+                            <i class="fas fa-tooth me-2 fs-5"></i>
+                            <span id="pdt_dich_vu" class="fs-5 fw-medium">...</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="text-muted small text-uppercase fw-bold mb-1">Tổng chi phí</label>
+                        <div class="d-flex align-items-center text-danger">
+                            <i class="fas fa-money-bill-wave me-2 fs-5"></i>
+                            <span id="pdt_dongia" class="fs-4 fw-bold">...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded-3 p-3 mt-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 mb-2 mb-md-0">
+                            <small class="text-muted d-block mb-1">Trạng thái thanh toán:</small>
+                            <span id="pdt_trang_thai" class="badge rounded-pill bg-secondary">
+                                Chưa xác định
+                            </span>
+
+                        </div>
+                        <div class="col-md-4">
+                            <small class="text-muted d-block mb-1">Ghi chú bác sĩ:</small>
+                            <div class="d-flex text-dark">
+                                <i class="fas fa-sticky-note me-2 mt-1 text-secondary"></i>
+                                <span id="pdt_ghichu" class="fst-italic">Không có ghi chú</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-right" id="btn-thanh-toan">
+                               <span type="button" class="btn btn-hover bg-primary  m-2 text-white ">
+                                <a id="a-thanh-toan"
+                                   class="text-white text-decoration-none">Thanh toán</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+<div id="error_alert_div" class=" p-3 alert-warning m-3" style="display: none;">
+    Không tìm thấy phiếu điều trị!
+</div>
+
+<div id="loading_spinner" class="text-center mt-3" style="display: none;">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>

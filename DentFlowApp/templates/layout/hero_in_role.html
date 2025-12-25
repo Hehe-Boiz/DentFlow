@@ -1,0 +1,33 @@
+<div class="bg-primary bg-gradient-primary text-white">
+    <div class="hdr-container">
+        <div class="hdr-row">
+            <div>
+                <h2 class="hdr-title">
+                    {% if bacsi %}
+                    Chào bác sĩ {{ bacsi.ho_ten }}! 👨‍⚕️
+                    {% endif %}
+                    {% if letan %}
+                    Chào {{ current_user.ho_ten }}!
+                    {% endif %}
+                    {% if thungan %}
+                    Chào thu ngân {{ current_user.ho_ten }}
+                    {% endif %}
+                    {% if quanly %}
+                    Chào quản lý {{ current_user.ho_ten }}
+                    {% endif %}
+                </h2>
+
+                {% if bacsi %}
+                <p class="hdr-subtitle">
+                    Hôm nay bạn có {{ count_lich_kham }} bệnh nhân cần khám
+                </p>
+                {% endif %}
+            </div>
+
+            <div class="hdr-clock">
+                <i class="fa-regular fa-clock fa-lg"></i>
+                <span>{{ now }}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="card border-0 shadow-sm rounded-xl mt-4">
+    <div class="card-header bg-white border-0 p-4 pb-0">
+        <h5 class="text-primary">Danh sách chờ thanh toán </h5>
+    </div>
+    <div class="card-body shadow-sm ">
+        <div class="row ">
+            {% for phieu_dieu_tri in pagination.items %}
+                {% include 'cashier/phieu_dieu_tri.html' %}
+            {% endfor %}
+        </div>
+
+    </div>
+</div>

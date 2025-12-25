@@ -1,0 +1,14 @@
+<div class="cards-grid mb-6">
+    {% if 'stats_cards' in session %}
+    {% for info, quantity in session['stats_cards'].items() %}
+    <div class="stat-card">
+        <div class="stat-card-row">
+            <div>
+                <p class="stat-label">{{ info }}</p>
+                <p class="stat-value">{{ quantity }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>

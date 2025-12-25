@@ -1,0 +1,181 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8faff;
+    min-height: 100vh;
+}
+
+
+.booking-header {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 30px;
+}
+.btn-back {
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+.btn-back:hover { color: #2563eb; }
+
+
+.stepper-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+.step-item {
+    text-align: center;
+    position: relative;
+    padding: 0 40px;
+    z-index: 2;
+}
+
+.stepper-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 2px;
+    background-color: #e5e7eb;
+    z-index: 1;
+}
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin: 0 auto 10px;
+    transition: all 0.3s;
+}
+.step-text {
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+
+.step-item.active .step-circle {
+    background-color: #2563eb;
+    color: white;
+    box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.2);
+}
+.step-item.active .step-text {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+
+.booking-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.user-info-box {
+    background-color: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+
+.service-list-container {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.service-list-container::-webkit-scrollbar {
+    width: 6px;
+}
+.service-list-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.service-list-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+
+.service-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+.service-item:hover {
+    border-color: #93c5fd;
+    background-color: #f8faff;
+}
+
+.service-item.selected {
+    border-color: #2563eb;
+    background-color: #eff6ff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.service-item.selected::after {
+    content: '\f00c';
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: #2563eb;
+    font-size: 1.2rem;
+}
+
+.service-price {
+    color: #2563eb;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.service-duration {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+
+.support-footer {
+    margin-top: 40px;
+    text-align: left;
+    padding-left: 15%;
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 50px;
+}

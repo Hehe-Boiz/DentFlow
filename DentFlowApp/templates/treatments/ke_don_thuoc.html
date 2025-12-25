@@ -1,0 +1,131 @@
+<div class="p-5 bg-white border-t border-gray-300">
+    <div id="warning-box"
+         class="hidden bg-orange-50 border border-orange-200 rounded-lg p-3 mb-4 text-sm text-gray-800 flex items-center space-x-2">
+        <i class="fa-solid fa-triangle-exclamation w-6 h-4 mt-0.5 flex-shrink-0 text-orange-600 fa-xl"
+           style="color: #ed333b;"></i>
+        <p id="warning-text" class="p-0-class-m">Vui lòng kiểm tra kỹ hạn sử dụng của thuốc. Không được kê thuốc hết
+            hạn.</p>
+    </div>
+    <div id="error-msg-lo-thuoc"
+         class="hidden bg-red-50 border border-red-200 rounded-lg p-3 mb-4 text-sm text-red-700 flex items-center space-x-2">
+        <i class="fa-solid fa-circle-xmark w-4 h-4 text-red-600"></i>
+        <span id="error-text-content">Không tìm thấy lô thuốc phù hợp.</span>
+    </div>
+
+    <div class="space-y-4">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div>
+                <label class="flex items-center space-x-2 text-gray-700 mb-2 text-sm">
+                    <i class="fa-solid fa-pills w-4 h-4 text-gray-600 fa-xl" style="color: #c0bfbc;"></i>
+                    <span>Tên thuốc</span>
+                </label>
+                <select id="select-ten-thuoc"
+                        class="w-full min-h-45 px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm">
+                    <option value="">-- Chọn thuốc --</option>
+                    {% for t in thuocs %}
+                    <option value="{{ t.id }}" data-unit="{{ t.don_vi.value }}">
+                        {{ t.ten_thuoc }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2 text-sm">Hạn sử dụng</label>
+                <input type="text" readonly
+                       id="input-han-su-dung"
+                       class="w-full px-3 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm" value="">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+            <div>
+                <label class="block text-gray-700 mb-2 text-sm">Liều dùng</label>
+                <input type="number" placeholder="2" min="0" step="0.5"
+                       class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm"
+                       value="">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2 text-sm">Đơn vị</label>
+                <input type="text" placeholder="viên"
+                       readonly
+                       id="input-don-vi"
+                       class="w-full px-3 py-2.5 border border-gray-300 rounded-lg bg-gray-50 text-sm" value="">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2 text-sm">Số ngày</label>
+                <input type="number" placeholder="5" min="0"
+                       id="input-so-ngay"
+                       class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm"
+                       value="">
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-gray-700 mb-2 text-sm">Thời điểm uống thuốc</label>
+                <div class="flex items-center gap-2">
+                    <button type="button" class="time-btn px-3 py-1-5 rounded-lg bg-gray-200 text-gray-700">Sáng
+                    </button>
+                    <button type="button" class="time-btn px-3 py-1-5 rounded-lg bg-gray-200 text-gray-700">Trưa
+                    </button>
+                    <button type="button" class="time-btn px-3 py-1-5 rounded-lg bg-gray-200 text-gray-700">Chiều
+                    </button>
+                    <button type="button" class="time-btn px-3 py-1-5 rounded-lg bg-gray-200 text-gray-700">Tối</button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2 text-sm">Thời điểm uống</label>
+                <select id="select-thoi-diem"
+                        class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm">
+                    <option value="">-- Chọn --</option>
+                    <option value="Trước ăn">Trước ăn</option>
+                    <option value="Sau ăn">Sau ăn</option>
+                    <option value="Trong bữa ăn">Trong bữa ăn</option>
+                    <option value="Khi đói">Khi đói</option>
+                    <option value="Trước khi ngủ">Trước khi ngủ</option>
+                    <option value="Sau khi ngủ dậy dậy">Sau khi ngủ dậy</option>
+                </select>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm text-gray-700 mb-2">
+                    Ghi chú
+                </label>
+
+                <input
+                        type="text"
+                        id="ghi-chu-thuoc"
+                        placeholder="Ghi chú về cách sử dụng..."
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg
+                   focus:ring-2 focus:ring-blue-600 focus:border-blue-600
+                   text-sm bg-white"
+                        value=""
+                >
+            </div>
+        </div>
+
+        <button type="button"
+                id="id-add-thuoc"
+                class="bg-blue-600 text-white px-4 py-2.5 rounded-lg hover:bg-blue-700 transition-all shadow-sm flex items-center space-x-2 text-sm">
+                <i class="fa-solid fa-plus w-5 h-5 text-blue-600" style="color: #ffffff;"></i>
+            <span>Thêm Thuốc</span>
+        </button>
+        <div id="list-thuoc-container" class="border border-gray-300 rounded-lg overflow-hidden mt-6 hidden">
+            <div class="bg-gray-50 px-4 py-2 border-b border-gray-200 flex items-center">
+                <p class="text-sm text-gray-900 font-bold">
+                    Danh sách thuốc đã thêm
+                </p>
+            </div>
+
+            <div id="list-thuoc-body" class="divide-y divide-gray-100">
+            </div>
+        </div>
+    </div>
+</div>

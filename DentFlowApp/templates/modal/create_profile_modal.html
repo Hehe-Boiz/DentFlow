@@ -1,0 +1,74 @@
+<div class="modal fade" id="createProfileModal" tabindex="-1" aria-hidden="true" style="z-index: 1060;">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header border-bottom-0 pb-0">
+                <h5 class="modal-title fw-bold text-uppercase">Thêm mới khách hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body bg-light">
+                <form id="formCreateProfile">
+                    <div class="tab-content bg-white p-4 rounded shadow-sm">
+                        <div class="tab-pane fade show active" id="tab-info">
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label small fw-bold">Họ tên <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control fw-bold text-primary" name="ho_ten"
+                                                   id="new_hoten" required placeholder="Nhập họ tên khách hàng...">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label small text-muted">Ngày sinh</label>
+                                            <input type="date" class="form-control" name="ngay_sinh" id="new_ngaysinh">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small text-muted">Giới tính</label>
+                                            <select class="form-select" name="gioi_tinh" id="new_gioitinh">
+                                                <option value="NAM">Nam</option>
+                                                <option value="NU">Nữ</option>
+                                                <option value="KHAC">Khác</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small text-muted">Số điện thoại <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="so_dien_thoai" id="new_sdt"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small text-muted">CCCD <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="CCCD" id="new_CCCD">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label class="form-label small text-muted">Email</label>
+                                            <input type="email" class="form-control" name="email" id="new_email"
+                                                   placeholder="Nhập email...">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label class="form-label small text-muted">Địa chỉ</label>
+                                            <input type="text" class="form-control" name="dia_chi" id="new_diachi"
+                                                   placeholder="Số nhà, đường, phường/xã...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-white">
+                <button type="button" class="btn btn-light border px-4" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary px-4 fw-bold" onclick="saveFullProfile()">
+                    <i class="fas fa-save me-2"></i> Lưu thông tin
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

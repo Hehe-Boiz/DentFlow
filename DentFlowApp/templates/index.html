@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Trang chủ{% endblock %}
+{% block hero %}
+    {% include 'landing_page_hero.html' %}
+{% endblock %}
+{% block content %}
+    {% block styles %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/landing_page.css') }}"/>
+    {% endblock %}
+    {% block landing_page %}
+        {% include 'landing_page_content.html' %}
+    {% endblock %}
+    {% block booking_success %}
+        {% include 'booking/booking_success.html' %}
+    {% endblock %}
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/landing_page.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Tìm kiếm phiếu điều trị{% endblock %}
+{% block content %}
+    {% from macros import service_header %}
+    {{ service_header('/cashier') }}
+
+    {% include 'layout/phieu_dieu_tri_search_service.html' %}
+
+    <div class="d-flex justify-content-end gap-2 mt-3">
+        <button type="button" class="btn btn-success">
+            Xác nhận
+        </button>
+        <button type="button" class="btn btn-danger">
+            Hủy xác nhận
+        </button>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/service.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,69 @@
+<div class="tab-pane fade show active" id="pills-schedule" role="tabpanel">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold text-secondary mb-0">Danh sách lịch hẹn</h5>
+        <form class="d-flex" action="" method="get">
+            <div class="input-group shadow-sm rounded-3 bg-white p-1 border">
+                <span class="input-group-text border-0 bg-transparent ps-3">
+                    <i class="fas fa-search text-muted"></i>
+                </span>
+                <input type="hidden" name="tab" value="schedule">
+                <input type="text"
+                       class="form-control border-0 shadow-none bg-transparent"
+                       placeholder="Tìm theo tên..."
+                       name="kw"
+                       value="{{ request.args.get('kw', '') }}">
+                <button class="btn btn-primary rounded-3 px-4 fw-bold m-0" type="submit">
+                    Tìm
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="appointment-list">
+        {% if lich_hen %}
+        {% for lich in lich_hen %}
+        {% if lich.trang_thai.value in ['Chờ khám', 'Đặt lịch thành công'] %}
+        <div class="appointment-item d-flex flex-column flex-md-row justify-content-between align-items-center gap-3" id="action-delete-{{ lich.id }}">
+            <div class="w-100">
+                <div class="patient-name">{{ lich.ho_so_benh_nhan.ho_ten }}</div>
+                <div class="info-line"><i class="far fa-clock"></i> {{ lich.ngay_dat }} - {{ lich.gio_kham }}</div>
+                <div class="info-line"><i class="fas fa-user-md"></i> BS. {{ lich.bac_si.ho_ten }}</div>
+            </div>
+            <div class="d-flex align-items-center gap-2" id="action-area-{{ lich.id }}">
+                {% if lich.trang_thai.value == 'Chờ khám' %}
+                <span class="badge badge-soft-success px-3 py-2 fw-normal" >
+                    Đã xác nhận
+                </span>
+                <a href="#"
+                   class="btn btn-outline-primary btn-md px-3 fw-medium rounded-pill d-flex align-items-center text-nowrap">
+                    <i class="fas fa-print me-2"></i> Xuất phiếu
+                </a>
+                {% elif lich.trang_thai.value == 'Đặt lịch thành công' %}
+                <span class="badge badge-soft-warning px-3 py-2 fw-normal">
+                    Chờ xác nhận
+                </span>
+                <button class="btn btn-primary btn-md rounded-pill px-3 text-nowrap fw-medium" onclick="confirmBookedAppointment({{ lich.id }})">
+                    Xác nhận
+                </button>
+                {% endif %}
+                <button class="btn btn-danger btn-md rounded-pill px-3 text-nowrap fw-medium" onclick="deleteBookedAppointment({{ lich.id }})">
+                    Hủy lịch
+                </button>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+
+    {% if pages > 1 %}
+    <ul class="pagination mt-2">
+        {% for i in range(1, pages + 1) %}
+        <li class="page-item"><a class="page-link" href="/receptionist?tab=schedule&page={{i}}">{{ i }}</a></li>
+        {% endfor %}
+    </ul>
+        {% endif %}
+
+</div>

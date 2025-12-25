@@ -1,0 +1,122 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Đặt lịch khám{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_2.css') }}"/>
+{% endblock %}
+
+{% block content %}
+    {% from 'macros.html' import service_header %}
+    {{ service_header('/booking') }}
+
+    <div class="container">
+        <div class="stepper-wrapper step-2-active">
+            <div class="step-item completed">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <div class="step-text">Dịch vụ</div>
+            </div>
+            <div class="step-item active">
+                <div class="step-circle">2</div>
+                <div class="step-text">Thời gian</div>
+            </div>
+            <div class="step-item">
+                <div class="step-circle">3</div>
+                <div class="step-text">Xác nhận</div>
+            </div>
+        </div>
+
+        <div class="booking-card">
+            <div class="user-info-box">
+                <div class="avatar-circle"><i class="far fa-user"></i></div>
+                <div>
+                    <div class="small text-muted">Đặt lịch cho</div>
+                    <div class="fw-bold text-dark">{{ current_user.ho_ten if current_user.is_authenticated else 'Khách Vãng
+                    Lai' }}
+                    </div>
+                    {% if 'booking_data' in session %}
+                        <div class="small text-primary"><i class="fas fa-tooth me-1"></i> Dịch vụ đã
+                            chọn: {{ session['booking_data']['service_name'] }}
+                        </div>
+                    {% else %}
+                        <div class="small text-primary"><i class="fas fa-tooth me-1"></i>
+                            Chưa chọn dịch vụ nào
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <h4 class="mb-4 fw-bold">Chọn bác sĩ và thời gian</h4>
+
+            <form action="/booking/choose-time-and-doctor" method="POST" id="bookingFormStep2">
+                <input type="hidden" name="doctor_id" id="selectedDoctorId" required>
+                <input type="hidden" name="doctor_name" id="selectedDoctorName" required>
+                <div id="formErrorMessage" class="alert alert-danger d-none mb-3">
+                    <i class="fas fa-exclamation-circle me-2"></i> Vui lòng chọn đầy đủ: Bác sĩ, Ngày và Giờ khám!
+                </div>
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Bác sĩ <span class="text-danger">*</span></label>
+                    <div class="row g-3">
+                        {% for doctor in doctors %}
+                            <div class="col-md-6">
+                                <div class="doctor-card"
+                                     onclick="selectDoctor(this, '{{ doctor.ma_bac_si }}', '{{ doctor.ho_ten }}')">
+                                    <div>
+                                        <h6 class="fw-bold mb-1">{{ doctor.ho_ten }}</h6>
+                                        <div class="small text-muted">Răng hàm mặt</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <label for="bookingDate" class="form-label fw-bold">Ngày khám <span
+                                class="text-danger">*</span></label>
+                        <input type="date" class="form-control form-control-custom" id="bookingDate" name="booking_date"
+                               required>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-label fw-bold">Giờ khám <span class="text-danger">*</span></div>
+                        <div id="noSlotMessage" class="alert alert-warning text-center small p-2 d-none">
+                            <i class="fas fa-exclamation-triangle me-1"></i> Bác sĩ đã kín lịch hoặc không có lịch vào
+                            ngày này.
+                        </div>
+                        <div id="slotWaitingMessage" class="text-muted small border rounded p-3 bg-light">
+                            <i class="fas fa-info-circle me-1"></i> Vui lòng chọn Bác sĩ và Ngày khám để xem lịch.
+                        </div>
+
+                        <div id="timeSlotContainer" class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-2 d-none">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-5">
+                    <a href="/booking"
+                       class="btn btn-outline-secondary px-4 py-2 fw-medium rounded-3">
+                        Quay lại
+                    </a>
+                    <button type="button" class="btn btn-primary px-5 py-2 fw-bold rounded-3" id="btnContinueStep2"
+                            onclick="checkFormValidity()">
+                        Tiếp tục
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="container" style="max-width: 800px;">
+            <div class="mt-4 p-3 bg-white rounded-3 border">
+                <div class="small text-muted"><i class="fas fa-headset me-2 text-primary"></i> Hotline hỗ trợ: <span
+                        class="text-dark fw-bold">1900.1234</span></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+{% endblock %}

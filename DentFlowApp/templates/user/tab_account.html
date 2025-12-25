@@ -1,0 +1,83 @@
+<div class="tab-pane fade show active" id="tab-account">
+    <h6 class="text-uppercase text-muted mb-3 small fw-bold">Thông tin đăng nhập</h6>
+    <form id="formAccount" action="/user/update-user/{{ current_user.id }}" method="post" enctype="multipart/form-data">
+        <div class="row g-4 mb-4">
+
+            <div class="col-md-6">
+                <label class="form-label fw-bold small text-muted">Họ và Tên</label>
+                <div class="input-group">
+                <span class="input-group-text bg-light border-end-0 text-muted">
+                    <i class="fas fa-user"></i>
+                </span>
+                    <input type="text" class="form-control bg-light border-start-0 fw-bold text-dark"
+                           value="{{ current_user.ho_ten }}" name="ho_ten">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-bold small text-muted">Số điện thoại</label>
+                <div class="input-group shadow-sm">
+                <span class="input-group-text bg-white border-end-0 text-primary">
+                    <i class="fas fa-phone-alt"></i>
+                </span>
+                    <input type="text" class="form-control border-start-0"
+                           name="so_dien_thoai"
+                           value="{{ current_user.so_dien_thoai }}"
+                           placeholder="Nhập số điện thoại...">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+                <label for="uploadAvatarInput" class="btn btn-outline-secondary btn-sm rounded-pill px-3 border-dashed">
+                    <i class="fas fa-camera me-1"></i> Tải ảnh mới
+                </label>
+                <input type="file" id="uploadAvatarInput" name="avatar" class="d-none">
+                <span class="ms-2 small text-muted fst-italic d-none d-md-inline" id="fileNameDisplay">JPG, PNG tối đa 2MB.</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary px-4 py-2 fw-bold rounded-3 shadow-sm transition-hover">
+                <i class="fas fa-save me-2"></i> Lưu thay đổi
+            </button>
+        </div>
+    </form>
+
+    <hr class="my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="text-uppercase text-muted small fw-bold m-0">Đổi mật khẩu</h6>
+
+        <button class="btn btn-light btn-sm rounded-circle shadow-sm" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsePass"
+                aria-expanded="false"
+                id="btnTogglePass">
+            <i class="fas fa-chevron-down text-primary"></i>
+        </button>
+    </div>
+    <div class="collapse" id="collapsePass">
+        <form class="card card-body border-0 bg-light mb-3" action="/change-password" method="post">
+            <input type="hidden" name="username" value="{{ current_user.username }}">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Mật khẩu cũ <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" name="old_password" placeholder="Nhập mật khẩu hiện tại...">
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Mật khẩu mới <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" name="new_password" placeholder="Nhập mật khẩu mới...">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Xác nhận mật khẩu <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" name="confirm_password"
+                           placeholder="Nhập lại mật khẩu mới...">
+                </div>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary fw-bold">
+                    <i class="fas fa-key me-2"></i> Cập nhật mật khẩu
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

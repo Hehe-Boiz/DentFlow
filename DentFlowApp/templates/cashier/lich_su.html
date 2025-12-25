@@ -1,0 +1,31 @@
+<div class="card border-0 mt-4 shadow-sm rounded-3">
+    <div class="card-body">
+        <h5 class="text-primary fw-bold mb-3">Lịch sử giao dịch gần đây</h5>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Mã HD</th>
+                <th>Bệnh nhân</th>
+                <th>Thời gian</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for phieu_dieu_tri in pagination_tt.items %}
+
+                <tr>
+                    <td>{{ phieu_dieu_tri.id }}</td>
+                    <td>{{ phieu_dieu_tri.ho_so_benh_nhan.ho_ten }}</td>
+                    <td>{{ phieu_dieu_tri.ngay_cap_nhat }}</td>
+                    <td>
+                        <span class="fs-6 fw-bold text-danger">
+                            {{ "{:,.0f}".format(phieu_dieu_tri.get_tong_tien).replace(',', '.') }} ₫ </span></td>
+                    <td><span class="badge bg-success">Thành công</span></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>

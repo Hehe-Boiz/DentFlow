@@ -1,0 +1,27 @@
+.confirm-box {
+    background-color: #f3f4f6;
+    border-radius: 16px;
+    padding: 30px;
+}
+.info-label {
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+.info-value {
+    color: #111827;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+.note-textarea {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 0.95rem;
+    resize: none;
+}
+.note-textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}

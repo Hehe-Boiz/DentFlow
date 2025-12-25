@@ -1,0 +1,1877 @@
+{
+  "users": [
+    {
+      "username": "quanly",
+      "password": "123456",
+      "ho_ten": "Nguyễn Văn Quản",
+      "vai_tro": "MANAGER",
+      "so_dien_thoai": "091919169",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "thungan",
+      "password": "123456",
+      "ho_ten": "Trần Thị Thu Ngân",
+      "vai_tro": "CASHIER",
+      "so_dien_thoai": "0909000002",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "admin",
+      "password": "123456",
+      "ho_ten": "Quản Trị Viên",
+      "vai_tro": "ADMIN",
+      "so_dien_thoai": "0909999999",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "letan",
+      "password": "123456",
+      "ho_ten": "Lê Thị Tân",
+      "vai_tro": "RECEPTIONIST",
+      "so_dien_thoai": "0909000001",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "bacsi_a",
+      "password": "123456",
+      "ho_ten": "Bác Sĩ A",
+      "vai_tro": "DOCTOR",
+      "so_dien_thoai": "0909000003",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "bacsi_b",
+      "password": "123456",
+      "ho_ten": "Bác Sĩ B",
+      "vai_tro": "DOCTOR",
+      "so_dien_thoai": "0909000004",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "bacsi_c",
+      "password": "123",
+      "ho_ten": "BS. Lê Hoàng C",
+      "vai_tro": "DOCTOR",
+      "so_dien_thoai": "0909000005",
+      "avatar": "https://i.pravatar.cc/150?u=bsc"
+    },
+    {
+      "username": "benhnhan1",
+      "password": "123",
+      "ho_ten": "Lê Văn C",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0912345678",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    },
+    {
+      "username": "benhnhan2",
+      "password": "123",
+      "ho_ten": "Phạm Thị D",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0987654321",
+      "avatar": "https://i.pravatar.cc/150?u=bn2"
+    },
+    {
+      "username": "user",
+      "password": "123456",
+      "ho_ten": "Nguyễn Bá Tân",
+      "vai_tro": "USER",
+      "so_dien_thoai": "0909000000",
+      "avatar": "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647056401/ipmsmnxjydrhpo21xrd8.jpg"
+    }
+  ],
+  "employees": [
+    {
+      "ma_nv": "NV001",
+      "ho_ten": "Nguyễn Văn Quản",
+      "ngay_sinh": "1985-01-01",
+      "nam_sinh": 1985,
+      "so_dien_thoai": "091919169",
+      "dia_chi": "Quận 1, TP.HCM",
+      "muc_luong": 25000000,
+      "ngay_vao_lam": "2020-01-01 08:00:00",
+      "username_lien_ket": "quanly"
+    },
+    {
+      "ma_nv": "NV002",
+      "ho_ten": "Trần Thị Thu Ngân",
+      "ngay_sinh": "1995-05-15",
+      "nam_sinh": 1995,
+      "so_dien_thoai": "0909000002",
+      "dia_chi": "Quận 3, TP.HCM",
+      "muc_luong": 8000000,
+      "ngay_vao_lam": "2023-06-01 08:00:00",
+      "username_lien_ket": "thungan"
+    },
+    {
+      "ma_nv": "NV003",
+      "ho_ten": "Lê Thị Tân",
+      "ngay_sinh": "1998-10-20",
+      "nam_sinh": 1998,
+      "so_dien_thoai": "0909000001",
+      "dia_chi": "Quận Bình Thạnh, TP.HCM",
+      "muc_luong": 7500000,
+      "ngay_vao_lam": "2024-02-15 08:00:00",
+      "username_lien_ket": "letan"
+    },
+    {
+      "ma_nv": "NV004",
+      "ho_ten": "Quản Trị Viên",
+      "ngay_sinh": "1990-12-12",
+      "nam_sinh": 1990,
+      "so_dien_thoai": "0909999999",
+      "dia_chi": "Server Room",
+      "muc_luong": 20000000,
+      "ngay_vao_lam": "2019-01-01 08:00:00",
+      "username_lien_ket": "admin"
+    },
+    {
+      "ma_nv": "NV005",
+      "ho_ten": "Phạm Văn Lao (Lao Công)",
+      "ngay_sinh": "1975-03-10",
+      "nam_sinh": 1975,
+      "so_dien_thoai": "0908887777",
+      "dia_chi": "Quận 4, TP.HCM",
+      "muc_luong": 6000000,
+      "ngay_vao_lam": "2021-05-01 08:00:00",
+      "username_lien_ket": ""
+    }
+  ],
+  "doctors": [
+    {
+      "ma_bac_si": "BS001",
+      "ho_ten": "Nguyễn Văn A",
+      "so_dien_thoai": "0909000003",
+      "loai_bac_si": "TOAN_THOI_GIAN",
+      "username_lien_ket": "bacsi_a",
+      "luong_co_ban": 15000000
+    },
+    {
+      "ma_bac_si": "BS002",
+      "ho_ten": "Trần Thị B",
+      "so_dien_thoai": "0909000004",
+      "loai_bac_si": "BAN_THOI_GIAN",
+      "username_lien_ket": "bacsi_b",
+      "muc_luong_gio": 200000
+    },
+    {
+      "ma_bac_si": "BS003",
+      "ho_ten": "Lê Hoàng C",
+      "so_dien_thoai": "0909000005",
+      "loai_bac_si": "TOAN_THOI_GIAN",
+      "username_lien_ket": "bacsi_c",
+      "luong_co_ban": 18000000
+    }
+  ],
+  "services": [
+    {
+      "ten_dich_vu": "Cạo vôi răng",
+      "don_gia": 200000
+    },
+    {
+      "ten_dich_vu": "Trám răng",
+      "don_gia": 500000
+    },
+    {
+      "ten_dich_vu": "Nhổ răng",
+      "don_gia": 300000
+    },
+    {
+      "ten_dich_vu": "Tẩy trắng răng",
+      "don_gia": 1500000
+    },
+    {
+      "ten_dich_vu": "Điều trị tủy",
+      "don_gia": 1200000
+    },
+    {
+      "ten_dich_vu": "Phục hình răng sứ",
+      "don_gia": 5000000
+    },
+    {
+      "ten_dich_vu": "Niềng răng mắc cài",
+      "don_gia": 35000000
+    }
+  ],
+  "medicines": [
+    {
+      "ten_thuoc": "Paracetamol 500mg",
+      "don_vi": "VIEN",
+      "don_gia": 1000,
+      "batches": [
+        {
+          "han_dung_ngay": 365,
+          "so_luong": 100
+        },
+        {
+          "han_dung_ngay": 180,
+          "so_luong": 60
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Amoxicillin 500mg",
+      "don_vi": "VIEN",
+      "don_gia": 2500,
+      "batches": [
+        {
+          "han_dung_ngay": 700,
+          "so_luong": 200
+        },
+        {
+          "han_dung_ngay": 365,
+          "so_luong": 120
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Ibuprofen 400mg",
+      "don_vi": "VIEN",
+      "don_gia": 3000,
+      "batches": [
+        {
+          "han_dung_ngay": 540,
+          "so_luong": 150
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Augmentin 625mg",
+      "don_vi": "VIEN",
+      "don_gia": 22000,
+      "batches": [
+        {
+          "han_dung_ngay": 500,
+          "so_luong": 80
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Chlorhexidine 0.12% (súc miệng)",
+      "don_vi": "CHAI",
+      "don_gia": 75000,
+      "batches": [
+        {
+          "han_dung_ngay": 365,
+          "so_luong": 40
+        },
+        {
+          "han_dung_ngay": 200,
+          "so_luong": 25
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Vitamin C 500mg",
+      "don_vi": "VI",
+      "don_gia": 2000,
+      "batches": [
+        {
+          "han_dung_ngay": 900,
+          "so_luong": 60
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Listerine Cool Mint",
+      "don_vi": "CHAI",
+      "don_gia": 110000,
+      "batches": [
+        {
+          "han_dung_ngay": 720,
+          "so_luong": 100
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Rodogyl",
+      "don_vi": "VI",
+      "don_gia": 5000,
+      "batches": [
+        {
+          "han_dung_ngay": 300,
+          "so_luong": 50
+        }
+      ]
+    },
+    {
+      "ten_thuoc": "Medrol 4mg",
+      "don_vi": "VIEN",
+      "don_gia": 2000,
+      "batches": [
+        {
+          "han_dung_ngay": 600,
+          "so_luong": 200
+        }
+      ]
+    }
+  ],
+  "patients": [
+    {
+      "ho_ten": "Lê Văn C",
+      "so_dien_thoai": "0912345678",
+      "gioi_tinh": "NAM",
+      "dia_chi": "TP.HCM",
+      "ngay_sinh": "1990-05-15"
+    },
+    {
+      "ho_ten": "Phạm Thị D",
+      "so_dien_thoai": "0987654321",
+      "gioi_tinh": "NU",
+      "dia_chi": "Hà Nội",
+      "ngay_sinh": "1995-08-20"
+    },
+    {
+      "ho_ten": "Nguyễn Hoàng Nam",
+      "so_dien_thoai": "0933445566",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Hải Phòng",
+      "ngay_sinh": "1988-12-10"
+    },
+    {
+      "ho_ten": "Trần Thanh Thảo",
+      "so_dien_thoai": "0944556677",
+      "gioi_tinh": "NU",
+      "dia_chi": "Đà Nẵng",
+      "ngay_sinh": "1992-03-25"
+    },
+    {
+      "ho_ten": "Lý Gia Kiệt",
+      "so_dien_thoai": "0955667788",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Cần Thơ",
+      "ngay_sinh": "1985-07-07"
+    },
+    {
+      "ho_ten": "Võ Minh Anh",
+      "so_dien_thoai": "0966778899",
+      "gioi_tinh": "NU",
+      "dia_chi": "Quận 3, TP.HCM",
+      "ngay_sinh": "1998-11-30"
+    },
+    {
+      "ho_ten": "Đặng Thu Hà",
+      "so_dien_thoai": "0977889900",
+      "gioi_tinh": "NU",
+      "dia_chi": "Long An",
+      "ngay_sinh": "1993-02-14"
+    },
+    {
+      "ho_ten": "Bùi Xuân Huấn",
+      "so_dien_thoai": "0922334455",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Lào Cai",
+      "ngay_sinh": "1980-09-05"
+    },
+    {
+      "ho_ten": "Phan Văn Đức",
+      "so_dien_thoai": "0911223344",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Bình Dương",
+      "ngay_sinh": "1996-06-18"
+    },
+    {
+      "ho_ten": "Trương Thị Mỹ Linh",
+      "so_dien_thoai": "0922334466",
+      "gioi_tinh": "NU",
+      "dia_chi": "Đồng Nai",
+      "ngay_sinh": "1991-04-22"
+    },
+    {
+      "ho_ten": "Hoàng Quốc Việt",
+      "so_dien_thoai": "0933445577",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Vũng Tàu",
+      "ngay_sinh": "1987-01-30"
+    },
+    {
+      "ho_ten": "Ngô Thị Bích Ngọc",
+      "so_dien_thoai": "0944556688",
+      "gioi_tinh": "NU",
+      "dia_chi": "Tây Ninh",
+      "ngay_sinh": "1994-10-12"
+    },
+    {
+      "ho_ten": "Đỗ Minh Tâm",
+      "so_dien_thoai": "0955667799",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Bến Tre",
+      "ngay_sinh": "1989-08-08"
+    },
+    {
+      "ho_ten": "Dương Thúy Hằng",
+      "so_dien_thoai": "0966778800",
+      "gioi_tinh": "NU",
+      "dia_chi": "Tiền Giang",
+      "ngay_sinh": "1997-05-05"
+    },
+    {
+      "ho_ten": "Lâm Chấn Khang",
+      "so_dien_thoai": "0977889911",
+      "gioi_tinh": "NAM",
+      "dia_chi": "Vĩnh Long",
+      "ngay_sinh": "1982-12-24"
+    },
+    {
+      "ho_ten": "Hồ Ngọc Hà",
+      "so_dien_thoai": "0988990022",
+      "gioi_tinh": "NU",
+      "dia_chi": "Quảng Bình",
+      "ngay_sinh": "1984-11-25"
+    }
+  ],
+  "work_schedules": [
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-20",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-20",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-20",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-21",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-21",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-21",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-22",
+      "gio_bat_dau": "08:15:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-22",
+      "gio_bat_dau": "13:00:00",
+      "gio_ket_thuc": "21:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-22",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "12:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-23",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-23",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-23",
+      "gio_bat_dau": "13:00:00",
+      "gio_ket_thuc": "21:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-27",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-27",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-27",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-28",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-28",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-28",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-29",
+      "gio_bat_dau": "08:15:00",
+      "gio_ket_thuc": "12:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-29",
+      "gio_bat_dau": "13:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-29",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "12:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS002",
+      "ngay_lam": "2025-12-30",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS003",
+      "ngay_lam": "2025-12-30",
+      "gio_bat_dau": "13:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-30",
+      "gio_bat_dau": "08:10:00",
+      "gio_ket_thuc": "11:45:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-31",
+      "gio_bat_dau": "13:15:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-01-01",
+      "gio_bat_dau": "08:45:00",
+      "gio_ket_thuc": "10:30:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-02-02",
+      "gio_bat_dau": "16:00:00",
+      "gio_ket_thuc": "20:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2026-01-03",
+      "gio_bat_dau": "10:00:00",
+      "gio_ket_thuc": "13:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2026-01-04",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "09:30:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2026-01-05",
+      "gio_bat_dau": "10:00:00",
+      "gio_ket_thuc": "12:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2026-01-06",
+      "gio_bat_dau": "14:00:00",
+      "gio_ket_thuc": "17:30:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-24",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    },
+    {
+      "bac_si_id": "BS001",
+      "ngay_lam": "2025-12-25",
+      "gio_bat_dau": "08:00:00",
+      "gio_ket_thuc": "17:00:00",
+      "trang_thai": "SAN_SANG"
+    }
+  ],
+  "appointments": [
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "08:00",
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DA_KHAM",
+      "ghi_chu": "Bệnh nhân đến sớm"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "08:30",
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DA_KHAM",
+      "ghi_chu": "Trám 2 lỗ sâu"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "09:00",
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "DA_KHAM",
+      "ghi_chu": "Đau nhức dữ dội"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Niềng răng mắc cài",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Tư vấn lần đầu"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "10:00",
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": "Răng lung lay"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Gói cao cấp"
+    },
+    {
+      "ngay_dat": "2025-12-20",
+      "gio_kham": "15:00",
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "08:00",
+      "benh_nhan_sdt": "0922334455",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Phục hình răng sứ",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Làm cầu răng"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "08:30",
+      "benh_nhan_sdt": "0911223344",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "09:00",
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Sâu răng cửa"
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DA_KHAM",
+      "ghi_chu": "Răng số 8"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "10:30",
+      "benh_nhan_sdt": "0944556688",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": "Tái khám"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0955667799",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Niềng răng mắc cài",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Gắn mắc cài"
+    },
+    {
+      "ngay_dat": "2025-12-21",
+      "gio_kham": "15:30",
+      "benh_nhan_sdt": "0966778800",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "08:15",
+      "benh_nhan_sdt": "0977889911",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "09:00",
+      "benh_nhan_sdt": "0988990022",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Phục hình răng sứ",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Bọc sứ 4 răng"
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "10:00",
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Mòn cổ răng"
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Lần 2"
+    },
+    {
+      "ngay_dat": "2025-12-22",
+      "gio_kham": "15:00",
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Nhổ răng sữa cho bé"
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "08:00",
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "08:30",
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Niềng răng mắc cài",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Siết răng định kỳ"
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "10:30",
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0922334455",
+      "bac_si_id": "BS002",
+      "dich_vu_ten": "Phục hình răng sứ",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Kiểm tra mão sứ"
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "15:00",
+      "benh_nhan_sdt": "0911223344",
+      "bac_si_id": "BS003",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-23",
+      "gio_kham": "16:00",
+      "benh_nhan_sdt": "0988990022",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": ""
+    },
+    {
+      "ngay_dat": "2025-12-24",
+      "gio_kham": "08:30",
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Cạo vôi răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Khách yêu cầu làm nhẹ tay"
+    },
+    {
+      "ngay_dat": "2025-12-24",
+      "gio_kham": "09:30",
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Trám răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Sâu kẽ răng cửa"
+    },
+    {
+      "ngay_dat": "2025-12-24",
+      "gio_kham": "14:00",
+      "benh_nhan_sdt": "0955667799",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Điều trị tủy",
+      "trang_thai": "CHO_KHAM",
+      "ghi_chu": "Tái khám lần 2"
+    },
+    {
+      "ngay_dat": "2025-12-25",
+      "gio_kham": "09:00",
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Tẩy trắng răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Gói tẩy trắng nhanh"
+    },
+    {
+      "ngay_dat": "2025-12-25",
+      "gio_kham": "10:30",
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Nhổ răng",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Răng lung lay, bệnh nhân sợ đau"
+    },
+    {
+      "ngay_dat": "2025-12-25",
+      "gio_kham": "15:00",
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS001",
+      "dich_vu_ten": "Phục hình răng sứ",
+      "trang_thai": "DAT_LICH_THANH_CONG",
+      "ghi_chu": "Tư vấn làm mão sứ"
+    }
+  ],
+  "treatments": [
+    {
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-21 14:00:00",
+      "chan_doan": "Răng hô, chen chúc hàm dưới",
+      "ghi_chu": "Gắn mắc cài hàm dưới (Thanh toán đợt 1)",
+      "dich_vu_su_dung": [
+        "Niềng răng mắc cài"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên sau ăn khi đau nhiều"
+        },
+        {
+          "ten_thuoc": "Listerine Cool Mint",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng kỹ sau ăn"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0966778800",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-21 16:30:00",
+      "chan_doan": "Răng ố vàng muốn cải thiện màu sắc",
+      "ghi_chu": "Tẩy trắng răng tại ghế",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0988990022",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-22 09:00:00",
+      "chan_doan": "Mất răng R14, R15",
+      "ghi_chu": "Phục hình cầu răng sứ (3 đơn vị)",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-22 10:30:00",
+      "chan_doan": "Mòn cổ răng R24, R25",
+      "ghi_chu": "Trám thẩm mỹ cổ răng",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-22 15:15:00",
+      "chan_doan": "Viêm tủy R36 quay lại tái khám",
+      "ghi_chu": "Trám bít ống tủy",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-22 16:00:00",
+      "chan_doan": "Răng sữa lung lay (trẻ em)",
+      "ghi_chu": "Nhổ răng bôi tê",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-23 08:30:00",
+      "chan_doan": "Vôi răng nhiều, hôi miệng",
+      "ghi_chu": "Cạo vôi đánh bóng",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Chlorhexidine 0.12% (súc miệng)",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng sáng tối"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-23 09:45:00",
+      "chan_doan": "Muốn làm trắng răng đón Tết",
+      "ghi_chu": "Tẩy trắng răng trọn gói",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-23 11:00:00",
+      "chan_doan": "Răng đang niềng, đến hẹn",
+      "ghi_chu": "Thay dây cung, siết răng",
+      "dich_vu_su_dung": [
+        "Niềng răng mắc cài"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-23 14:30:00",
+      "chan_doan": "Sâu răng R47 vỡ lớn",
+      "ghi_chu": "Trám tái tạo",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-24 09:15:00",
+      "chan_doan": "Vôi răng độ 1",
+      "ghi_chu": "Khách hàng thân thiết",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-24 10:30:00",
+      "chan_doan": "Sâu kẽ răng cửa",
+      "ghi_chu": "Trám thẩm mỹ Nano",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0955667799",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-24 15:00:00",
+      "chan_doan": "Viêm quanh chóp R36",
+      "ghi_chu": "Bơm rửa ống tủy, đặt thuốc",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "CHUA_THANH_TOAN",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-25 09:00:00",
+      "chan_doan": "Răng xỉn màu",
+      "ghi_chu": "Tẩy trắng răng công nghệ Laser",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-25 10:45:00",
+      "chan_doan": "Răng lung lay, viêm nha chu nặng",
+      "ghi_chu": "Nhổ răng R36, R37",
+      "dich_vu_su_dung": [
+        "Nhổ răng",
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 20,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (Kháng sinh liều cao)"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 20,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-25 15:30:00",
+      "chan_doan": "Thẩm mỹ toàn hàm trên",
+      "ghi_chu": "Bọc sứ 6 răng cửa hàm trên (Thẩm mỹ cao cấp)",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-06-02 08:30:00",
+      "chan_doan": "Vôi răng độ 1",
+      "ghi_chu": "Vệ sinh định kỳ",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Listerine Cool Mint",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng hằng ngày"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-06-05 10:15:00",
+      "chan_doan": "Sâu răng R36, R37",
+      "ghi_chu": "Trám composite 2 xoang",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-06-10 14:00:00",
+      "chan_doan": "Viêm tủy không hồi phục R46",
+      "ghi_chu": "Điều trị nội nha xong",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 14,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (uống hết liều)"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-06-15 09:30:00",
+      "chan_doan": "Răng khấp khểnh, lệch lạc",
+      "ghi_chu": "Gắn mắc cài hàm trên",
+      "dich_vu_su_dung": [
+        "Niềng răng mắc cài"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 10,
+          "huong_dan": "Uống khi thấy ê buốt nhiều"
+        },
+        {
+          "ten_thuoc": "Chlorhexidine 0.12% (súc miệng)",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng kỹ để tránh viêm nướu"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-06-20 16:00:00",
+      "chan_doan": "Răng ố vàng, muốn thẩm mỹ",
+      "ghi_chu": "Tẩy trắng tại phòng khám",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-06-25 08:45:00",
+      "chan_doan": "Răng khôn R48 mọc lệch má",
+      "ghi_chu": "Tiểu phẫu nhổ răng khôn",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 14,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (chống nhiễm trùng)"
+        },
+        {
+          "ten_thuoc": "Medrol 4mg",
+          "so_luong": 3,
+          "huong_dan": "Uống 1 viên vào buổi sáng sau ăn (giảm sưng)"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-06-29 15:30:00",
+      "chan_doan": "Mất răng R24",
+      "ghi_chu": "Làm cầu răng sứ 3 đơn vị",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-07-05 08:30:00",
+      "chan_doan": "Vôi răng dưới nướu, viêm nướu nhẹ",
+      "ghi_chu": "Dặn bệnh nhân dùng chỉ nha khoa",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Listerine Cool Mint",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng sáng tối để giảm viêm nướu"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-07-08 14:15:00",
+      "chan_doan": "Viêm tủy cấp R46 do sâu răng lâu ngày",
+      "ghi_chu": "Đau dữ dội, đã mở tủy giảm áp",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau quá sức chịu đựng"
+        },
+        {
+          "ten_thuoc": "Amoxicillin 500mg",
+          "so_luong": 15,
+          "huong_dan": "Sáng 1 viên, Trưa 1 viên, Tối 1 viên (Kháng sinh)"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên sau ăn"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-07-12 09:00:00",
+      "chan_doan": "Thẩm mỹ răng cửa hàm trên",
+      "ghi_chu": "Làm 2 răng sứ Cercon",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-07-15 16:30:00",
+      "chan_doan": "Sâu răng R36 mặt nhai",
+      "ghi_chu": "Trám Composite",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-07-20 10:00:00",
+      "chan_doan": "Răng chen chúc, hô hàm trên",
+      "ghi_chu": "Thanh toán trọn gói niềng răng",
+      "dich_vu_su_dung": [
+        "Niềng răng mắc cài"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên sau ăn khi cảm thấy ê buốt do siết răng"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-07-25 08:00:00",
+      "chan_doan": "Răng số 8 mọc ngầm 45 độ",
+      "ghi_chu": "Tiểu phẫu",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (uống hết liều)"
+        },
+        {
+          "ten_thuoc": "Medrol 4mg",
+          "so_luong": 5,
+          "huong_dan": "Uống 1 lần vào buổi sáng sau ăn để giảm sưng tấy"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0922334455",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-07-28 15:45:00",
+      "chan_doan": "Mòn cổ chân răng R24, R25",
+      "ghi_chu": "Trám cổ răng",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-01 08:30:00",
+      "chan_doan": "Vôi răng bám nhiều",
+      "ghi_chu": "Vệ sinh kỹ",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Listerine Cool Mint",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng 2 lần/ngày sau khi đánh răng"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-01 10:00:00",
+      "chan_doan": "Răng ố vàng do thực phẩm",
+      "ghi_chu": "Tẩy trắng công nghệ mới",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-02 09:15:00",
+      "chan_doan": "Sâu răng R47",
+      "ghi_chu": "Trám composite",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0944556677",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-03 14:00:00",
+      "chan_doan": "Mất răng R36",
+      "ghi_chu": "Tư vấn làm cầu răng sứ",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0955667788",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-04 08:45:00",
+      "chan_doan": "Viêm tủy hồi phục",
+      "ghi_chu": "Điều trị nội nha",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau, cách nhau tối thiểu 4-6 tiếng"
+        },
+        {
+          "ten_thuoc": "Amoxicillin 500mg",
+          "so_luong": 15,
+          "huong_dan": "Sáng 1 viên, Chiều 1 viên, Tối 1 viên sau ăn"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-05 10:30:00",
+      "chan_doan": "Răng hô nhẹ, lệch lạc",
+      "ghi_chu": "Thanh toán đợt 1 niềng răng",
+      "dich_vu_su_dung": [
+        "Niềng răng mắc cài"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0977889900",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-06 15:20:00",
+      "chan_doan": "Răng lung lay độ 3",
+      "ghi_chu": "Nhổ bỏ",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 6,
+          "huong_dan": "Uống khi đau, không quá 4 viên/ngày"
+        },
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 6,
+          "huong_dan": "Uống 1 viên sau ăn trưa, 1 viên sau ăn tối (chống viêm)"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0922334455",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-07 09:00:00",
+      "chan_doan": "Sâu men răng",
+      "ghi_chu": "",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0911223344",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-08 11:00:00",
+      "chan_doan": "Nhu cầu thẩm mỹ",
+      "ghi_chu": "Bọc sứ 2 răng cửa",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-09 14:30:00",
+      "chan_doan": "Viêm nướu",
+      "ghi_chu": "",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Vitamin C 500mg",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên sau ăn"
+        },
+        {
+          "ten_thuoc": "Chlorhexidine 0.12% (súc miệng)",
+          "so_luong": 1,
+          "huong_dan": "Súc miệng sáng, tối. Không được uống"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-10 16:00:00",
+      "chan_doan": "Sâu răng hàm lớn",
+      "ghi_chu": "Đã trám xong",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0944556688",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-12 08:00:00",
+      "chan_doan": "Đau nhức về đêm",
+      "ghi_chu": "Điều trị tủy xong",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống khi đau"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 14,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (Kháng sinh)"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0955667799",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-13 10:15:00",
+      "chan_doan": "Mẻ răng cửa",
+      "ghi_chu": "Trám thẩm mỹ",
+      "dich_vu_su_dung": [
+        "Trám răng",
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0966778800",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-14 13:45:00",
+      "chan_doan": "Răng số 8 mọc thẳng",
+      "ghi_chu": "Nhổ dự phòng",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 5,
+          "huong_dan": "Uống khi đau"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0977889911",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-15 09:30:00",
+      "chan_doan": "Vệ sinh răng miệng định kỳ",
+      "ghi_chu": "",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_MOMO"
+    },
+    {
+      "benh_nhan_sdt": "0988990022",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-16 15:00:00",
+      "chan_doan": "Muốn làm lại nụ cười",
+      "ghi_chu": "Làm 4 răng sứ",
+      "dich_vu_su_dung": [
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ",
+        "Phục hình răng sứ"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-17 11:00:00",
+      "chan_doan": "Đau răng hàm",
+      "ghi_chu": "Sâu răng lớn",
+      "dich_vu_su_dung": [
+        "Điều trị tủy",
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống khi đau"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 20,
+          "huong_dan": "Sáng 2 viên, Tối 2 viên (chống nhiễm trùng răng miệng)"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-18 14:00:00",
+      "chan_doan": "Niềng răng (trả góp đợt 2)",
+      "ghi_chu": "Tái khám siết răng",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "CHUYEN_KHOAN_VIETQR"
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-19 16:30:00",
+      "chan_doan": "Răng xỉn màu",
+      "ghi_chu": "Tẩy trắng nhanh",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0912345678",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-20 08:30:00",
+      "chan_doan": "Cao răng nhiều, viêm nướu nhẹ",
+      "ghi_chu": "Dặn bệnh nhân đánh răng kỹ hơn",
+      "dich_vu_su_dung": [
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "DA_THANH_TOAN",
+      "phuong_thuc_thanh_toan": "TIEN_MAT"
+    },
+    {
+      "benh_nhan_sdt": "0987654321",
+      "bac_si_id": "BS002",
+      "ngay_tao": "2025-12-20 09:00:00",
+      "chan_doan": "Sâu răng hàm dưới R36, R37",
+      "ghi_chu": "Đã trám composite",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "CHUA_THANH_TOAN"
+    },
+    {
+      "benh_nhan_sdt": "0933445566",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-20 09:45:00",
+      "chan_doan": "Viêm tủy cấp tính răng R46",
+      "ghi_chu": "Bệnh nhân đau nhiều, đã gây tê",
+      "dich_vu_su_dung": [
+        "Điều trị tủy"
+      ],
+      "trang_thai_thanh_toan": "CHUA_THANH_TOAN",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau dữ dội"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên"
+        },
+        {
+          "ten_thuoc": "Rodogyl",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên"
+        }
+      ]
+    },
+    {
+      "benh_nhan_sdt": "0966778899",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-20 14:30:00",
+      "chan_doan": "Nhu cầu thẩm mỹ",
+      "ghi_chu": "Tẩy trắng 2 hàm",
+      "dich_vu_su_dung": [
+        "Tẩy trắng răng",
+        "Cạo vôi răng"
+      ],
+      "trang_thai_thanh_toan": "CHUA_THANH_TOAN"
+    },
+    {
+      "benh_nhan_sdt": "0922334466",
+      "bac_si_id": "BS003",
+      "ngay_tao": "2025-12-21 09:30:00",
+      "chan_doan": "Sâu răng cửa nhẹ",
+      "ghi_chu": "Trám thẩm mỹ",
+      "dich_vu_su_dung": [
+        "Trám răng"
+      ],
+      "trang_thai_thanh_toan": "CHUA_THANH_TOAN"
+    },
+    {
+      "benh_nhan_sdt": "0933445577",
+      "bac_si_id": "BS001",
+      "ngay_tao": "2025-12-21 10:00:00",
+      "chan_doan": "Răng khôn mọc lệch 90 độ",
+      "ghi_chu": "Tiểu phẫu khó, dặn uống thuốc đầy đủ",
+      "dich_vu_su_dung": [
+        "Nhổ răng"
+      ],
+      "trang_thai_thanh_toan": "CHUA_THANH_TOAN",
+      "don_thuoc": [
+        {
+          "ten_thuoc": "Paracetamol 500mg",
+          "so_luong": 10,
+          "huong_dan": "Uống 1 viên khi đau"
+        },
+        {
+          "ten_thuoc": "Ibuprofen 400mg",
+          "so_luong": 10,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên sau ăn (giảm sưng)"
+        },
+        {
+          "ten_thuoc": "Augmentin 625mg",
+          "so_luong": 14,
+          "huong_dan": "Sáng 1 viên, Tối 1 viên (uống hết liều)"
+        },
+        {
+          "ten_thuoc": "Medrol 4mg",
+          "so_luong": 5,
+          "huong_dan": "Uống 1 lần vào buổi sáng sau ăn (kháng viêm mạnh)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+body {
+    background-color: #f8faff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.login-header {
+    padding: 20px 0;
+}
+.btn-back {
+    color: #6c757d;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.btn-back:hover { color: #2563eb; }
+.brand-logo-text {
+    color: #2563eb;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+
+.login-card {
+    background: white;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+}
+
+
+.input-group-custom .input-group-text {
+    background-color: white;
+    border-right: none;
+    color: #adb5bd;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.input-group-custom .form-control {
+    border-left: none;
+    box-shadow: none !important;
+     border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.input-group-custom:focus-within .input-group-text,
+.input-group-custom:focus-within .form-control {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+
+.btn-toggle-password {
+    background: white;
+    border: 1px solid #ced4da;
+    border-left: none;
+    color: #adb5bd;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+
+    z-index: 5;
+}
+.input-group-custom .form-control#passwordInput {
+     border-top-right-radius: 0;
+     border-bottom-right-radius: 0;
+}
+
+
+
+.btn-login {
+    background-color: #2563eb;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.btn-login:hover { background-color: #1d4ed8; }
+
+
+.demo-info-box {
+    background-color: #eef2ff;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+.demo-info-box i { color: #2563eb; width: 20px;}
