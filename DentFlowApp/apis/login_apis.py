@@ -1,3 +1,4 @@
+import math
 from logging import addLevelName
 
 from sqlalchemy.exc import IntegrityError
@@ -6,14 +7,22 @@ from DentFlowApp import app,db, bcrypt
 from flask import request, redirect, render_template, session, flash
 from flask_login import login_user, logout_user, current_user, AnonymousUserMixin
 from DentFlowApp import login
-from DentFlowApp.dao import user_dao
+from DentFlowApp.dao import user_dao, dichvu_dao, lich_hen_dao
 from DentFlowApp.models import UserRole, NguoiDung
 from DentFlowApp.admin import admin
 from DentFlowApp import utils
 
+
 @app.route("/")
 def index():
-    return render_template("index.html")
+    dich_vu = dichvu_dao.get_dich_vu()
+    return render_template("index.html",dich_vu=dich_vu)
+@app.route("/dich_vu")
+def dichvu_view():
+    page = request.args.get('page', 1)
+    dich_vu = dichvu_dao.get_dich_vu(page=int(page))
+    return render_template("dich_vu.html",dich_vu=dich_vu,
+                           pages=math.ceil(dichvu_dao.get_tong_dich_vu() / app.config['PAGE_SIZE']))
 
 @app.route('/login')
 def login_view():

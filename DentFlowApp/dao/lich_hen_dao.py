@@ -74,7 +74,6 @@ def get_all_lich_hen_by_bac_si(bacsi_id):
         db.session.query(
             LichHen.id.label("lich_hen_id"),
             HoSoBenhNhan.id,
-            HoSoBenhNhan.ho_so_id,
             HoSoBenhNhan.ho_ten,
             func.date_format(
                 func.timestamp(LichHen.ngay_dat, LichHen.gio_kham),

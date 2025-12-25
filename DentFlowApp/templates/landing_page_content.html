@@ -13,7 +13,7 @@
                 </p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="#" class="btn  btn-outline-dark btn-lg rounded-pill px-4 fw-semibold">
+                <a href="/dich_vu" class="btn  btn-outline-dark btn-lg rounded-pill px-4 fw-semibold">
                     Tất cả các dịch vụ
                 </a>
             </div>
@@ -22,76 +22,17 @@
         <!-- Services Grid -->
         <div class="row g-4">
             <!-- General Dentistry -->
+            {% for i in range(6) %}
             <div class="col-md-6 col-lg-4">
                 <div class="service-card h-100 p-4 rounded-4 position-relative">
                     <div class="service-icon bg-white rounded-circle d-flex align-items-center justify-content-center mb-4"
                          style="width: 60px; height: 60px;">
                         <i class="fas fa-tooth"></i>
                     </div>
-                    <h4 class="fw-bold mb-3 text-white">General Dentistry</h4>
-                    <p class="mb-0 text-white-30">Preventive care and routine checkups</p>
+                    <h4 class="fw-bold mb-3 text-white">{{ dich_vu[i].ten_dich_vu }}</h4>
                 </div>
             </div>
-
-            <!-- Cosmetic Dentistry -->
-            <div class="col-md-6 col-lg-4">
-                <div class="service-card h-100 p-4 rounded-4 position-relative">
-                    <div class="service-icon bg-white rounded-circle d-flex align-items-center justify-content-center mb-4"
-                         style="width: 60px; height: 60px;">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3 text-white" style="color: #1a365d;">Cosmetic Dentistry</h4>
-                    <p class="mb-0 text-white-30">Smile makeovers with whitening, veneers & more</p>
-                </div>
-            </div>
-
-            <!-- Orthodontics -->
-            <div class="col-md-6 col-lg-4">
-                <div class="service-card h-100 p-4 rounded-4 position-relative">
-                    <div class="service-icon bg-white rounded-circle d-flex align-items-center justify-content-center mb-4"
-                         style="width: 60px; height: 60px;">
-                        <i class="fas fa-teeth"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3 text-white" style="color: #1a365d;">Orthodontics</h4>
-                    <p class="mb-0 text-white-30">Braces and Invisalign for a perfect alignment</p>
-                </div>
-            </div>
-
-            <!-- Pediatric Dentistry -->
-            <div class="col-md-6 col-lg-4">
-                <div class="service-card h-100 p-4 rounded-4 position-relative overflow-hidden">
-                    <div class="service-icon bg-white rounded-circle d-flex align-items-center justify-content-center mb-4"
-                         style="width: 60px; height: 60px;">
-                        <i class="fas fa-child"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3 text-white">Pediatric Dentistry</h4>
-                    <p class="mb-0 text-white-30">Gentle, friendly care for children of all ages</p>
-                </div>
-            </div>
-
-            <!-- Dental Implants -->
-            <div class="col-md-6 col-lg-4">
-                <div class="service-card h-100 p-4 rounded-4 position-relative">
-                    <div class="service-icon bg-white rounded-circle d-flex align-items-center justify-content-center mb-4"
-                         style="width: 60px; height: 60px;">
-                        <i class="fas fa-procedures"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3 text-white" style="color: #1a365d;">Dental Implants</h4>
-                    <p class="mb-0 text-white-30">Permanent tooth replacement solutions</p>
-                </div>
-            </div>
-
-            <!-- Emergency Dental Care -->
-            <div class="col-md-6 col-lg-4">
-                <div class="service-card h-100 p-4 rounded-4 position-relative">
-                    <div class="service-icon bg-white rounded-circle d-flex align-items-center justify-content-center mb-4"
-                         style="width: 60px; height: 60px;">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3 text-white" style="color: #1a365d;">Emergency Dental Care</h4>
-                    <p class="mb-0 text-white-30">Fast, dependable relief when you need it most</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

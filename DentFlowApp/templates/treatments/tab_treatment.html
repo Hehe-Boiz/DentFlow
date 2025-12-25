@@ -28,7 +28,7 @@
                             {% for patient in patients %}
                             <option value="{{ patient.id }}" data-lichhenId=" {{ patient.lich_hen_id }}"
                                     {% if selected_patient_id== patient.id %}selected{% endif %}>
-                                {{ patient.ho_ten }} - {{ patient.ho_so_id }} - {{
+                                {{ patient.ho_ten }} - HS00{{ patient.id }} - {{
                                 patient.thoi_diem_kham_str }}
                             </option>
                             {% endfor %}
