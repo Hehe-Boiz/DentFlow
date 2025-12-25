@@ -1,40 +1,14 @@
-/* ============================================
-   DENTFLOW - LANDING PAGE STYLES
-   ============================================ */
-
-/* ========== CSS VARIABLES ========== */
-:root {
-    --primary-dark: #1a2b4a;
-    --primary-blue: #4a7cf5;
-    --primary-light: #6aa3f2;
-    --teal: #5ba4a4;
-    --gray-text: #6c757d;
-    --gray-light: #e9ecef;
-    --bg-light: #f8f9fa;
-    --bg-section: #f5f7fa;
-    --white: #ffffff;
-    --gold: #f9c74f;
-    --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.05);
-    --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.08);
-    --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.1);
-    --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 20px;
-    --radius-xl: 30px;
-    --transition: all 0.3s ease;
-}
-
 /* ========== COMMON STYLES ========== */
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     margin-bottom: 10px;
 }
 
 .section-subtitle {
     font-size: 1rem;
-    color: var(--gray-text);
+    color: #6c757d;
     margin-bottom: 50px;
     max-width: 280px;
 }
@@ -53,16 +27,16 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background: var(--bg-light);
+    background: #f8f9fa;
     min-height: 100vh;
-    color: var(--white);
+    color: #ffffff;
 }
 
 .badge-custom {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 8px 16px;
-    border-radius: var(--radius-xl);
+    border-radius: 30px;
     display: inline-flex;
     align-items: center;
     font-size: 0.9rem;
@@ -74,7 +48,7 @@
     border: none;
     padding: 12px 30px;
     font-weight: 600;
-    border-radius: var(--radius-sm);
+    border-radius: 8px;
 }
 
 .btn-outline-custom {
@@ -82,13 +56,13 @@
     color: #494848;
     padding: 12px 30px;
     font-weight: 600;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 .btn-outline-custom:hover {
     background-color: #7d7b7b;
-    color: var(--white);
+    color: #ffffff;
     border-color: #494848;
     box-shadow: 0 4px 15px rgba(73, 72, 72, 0.4);
     cursor: pointer;
@@ -103,7 +77,7 @@
 }
 
 .main-doctor-img {
-    border-radius: var(--radius-xl);
+    border-radius: 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     width: 100%;
     height: auto;
@@ -116,9 +90,9 @@
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-lg);
+    border-radius: 20px;
     padding: 15px 20px;
-    color: var(--white);
+    color: #ffffff;
     display: flex;
     align-items: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -141,7 +115,7 @@
     right: -10px;
     background: linear-gradient(135deg, #a855f7, #6366f1);
     padding: 20px;
-    border-radius: var(--radius-lg);
+    border-radius: 30px;
     width: 280px;
     text-align: left;
     z-index: 3;
@@ -157,7 +131,7 @@
 }
 
 .btn-booking-light {
-    background: var(--white);
+    background: #ffffff;
     color: #6366f1;
     border: none;
     width: 100%;
@@ -168,7 +142,7 @@
 
 /* ========== SERVICES SECTION ========== */
 .service-card {
-    transition: var(--transition);
+    transition: all 0.3s ease;
     border: 2px solid transparent;
     border-radius: 1rem;
     background-color: #6c9de1;
@@ -208,7 +182,7 @@
 
 .service-icon {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: var(--transition);
+    transition: all 0.3s ease;
 }
 
 .service-card:hover .service-icon {
@@ -218,7 +192,7 @@
 
 /* ========== WHY CHOOSE US SECTION ========== */
 .why-choose-section {
-    background-color: var(--white);
+    background-color: #ffffff;
     position: relative;
     overflow: hidden;
 }
@@ -230,21 +204,20 @@
     left: 0;
     right: 0;
     height: 1px;
-    background-image: linear-gradient(to right, #cbd5e0 50%, transparent 50%);
     background-size: 10px 1px;
     background-repeat: repeat-x;
     z-index: 0;
 }
 
 .feature-check-icon {
-    transition: var(--transition);
+    transition: all 0.3s ease;
     width: 40px;
     height: 40px;
     background-color: #ebeef4;
 }
 
 .feature-check-icon i {
-    color: var(--primary-blue);
+    color: #4a7cf5;
     font-size: 16px;
 }
 
@@ -254,7 +227,7 @@
 }
 
 .features-list > div:hover .feature-check-icon i {
-    color: var(--white) !important;
+    color: #ffffff !important;
 }
 
 .stat-item {
@@ -269,12 +242,12 @@
     top: 20px;
     width: 4px;
     height: 50px;
-    background: linear-gradient(180deg, var(--primary-light), #d4e9e7);
+    background: linear-gradient(180deg, #6aa3f2, #d4e9e7);
     border-radius: 2px;
 }
 
 .doctor-image-wrapper img {
-    box-shadow: var(--shadow-heavy);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes pulse {
@@ -307,7 +280,7 @@
     top: 0;
     bottom: 0;
     width: 3px;
-    background: linear-gradient(to bottom, var(--primary-light), #668bbf);
+    background: linear-gradient(to bottom, #6aa3f2, #668bbf);
     border-radius: 2px;
 }
 
@@ -324,28 +297,28 @@
 .step-number {
     font-size: 1rem;
     font-weight: 500;
-    color: var(--primary-blue);
+    color: #4a7cf5;
     margin-bottom: 5px;
 }
 
 .step-title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     margin-bottom: 5px;
 }
 
 .step-description {
     font-size: 0.9rem;
-    color: var(--gray-text);
+    color: #6c757d;
     margin-bottom: 0;
 }
 
 .image-wrapper {
     position: relative;
-    border-radius: var(--radius-lg);
+    border-radius: 30px;
     overflow: hidden;
-    box-shadow: var(--shadow-heavy);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
 .image-wrapper img {
@@ -364,7 +337,7 @@
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
-    border-radius: var(--radius-lg);
+    border-radius: 30px;
     overflow: hidden;
     box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
 }
@@ -389,18 +362,18 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 .play-button:hover {
     transform: translate(-50%, -50%) scale(1.1);
-    background-color: var(--white);
+    background-color: #ffffff;
 }
 
 .play-button i {
     font-size: 28px;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     margin-left: 5px;
 }
 
@@ -415,26 +388,26 @@
     height: 50px;
     border-radius: 50%;
     border: 2px solid #e0e0e0;
-    background-color: var(--white);
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
+    background-color: #1a2b4a;
+    border-color: #1a2b4a;
 }
 
 .nav-btn:hover i {
-    color: var(--white);
+    color: #ffffff;
 }
 
 .nav-btn i {
     font-size: 18px;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     transition: color 0.3s ease;
 }
 
@@ -444,12 +417,12 @@
 }
 
 .nav-btn:disabled:hover {
-    background-color: var(--white);
+    background-color: #ffffff;
     border-color: #e0e0e0;
 }
 
 .nav-btn:disabled:hover i {
-    color: var(--primary-dark);
+    color: #1a2b4a;
 }
 
 .experts-slider {
@@ -470,12 +443,12 @@
     flex: 0 0 auto;
     width: 280px;
     height: 380px;
-    border-radius: var(--radius-lg);
+    border-radius: 30px;
     overflow: hidden;
     position: relative;
     background: linear-gradient(135deg, #f5f7fa, #e4e8ec);
-    box-shadow: var(--shadow-medium);
-    transition: var(--transition);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
 }
 
 .expert-card:hover {
@@ -502,7 +475,7 @@
 .expert-name {
     font-size: 1.35rem;
     font-weight: 600;
-    color: var(--white);
+    color: #ffffff;
     margin-bottom: 5px;
 }
 
@@ -521,7 +494,7 @@
 .scroll-progress-bar {
     width: 100%;
     height: 4px;
-    background-color: var(--gray-light);
+    background-color: #e9ecef;
     border-radius: 2px;
     position: relative;
     overflow: hidden;
@@ -529,7 +502,7 @@
 
 .scroll-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #7591d4, var(--primary-dark));
+    background: linear-gradient(90deg, #7591d4, #1a2b4a);
     border-radius: 2px;
     width: 30%;
     transition: width 0.1s ease, left 0.1s ease;
@@ -551,11 +524,11 @@
     border-radius: 50%;
     background-color: #e0e0e0;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s ease;
 }
 
 .dot.active {
-    background-color: var(--primary-dark);
+    background-color: #1a2b4a;
     width: 30px;
     border-radius: 5px;
 }
@@ -576,11 +549,11 @@
 }
 
 .testimonial-card {
-    background-color: var(--white);
-    border-radius: var(--radius-md);
+    background-color: #ffffff;
+    border-radius: 16px;
     padding: 25px 30px;
-    box-shadow: var(--shadow-light);
-    transition: var(--transition);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
 }
 
 .testimonial-card:hover {
@@ -611,7 +584,7 @@
 .patient-name {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     margin: 0;
 }
 
@@ -621,7 +594,7 @@
 }
 
 .star-rating i {
-    color: var(--gold);
+    color: #f9c74f;
     font-size: 16px;
 }
 
@@ -634,7 +607,7 @@
 
 /* ========== BLOG SECTION ========== */
 .blog-section {
-    background-color: var(--white);
+    background-color: #ffffff;
     padding: 80px 0;
 }
 
@@ -648,13 +621,13 @@
 .blog-title {
     font-size: 2.25rem;
     font-weight: 700;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     margin: 0;
 }
 
 .blog-subtitle {
     font-size: 1rem;
-    color: var(--gray-text);
+    color: #6c757d;
     text-align: right;
     max-width: 280px;
 }
@@ -674,14 +647,14 @@
 .blog-card-title {
     font-size: 1.15rem;
     font-weight: 600;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     margin-bottom: 8px;
     line-height: 1.4;
 }
 
 .blog-card-date {
     font-size: 0.9rem;
-    color: var(--gray-text);
+    color: #6c757d;
     margin: 0;
 }
 
@@ -692,7 +665,7 @@
 
 .cta-banner {
     background-color: #e8f4f4;
-    border-radius: var(--radius-xl);
+    border-radius: 30px;
     padding: 60px 40px;
     text-align: center;
 }
@@ -700,51 +673,51 @@
 .cta-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     margin-bottom: 15px;
 }
 
 .cta-subtitle {
     font-size: 1.1rem;
-    color: var(--gray-text);
+    color: #6c757d;
     margin-bottom: 30px;
 }
 
 .cta-btn {
     display: inline-block;
     padding: 14px 32px;
-    background-color: var(--white);
-    color: var(--primary-dark);
-    border: 2px solid var(--primary-dark);
-    border-radius: var(--radius-xl);
+    background-color: #ffffff;
+    color: #1a2b4a;
+    border: 2px solid #1a2b4a;
+    border-radius: 30px;
     font-size: 1rem;
     font-weight: 500;
     text-decoration: none;
-    transition: var(--transition);
+    transition: all 0.3s ease;
 }
 
 .cta-btn:hover {
-    background-color: var(--primary-dark);
-    color: var(--white);
+    background-color: #1a2b4a;
+    color: #ffffff;
 }
 
 /* ========== FAQ SECTION ========== */
 .faq-section {
-    background-color: var(--white);
+    background-color: #ffffff;
     padding: 80px 0;
 }
 
 .faq-title {
     font-size: 2.25rem;
     font-weight: 700;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     line-height: 1.2;
     margin-bottom: 20px;
 }
 
 .faq-subtitle {
     font-size: 1rem;
-    color: var(--gray-text);
+    color: #6c757d;
     line-height: 1.6;
     max-width: 280px;
 }
@@ -754,7 +727,7 @@
 }
 
 .faq-item {
-    border-bottom: 1px solid var(--gray-light);
+    border-bottom: 1px solid #e9ecef;
     padding: 20px 0;
 }
 
@@ -768,13 +741,13 @@
 .faq-question h4 {
     font-size: 1.05rem;
     font-weight: 600;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     margin: 0;
 }
 
 .faq-icon {
     font-size: 14px;
-    color: var(--primary-dark);
+    color: #1a2b4a;
     transition: transform 0.3s ease;
 }
 
@@ -786,7 +759,7 @@
     display: none;
     padding-top: 15px;
     font-size: 0.95rem;
-    color: var(--gray-text);
+    color: #6c757d;
     line-height: 1.7;
 }
 
@@ -925,7 +898,7 @@
     }
 
     .navbar-custom {
-        background-color: var(--white) !important;
+        background-color: #ffffff !important;
         position: relative;
         padding-bottom: 20px;
     }
@@ -990,7 +963,7 @@
 
     .cta-banner {
         padding: 40px 25px;
-        border-radius: var(--radius-lg);
+        border-radius: 30px;
     }
 
     .cta-title {
