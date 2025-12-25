@@ -2,7 +2,7 @@ import http
 import os
 
 from DentFlowApp import app, db
-from flask import render_template, request, jsonify, flash
+from flask import render_template, request, jsonify, flash, redirect
 from flask_login import current_user, login_required
 
 from DentFlowApp.dao.phieu_dieu_tri_dao import get_ds_thuoc_by_phieu_dieu_tri
@@ -94,8 +94,7 @@ def cashier_xac_nhan_thanh_toan(id):
         db.session.add(new_hoa_don)
         db.session.commit()
         flash(f"Xác lập thanh toán hóa đơn thành công cho mã phiếu {phieu_dieu_tri.id}", 'success')
-
-        return jsonify({'status': 'success', 'msg': 'Tạo hóa đơn thành công'})
+        return redirect('/cashier')
     except Exception as ex:
         db.session.rollback()
         flash(f"Lỗi thanh toán: {ex}", 'danger')
