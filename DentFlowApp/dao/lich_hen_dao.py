@@ -17,7 +17,7 @@ def get_lich_hen(page=1, ho_so_benh_nhan_id=None, kw=None):
         joinedload(LichHen.bac_si)
     ).order_by(LichHen.ngay_dat.desc(), LichHen.gio_kham.desc())
     if kw:
-        query = query.filter(HoSoBenhNhan.ho_ten.contains(kw))
+        query = query.join(HoSoBenhNhan).filter(HoSoBenhNhan.ho_ten.contains(kw))
     if ho_so_benh_nhan_id:
         query = query.filter(LichHen.ho_so_benh_nhan_id.__eq__(ho_so_benh_nhan_id))
     if page:

@@ -22,11 +22,11 @@ def user_can_do(User):
         can_do['Trang quản lý'] = '/manager'
     if User.vai_tro == UserRole.DOCTOR:
         can_do['Trang bác sĩ'] = '/treatment'
-    else:
-        for item in admin.menu():
-            if item.is_accessible():
-                if item.name != 'Home' and item.name != 'Đăng xuất':
-                    can_do[item.name] = item.get_url()
+    # else:
+    #     for item in admin.menu():
+    #         if item.is_accessible():
+    #             if item.name != 'Home' and item.name != 'Đăng xuất':
+    #                 can_do[item.name] = item.get_url()
     return can_do
 
 

@@ -13,7 +13,6 @@ from DentFlowApp.decorators import receptionist_required
 @app.route('/receptionist', methods=['GET'])
 @receptionist_required
 def receptionist():
-    flash('none')
     active_tab = request.args.get('tab','schedule')
     session['stats_cards'] = {
         "Lịch hôm nay": 0,
@@ -25,7 +24,8 @@ def receptionist():
     kw = request.args.get('kw')
     if active_tab == 'schedule':
         lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)),kw=kw)
-        print(lich.ho_ten for lich in lich_hen)
+        for l in lich_hen:
+            print(l)
     if active_tab == 'profile':
         ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)),kw=kw)
     return render_template('receptionist/receptionist.html',
