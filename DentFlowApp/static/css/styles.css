@@ -126,24 +126,24 @@
 
 
 #btn-back-to-top {
-    display: none; /* Mặc định ẩn */
-    position: fixed; /* Ghim cố định */
-    bottom: 20px; /* Cách đáy 20px */
-    right: 30px; /* Cách phải 30px */
-    z-index: 9999; /* Luôn nổi lên trên cùng */
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 9999;
     border: none;
     outline: none;
-    background-color: #007bff; /* Màu xanh (tùy chỉnh) */
-    color: white; /* Màu chữ */
+    background-color: #007bff;
+    color: white;
     cursor: pointer;
     padding: 15px;
-    border-radius: 50%; /* Bo tròn */
+    border-radius: 50%;
     font-size: 18px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, transform 0.3s;
 }
 
 #btn-back-to-top:hover {
-    background-color: #0056b3; /* Màu khi di chuột vào */
-    transform: translateY(-3px); /* Hiệu ứng nhồi nhẹ */
+    background-color: #0056b3;
+    transform: translateY(-3px);
 }
