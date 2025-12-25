@@ -1,20 +1,17 @@
-import http
 import math
-import re
 from DentFlowApp import app, db
-from flask import request, redirect, render_template, url_for, flash, session, jsonify
-from flask_login import current_user, login_required
+from flask import request, redirect, render_template, flash, session, jsonify
 from datetime import datetime
-from DentFlowApp.dao import receptionistDao, user_dao, lich_hen_dao,ho_so_benh_nhan_dao
-from DentFlowApp.models import UserRole, GioiTinh, HoSoBenhNhan, TrangThaiLichHen
-from DentFlowApp.utils import validate_thong_tin_benh_nhan
+from DentFlowApp.dao import lich_hen_dao, ho_so_benh_nhan_dao
+from DentFlowApp.models import TrangThaiLichHen
 from DentFlowApp.decorators import receptionist_required
+
 
 @app.route('/receptionist', methods=['GET'])
 @receptionist_required
 def receptionist():
     flash('none')
-    active_tab = request.args.get('tab','schedule')
+    active_tab = request.args.get('tab', 'schedule')
     session['stats_cards'] = {
         "Lịch hôm nay": 0,
         "Chờ xác nhận": 0,
@@ -24,10 +21,10 @@ def receptionist():
     ho_so = None
     kw = request.args.get('kw')
     if active_tab == 'schedule':
-        lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)),kw=kw)
+        lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)), kw=kw)
         print(lich.ho_ten for lich in lich_hen)
     if active_tab == 'profile':
-        ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)),kw=kw)
+        ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)), kw=kw)
     return render_template('receptionist/receptionist.html',
                            active_tab=active_tab,
                            letan=True,
@@ -35,6 +32,7 @@ def receptionist():
                            ho_so=ho_so,
                            pages=math.ceil(lich_hen_dao.get_tong_lich_hen() / app.config['PAGE_SIZE']),
                            now=datetime.now().strftime("%Y-%m-%d"))
+
 
 @app.route('/receptionist/add-appointment', methods=['POST'])
 @receptionist_required
@@ -76,15 +74,14 @@ def accept_booked_appointment(lich_hen_id):
         db.session.rollback()
         return jsonify({'status': 'error', 'msg': str(ex)})
 
+
 @app.route('/receptionist/appointment/<int:lich_hen_id>', methods=['DELETE'])
 @receptionist_required
 def delete_booked_appointment(lich_hen_id):
     try:
         if lich_hen_dao.del_lich_hen(lich_hen_id):
-            return jsonify({'status': 'success','msg': 'Xóa thành công'})
+            return jsonify({'status': 'success', 'msg': 'Xóa thành công'})
         else:
             return jsonify({'status': 'error', 'msg': 'Không có lịch hẹn cần xóa'})
     except Exception as ex:
         return jsonify({'status': 'error', 'msg': str(ex)})
-
-
