@@ -50,16 +50,11 @@
 
 .dot.active {
     background-color: #1a2b4a;
-    width: 30px;
-    border-radius: 5px;
-}
-
-.active {
-    background-color: #461235;
     color: white;
     width: 30px;
     border-radius: 5px;
 }
+
 
 .dot:hover {
     background-color: #4060ad;

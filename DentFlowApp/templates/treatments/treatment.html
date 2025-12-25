@@ -1,81 +1,83 @@
 {% extends 'layout/base.html' %}
 {% block title %} Trang điều trị {% endblock %}
 {% block styles %}
-<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}"/>-->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/treatment.css') }}"/>
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}"/>-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/treatment.css') }}"/>
 
 {% endblock %}
 
 {% block hero %}
-{% include 'layout/hero_in_role.html' %}
+    {% include 'layout/hero_in_role.html' %}
 {% endblock %}
 
 {% block content %}
 
-{% block stats_cards %}
-{% include 'layout/stats_cards.html' %}
-{% endblock %}
+    {% block stats_cards %}
+        {% include 'layout/stats_cards.html' %}
+    {% endblock %}
 
-<div class="bg-white rounded-t-xl border border-gray-200 border-b-0">
-    <div class="flex space-x-1 p-2 overflow-x-auto">
-        <button data-tab="tab-today"
-                class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap bg-blue-600 text-white shadow-md">
-            <i class="fa-regular fa-calendar w-4 h-4 inline mr-2"></i>
-            Lịch hôm nay
-        </button>
-        <button data-tab="tab-work"
-                class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap text-gray-600 hover:bg-gray-100">
-            <i class="fa-regular fa-calendar-days w-4 h-4 inline mr-2"></i>
-            Lịch làm việc
-        </button>
-        <button data-tab="tab-treatment"
-                class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap text-gray-600 hover:bg-gray-100">
-            <i class="fa-regular fa-file-lines w-4 h-4 inline mr-2"></i>
-            Lập phiếu điều trị
-        </button>
-    </div>
-</div>
-
-<div class="bg-white rounded-b-xl border border-gray-200 p-6">
-    <div id="tab-content-container">
-        {% include 'treatments/tab_schedule_today.html' %}
-    </div>
-</div>
-<div id="slot-popup"
-     class="hidden fixed z-[1000] w-[calc(100vw-20px)] max-w-96 bg-white rounded-lg shadow-2xl border border-gray-300">
-
-    <!-- header -->
-    <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg flex items-center justify-between">
-        <div class="flex-1 min-w-0">
-            <p id="popup-title" class="text-sm mb-0 font-semibold">Lịch hẹn</p>
-            <p id="popup-subtitle" class="text-xs text-blue-100 mt-0.5 truncate mb-0"></p>
-        </div>
-
-        <button id="popup-close"
-                class="text-blue-100 hover:text-white transition-colors ml-2 hover:bg-blue-700 rounded p-1 flex-shrink-0">
-            <i class="fa-solid fa-xmark w-5 h-5 fx-xl"></i>
-
-        </button>
-    </div>
-
-    <!-- body -->
-    <div class="max-h-[60vh] overflow-y-auto">
-        <div class="px-4 py-2 bg-blue-50 border-b border-blue-100">
-            <p class="text-xs text-gray-700 mb-0">
-                Tổng: <span id="popup-total" class="font-semibold text-blue-600">0 lịch hẹn</span>
-            </p>
-        </div>
-
-        <div id="popup-content" class="p-3 space-y-2">
-            <!-- JS sẽ đổ content vào đây -->
+    <div class="bg-white rounded-t-xl border border-gray-200 border-b-0">
+        <div class="flex space-x-1 p-2 overflow-x-auto">
+            <button data-tab="tab-today"
+                    class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap bg-blue-600 text-white shadow-md">
+                <i class="fa-regular fa-calendar w-4 h-4 inline mr-2"></i>
+                Lịch hôm nay
+            </button>
+            <button data-tab="tab-work"
+                    class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap text-gray-600 hover:bg-gray-100">
+                <i class="fa-regular fa-calendar-days w-4 h-4 inline mr-2"></i>
+                Lịch làm việc
+            </button>
+            <button data-tab="tab-treatment"
+                    class="tab-btn px-6 py-3 rounded-lg transition-all whitespace-nowrap text-gray-600 hover:bg-gray-100">
+                <i class="fa-regular fa-file-lines w-4 h-4 inline mr-2"></i>
+                Lập phiếu điều trị
+            </button>
         </div>
     </div>
-</div>
+
+    <div class="bg-white rounded-b-xl border border-gray-200 p-6">
+        <div id="tab-content-container">
+            {% include 'treatments/tab_schedule_today.html' %}
+        </div>
+    </div>
+    <div id="slot-popup"
+         class="hidden fixed z-[1000] w-[calc(100vw-20px)] max-w-96 bg-white rounded-lg shadow-2xl border border-gray-300">
+
+        <!-- header -->
+        <div class="bg-blue-600 text-white px-4 py-3 rounded-t-lg flex items-center justify-between">
+            <div class="flex-1 min-w-0">
+                <p id="popup-title" class="text-sm mb-0 font-semibold">Lịch hẹn</p>
+                <p id="popup-subtitle" class="text-xs text-blue-100 mt-0.5 truncate mb-0"></p>
+            </div>
+
+            <button id="popup-close"
+                    class="text-blue-100 hover:text-white transition-colors ml-2 hover:bg-blue-700 rounded p-1 flex-shrink-0">
+                <i class="fa-solid fa-xmark w-5 h-5 fx-xl"></i>
+
+            </button>
+        </div>
+
+        <!-- body -->
+        <div class="max-h-[60vh] overflow-y-auto">
+            <div class="px-4 py-2 bg-blue-50 border-b border-blue-100">
+                <p class="text-xs text-gray-700 mb-0">
+                    Tổng: <span id="popup-total" class="font-semibold text-blue-600">0 lịch hẹn</span>
+                </p>
+            </div>
+
+            <div id="popup-content" class="p-3 space-y-2">
+                <!-- JS sẽ đổ content vào đây -->
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block scripts %}
-<!--<script type="module" src="{{ url_for('static', filename='js/create_treatment.js') }}"></script>-->
-<script type="module" src="{{ url_for('static', filename='js/doctor.js') }}"></script>
+    {#    <!--<script type="module" src="{{ url_for('static', filename='js/create_treatment.js') }}"></script>-->#}
+    <script type="module" src="{{ url_for('static', filename='js/doctor.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/base.js') }}"></script>
+
 {% endblock %}
