@@ -3,7 +3,6 @@ import hashlib
 from datetime import datetime, timedelta
 from DentFlowApp import app, db, bcrypt
 
-# 1. CẬP NHẬT IMPORT: Thêm DonThuoc, LieuLuongSuDung
 from DentFlowApp.models import (
     NguoiDung, UserRole, GioiTinh, LoaiBacSi,
     BacSi, BacSiFullTime, BacSiPartTime,
@@ -27,7 +26,6 @@ def import_json_data():
         print("Lỗi: Không tìm thấy file data.json")
         return
 
-    # Reset Database
     db.drop_all()
     db.create_all()
     print("--- Đã reset database ---")
@@ -36,10 +34,9 @@ def import_json_data():
     service_map = {}
     service_price_map = {}
     patient_map = {}
-    medicine_map = {}  # <-- Map tên thuốc sang ID để tra cứu nhanh
+    medicine_map = {}
     cashier_id = None
 
-    # 1. Import Users
     print("1. Đang import Users...")
     for u in data.get('users', []):
         user = NguoiDung(
@@ -79,7 +76,6 @@ def import_json_data():
 
     db.session.commit()
 
-    # 2. Import Bác sĩ
     print("2. Đang import Bác sĩ...")
     for d in data.get('doctors', []):
         loai_enum = getattr(LoaiBacSi, d['loai_bac_si'])
@@ -101,7 +97,6 @@ def import_json_data():
             dt = BacSiPartTime(ma_bac_si=d['ma_bac_si'], muc_luong_gio=d.get('muc_luong_gio'))
             db.session.add(dt)
 
-    # 3. Import Dịch vụ
     print("3. Đang import Dịch vụ...")
     for s in data.get('services', []):
         sv = DichVu(ten_dich_vu=s['ten_dich_vu'], don_gia=s['don_gia'])
@@ -110,7 +105,6 @@ def import_json_data():
         service_map[s['ten_dich_vu']] = sv.id
         service_price_map[s['ten_dich_vu']] = s['don_gia']
 
-    # 4. Import Thuốc
     print("4. Đang import Thuốc...")
     for m in data.get('medicines', []):
         don_vi_enum = getattr(DonViThuoc, m['don_vi'])
@@ -118,7 +112,6 @@ def import_json_data():
         db.session.add(thuoc)
         db.session.flush()
 
-        # Lưu vào map để lát dùng cho đơn thuốc
         medicine_map[m['ten_thuoc']] = thuoc.id
 
         for b in m.get('batches', []):
@@ -129,7 +122,6 @@ def import_json_data():
             )
             db.session.add(lt)
 
-    # 5. Import Bệnh nhân
     print("5. Đang import Bệnh nhân...")
     for p in data.get('patients', []):
         bn = HoSoBenhNhan(
@@ -145,7 +137,6 @@ def import_json_data():
 
     db.session.commit()
 
-    # 6. Import Lịch hẹn
     print("6. Đang import Lịch hẹn...")
     for apt in data.get('appointments', []):
         bn_id = patient_map.get(apt['benh_nhan_sdt'])
@@ -171,7 +162,7 @@ def import_json_data():
 
     db.session.commit()
 
-    # 7. Import Lịch làm việc
+
     print("7. Đang import Lịch làm việc...")
     for ws in data.get('work_schedules', []):
         try:
@@ -190,18 +181,18 @@ def import_json_data():
         except Exception as e:
             print(f"Lỗi import lịch trực: {e}")
 
-    # 8. Import Phiếu Điều Trị & Hóa Đơn & Đơn Thuốc
+
     print("8. Đang import Phiếu Điều Trị & Hóa Đơn & Đơn Thuốc...")
     for trt in data.get('treatments', []):
         bn_id = patient_map.get(trt['benh_nhan_sdt'])
         if bn_id:
             try:
-                # 8.1 Xử lý trạng thái thanh toán
+
                 json_status = trt.get('trang_thai_thanh_toan', 'CHUA_THANH_TOAN')
                 payment_status_enum = getattr(TrangThaiThanhToan, json_status)
                 ngay_tao_lich_su = datetime.strptime(trt['ngay_tao'], '%Y-%m-%d %H:%M:%S')
 
-                # 8.2 Tạo Phiếu Điều Trị
+
                 pdt = PhieuDieuTri(
                     chan_doan=trt['chan_doan'],
                     ghi_chu=trt.get('ghi_chu', ''),
@@ -211,9 +202,9 @@ def import_json_data():
                     trang_thai_thanh_toan=payment_status_enum
                 )
                 db.session.add(pdt)
-                db.session.flush()  # Để lấy pdt.id
+                db.session.flush()
 
-                # 8.3 Tạo chi tiết dịch vụ
+
                 tong_tien = 0
                 for dv_ten in trt['dich_vu_su_dung']:
                     dv_id = service_map.get(dv_ten)
@@ -229,7 +220,7 @@ def import_json_data():
                         db.session.add(ct_pdt)
                         tong_tien += don_gia
 
-                # 8.4 Xử lý Đơn thuốc (LOGIC MỚI THÊM VÀO)
+
                 don_thuoc_data = trt.get('don_thuoc')
                 if don_thuoc_data:
                     # Tạo Đơn thuốc
@@ -239,9 +230,8 @@ def import_json_data():
                         ngay_tao=ngay_tao_lich_su
                     )
                     db.session.add(dt)
-                    db.session.flush()  # Lấy dt.id
+                    db.session.flush()
 
-                    # Tạo Liều lượng sử dụng
                     for item in don_thuoc_data:
                         thuoc_id = medicine_map.get(item['ten_thuoc'])
                         if thuoc_id:
@@ -255,7 +245,7 @@ def import_json_data():
                         else:
                             print(f"Cảnh báo: Không tìm thấy thuốc '{item['ten_thuoc']}' trong kho")
 
-                # 8.5 Tạo hóa đơn
+
                 if payment_status_enum == TrangThaiThanhToan.DA_THANH_TOAN:
                     method_str = trt.get('phuong_thuc_thanh_toan', 'TIEN_MAT')
                     method_enum = getattr(PhuongThucThanhToan, method_str)

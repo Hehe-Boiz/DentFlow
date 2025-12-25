@@ -104,81 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// buttons.forEach(btn => {
-//     btn.addEventListener('click', async () => {
-//         const target = btn.dataset.tab;
-//         const url = tabApiMap[target];
-//
-//         if (!url) return;
-//         buttons.forEach(b => {
-//             b.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
-//             b.classList.add('text-gray-600', 'hover:bg-gray-100');
-//         });
-//         btn.classList.remove('text-gray-600', 'hover:bg-gray-100');
-//         btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
-//
-//         const tabel = document.getElementById("tab-content-container");
-//         if (!tabel) return;
-//
-//         tabel.style.opacity = "0.5";
-//         tabel.style.pointerEvents = "none";
-//
-//         try {
-//             let res = await fetch(url);
-//             if (!res.ok) throw new Error('Network response was not ok');
-//             let html = await res.text();
-//             tabel.innerHTML = html;
-//
-//             if (target === 'tab-treatment') {
-//                 initCreateTreatment();
-//             }
-//             if (target === 'tab-work') {
-//                 initCalendarWork();
-//             }
-//             if (target === 'tab-today') {
-//                 const buttons = document.querySelectorAll(".btn-phieu-dieu-tri");
-//                 buttons.forEach(btn => {
-//                     btn.addEventListener("click", async () => {
-//                         const patientId = btn.dataset.patientId;
-//                         const dichVu = btn.dataset.dichvu;
-//
-//                         const url = `/tabs/treatment?patient_id=${patientId}&dichvu=${dichVu}`;
-//                         res = await fetch(url);
-//                         html = await res.text();
-//                         tabel.innerHTML = html;
-//                         const listContainer = document.getElementById('service-list-container');
-//                         listContainer.classList.remove('hidden');
-//                         initCreateTreatment()
-//
-//                     });
-//                 });
-//                 initToday();
-//             }
-//
-//         } catch (error) {
-//             console.error("Lỗi tải tab:", error);
-//             tabel.innerHTML = `<p class="text-red-500 p-4">Không thể tải dữ liệu. Vui lòng thử lại.</p>`;
-//         } finally {
-//             tabel.style.opacity = "1";
-//             tabel.style.pointerEvents = "auto";
-//         }
-//     });
-// });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const params = new URLSearchParams(window.location.search);
-//     let currentTabId = params.get('tab');
-//
-//     if (!currentTabId) {
-//         currentTabId = 'tab-today';
-//     }
-//initCreateTreatment()
-//     const targetBtn = document.querySelector(`.tab-btn[data-tab="${currentTabId}"]`);
-//
-//     if (targetBtn) {
-//         targetBtn.click();
-//     }
-// });
 
 const STATUS_MAP = {
     "Đã khám": {
@@ -254,7 +179,7 @@ function initCalendarWork() {
         currentMonday.setDate(currentMonday.getDate() + (offset * 7));
 
         const newDateStr = formatDate(currentMonday);
-        // Tải tuần mới qua AJAX
+
         loadWorkTab(`/tabs/work?day=${newDateStr}`);
     }
 
@@ -262,7 +187,7 @@ function initCalendarWork() {
         loadWorkTab(`/tabs/work`);
     }
 
-// hiện ô nhỏ
+
     const popup = document.getElementById("slot-popup");
     const popupTitle = document.getElementById("popup-title");
     const popupSubtitle = document.getElementById("popup-subtitle");
@@ -309,7 +234,7 @@ function initCalendarWork() {
         popupTotal.textContent = `${items.length} lịch hẹn`;
 
         popupContent.innerHTML = items.map((x, idx) => {
-            // status badge
+
             const statusText = x.trang_thai_text || "Chờ khám";
             const statusClass = (statusText.includes("Chờ"))
                 ? "bg-amber-600 text-white"

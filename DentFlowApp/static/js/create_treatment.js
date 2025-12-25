@@ -12,7 +12,7 @@ export function initCreateTreatment() {
 
     const btn = document.getElementById("btn-ke-don");
     const container = document.getElementById("ke-don-container");
-    let loaded = false; // Biến cục bộ trong scope này
+    let loaded = false;
 
     if (btn) {
         const newBtn = btn.cloneNode(true);
@@ -44,29 +44,6 @@ export function initCreateTreatment() {
     initSaveTreatmentEvent();
 }
 
-//
-// const btn = document.getElementById("btn-ke-don");
-// const container = document.getElementById("ke-don-container");
-// let loaded = false;
-//
-// btn.addEventListener("click", async () => {
-//     if (loaded) {
-//         container.classList.toggle("hidden");
-//         return;
-//     }
-//     const res = await fetch("/treatments/ke-don");
-//     const html = await res.text();
-//
-//     container.innerHTML = html;
-//     loaded = true;
-//
-//     initTimeButtons();
-//     checkLoThuoc();
-//     inputUnit();
-//     initAddMedicineEvent();
-// });
-
-
 function inputUnit() {
     const thuocSelect = document.getElementById('select-ten-thuoc');
     const unitInput = document.getElementById('input-don-vi');
@@ -83,7 +60,7 @@ function inputUnit() {
 }
 
 
-// thêm dịch vụ và hiện giá trị dịch vụ trên nơi chọn
+
 function initServiceEvents() {
     const serviceSelect = document.getElementById('service-select');
     const priceInput = document.getElementById('service-price');
@@ -180,8 +157,7 @@ function initServiceEvents() {
     }
 }
 
-// ---------------- Liên quan tới thuốc
-// đổi màu nút
+
 function initTimeButtons() {
     const buttons_time = document.querySelectorAll('.time-btn');
     buttons_time.forEach(btn => {
@@ -215,9 +191,6 @@ function checkLoThuoc() {
         inputHanSuDung.value = '';
         inputHanSuDung.classList.remove('text-red-600', 'font-bold');
 
-        // if (!thuocId || !soNgay || soNgay <= 0) {
-        //     return;
-        // }
 
         if (soNgay <= 0) {
             return;
@@ -262,7 +235,7 @@ function checkLoThuoc() {
 }
 
 
-// hàm khởi tạo sự kiện cho nút Thêm Thuốc
+
 function initAddMedicineEvent() {
     const btnThemThuoc = document.getElementById('id-add-thuoc'); // Nút thêm thuốc
 
@@ -276,7 +249,7 @@ function initAddMedicineEvent() {
     }
 }
 
-// xử lý thêm thuốc
+
 function handleAddMedicine() {
     const selectThuoc = document.getElementById('select-ten-thuoc');
     const inputLieuDung = document.querySelector('input[type="number"][placeholder="2"]'); // Input Liều dùng
@@ -295,10 +268,6 @@ function handleAddMedicine() {
         alert("Vui lòng nhập liều dùng hợp lệ!");
         return;
     }
-    // if (inputSoNgay.value <= 0) {
-    //     alert("Vui lòng nhập số ngày hợp lệ!");
-    //     return;
-    // }
 
     const thuocItem = {
         id: selectThuoc.value,
@@ -316,7 +285,6 @@ function handleAddMedicine() {
     renderMedicineList();
 
     inputLieuDung.value = '';
-    // inputSoNgay.value = '';
     selectThuoc.value = '';
     inputDonVi.value = '';
     document.getElementById('input-han-su-dung').value = '';
@@ -429,8 +397,7 @@ function initDeleteMedicineEvent() {
     }
 }
 
-// ---------------------------------------------
-// Xử lý lưu phiếu điều trị
+
 function initSaveTreatmentEvent() {
     const btnSaveTreatment = document.getElementById('btn-save-treatment');
     btnSaveTreatment.addEventListener('click', async function () {
@@ -438,7 +405,7 @@ function initSaveTreatmentEvent() {
         const patientId = selectPatientElement ? selectPatientElement.value : null;
         const selectedOption = selectPatientElement.options[selectPatientElement.selectedIndex];
         const lichHenId = selectedOption ? selectedOption.getAttribute('data-lichhenId') : null;
-        // console.log(patientId)
+
         if (!patientId) {
             alert("Vui lòng chọn lịch khám/bệnh nhân trước khi lưu!");
             selectPatientElement.focus();
@@ -464,7 +431,7 @@ function initSaveTreatmentEvent() {
 
             rows.forEach(row => {
                 const sId = row.getAttribute('data-service-id');
-                const priceCell = row.querySelector('td[data-price]'); // Tìm td có data-price
+                const priceCell = row.querySelector('td[data-price]');
                 const sPrice = priceCell ? priceCell.getAttribute('data-price') : 0;
 
                 if (sId) services.push({id: sId, price: parseFloat(sPrice)});
@@ -504,7 +471,6 @@ function initSaveTreatmentEvent() {
             console.error(error);
             alert("Lỗi kết nối server");
         } finally {
-            // Reset nút bấm
             btnSaveTreatment.innerText = "Lưu phiếu điều trị";
             btnSaveTreatment.disabled = false;
         }

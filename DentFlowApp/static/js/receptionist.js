@@ -1,12 +1,12 @@
 function confirmBookedAppointment(lichHenId) {
-    // 1. Xác nhận nhẹ (Optional)
+
     if (confirm("Bạn có chắc chắn muốn xác nhận lịch hẹn này?") === true){
         let actionDiv = document.getElementById(`action-area-${lichHenId}`);
         console.log(actionDiv)
-         // Hiệu ứng loading tạm thời (cho người dùng biết đang chạy)
+
         const originalContent = actionDiv.innerHTML;
         actionDiv.innerHTML = '<div class="spinner-border spinner-border-sm text-primary" role="status"></div> Đang xử lý...';
-        // 3. Gọi API Backend
+
         fetch(`/receptionist/appointment/${lichHenId}?tab=schedule`, {
             method: 'PUT',
             headers: {
@@ -16,7 +16,7 @@ function confirmBookedAppointment(lichHenId) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                // Ghi đè HTML cũ bằng HTML mới
+
                 actionDiv.innerHTML = `
                     <span class="badge badge-soft-success px-3 py-2 fw-normal" >
                     Đã xác nhận
@@ -30,12 +30,10 @@ function confirmBookedAppointment(lichHenId) {
                     </button>
                 `;
 
-                // Thêm chút hiệu ứng CSS cho mượt (Optional)
-                // actionDiv.style.opacity = 0;
-                // setTimeout(() => actionDiv.style.opacity = 1, 100);
+
 
             } else {
-                // Thất bại -> Trả lại nút cũ và báo lỗi
+
                 actionDiv.innerHTML = originalContent;
                 alert('Lỗi: ' + data.msg);
             }
@@ -49,12 +47,12 @@ function confirmBookedAppointment(lichHenId) {
 }
 
 function deleteBookedAppointment(lichHenId) {
-    // 1. Xác nhận nhẹ (Optional)
+
     if (confirm("Bạn có chắc chắn muốn hủy lịch hẹn này?") === true){
         let actionDiv = document.getElementById(`action-delete-${lichHenId}`);
         console.log(actionDiv)
         actionDiv.innerHTML = '<div class="spinner-border spinner-border-sm text-primary" role="status"></div> Đang xóa...';
-        // 3. Gọi API Backend
+
         fetch(`/receptionist/appointment/${lichHenId}?tab=schedule`, {
             method: 'DELETE',
             headers: {
@@ -65,10 +63,10 @@ function deleteBookedAppointment(lichHenId) {
         .then(data => {
             if (data.status === 'success') {
                 console.log(data.status)
-                // Xóa đối tượng khỏi giao diện
+
                 actionDiv.remove()
             } else {
-                // Thất bại -> Trả lại nút cũ và báo lỗi
+
                 alert('Lỗi: ' + data.msg);
             }
         })
@@ -80,36 +78,34 @@ function deleteBookedAppointment(lichHenId) {
 }
 
 function disableEditMode() {
-    // Khóa lại tất cả input
+
     const inputs = document.querySelectorAll('#patientModal input, #patientModal select, #patientModal textarea');
     inputs.forEach(input => input.disabled = true);
 
-    // Hiện nút Sửa, ẩn nút Lưu
+
     document.getElementById('btnEnableEdit').classList.remove('d-none');
     document.getElementById('btnSave').classList.add('d-none');
 }
 
 function enableEditMode() {
-    // Bỏ thuộc tính disabled của tất cả input
+
     const inputs = document.querySelectorAll('#patientModal input, #patientModal select, #patientModal textarea');
     inputs.forEach(input => input.disabled = false);
 
-    // Ẩn nút Sửa, hiện nút Lưu
+
     document.getElementById('btnEnableEdit').classList.add('d-none');
     document.getElementById('btnSave').classList.remove('d-none');
 }
 
 function fillModalData(hoSoId) {
     disableEditMode();
-    // Hiện loading trong lúc chờ (Optional)
-    // document.getElementById('modal_ho_ten').value = "Đang tải...";
 
-    // Gọi về Server lấy dữ liệu mới nhất
+
     fetch(`/api/profile/${hoSoId}`)
         .then(res => res.json())
         .then(hs => {
             console.log(hs)
-            // Điền dữ liệu y hệt Cách 1
+
             document.getElementById('modal_id').value = hs.id;
             document.getElementById('modal_ho_ten').value = hs.ho_ten;
             document.getElementById('modal_sdt').value = hs.so_dien_thoai;
@@ -119,7 +115,7 @@ function fillModalData(hoSoId) {
             document.getElementById('modal_dia_chi').value = hs.dia_chi;
             document.getElementById('modal_gioi_tinh').value = hs.gioi_tinh;
 
-            // Cập nhật action
+
             document.getElementById('patientForm').action = `/api/update-profile/${hoSoId}`;
         });
 }
@@ -132,10 +128,8 @@ function loadServices(){
         .then(res => res.json())
         .then(data => {
             data.forEach(item => {
-                // Tạo thẻ option: <option value="1">Nhổ răng (500k)</option>
                 const option = document.createElement('option');
                 option.value = item.id;
-                // Hiển thị tên kèm giá (format tiền việt)
                 const price = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.don_gia);
                 option.text = `${item.ten_dich_vu} - ${price}`;
                 serviceSelect.appendChild(option);
@@ -160,8 +154,6 @@ function loadDoctors() {
                     option.o
                     doctorSelect.appendChild(option);
                 });
-
-                // Đánh dấu là đã load xong -> Lần sau mở modal không cần load lại
                 isLoadDoctor = true;
             })
             .catch(err => console.error("Lỗi load bác sĩ:", err));
@@ -245,7 +237,6 @@ searchInput.addEventListener('input', function(e) {
         resultBox.classList.remove('d-none');
         resultBox.innerHTML = '<div class="p-3 text-center text-muted"><i class="fas fa-spinner fa-spin"></i> Đang tìm...</div>';
 
-        // Gọi API
         fetch(`/api/profile?kw=${encodeURIComponent(keyword)}&page=1`)
             .then(res => res.json())
             .then(data => {
@@ -269,10 +260,7 @@ function renderDropdown(profiles) {
 
     let html = '';
     profiles.forEach(p => {
-        // Tạo avatar từ chữ cái đầu tên (VD: Lan -> L)
         const firstLetter = p.ho_ten.charAt(0).toUpperCase();
-
-        // Check năm sinh để hiển thị
         const namSinhStr = p.nam_sinh ? `, ${p.nam_sinh}` : '';
 
         html += `
@@ -297,20 +285,16 @@ function renderDropdown(profiles) {
 }
 
 function selectCustomer(id, name, phone) {
-    // Điền thông tin vào ô input
     searchInput.value = name;
     hiddenInput.value = id;
 
-    // Tự điền SĐT xuống ô bên dưới (nếu có)
-    const phoneField = document.getElementById('bookingPhone'); // ID ô SĐT trong modal
+    const phoneField = document.getElementById('bookingPhone');
     if (phoneField) phoneField.value = phone;
 
-    // Ẩn bảng kết quả
     resultBox.classList.add('d-none');
 }
 
 document.addEventListener('click', function(e) {
-    // Nếu click không trúng ô input và không trúng bảng kết quả
     if (!searchInput.contains(e.target) && !resultBox.contains(e.target)) {
         resultBox.classList.add('d-none');
     }

@@ -8,8 +8,7 @@ def create_fake_data():
     with app.app_context():
         print("--- Bắt đầu tạo dữ liệu giả ---")
 
-        # 1. TẠO DỮ LIỆU BÁC SĨ (Cần có bác sĩ trước mới tạo được lịch)
-        # Kiểm tra xem đã có bác sĩ chưa, nếu chưa thì tạo
+
         doctors = BacSi.query.all()
 
         if not doctors:
@@ -35,27 +34,27 @@ def create_fake_data():
 
             db.session.add_all([bs1, bs2, bs3])
             db.session.commit()
-            doctors = [bs1, bs2, bs3]  # Cập nhật danh sách để dùng bên dưới
+            doctors = [bs1, bs2, bs3]
         else:
             print(f"Đã tìm thấy {len(doctors)} bác sĩ hiện có.")
 
-        # 2. TẠO DỮ LIỆU LỊCH LÀM VIỆC
+
         print("Đang tạo lịch làm việc cho 7 ngày tới...")
 
         today = datetime.now().date()
         schedules = []
 
-        # Các trạng thái có thể xảy ra (Sẵn sàng chiếm tỉ lệ cao hơn)
+
         trang_thai_choices = [TrangThaiLamViec.SAN_SANG] * 8 + \
                              [TrangThaiLamViec.DANG_BAN] * 1 + \
                              [TrangThaiLamViec.NGHI] * 1
 
         for doctor in doctors:
-            # Tạo lịch cho 7 ngày tới
+
             for i in range(7):
                 current_day = today + timedelta(days=i)
 
-                # Ca Sáng (08:00 - 12:00)
+
                 ca_sang = LichLamViec(
                     ngay_lam=current_day,
                     gio_bat_dau=time(8, 0),
@@ -64,7 +63,7 @@ def create_fake_data():
                     bac_si_id=doctor.ma_bac_si
                 )
 
-                # Ca Chiều (13:30 - 17:30)
+
                 ca_chieu = LichLamViec(
                     ngay_lam=current_day,
                     gio_bat_dau=time(13, 30),
@@ -76,7 +75,6 @@ def create_fake_data():
                 schedules.append(ca_sang)
                 schedules.append(ca_chieu)
 
-        # Lưu vào DB
         try:
             db.session.add_all(schedules)
             db.session.commit()

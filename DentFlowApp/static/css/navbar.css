@@ -1,11 +1,11 @@
 .navbar-custom {
-    background-color: transparent !important; /* Nền trong suốt */
+    background-color: transparent !important;
     width: 100%;
 }
 .navbar-brand-text {
     font-weight: 700;
     font-size: 1.2rem;
-    color: #1a3a8a !important; /* Màu xanh logo */
+    color: #1a3a8a !important;
 }
 .navbar-brand-sub {
     font-size: 0.8rem;

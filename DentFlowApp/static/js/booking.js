@@ -1,12 +1,12 @@
 const dateInput = document.getElementById('bookingDate');
-// Thiết lập ngày tối thiểu là hôm nay
+
 const today = new Date().toISOString().split('T')[0];
 dateInput.setAttribute('min', today);
 
 const doctorInput = document.getElementById('selectedDoctorId');
 const btnContinue = document.getElementById('btnContinueStep2');
 
-//Thẻ giờ khám
+
 const slotContainer = document.getElementById('timeSlotContainer');
 const waitingMsg = document.getElementById('slotWaitingMessage');
 const noSlotMsg = document.getElementById('noSlotMessage');
@@ -75,7 +75,7 @@ dateInput.addEventListener('change', function(){
 });
 
 function renderSlots(slots) {
-    // Xóa nội dung cũ
+
     slotContainer.innerHTML = '';
 
 
@@ -86,17 +86,15 @@ function renderSlots(slots) {
     } else {
         waitingMsg.classList.add('d-none')
         noSlotMsg.classList.add('d-none')
-        // Trường hợp có lịch -> Hiển thị Container
+
         slotContainer.classList.remove('d-none');
 
-        // Vòng lặp tạo nút
+
         slots.forEach((slot, index) => {
-            // 1. Tạo thẻ cột (col) bao bên ngoài
+
             const colDiv = document.createElement('div');
             colDiv.className = 'col';
 
-            // 2. Tạo nội dung bên trong (Input ẩn + Label nút bấm)
-            // Lưu ý: btn-outline-primary giúp nút có viền xanh, khi chọn sẽ tô màu xanh
             colDiv.innerHTML = `
                 <input type="radio" class="btn-check text-center" name="time_slot" id="slot_${index}" value="${slot}" autocomplete="off">
                 <label class="btn btn-outline-primary w-100 fw-medium py-2" for="slot_${index}">
@@ -104,7 +102,6 @@ function renderSlots(slots) {
                 </label>
             `;
 
-            // 3. Thêm vào container
             slotContainer.appendChild(colDiv);
         });
     }

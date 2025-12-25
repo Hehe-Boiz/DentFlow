@@ -4,7 +4,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- 1. Header đơn giản --- */
+
 .booking-header {
     background: white;
     padding: 15px 0;
@@ -20,7 +20,7 @@ body {
 }
 .btn-back:hover { color: #2563eb; }
 
-/* --- 2. Stepper (Thanh tiến trình) --- */
+
 .stepper-wrapper {
     display: flex;
     justify-content: center;
@@ -30,17 +30,17 @@ body {
 .step-item {
     text-align: center;
     position: relative;
-    padding: 0 40px; /* Khoảng cách giữa các bước */
+    padding: 0 40px;
     z-index: 2;
 }
-/* Đường kẻ nối các bước */
+
 .stepper-wrapper::before {
     content: '';
     position: absolute;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 300px; /* Độ dài đường kẻ */
+    width: 300px;
     height: 2px;
     background-color: #e5e7eb;
     z-index: 1;
@@ -49,7 +49,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #e5e7eb; /* Màu mặc định chưa active */
+    background-color: #e5e7eb;
     color: #6b7280;
     display: flex;
     align-items: center;
@@ -64,9 +64,9 @@ body {
     font-weight: 500;
 }
 
-/* Trạng thái Active (Đang chọn) */
+
 .step-item.active .step-circle {
-    background-color: #2563eb; /* Xanh dương */
+    background-color: #2563eb;
     color: white;
     box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.2);
 }
@@ -75,7 +75,7 @@ body {
     font-weight: 700;
 }
 
-/* --- 3. Main Container (Card trắng to ở giữa) --- */
+
 .booking-card {
     background: white;
     border-radius: 20px;
@@ -85,7 +85,7 @@ body {
     margin: 0 auto;
 }
 
-/* --- 4. User Info Box (Thông tin người đặt) --- */
+
 .user-info-box {
     background-color: #eff6ff;
     border: 1px solid #dbeafe;
@@ -108,13 +108,13 @@ body {
     margin-right: 15px;
 }
 
-/* --- 5. Service List (Danh sách dịch vụ) --- */
+
 .service-list-container {
-    max-height: 400px; /* Chiều cao cố định để scroll */
+    max-height: 400px;
     overflow-y: auto;
-    padding-right: 10px; /* Chừa chỗ cho scrollbar */
+    padding-right: 10px;
 }
-/* Custom Scrollbar cho đẹp */
+
 .service-list-container::-webkit-scrollbar {
     width: 6px;
 }
@@ -127,7 +127,7 @@ body {
     border-radius: 10px;
 }
 
-/* Service Item (Từng ô dịch vụ) */
+
 .service-item {
     border: 1px solid #e5e7eb;
     border-radius: 12px;
@@ -141,15 +141,15 @@ body {
     border-color: #93c5fd;
     background-color: #f8faff;
 }
-/* Khi được chọn (Active) */
+
 .service-item.selected {
     border-color: #2563eb;
     background-color: #eff6ff;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
 }
-/* Dấu tích xanh khi chọn */
+
 .service-item.selected::after {
-    content: '\f00c'; /* FontAwesome check icon */
+    content: '\f00c';
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     position: absolute;
@@ -170,11 +170,11 @@ body {
     color: #6b7280;
 }
 
-/* --- 6. Footer Support --- */
+
 .support-footer {
     margin-top: 40px;
     text-align: left;
-    padding-left: 15%; /* Căn cho thẳng với layout trên */
+    padding-left: 15%;
     color: #6b7280;
     font-size: 0.9rem;
     margin-bottom: 50px;

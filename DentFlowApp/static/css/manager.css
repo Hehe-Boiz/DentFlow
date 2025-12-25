@@ -1,21 +1,21 @@
 .rounded-xl {
-    border-radius: 20px !important; /* Độ cong 20px là chuẩn đẹp nhất hiện nay */
-    overflow: hidden; /* Bắt buộc để cắt phần thừa của header bên trong */
+    border-radius: 20px !important;
+    overflow: hidden;
 }
 
 .card-hover {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* 2. Hiệu ứng khi di chuột vào */
+
 .card-hover:hover {
-    /* Nhấc thẻ lên trên 5px */
+
     transform: translateY(-5px);
 
-    /* Tăng độ đậm của bóng đổ để tạo cảm giác nổi khối 3D */
+
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
 
-    /* Đổi con trỏ chuột thành hình bàn tay */
+
     cursor: pointer;
 }
 
@@ -24,8 +24,8 @@
 }
 
 .tab-button:hover {
-    background-color: #f8f9fc !important; /* Nền sáng nhẹ */
-    color: #4e73df; /* Chữ màu xanh chủ đạo */
+    background-color: #f8f9fc !important;
+    color: #4e73df;
 }
 
 .text-right {

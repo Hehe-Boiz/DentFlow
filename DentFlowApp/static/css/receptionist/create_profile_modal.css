@@ -1,8 +1,8 @@
 .upload-content {
     text-align: center;
-    pointer-events: none; /* Để click xuyên qua vào input file */
+    pointer-events: none;
 }
-/* Style cho từng dòng kết quả */
+
 .suggestion-item {
     cursor: pointer;
     border-left: none;
@@ -10,9 +10,9 @@
     transition: background 0.2s;
 }
 .suggestion-item:hover {
-    background-color: #f8f9fa; /* Màu nền khi di chuột */
+    background-color: #f8f9fa;
 }
-/* Style cho nút Xem thêm */
+
 .load-more-btn {
     text-align: center;
     font-size: 0.9rem;
@@ -25,7 +25,7 @@
     background: #e2e8f0;
 }
 
-/* Container của từng dòng kết quả */
+
 .customer-result-item {
     padding: 10px 15px;
     cursor: pointer;
@@ -34,15 +34,15 @@
 }
 
 .customer-result-item:hover {
-    background-color: #f0f9ff; /* Màu xanh nhạt khi hover */
+    background-color: #f0f9ff;
 }
 
-/* Avatar tròn chứa chữ cái đầu */
+
 .avatar-circle {
     width: 40px;
     height: 40px;
-    background-color: #e0e7ff; /* Màu nền avatar */
-    color: #4f46e5; /* Màu chữ */
+    background-color: #e0e7ff;
+    color: #4f46e5;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -52,22 +52,22 @@
     margin-right: 12px;
 }
 
-/* Text phụ (Năm sinh, SĐT) */
+
 .meta-text {
     font-size: 0.85rem;
     color: #64748b;
 }
-/* 1. Khóa chiều rộng của hộp kết quả */
+
 #searchResultBox {
-    width: 100%;      /* Bằng đúng cha nó (cột trái) */
-    max-width: 100%;  /* Tuyệt đối không được vượt quá */
+    width: 100%;
+    max-width: 100%;
     left: 0;
     right: auto;
-    overflow-x: hidden; /* Ẩn thanh cuộn ngang nếu có */
+    overflow-x: hidden;
 }
 
-/* 2. Ép nội dung bên trong xuống dòng thay vì phình to */
+
 .customer-result-item {
-    white-space: normal !important; /* Quan trọng: Cho phép xuống dòng */
-    word-wrap: break-word;          /* Ngắt từ nếu quá dài */
+    white-space: normal !important;
+    word-wrap: break-word;
 }

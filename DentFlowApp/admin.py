@@ -21,21 +21,19 @@ class AdminModelView(BaseModelView):
 
 
 class UserModelView(AdminModelView):
-    column_list = ['id', 'username', 'ho_ten', 'vai_tro', 'is_active']  # Cột hiện trên danh sách
+    column_list = ['id', 'username', 'ho_ten', 'vai_tro', 'is_active']
     column_searchable_list = ['username', 'ho_ten']
     column_filters = ['vai_tro']
     create_modal = True
-    # Ẩn password hash trên danh sách để bảo mật
+
     column_exclude_list = ['password', 'avatar']
     form_overrides = {
         'password': PasswordField,
         'avatar': FileField
     }
 
-    # Form nhập liệu: Chỉ hiện những cái cần thiết
     form_columns = ['ho_ten', 'username', 'password', 'vai_tro', 'so_dien_thoai', 'avatar']
 
-    # Hook: Chạy trước khi lưu vào DB -> Để băm mật khẩu
     def on_model_change(self, form, model, is_created):
         raw_pass = form.password.data
         if raw_pass:
@@ -56,10 +54,9 @@ class UserModelView(AdminModelView):
 
 
 class ChiTietDichVuInLineView(InlineFormAdmin):
-    # Chỉ hiện những cột cần nhập
+
     form_columns = ['id', 'noi_dung_chi_tiet']
 
-    # Tắt việc nhập ID thủ công (vì nó tự lấy ID của cha)
     form_excluded_columns = ['id']
 
 class DichVuModelView(AdminModelView):
@@ -69,7 +66,7 @@ class DichVuModelView(AdminModelView):
 
     can_delete = False
 
-    # Cho phép tìm kiếm
+
     column_searchable_list = ['ten_dich_vu']
     inline_models = (ChiTietDichVuInLineView(ChiTietDichVu),)
 
