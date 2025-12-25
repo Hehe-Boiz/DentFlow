@@ -1,5 +1,4 @@
-// DOANH THU THEO THÁNG
-// === CẤU HÌNH CHUNG ===
+
 const today = new Date();
 let currentDay = today.getDate();
 const currentMonth = today.getMonth();
@@ -15,7 +14,7 @@ function renderMonthlyChart(invoices, elmId, month) {
     }
 
     let dailyRevenue = new Array(daysInMonth + 1).fill(0);
-    // console.log('invoice', invoices)
+
     invoices.forEach(inv => {
         let date = new Date(inv.ngay_thanh_toan);
         let day = date.getDate();
@@ -117,7 +116,7 @@ function renderDoctorChart(doctorData) {
     if (!ctx) return;
     if (window.myDoctorChart) window.myDoctorChart.destroy();
     window.myDoctorChart = new Chart(ctx, {
-        type: 'doughnut', // Biểu đồ vành khuyên
+        type: 'doughnut',
         data: {
             labels: labels,
             datasets: [{
@@ -149,7 +148,7 @@ function renderDoctorChart(doctorData) {
                     }
                 }
             },
-            cutout: '70%', // Độ mỏng của vòng tròn
+            cutout: '70%',
         }
     });
 }
@@ -190,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         renderDoctorChart(dataDoctor)
 
         const tbody = document.getElementById('table-body');
-        // Tính tổng doanh thu để chia phần trăm (nếu API chưa trả về)
+
         const totalRevenue = dataDoctor.reduce((sum, item) => sum + item.tong_doanh_thu, 0);
 
         let html = '';
