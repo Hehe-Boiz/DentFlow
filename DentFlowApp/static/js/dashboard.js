@@ -15,7 +15,7 @@ function renderMonthlyChart(invoices, elmId, month) {
     }
 
     let dailyRevenue = new Array(daysInMonth + 1).fill(0);
-    // console.log(invoices)
+    // console.log('invoice', invoices)
     invoices.forEach(inv => {
         let date = new Date(inv.ngay_thanh_toan);
         let day = date.getDate();

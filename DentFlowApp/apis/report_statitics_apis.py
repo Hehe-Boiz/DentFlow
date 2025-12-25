@@ -27,6 +27,7 @@ def manager_view():
     now = datetime.datetime.now().strftime('%Y-%m-%d')
     active_tab = request.args.get('tab', 'thong-ke')
     ds_bacsi = get_doctors()
+    page = request.args.get('page', 1, type=int)
     cards = [
         {
             'title': 'Doanh thu hôm nay',
@@ -61,7 +62,7 @@ def manager_view():
     ]
 
     return render_template('manager/trang_quanly.html', active_tab=active_tab, quanly=True, ds_hoadon=ds_hoadon,
-                           cards=cards, now=now, ds_bacsi=ds_bacsi)
+                           cards=cards, now=now, ds_bacsi=ds_bacsi, page=page)
 
 
 @app.route('/manager/statistics/monthly', methods=['GET'])
@@ -72,14 +73,30 @@ def manager_statistics_view():
         ds_hoadon = get_ds_hoa_don_trong_thang(thang_nay=select_monthly)
 
         data = list()
+        data_ds_hoadon = list()
         for hoa_don in ds_hoadon:
             data.append({
                 'ngay_thanh_toan': hoa_don.ngay_tao.strftime('%Y-%m-%d %H:%M:%S'),
                 'tong_tien': hoa_don.tong_tien
             })
+            list_dv = []
+            list_thuoc = []
+            for ct in hoa_don.phieu_dieu_tri.get_ds_dich_vu:
+                list_dv.append(ct.dich_vu.ten_dich_vu)
+            if hoa_don.phieu_dieu_tri.don_thuoc:
+                for lt in hoa_don.phieu_dieu_tri.don_thuoc.ds_thuoc:
+                    list_thuoc.append(lt.thuoc.ten_thuoc)
+            data_ds_hoadon.append({
+                'ngay_thanh_toan': hoa_don.ngay_thanh_toan,
+                'ho_ten': hoa_don.phieu_dieu_tri.ho_so_benh_nhan.ho_ten,
+                'ds_dv': list_dv,
+                'ds_t': list_thuoc,
+                'tong_tien': hoa_don.tong_tien
+            })
         return jsonify({
             'status': 'success',
-            'data': data
+            'data': data,
+            'data_ds_hoadon': data_ds_hoadon
         })
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 403

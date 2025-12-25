@@ -121,6 +121,7 @@ def validate_thong_tin_benh_nhan(ho_ten, sdt, email=None, password=None, confirm
             return False, "Mật khẩu xác nhận không khớp."
     return True, None
 
+
 def validate_booking(doctor_id, booking_date, time_slot, doctor_name):
     doctor_id = doctor_id.strip() if doctor_id else ""
     doctor_name = doctor_name.strip() if doctor_name else ""
@@ -138,6 +139,7 @@ def validate_booking(doctor_id, booking_date, time_slot, doctor_name):
     if not time_slot:
         return False, "chưa giờ đặt"
     return True, None
+
 
 def get_monday(d: date) -> date:
     # Thứ 2 = 0, CN = 6
