@@ -31,3 +31,36 @@
 .text-right {
     text-align: right;
 }
+
+.dot-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background-color: #1a2b4a;
+    width: 30px;
+    border-radius: 5px;
+}
+
+.active {
+    background-color: #461235;
+    color: white;
+    width: 30px;
+    border-radius: 5px;
+}
+
+.dot:hover {
+    background-color: #4060ad;
+}
