@@ -65,13 +65,11 @@ class CalculationUtils:
 
         tong_tien_thuoc = 0
 
-        # Tính tiền thuốc
         for item in danh_sach_thuoc:
             t = Thuoc.query.get(item['id'])
             if t:
                 tong_tien_thuoc += t.gia * item['so_luong']
 
-        # Tính VAT 10%
         VAT_RATE = 0.10
         tong_chua_vat = tien_dich_vu + tong_tien_thuoc
         tien_vat = tong_chua_vat * VAT_RATE
@@ -134,7 +132,6 @@ def validate_booking(doctor_id, booking_date, time_slot, doctor_name):
 
 
 def get_monday(d: date) -> date:
-    # Thứ 2 = 0, CN = 6
     return d - timedelta(days=d.weekday())
 
 

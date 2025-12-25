@@ -39,4 +39,4 @@ def get_phieu_dieu_tri_by_ma_bacsi(ma_bacsi):
 def get_ds_thuoc_by_phieu_dieu_tri(id):
     query = DonThuoc.query.filter(DonThuoc.phieu_dieu_tri_id == id).first()
     query_lieuluong = LieuLuongSuDung.query.filter(LieuLuongSuDung.don_luog_id == query.id).first()
-    return query_lieuluong  # so_luong && query_lieuluong.thuoc.don_gia && query_lieuluong.thuoc.ten_thuoc
+    return query_lieuluong

@@ -140,6 +140,14 @@ function doChiTietHoaDon(data, PAGE_SIZE = 10) {
 function renderCTHD(paginateList, page, PAGE_SIZE = 10) {
     let tb_body = document.getElementById('table-body-cthd')
     let html = '';
+    const spanNav = document.getElementsByClassName('dot');
+    for (let i = 0; i < spanNav.length; i++) {
+        spanNav[i].classList.remove('active');
+
+        if (i === page) {
+            spanNav[i].classList.add('active');
+        }
+    }
     for (let j = 0; j < paginateList[page].length; j++) {
         html += `
             <tr>
@@ -170,15 +178,18 @@ function paginateCTHD(paginateList, totalPages) {
     };
     updateButtons();
     btnPrev.addEventListener('click', () => {
-        if (currentPage > 1) {
+        if (currentPage > 0) {
+
             currentPage--;
             renderCTHD(paginateList, currentPage);
             updateButtons();
         }
     })
     btnNext.addEventListener('click', () => {
-        if (currentPage < totalPages) {
+        if (currentPage < totalPages - 1) {
+
             currentPage++;
+
             renderCTHD(paginateList, currentPage);
             updateButtons();
         }
@@ -204,11 +215,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     let [paginateList, totalPages] = doChiTietHoaDon(data);
     let html = `<button id="paginate-btn-prev-cthd" class="btn btn-sm btn-secondary"> < </button>`;
     for (let i = 0; i < totalPages; i++) {
+
         html += `
-        <span class="p-2 mx-1 border rounded" style="cursor: pointer;">
+        <span class="p-2 mx-1 border rounded dot" style="cursor: pointer;">
             ${i + 1}
         </span>
+        
     `;
+
     }
     html += `<button id="paginate-btn-next-cthd" class="btn btn-sm btn-secondary"> > </button>`;
     divPaginate.innerHTML = html;

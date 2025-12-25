@@ -4,7 +4,6 @@
 {% block title %}Cashier view{% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_2.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_3.css') }}"/>
@@ -95,5 +94,6 @@
 {% endblock %}
 {% block scripts %}
     <script src="{{ url_for('static', filename='js/service.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 
 {% endblock %}

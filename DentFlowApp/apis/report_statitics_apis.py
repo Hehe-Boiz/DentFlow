@@ -1,17 +1,13 @@
-# FOR ROLE MANAGER
 from DentFlowApp import app
 from flask import render_template, jsonify, request
 
 from DentFlowApp.dao.bacsi_dao import get_doctors
 from DentFlowApp.dao.hoadon_dao import get_ds_hoa_don_trong_thang, get_soluong_hoa_don_trong_thang, \
     get_tong_doanh_thu_trong_thang, get_trung_binh_doanh_thu_trong_thang, get_doanh_thu_trong_ngay, \
-    get_doanh_thu_bac_si_trong_thang, get_ds_hoa_don_trong_nam_ngay_gan_day, get_doanh_thu_trong_nam_ngay_gan_day, \
-    get_so_lieu_bao_cao
+    get_doanh_thu_bac_si_trong_thang, get_doanh_thu_trong_nam_ngay_gan_day
 from DentFlowApp.dao.nhanvien_dao import get_ds_nhan_vien
 from DentFlowApp.decorators import manager_required
 import datetime
-
-from DentFlowApp.models import PhieuDieuTri
 
 
 def format_vnd(value):
@@ -31,10 +27,10 @@ def manager_view():
     cards = [
         {
             'title': 'Doanh thu hôm nay',
-            'value': format_vnd(get_doanh_thu_trong_ngay()),  # Gọi hàm vừa viết
-            'sub_text': datetime.datetime.now().strftime("Ngày %d/%m/%Y"),  # Hiện ngày tháng năm
-            'class': 'bg-warning bg-gradient text-dark',  # Màu vàng cho nổi bật (hoặc bg-info text-white)
-            'icon': 'fas fa-calendar-day'  # Icon lịch ngày
+            'value': format_vnd(get_doanh_thu_trong_ngay()),
+            'sub_text': datetime.datetime.now().strftime("Ngày %d/%m/%Y"),
+            'class': 'bg-warning bg-gradient text-dark',
+            'icon': 'fas fa-calendar-day'
         },
         {
             'title': 'Tổng doanh thu',
@@ -172,14 +168,3 @@ def manager_statistics_daily_recently():
         return jsonify({'status': 'success', 'data': data}), 200
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 403
-
-# @app.route('/manager/export-report', methods=['GET'])
-# @manager_required
-# def export_report_csv():
-#     try:
-#         so_lieu = get_so_lieu_bao_cao()
-#         data = list()
-#         for hoa_don_id, so_lieu in so_lieu.items():
-#
-#     except Exception as e:
-#         return jsonify({'status': 'error', 'message': str(e)}), 403
