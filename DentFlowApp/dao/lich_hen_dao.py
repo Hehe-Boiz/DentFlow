@@ -52,7 +52,7 @@ def add_lich_hen(ho_so_benh_nhan_id, bac_si_id, dich_vu_id, ngay_dat, gio_kham, 
         db.session.commit()
     except IntegrityError:
         db.session.rollback()
-        raise Exception('Có lỗi xảy ra')
+        raise Exception('Rất tiêc, lịch hẹn của bạn vừa được người khác đặt cùng cách đây không lâu! Vui lòng đặt lại')
 
 
 def del_lich_hen(lich_hen_id):

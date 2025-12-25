@@ -1,6 +1,6 @@
 const fileInput = document.getElementById('uploadAvatarInput');
 const fileNameDisplay = document.getElementById('fileNameDisplay');
-// 2. Lắng nghe sự kiện "change" (khi người dùng chọn file xong)
+
 fileInput.addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
@@ -17,3 +17,10 @@ fileInput.addEventListener('change', function(event) {
         fileNameDisplay.classList.remove('text-primary', 'fw-bold');
     }
 });
+
+function deleteAppointment(){
+    if(confirm("Bạn có chắc chắn muốn xóa lịch hẹn này?") === true){
+        let form = document.getElementById('delAppointment')
+        form.submit()
+    }
+}

@@ -4,8 +4,10 @@ from DentFlowApp.models import DichVu, ChiTietPhieuDieuTri
 from DentFlowApp import db,app
 
 
-def get_dich_vu(page=-1):
+def get_dich_vu(page=-1, kw=None):
     query = DichVu.query
+    if kw:
+        query = query.filter(DichVu.ten_dich_vu.contains(kw))
     if page >= 1:
         start = (page - 1) * app.config['PAGE_SIZE']
         query = query.slice(start, start + app.config['PAGE_SIZE'])
