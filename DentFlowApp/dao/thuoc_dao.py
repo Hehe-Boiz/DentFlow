@@ -5,17 +5,14 @@ from sqlalchemy import and_
 
 
 def get_thuoc_all():
-    """Lấy tất cả thuốc"""
     return Thuoc.query.all()
 
 
 def get_thuoc_by_id(thuoc_id):
-    """Lấy thông tin thuốc theo ID"""
     return Thuoc.query.get(thuoc_id)
 
 
 def get_lo_thuoc_by_thuoc_id(thuoc_id):
-    """Lấy tất cả lô thuốc còn hạn và còn tồn kho"""
     ngay_hien_tai = date.today()
     return LoThuoc.query.filter(
         and_(
@@ -45,9 +42,6 @@ def get_lo_thuoc_phu_hop(thuoc_id, so_ngay_dung):
 
 
 def get_lo_co_han_xa_nhat(thuoc_id):
-    """
-    Tìm lô thuốc có hạn sử dụng xa nhất còn trong kho (để tính max days)
-    """
     ngay_hien_tai = date.today()
     return LoThuoc.query.filter(
         and_(

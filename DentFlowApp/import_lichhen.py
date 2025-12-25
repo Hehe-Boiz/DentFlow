@@ -12,9 +12,7 @@ def create_patient_and_appointment_data():
     with app.app_context():
         print("--- Bắt đầu tạo dữ liệu Bệnh nhân & Lịch hẹn ---")
 
-        # ---------------------------------------------------------
-        # 1. TẠO DỮ LIỆU DỊCH VỤ (Cần có dịch vụ để đặt lịch)
-        # ---------------------------------------------------------
+
         services_data = [
             {"ten": "Cạo vôi răng", "gia": 200000.0},
             {"ten": "Trám răng thẩm mỹ", "gia": 500000.0},
@@ -36,9 +34,7 @@ def create_patient_and_appointment_data():
         else:
             print(f"Đã có {len(existing_services)} dịch vụ.")
 
-        # ---------------------------------------------------------
-        # 2. TẠO HỒ SƠ BỆNH NHÂN (HoSoBenhNhan)
-        # ---------------------------------------------------------
+
         print("Đang tạo Hồ sơ bệnh nhân...")
 
         # Danh sách tên mẫu
@@ -49,11 +45,11 @@ def create_patient_and_appointment_data():
         addresses = ["Hà Nội", "TP.HCM", "Đà Nẵng", "Cần Thơ", "Hải Phòng"]
 
         patients = []
-        for i in range(10):  # Tạo 10 bệnh nhân
-            # Random tên
+        for i in range(10):
+
             full_name = f"{random.choice(last_names)} {random.choice(middle_names)} {random.choice(first_names)}"
 
-            # Random giới tính
+
             gender = random.choice([GioiTinh.NAM, GioiTinh.NU])
 
             bn = HoSoBenhNhan(
@@ -69,9 +65,7 @@ def create_patient_and_appointment_data():
         db.session.commit()  # Commit để lấy ID cho bệnh nhân
         print(f"Đã tạo xong {len(patients)} hồ sơ bệnh nhân.")
 
-        # ---------------------------------------------------------
-        # 3. TẠO LỊCH HẸN (LichHen)
-        # ---------------------------------------------------------
+
         print("Đang tạo Lịch hẹn...")
 
         doctors = BacSi.query.all()
@@ -81,7 +75,7 @@ def create_patient_and_appointment_data():
 
         appointments = []
 
-        # Tạo lịch hẹn cho mỗi bệnh nhân (mỗi người 1-2 cuộc hẹn)
+
         for patient in patients:
             num_appts = random.randint(1, 2)
 

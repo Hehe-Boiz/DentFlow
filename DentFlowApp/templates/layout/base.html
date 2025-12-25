@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}"/>
 
 
@@ -22,7 +22,7 @@
 <body class="d-flex flex-column min-vh-100">
 
 {% block header %}
-{% include 'layout/header.html' %}
+    {% include 'layout/header.html' %}
 {% endblock %}
 
 
@@ -31,14 +31,14 @@
 
 <section class="container mx-auto px-4 py-6 flex-fill md:py-8">
     {% block alert %}
-    {% include 'layout/alert.html' %}
+        {% include 'layout/alert.html' %}
     {% endblock %}
     {% block content required %}
     {% endblock %}
 </section>
 
 {% block footer %}
-{% include 'layout/footer.html' %}
+    {% include 'layout/footer.html' %}
 {% endblock %}
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>

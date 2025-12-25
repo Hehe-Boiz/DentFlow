@@ -773,7 +773,6 @@
         max-width: 100%;
     }
 
-    /* Hero */
     .hero-section {
         padding-top: 120px;
         text-align: center;
@@ -923,7 +922,6 @@
         margin-left: 60px;
     }
 
-    /* Blog & FAQ */
     .blog-section,
     .faq-section {
         padding: 60px 0;

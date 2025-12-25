@@ -101,14 +101,12 @@ def get_lo_thuoc(thuoc_id):
 @app.route('/treatment/thuoc/<int:thuoc_id>/lo-phu-hop', methods=['POST'])
 @doctor_required
 def get_lo_phu_hop(thuoc_id):
-    """Tự động chọn lô thuốc phù hợp dựa trên số ngày dùng"""
+
     try:
         so_ngay = request.json.get('so_ngay_dung', 0)
-        # Validate input cơ bản
         if not so_ngay or int(so_ngay) <= 0:
             return jsonify({'status': 'error', 'message': 'Số ngày dùng phải lớn hơn 0'}), 400
 
-        # Gọi Utils để xử lý logic
         success, lo_thuoc, message = utils.ValidationUtils.tim_lo_thuoc_tot_nhat(thuoc_id, so_ngay)
 
         if success and lo_thuoc:
@@ -207,7 +205,7 @@ def create_treatment():
         return jsonify({'status': 'success', 'treatment_id': phieu.id})
 
     except Exception as e:
-        db.session.rollback()  # Hoàn tác nếu lỗi
+        db.session.rollback()
         print(f"Error creating treatment: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
