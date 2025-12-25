@@ -1,6 +1,5 @@
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String, Enum as sqlEnum, DateTime, Date, Time, Double, ForeignKey, Float, \
-    Boolean, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Enum as sqlEnum, DateTime, Date, Time, Double, ForeignKey, Float, Boolean, UniqueConstraint
 from sqlalchemy.orm import relationship
 from DentFlowApp import db, app
 from flask_sqlalchemy import SQLAlchemy
