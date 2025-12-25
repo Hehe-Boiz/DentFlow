@@ -90,7 +90,6 @@ def get_all_lich_hen_by_bac_si(bacsi_id):
 
 
 def get_lich_hen_theo_bac_si_today_date_time(bacsi_id):
-    # print(bacsi_id)
     lich_bac_si = lichlamviec_dao.get_lich_truc_hom_nay(bacsi_id)
     if not lich_bac_si:
         print(f"Bác sĩ {bacsi_id} không có lịch trực hôm nay.")
@@ -168,7 +167,6 @@ def get_tong_lich_hen_theo_bac_si(bacsi_id):
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id)
         .filter(
             LichHen.bac_si_id == bacsi_id,
-            # LichHen.gio_kham >= lich_bac_si.gio_bat_dau,
             LichHen.trang_thai == TrangThaiLichHen.DAT_LICH_THANH_CONG,
             LichHen.ngay_dat == date.today(),
         )

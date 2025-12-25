@@ -237,7 +237,7 @@ function checkLoThuoc() {
 
 
 function initAddMedicineEvent() {
-    const btnThemThuoc = document.getElementById('id-add-thuoc'); // Nút thêm thuốc
+    const btnThemThuoc = document.getElementById('id-add-thuoc');
 
     if (btnThemThuoc) {
         const newBtn = btnThemThuoc.cloneNode(true);
@@ -252,7 +252,7 @@ function initAddMedicineEvent() {
 
 function handleAddMedicine() {
     const selectThuoc = document.getElementById('select-ten-thuoc');
-    const inputLieuDung = document.querySelector('input[type="number"][placeholder="2"]'); // Input Liều dùng
+    const inputLieuDung = document.querySelector('input[type="number"][placeholder="2"]');
     const inputDonVi = document.getElementById('input-don-vi');
     const inputSoNgay = document.getElementById('input-so-ngay');
     const selectThoiDiem = document.getElementById('select-thoi-diem');

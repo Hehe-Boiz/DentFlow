@@ -35,7 +35,6 @@ def booking_2_view():
                 return redirect('/booking')
 
         if request.method == 'POST':
-                # Xử lý khi bấm "Tiếp tục" ở bước 2
                 doctor_id = request.form.get('doctor_id')
                 booking_date = request.form.get('booking_date')
                 time_slot = request.form.get('time_slot')
@@ -61,21 +60,17 @@ def booking_3_view():
         print(booking_data)
         print(booking_data['service_id'])
         print(booking_data['doctor_id'])
-        # Nếu chưa có dữ liệu (chưa qua bước 1, 2) thì đá về trang đầu
         if not booking_data or 'service_id' not in booking_data or 'doctor_id' not in booking_data:
                 return redirect('/booking/choose-time-and-doctor')
 
-        # 2. Truy vấn DB để lấy thông tin chi tiết hiển thị ra màn hình
         ten_dich_vu = booking_data['service_name']
         dich_vu_id = booking_data['service_id']
         ten_bac_si = booking_data['doctor_name']
         bac_si_id = booking_data['doctor_id']
 
 
-        # Format lại ngày giờ cho đẹp
-        ngay_dat = booking_data['booking_date']  # YYYY-MM-DD
+        ngay_dat = booking_data['booking_date']
         gio_kham = booking_data['time_slot']
-        # --- XỬ LÝ KHI BẤM NÚT "XÁC NHẬN ĐẶT LỊCH" (POST) ---
         if request.method == 'POST':
                 ghi_chu = request.form.get('note')
                 print(ghi_chu)

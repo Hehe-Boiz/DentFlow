@@ -18,7 +18,7 @@ def cashier_view():
     now = datetime.datetime.now().strftime('%Y-%m-%d')
     active_tab = request.args.get('tab')
     ds_phieu_dieu_tri_chua_thanh_toan = get_phieu_dieu_tri_chua_thanh_toan(page=page,
-                                                                           PAGE_SIZE=page_size)  # pagination
+                                                                           PAGE_SIZE=page_size)
     ds_phieu_dieu_tri_da_thanh_toan = get_ds_phieu_dieu_tri_da_thanh_toan(page=page_history, PAGE_SIZE=page_size)
     return render_template('cashier/trang_thungan.html', thungan=True, pagination=ds_phieu_dieu_tri_chua_thanh_toan,
                            active_tab=active_tab,
