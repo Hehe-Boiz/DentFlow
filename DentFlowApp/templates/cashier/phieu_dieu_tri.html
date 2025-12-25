@@ -6,7 +6,7 @@
                     <h5 class="fw-light b  mb-0">
                         {{ phieu_dieu_tri.ho_so_benh_nhan.ho_ten }}
                     </h5>
-                    <span class="badge bg-warning bg-gradient text-black-50 fw-light">Chờ thanh toán</span>
+                    <span class="badge bg-warning bg-gradient text-black-50 mt-2 mb-2 ">Chờ thanh toán</span>
                 </div>
                 <div class="col-md-4 text-right">
                     Mã số phiếu: {{ phieu_dieu_tri.id }}
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="card-footer p-0 border-0 bg-white text-right">
-        <span type="button" class="btn btn-hover bg-primary rounded-pill m-2 text-white ">
+        <span type="button" class="btn btn-hover bg-primary  m-2 text-white ">
             <a href="{{ url_for('cashier_thanh_toan', id=phieu_dieu_tri.id) }}" class="text-white text-decoration-none">Thanh toán</a></span>
         </div>
     </div>
