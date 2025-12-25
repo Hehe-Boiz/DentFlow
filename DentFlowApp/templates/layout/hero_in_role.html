@@ -1,29 +1,30 @@
 <div class="bg-primary bg-gradient-primary text-white">
-    <div class="container mx-auto px-4 py-8 md:py-12">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+    <div class="hdr-container">
+        <div class="hdr-row">
             <div>
-                <h2 class="text-2xl md:text-3xl mb-2">
+                <h2 class="hdr-title">
                     {% if bacsi %}
-                        Chào bác sĩ {{ bacsi.ho_ten }}! 👨‍⚕️
+                    Chào bác sĩ {{ bacsi.ho_ten }}! 👨‍⚕️
                     {% endif %}
                     {% if letan %}
-                        Chào {{ current_user.ho_ten }}!
+                    Chào {{ current_user.ho_ten }}!
                     {% endif %}
                     {% if thungan %}
-                        Chào thu ngân {{ current_user.ho_ten }}
+                    Chào thu ngân {{ current_user.ho_ten }}
                     {% endif %}
                     {% if quanly %}
-                        Chào quản lý {{ current_user.ho_ten }}
+                    Chào quản lý {{ current_user.ho_ten }}
                     {% endif %}
                 </h2>
+
                 {% if bacsi %}
-                    <p class="text-blue-100">
-                        Hôm nay bạn có {{ count_lich_kham }} bệnh nhân cần khám
-                    </p>
+                <p class="hdr-subtitle">
+                    Hôm nay bạn có {{ count_lich_kham }} bệnh nhân cần khám
+                </p>
                 {% endif %}
             </div>
 
-            <div class="mt-4 md:mt-0 flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-xl px-4 py-3">
+            <div class="hdr-clock">
                 <i class="fa-regular fa-clock fa-lg"></i>
                 <span>{{ now }}</span>
             </div>

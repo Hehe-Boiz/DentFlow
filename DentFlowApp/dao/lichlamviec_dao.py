@@ -25,7 +25,6 @@ def get_lich_san_sang_theo_ngay_theo_bac_si(ngay, bac_si_id):
 
 
 def get_lich_truc_hom_nay(bac_si_id):
-    # Lấy lịch trực của bác sĩ đúng vào ngày hôm nay
     return LichLamViec.query.filter(
         LichLamViec.bac_si_id == bac_si_id,
         LichLamViec.ngay_lam == date.today()

@@ -77,11 +77,10 @@ def get_all_lich_hen_by_bac_si(bacsi_id):
             HoSoBenhNhan.ho_ten,
             func.date_format(
                 func.timestamp(LichHen.ngay_dat, LichHen.gio_kham),
-                '%d/%m/%Y %H:%i'  # MySQL dùng %i cho phút
+                '%d/%m/%Y %H:%i'
             ).label("thoi_diem_kham_str"))
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id)
         .filter(
-            # LichHen.bac_si_id == bacsi_id,
             LichHen.trang_thai == TrangThaiLichHen.CHO_KHAM
         ).distinct()
         .all()
@@ -91,7 +90,6 @@ def get_all_lich_hen_by_bac_si(bacsi_id):
 
 
 def get_lich_hen_theo_bac_si_today_date_time(bacsi_id):
-    # print(bacsi_id)
     lich_bac_si = lichlamviec_dao.get_lich_truc_hom_nay(bacsi_id)
     if not lich_bac_si:
         print(f"Bác sĩ {bacsi_id} không có lịch trực hôm nay.")
@@ -103,7 +101,7 @@ def get_lich_hen_theo_bac_si_today_date_time(bacsi_id):
             HoSoBenhNhan.ho_ten,
             func.date_format(
                 func.timestamp(LichHen.ngay_dat, LichHen.gio_kham),
-                '%d/%m/%Y %H:%i'  # MySQL dùng %i cho phút
+                '%d/%m/%Y %H:%i'
             ).label("thoi_diem_kham_str"))
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id)
         .filter(
@@ -120,12 +118,6 @@ def get_lich_hen_theo_bac_si_today_date_time(bacsi_id):
 
 
 def get_lich_hen_theo_bac_si_today_time(bacsi_id):
-    # print(bacsi_id)
-    # lich_bac_si = lichlamviec_dao.get_lich_truc_hom_nay(bacsi_id)
-    # if not lich_bac_si:
-    #     print(f"Bác sĩ {bacsi_id} không có lịch trực hôm nay.")
-    #     return []
-    # print(lich_bac_si.ngay_lam)
     benh_nhan = (
         db.session.query(
             HoSoBenhNhan.id,
@@ -142,16 +134,12 @@ def get_lich_hen_theo_bac_si_today_time(bacsi_id):
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id).join(DichVu, DichVu.id == LichHen.dich_vu_id)
         .filter(
             LichHen.bac_si_id == bacsi_id,
-            # LichHen.ngay_dat == lich_bac_si.ngay_lam,
-            # LichHen.gio_kham >= lich_bac_si.gio_bat_dau,
-            # LichHen.gio_kham <= lich_bac_si.gio_ket_thuc,
             or_(
                 LichHen.trang_thai == TrangThaiLichHen.CHO_KHAM,
                 LichHen.trang_thai == TrangThaiLichHen.DA_KHAM
             ),
             LichHen.ngay_dat == date.today()
         )
-        # .distinct()  # phòng trường hợp 1 bệnh nhân có nhiều lịch trong khung giờ
         .all()
     )
 
@@ -159,7 +147,6 @@ def get_lich_hen_theo_bac_si_today_time(bacsi_id):
 
 
 def get_lich_hen_da_kham_theo_bac_si_today(bacsi_id):
-    # lich_bac_si = lichlamviec_dao.get_lich_truc_hom_nay(bacsi_id)
     benh_nhan = (
         db.session.query(HoSoBenhNhan.id, HoSoBenhNhan.ho_ten)
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id)
@@ -175,18 +162,15 @@ def get_lich_hen_da_kham_theo_bac_si_today(bacsi_id):
 
 
 def get_tong_lich_hen_theo_bac_si(bacsi_id):
-    # bacsi_id = current_user.bac_si.ma_bac_si
-    # lich_bac_si = lichlamviec_dao.get_lich_truc_hom_nay(bacsi_id)
     benh_nhan = (
         db.session.query(HoSoBenhNhan.id, HoSoBenhNhan.ho_ten)
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id)
         .filter(
             LichHen.bac_si_id == bacsi_id,
-            # LichHen.gio_kham >= lich_bac_si.gio_bat_dau,
             LichHen.trang_thai == TrangThaiLichHen.DAT_LICH_THANH_CONG,
             LichHen.ngay_dat == date.today(),
         )
-        .distinct()  # phòng trường hợp 1 bệnh nhân có nhiều lịch trong khung giờ
+        .distinct()
         .all()
     )
 
@@ -201,10 +185,7 @@ def get_tong_lich_hen_in_tuan_by_bac_si(bacsi_id):
         LichHen.bac_si_id == bacsi_id,
         LichHen.ngay_dat >= start_date,
         LichHen.ngay_dat <= end_date,
-        # or_(
-        #     LichHen.trang_thai == TrangThaiLichHen.CHO_KHAM,
-        #     LichHen.trang_thai == TrangThaiLichHen.DAT_LICH_THANH_CONG,
-        # )
+
     )
 
     return benh_nhan
