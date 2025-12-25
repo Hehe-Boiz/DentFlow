@@ -72,7 +72,9 @@ def del_lich_hen(lich_hen_id):
 def get_all_lich_hen_by_bac_si(bacsi_id):
     benh_nhan = (
         db.session.query(
+            LichHen.id.label("lich_hen_id"),
             HoSoBenhNhan.id,
+            HoSoBenhNhan.ho_so_id,
             HoSoBenhNhan.ho_ten,
             func.date_format(
                 func.timestamp(LichHen.ngay_dat, LichHen.gio_kham),
@@ -80,7 +82,8 @@ def get_all_lich_hen_by_bac_si(bacsi_id):
             ).label("thoi_diem_kham_str"))
         .join(LichHen, LichHen.ho_so_benh_nhan_id == HoSoBenhNhan.id)
         .filter(
-            LichHen.bac_si_id == bacsi_id,
+            # LichHen.bac_si_id == bacsi_id,
+            LichHen.trang_thai == TrangThaiLichHen.CHO_KHAM
         ).distinct()
         .all()
     )

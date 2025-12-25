@@ -6,6 +6,7 @@ from DentFlowApp import db, app
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import enum
+from sqlalchemy import event
 
 
 # ENUMS
@@ -112,7 +113,7 @@ class HoSoBenhNhan(BaseModel):
     ngay_sinh = Column(Date, nullable=True)
     CCCD = Column(String(12), nullable=True)
     # Tài khoản của người dùng (Nếu có)
-    nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='SET NULL'), nullable=True, unique=True)
+    nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='SET NULL'), nullable=True)
 
     # lịch hẹn và phiếu điều trị tra cứu từ hồ sơ
     lich_hen_ds = relationship('LichHen', backref='ho_so_benh_nhan', lazy=True, cascade="all, delete-orphan")
@@ -129,6 +130,16 @@ class HoSoBenhNhan(BaseModel):
             'cccd': self.CCCD or '',
             'dia_chi': self.dia_chi or ''
         }
+
+@event.listens_for(HoSoBenhNhan, 'after_insert')
+def generate_ho_so_id(mapper, connection, target):
+    ma_bn = f"BN{str(target.id).zfill(6)}"
+
+    connection.execute(
+        HoSoBenhNhan.__table__.update()
+        .where(HoSoBenhNhan.id == target.id)
+        .values(ho_so_id=ma_bn)
+    )
 
 
 class BacSi(db.Model):

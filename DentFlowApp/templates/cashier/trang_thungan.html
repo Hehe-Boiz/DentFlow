@@ -4,6 +4,7 @@
 {% block title %}Cashier view{% endblock %}
 
 {% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_2.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking_3.css') }}"/>
@@ -12,8 +13,9 @@
 {% endblock %}
 
 {% block hero %}
-    {{ hero_in_role('Thu ngân', time_now,  "fa-solid fa-money-bills" ) }}
+    {% include 'layout/hero_in_role.html' %}
 {% endblock %}
+
 {% block content %}
     <div class="card border-0 rounded-xl shadow-sm mt-4">
         <div class="card-body  p-4">

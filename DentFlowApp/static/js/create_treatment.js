@@ -33,6 +33,7 @@ export function initCreateTreatment() {
                 checkLoThuoc();
                 inputUnit();
                 initAddMedicineEvent();
+                initDeleteMedicineEvent();
             } catch (err) {
                 console.error("Lỗi tải form kê đơn", err);
             }
@@ -137,7 +138,7 @@ function initServiceEvents() {
                 <td class="py-3 px-4 text-sm text-gray-600">${note}</td>
                 <td class="py-3 px-4">
                     <button type="button" class="btn-delete text-red-600 hover:text-red-800 p-2 rounded" data-price="${price}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                        <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </td>
             `;
@@ -315,26 +316,24 @@ function handleAddMedicine() {
     renderMedicineList();
 
     inputLieuDung.value = '';
-    // inputSoNgay.value = ''; // Thường số ngày giữ nguyên thì tiện hơn
+    // inputSoNgay.value = '';
     selectThuoc.value = '';
     inputDonVi.value = '';
-    document.getElementById('input-han-su-dung').value = ''; // Reset ô hạn sử dụng
+    document.getElementById('input-han-su-dung').value = '';
 }
 
 function renderMedicineList() {
     const container = document.getElementById('list-thuoc-container');
     const listBody = document.getElementById('list-thuoc-body');
 
-    // Nếu không có thuốc nào thì ẩn bảng đi
     if (danhSachThuocKeDon.length === 0) {
         container.classList.add('hidden');
         return;
     }
 
     container.classList.remove('hidden');
-    listBody.innerHTML = ''; // Xóa nội dung cũ
+    listBody.innerHTML = '';
 
-    // Duyệt mảng và tạo HTML
     danhSachThuocKeDon.forEach((thuoc, index) => {
         const parts = [];
 
@@ -394,19 +393,12 @@ function renderMedicineList() {
         
                 <button
                     type="button"
-                    onclick="removeMedicine(${index})"
-                    class="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded transition-colors flex-shrink-0"
+                    class="btn-remove-medicine text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded transition-colors flex-shrink-0"
+                    data-index="${index}"
                     title="Xóa thuốc này"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             className="lucide lucide-trash-2">
-            <path d="M3 6h18"/>
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-            <line x1="10" x2="10" y1="11" y2="17"/>
-            <line x1="14" x2="14" y1="11" y2="17"/>
-        </svg>
+                                            <i class="fa-regular fa-trash-can"></i>
+
                 </button>
             </div>
         `;
@@ -421,6 +413,22 @@ function removeMedicine(index) {
     renderMedicineList();
 }
 
+function initDeleteMedicineEvent() {
+    const listBody = document.getElementById('list-thuoc-body');
+    if (listBody) {
+        listBody.addEventListener('click', function (e) {
+            const btn = e.target.closest('.btn-remove-medicine');
+
+            if (btn) {
+                const index = btn.getAttribute('data-index');
+                if (index !== null) {
+                    removeMedicine(parseInt(index));
+                }
+            }
+        });
+    }
+}
+
 // ---------------------------------------------
 // Xử lý lưu phiếu điều trị
 function initSaveTreatmentEvent() {
@@ -428,7 +436,9 @@ function initSaveTreatmentEvent() {
     btnSaveTreatment.addEventListener('click', async function () {
         const selectPatientElement = document.querySelector('select[name="patient_id"]')
         const patientId = selectPatientElement ? selectPatientElement.value : null;
-        console.log(patientId)
+        const selectedOption = selectPatientElement.options[selectPatientElement.selectedIndex];
+        const lichHenId = selectedOption ? selectedOption.getAttribute('data-lichhenId') : null;
+        // console.log(patientId)
         if (!patientId) {
             alert("Vui lòng chọn lịch khám/bệnh nhân trước khi lưu!");
             selectPatientElement.focus();
@@ -472,7 +482,8 @@ function initSaveTreatmentEvent() {
                     chan_doan: chanDoan,
                     ghi_chu: ghiChu,
                     services: services,
-                    medicines: danhSachThuocKeDon
+                    medicines: danhSachThuocKeDon,
+                    lich_hen_id: lichHenId
                 })
             });
 
