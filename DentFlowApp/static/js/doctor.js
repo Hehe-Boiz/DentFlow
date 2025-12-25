@@ -11,11 +11,9 @@ let buttons = document.querySelectorAll('.tab-btn');
 function highlightTabButton(targetTabId) {
     const buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(b => {
-        // Reset style cũ
         b.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
         b.classList.add('text-gray-600', 'hover:bg-gray-100');
 
-        // Active style cho nút được chọn
         if (b.dataset.tab === targetTabId) {
             b.classList.remove('text-gray-600', 'hover:bg-gray-100');
             b.classList.add('bg-blue-600', 'text-white', 'shadow-md');
@@ -27,15 +25,13 @@ async function loadTabContent(target, params = "") {
     const urlBase = tabApiMap[target];
     if (!urlBase) return;
 
-    const url = urlBase + params; // Ghép tham số vào URL nếu có
+    const url = urlBase + params;
     const container = document.getElementById("tab-content-container");
     if (!container) return;
 
-    // Hiệu ứng loading
     container.style.opacity = "0.5";
     container.style.pointerEvents = "none";
 
-    // Cập nhật nút active trên thanh menu
     highlightTabButton(target);
 
     try {
@@ -44,7 +40,6 @@ async function loadTabContent(target, params = "") {
         const html = await res.text();
         container.innerHTML = html;
 
-        // --- Logic khởi tạo riêng cho từng tab ---
 
         if (target === 'tab-treatment') {
             initCreateTreatment();
@@ -69,23 +64,18 @@ async function loadTabContent(target, params = "") {
     }
 }
 
-// Hàm xử lý sự kiện click cho các nút "Lập phiếu" trong tab Lịch hôm nay
 function initButtonsLichKham() {
-    const buttons = document.querySelectorAll(".btn-phieu-dieu-tri"); // Nút Lập phiếu
+    const buttons = document.querySelectorAll(".btn-phieu-dieu-tri");
     buttons.forEach(btn => {
         btn.addEventListener("click", () => {
-            // 1. Lấy dữ liệu từ data attribute
             const patientId = btn.dataset.patientId || btn.getAttribute('data-patientId');
             const dichVuId = btn.dataset.dichvu || btn.getAttribute('data-dichvu');
 
             console.log(`Chuyển sang điều trị: BN ${patientId}, DV ${dichVuId}`);
 
-            // 2. Tạo query string
-            // Lưu ý: Tên tham số phải khớp với bên Python (benh_nhan_id, dich_vu_id)
             const queryString = `?patient_id=${patientId}&dichvu=${dichVuId}`;
             console.log(patientId)
 
-            // 3. Gọi hàm chuyển tab sang tab treatment với tham số
             loadTabContent('tab-treatment', queryString);
             initCreateTreatment()
 
@@ -93,28 +83,23 @@ function initButtonsLichKham() {
     });
 }
 
-// --- KHỞI TẠO SỰ KIỆN CHO CÁC TAB CHÍNH ---
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll('.tab-btn');
 
-    // Gán sự kiện click cho các tab menu
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             const target = btn.dataset.tab;
-            loadTabContent(target); // Gọi hàm load không tham số
+            loadTabContent(target);
         });
     });
 
-    // Mặc định load tab đầu tiên hoặc tab từ URL (nếu bạn muốn giữ tính năng bookmark)
     const params = new URLSearchParams(window.location.search);
-    const currentTabId = params.get('tab') || 'tab-today'; // Mặc định là tab-today
+    const currentTabId = params.get('tab') || 'tab-today';
 
-    // Tìm nút tab tương ứng để active
     const activeBtn = document.querySelector(`.tab-btn[data-tab="${currentTabId}"]`);
     if (activeBtn) {
         loadTabContent(currentTabId);
     } else {
-        // Fallback nếu không tìm thấy tab
         loadTabContent('tab-today');
     }
 });
@@ -328,7 +313,7 @@ function initCalendarWork() {
             const statusText = x.trang_thai_text || "Chờ khám";
             const statusClass = (statusText.includes("Chờ"))
                 ? "bg-amber-600 text-white"
-                : (statusText.includes("Đã") ? "bg-green-600 text-white" : "bg-gray-600 text-white");
+                : (statusText.includes("Đã") ? "bg-green-600 text-white" : "bg-blue-100 text-blue-700");
 
             return `
         <div class="border rounded-lg p-3 bg-amber-50 border-amber-300">

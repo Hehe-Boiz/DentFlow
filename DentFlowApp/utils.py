@@ -20,6 +20,8 @@ def user_can_do(User):
         can_do['Trang thu ngân'] = '/cashier'
     if User.vai_tro == UserRole.MANAGER:
         can_do['Trang quản lý'] = '/manager'
+    if User.vai_tro == UserRole.DOCTOR:
+        can_do['Trang bác sĩ'] = '/treatment'
     else:
         for item in admin.menu():
             if item.is_accessible():
@@ -31,10 +33,6 @@ def user_can_do(User):
 class ValidationUtils:
     @staticmethod
     def tim_lo_thuoc_tot_nhat(thuoc_id, so_ngay_dung):
-        """
-        Tìm lô thuốc phù hợp nhất (Auto).
-        Trả về: (Success: bool, Data: dict/None, Message: str)
-        """
         try:
             # 1. Tìm lô đáp ứng đủ số ngày (Ưu tiên lô date gần nhất để đẩy hàng cũ đi - FEFO)
             lo_phu_hop = thuoc_dao.get_lo_thuoc_phu_hop(thuoc_id, so_ngay_dung)

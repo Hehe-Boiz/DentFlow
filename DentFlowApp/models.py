@@ -1,11 +1,12 @@
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, Enum as sqlEnum, DateTime, Date, Time, Double, ForeignKey, Float, \
-    Boolean
+    Boolean, UniqueConstraint
 from sqlalchemy.orm import relationship
 from DentFlowApp import db, app
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import enum
+from sqlalchemy import event
 
 
 # ENUMS
@@ -14,6 +15,7 @@ class GioiTinh(enum.Enum):
     NAM = "Nam"
     NU = "Nữ"
     KHAC = "Khác"
+
 
 
 class DonViThuoc(enum.Enum):
@@ -113,7 +115,6 @@ class HoSoBenhNhan(BaseModel):
     CCCD = Column(String(12), nullable=True)
     # Tài khoản của người dùng (Nếu có)
     nguoi_dung_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='SET NULL'), nullable=True)
-
     # lịch hẹn và phiếu điều trị tra cứu từ hồ sơ
     lich_hen_ds = relationship('LichHen', backref='ho_so_benh_nhan', lazy=True, cascade="all, delete-orphan")
     phieu_dieu_tri_ds = relationship('PhieuDieuTri', backref='ho_so_benh_nhan', lazy=True, cascade="all, delete-orphan")
@@ -140,7 +141,7 @@ class BacSi(db.Model):
     loai_bac_si = Column(sqlEnum(LoaiBacSi))
 
     # Tài khoản của bác sĩ
-    nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id, ondelete='SET NULL'), nullable=True)
+    nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id, ondelete='SET NULL'), nullable=True, unique=True)
 
     # Lấy các lịch hẹn cũng như phiếu điều trị để phục vụ việc lọc thanh toán hay đặt lịch
     lich_lam_viec_ds = relationship('LichLamViec', backref='bac_si', lazy=True, cascade="all, delete-orphan")
@@ -194,7 +195,9 @@ class LichHen(BaseModel):
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
     dich_vu_id = Column(Integer, ForeignKey('dich_vu.id', ondelete='RESTRICT'), nullable=True)
     trang_thai = Column(sqlEnum(TrangThaiLichHen), default=TrangThaiLichHen.DAT_LICH_THANH_CONG)
-
+    __table_args__ = (
+        UniqueConstraint('bac_si_id', 'ngay_dat', 'gio_kham', name='unique_lich_hen_bac_si'),
+    )
     ghi_chu = Column(String(100), nullable=True)
 
 
@@ -208,7 +211,7 @@ class PhieuDieuTri(BaseModel):
     bac_si_id = Column(String(5), ForeignKey('bac_si.ma_bac_si'), nullable=False)
     # dich_vu_id = Column(Integer, ForeignKey('dich_vu.id'), nullable=False)
 
-    hoa_don = relationship('HoaDon', backref='phieu_dieu_tri', uselist=False, cascade="all, delete-orphan")
+    hoa_don = relationship('HoaDon', backref='phieu_dieu_tri', uselist=False)
     don_thuoc = relationship('DonThuoc', backref='phieu_dieu_tri', uselist=False, cascade="all, delete-orphan")
 
     chi_tiet_dich_vu = relationship('ChiTietPhieuDieuTri', backref='phieu_dieu_tri', lazy=True,
@@ -246,9 +249,9 @@ class HoaDon(BaseModel):
     __tablename__ = 'hoa_don'
     tong_tien = Column(Float)
     ngay_thanh_toan = Column(DateTime, default=datetime.now())
-    nhan_vien_id = Column(Integer, ForeignKey('nguoi_dung.id', ondelete='CASCADE'), nullable=False)
+    nhan_vien_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     phuong_thuc_thanh_toan = Column(sqlEnum(PhuongThucThanhToan), nullable=False)
-    phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id', ondelete='CASCADE'), nullable=False,
+    phieu_dieu_tri_id = Column(Integer, ForeignKey('phieu_dieu_tri.id'), nullable=False,
                                unique=True)
 
 

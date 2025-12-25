@@ -23,6 +23,7 @@
     <div class="appointment-list">
         {% if lich_hen %}
         {% for lich in lich_hen %}
+        {% if lich.trang_thai.value in ['Chờ khám', 'Đặt lịch thành công'] %}
         <div class="appointment-item d-flex flex-column flex-md-row justify-content-between align-items-center gap-3" id="action-delete-{{ lich.id }}">
             <div class="w-100">
                 <div class="patient-name">{{ lich.ho_so_benh_nhan.ho_ten }}</div>
@@ -51,21 +52,9 @@
                 </button>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
         {% endif %}
-        <div class="appointment-item d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 bg-light">
-            <div class="w-100 opacity-75">
-                <div class="patient-name text-decoration-line-through text-muted">Lê Văn Cường</div>
-                <div class="info-line"><i class="far fa-clock"></i> 19/12/2025 - 10:00</div>
-                <div class="info-line"><i class="fas fa-user-md"></i> ThS. BS. Lê Văn An</div>
-            </div>
-
-            <div>
-                <span class="badge badge-soft-danger px-3 py-2 rounded-pill fw-normal">
-                    Đã hủy
-                </span>
-            </div>
-        </div>
     </div>
 
 

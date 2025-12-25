@@ -1,0 +1,547 @@
+<!-- Services Section -->
+<section class="services-section py-5">
+    <div class="container">
+        <!-- Header -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold mb-3" style="color: #2f5a96;">
+                    Giải pháp nụ cười cho mọi nhu cầu
+                </h2>
+                <p class="lead text-muted">
+                    Dù là khám sức khỏe định kỳ hay thay đổi diện mạo toàn diện, chúng tôi đều có thể đáp ứng nhu cầu
+                    của bạn.
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="/dich_vu" class="btn  btn-outline-dark btn-lg rounded-pill px-4 fw-semibold">
+                    Tất cả các dịch vụ
+                </a>
+            </div>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="row g-4">
+            <!-- General Dentistry -->
+            {% for i in range(6) %}
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card h-100 p-4 rounded-4 position-relative">
+                    <div class="service-icon bg-white rounded-circle d-flex align-items-center justify-content-center mb-4"
+                         style="width: 60px; height: 60px;">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3 text-white">{{ dich_vu[i].ten_dich_vu }}</h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="why-choose-section py-5">
+    <div class="row align-items-center">
+        <!-- Left Content - Features -->
+        <div class="col-lg-4">
+            <div class="mb-5">
+                <h2 class="display-5 fw-bold mb-3" style="color: #1a365d;">
+                    Why Choose Dentrist
+                </h2>
+                <p class="text-muted fs-5">
+                    Trusted by families, backed by technology
+                </p>
+            </div>
+
+            <div class="features-list">
+                <!-- Feature 1 -->
+                <div class="d-flex align-items-start mb-4 ml-2">
+                    <div class="feature-check-icon rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-3"
+                    >
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <p class="mb-0">
+                            Patient-first approach<br>with tailored treatments
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="d-flex align-items-start mb-4 ml-2">
+                    <div class="feature-check-icon rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-3"
+                    >
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <p class="mb-0" style="color: #1a365d; font-weight: 500;">
+                            Certified professionals<br>and specialists
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="d-flex align-items-start mb-4 ml-2">
+                    <div class="feature-check-icon rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-3"
+                    >
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <p class="mb-0" style="color: #1a365d; font-weight: 500;">
+                            Comfortable, modern<br>facilities
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="d-flex align-items-start ml-2">
+                    <div class="feature-check-icon rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-3"
+                    >
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <p class="mb-0" style="color: #1a365d; font-weight: 500;">
+                            Transparent pricing and<br>flexible plans
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center - Doctor Image -->
+        <div class="col-lg-4 text-center my-5 my-lg-0">
+            <div class="doctor-image-wrapper position-relative d-inline-block"
+                 style="width: 300px; height: 400px;">
+                <div class="bg-shape position-absolute"
+                     style="width: 100%; height: 100%;
+                background-color: #4566c0;
+                border-radius: 20px; /* 2. Bo góc mềm mại */
+                top: 15px; left: 15px; /* Lệch xuống dưới và sang phải */
+                opacity: 0.2; z-index: 0;">
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600"
+                     alt="Doctor"
+                     class="img-fluid"
+                     style="width: 100%; height: 100%;
+                object-fit: cover;   /* Đảm bảo ảnh không bị méo */
+                border-radius: 20px; /* Bo góc trùng với lớp nền */
+                position: relative; z-index: 1;">
+            </div>
+        </div>
+
+        <!-- Right Content - Stats -->
+        <div class="col-lg-4 ">
+            <div class="stats-list ml-5">
+                <!-- Stat 1 - Rating -->
+                <div class="stat-item mb-5">
+                    <h2 class="display-3 fw-bold mb-0" style="color: #1a365d;">
+                        4.9<span class="fs-3 text-muted">/5</span>
+                    </h2>
+                    <p class="text-muted fs-6 mb-0">Average Rating</p>
+                </div>
+
+                <!-- Stat 2 - Specialists -->
+                <div class="stat-item mb-5">
+                    <h2 class="display-3 fw-bold mb-0" style="color: #1a365d;">
+                        6
+                    </h2>
+                    <p class="text-muted fs-6 mb-0">In-House Specialists</p>
+                </div>
+
+                <!-- Stat 3 - Happy Patients -->
+                <div class="stat-item mb-5">
+                    <h2 class="display-3 fw-bold mb-0" style="color: #1a365d;">
+                        10K+
+                    </h2>
+                    <p class="text-muted fs-6 mb-0">Happy Patients</p>
+                </div>
+
+                <!-- Stat 4 - Experience -->
+                <div class="stat-item">
+                    <h2 class="display-3 fw-bold mb-0" style="color: #1a365d;">
+                        20+
+                    </h2>
+                    <p class="text-muted fs-6 mb-0">Years of Experience</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="how-it-works-section">
+    <div class="row align-items-center">
+        <!-- Left Content -->
+        <div class="col-lg-5 col-md-6">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Simple steps to a healthier, brighter smile</p>
+
+            <div class="steps-container">
+                <!-- Step 1 -->
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">Book a Visit</h3>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">Meet Your Dentist</h3>
+                    <p class="step-description">Consult with our expert team</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">Get Diagnosed</h3>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-item">
+                    <div class="step-number">04</div>
+                    <h3 class="step-title">Receive Treatment</h3>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step-item">
+                    <div class="step-number">05</div>
+                    <h3 class="step-title">Follow-Up & Smile</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Image -->
+        <div class="col-lg-7 col-md-6">
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=800&auto=format&fit=crop"
+                     alt="Dentist examining X-ray on laptop">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="discover-section">
+    <!-- Title -->
+    <h2 class="section-title">Discover the Dentist Experience</h2>
+    <p class="section-subtitle">See how we make every visit comfortable and effective</p>
+
+    <!-- Video Thumbnail with Play Button -->
+    <div class="video-wrapper">
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop"
+             alt="Dentist with young patient looking at mirror">
+
+        <!-- Play Button -->
+        <div class="play-button" data-bs-toggle="modal" data-bs-target="#videoModal">
+            <i class="fas fa-play"></i>
+        </div>
+    </div>
+</section>
+<section class="experts-section">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <!-- Left Content -->
+            <div class="col-lg-3 col-md-4">
+                <div class="left-content ps-lg-5">
+                    <h2 class="section-title">Meet Our Dental Experts</h2>
+                    <p class="section-subtitle">Compassionate care from experienced professionals</p>
+
+                    <!-- Navigation Arrows -->
+                    <div class="slider-nav">
+                        <button class="nav-btn" id="prevBtn" aria-label="Previous">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="nav-btn" id="nextBtn" aria-label="Next">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right - Experts Slider -->
+            <div class="col-lg-9 col-md-8">
+                <div class="slider-container">
+                    <div class="experts-slider" id="expertsSlider">
+                        <!-- Expert 1 -->
+                        <div class="expert-card">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=400&auto=format&fit=crop"
+                                 alt="Dr. Emily Hart">
+                            <div class="expert-info">
+                                <h3 class="expert-name">Dr. Emily Hart</h3>
+                                <p class="expert-specialty">Cosmetic Dentistry</p>
+                            </div>
+                        </div>
+
+                        <!-- Expert 2 -->
+                        <div class="expert-card">
+                            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=400&auto=format&fit=crop"
+                                 alt="Dr. Sara Nguyen">
+                            <div class="expert-info">
+                                <h3 class="expert-name">Dr. Sara Nguyen</h3>
+                                <p class="expert-specialty">Pediatric Dentistry</p>
+                            </div>
+                        </div>
+
+                        <!-- Expert 3 -->
+                        <div class="expert-card">
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400&auto=format&fit=crop"
+                                 alt="Dr. Leo Ramirez">
+                            <div class="expert-info">
+                                <h3 class="expert-name">Dr. Leo Ramirez</h3>
+                                <p class="expert-specialty">Oral Surgery</p>
+                            </div>
+                        </div>
+
+                        <!-- Expert 4 -->
+                        <div class="expert-card">
+                            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop"
+                                 alt="Dr. Michael Chen">
+                            <div class="expert-info">
+                                <h3 class="expert-name">Dr. Michael Chen</h3>
+                                <p class="expert-specialty">Orthodontics</p>
+                            </div>
+                        </div>
+
+                        <!-- Expert 5 -->
+                        <div class="expert-card">
+                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop"
+                                 alt="Dr. Anna Williams">
+                            <div class="expert-info">
+                                <h3 class="expert-name">Dr. Anna Williams</h3>
+                                <p class="expert-specialty">Endodontics</p>
+                            </div>
+                        </div>
+
+                        <!-- Expert 6 -->
+                        <div class="expert-card">
+                            <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?q=80&w=400&auto=format&fit=crop"
+                                 alt="Dr. James Wilson">
+                            <div class="expert-info">
+                                <h3 class="expert-name">Dr. James Wilson</h3>
+                                <p class="expert-specialty">Periodontics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scroll Progress Bar -->
+                    <div class="scroll-progress-container">
+                        <div class="scroll-progress-bar">
+                            <div class="scroll-progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Dot Indicators -->
+                    <div class="dot-indicators" id="dotIndicators">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                        <span class="dot" data-index="3"></span>
+                        <span class="dot" data-index="4"></span>
+                        <span class="dot" data-index="5"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials-section">
+    <div class="container">
+        <div class="row">
+            <!-- Left Content -->
+            <div class="col-lg-4 col-md-4">
+                <div class="left-content">
+                    <h2 class="section-title">Hear From Our Happy Patients</h2>
+                    <p class="section-subtitle">Real stories from patients who've rediscovered their smile</p>
+                </div>
+            </div>
+
+            <!-- Right - Testimonials -->
+            <div class="col-lg-8 col-md-8">
+                <div class="testimonials-container">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="patient-info">
+                                <img src="https://i.pravatar.cc/100?img=1" alt="Amanda Lewis" class="patient-avatar">
+                                <h4 class="patient-name">Amanda Lewis</h4>
+                            </div>
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">I used to dread dental appointments, but Dentist changed that. The
+                            staff is welcoming, the care is gentle, and I finally feel confident in my smile again.</p>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="patient-info">
+                                <img src="https://i.pravatar.cc/100?img=3" alt="Daniel Wright" class="patient-avatar">
+                                <h4 class="patient-name">Daniel Wright</h4>
+                            </div>
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">Dentist exceeded my expectations. The clinic is spotless, the team
+                            is professional, and my root canal was completely painless. I always feel well cared
+                            for.</p>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="patient-info">
+                                <img src="https://i.pravatar.cc/100?img=5" alt="Julia Monroe" class="patient-avatar">
+                                <h4 class="patient-name">Julia Monroe</h4>
+                            </div>
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">Everything at Dentist runs smoothly—from booking to follow-up. The
+                            dentists take their time, and I never feel rushed. My smile has never looked better.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FROM THE DENTIST'S DESK ========== -->
+<section class="blog-section">
+    <div class="container">
+        <!-- Header -->
+        <div class="blog-header">
+            <h2 class="blog-title">From the Dentist's Desk</h2>
+            <p class="blog-subtitle">Your go-to source for trusted dental tips, trends, and wellness advice</p>
+        </div>
+
+        <!-- Blog Cards -->
+        <div class="row">
+            <!-- Blog 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=500&auto=format&fit=crop"
+                         alt="Dental Implants" class="blog-card-img">
+                    <h3 class="blog-card-title">Are Dental Implants Right for You?</h3>
+                    <p class="blog-card-date">April 18, 2035</p>
+                </div>
+            </div>
+
+            <!-- Blog 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?q=80&w=500&auto=format&fit=crop"
+                         alt="Healthy Smile" class="blog-card-img">
+                    <h3 class="blog-card-title">5 Tips to Maintain a Healthy Smile</h3>
+                    <p class="blog-card-date">February 10, 2035</p>
+                </div>
+            </div>
+
+            <!-- Blog 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=500&auto=format&fit=crop"
+                         alt="Child Dental Visit" class="blog-card-img">
+                    <h3 class="blog-card-title">When to Bring Your Child for Their First Dental Visit</h3>
+                    <p class="blog-card-date">March 2, 2035</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA BANNER ========== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-banner">
+            <h2 class="cta-title">Ready to Smile with Confidence?</h2>
+            <p class="cta-subtitle">Book your first appointment now and receive a free dental checkup</p>
+            <a href="/booking" class="cta-btn">Book an Appointment</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ SECTION ========== -->
+<section class="faq-section">
+    <div class="container">
+        <div class="row">
+            <!-- Left Content -->
+            <div class="col-lg-4 col-md-4">
+                <div class="left-content">
+                    <h2 class="faq-title">Answers to Your Dental Care Questions</h2>
+                    <p class="faq-subtitle">Get the clarity you need to feel confident about your oral health decisions</p>
+                </div>
+            </div>
+
+            <!-- Right - FAQ Items -->
+            <div class="col-lg-8 col-md-8">
+                <div class="faq-container">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item active">
+                        <div class="faq-question">
+                            <h4>Do you accept insurance?</h4>
+                            <i class="fas fa-arrow-up faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Yes, we accept most major insurance providers and are happy to assist with claims. If you're unsure about your coverage, our front desk staff can help you check eligibility and guide you through the reimbursement process.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Is teeth whitening safe?</h4>
+                            <i class="fas fa-arrow-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Yes, professional teeth whitening is safe when performed by a qualified dentist. We use clinically proven products that minimize sensitivity while delivering excellent results.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>How often should I visit the dentist?</h4>
+                            <i class="fas fa-arrow-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            We recommend visiting the dentist every 6 months for a routine checkup and cleaning. However, some patients may need more frequent visits depending on their oral health needs.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Do you treat children?</h4>
+                            <i class="fas fa-arrow-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Absolutely! We welcome patients of all ages, including children. Our team is experienced in pediatric dentistry and creates a comfortable, fun environment for young patients.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>What if I have dental anxiety?</h4>
+                            <i class="fas fa-arrow-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            We understand dental anxiety is common and offer various comfort options including sedation dentistry, calming music, and a gentle approach to help you feel at ease during your visit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

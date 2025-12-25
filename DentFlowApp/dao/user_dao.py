@@ -17,7 +17,7 @@ def auth_user(username, password):
 def add_user(ho_ten, so_dien_thoai, username, password, avatar):
     u = NguoiDung(ho_ten=ho_ten,
              so_dien_thoai=so_dien_thoai,
-             username=username.strip(),
+             username=username.strip().lower(),
              password=bcrypt.generate_password_hash(password.strip()).decode('utf-8'))
 
     if avatar:

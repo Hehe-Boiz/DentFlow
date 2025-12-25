@@ -1,0 +1,39 @@
+/* Style cho thẻ Card dịch vụ */
+.service-card {
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà */
+    border-color: #dee2e6;     /* Viền xám nhạt */
+    background: #fff;
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi di chuột vào (Hover) */
+.service-card:hover {
+    transform: translateY(-5px); /* Nhấc nhẹ lên 5px */
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; /* Đổ bóng */
+    border-color: #0d6efd;       /* Viền đổi màu xanh (Primary) */
+}
+
+/* Tên dịch vụ */
+.service-card .card-title {
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.service-card:hover .card-title {
+    color: #0d6efd; /* Tên đổi màu xanh khi hover */
+}
+
+/* Đường gạch dưới trang trí (Giống cái đế xanh trong ảnh mẫu) */
+.service-line {
+    width: 40px;
+    height: 3px;
+    background-color: #0d6efd; /* Màu xanh */
+    margin: 0 auto;            /* Căn giữa */
+    opacity: 0;                /* Mặc định ẩn */
+    transition: opacity 0.3s;
+}
+
+/* Khi hover thì hiện đường gạch lên */
+.service-card:hover .service-line {
+    opacity: 1;
+}

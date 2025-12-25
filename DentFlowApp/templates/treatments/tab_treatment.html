@@ -26,9 +26,9 @@
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
                             <option value="">-- Chọn lịch khám --</option>
                             {% for patient in patients %}
-                            <option value="{{ patient.id }}"
-                                    {% if selected_patient_id == patient.id %}selected{% endif %}>
-                                {{ patient.ho_ten }} - {{
+                            <option value="{{ patient.id }}" data-lichhenId=" {{ patient.lich_hen_id }}"
+                                    {% if selected_patient_id== patient.id %}selected{% endif %}>
+                                {{ patient.ho_ten }} - HS00{{ patient.id }} - {{
                                 patient.thoi_diem_kham_str }}
                             </option>
                             {% endfor %}
@@ -68,7 +68,8 @@
                                         class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm">
                                     <option value="">-- Chọn --</option>
                                     {% for s in services %}
-                                    <option value="{{ s.id }}" data-price="{{ s.don_gia }}" {% if selected_service_id == s.id %}selected{% endif %}>
+                                    <option value="{{ s.id }}" data-price="{{ s.don_gia }}" {% if selected_service_id==
+                                            s.id %}selected{% endif %}>
                                         {{ s.ten_dich_vu }}
                                     </option>
                                     {% endfor %}
@@ -135,12 +136,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-chevron-right w-5 h-5 text-gray-600"
-                                     aria-hidden="true">
-                                    <path d="m9 18 6-6-6-6"></path>
-                                </svg>
+                                <i class="fa-solid fa-angle-right w-4 h-4 fa-lg mt-2-5 w-5 h-5 text-gray-600"></i>
                             </div>
                         </button>
                         <div id="ke-don-container"></div>

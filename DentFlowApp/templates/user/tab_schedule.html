@@ -22,17 +22,27 @@
                 <td>
                     BS. {{ lich.bac_si.ho_ten }}
                 </td>
-                <td>
+                <td class="d-flex align-middle">
                     {% if lich.trang_thai.name == 'DAT_LICH_THANH_CONG' %}
                     <span class="badge bg-warning text-dark">Chờ xác nhận</span>
+                    <form action="/api/delete-appointment/{{ lich.id }}" id="delAppointment" method="post"></form>
+                    <button class="btn btn-outline-danger btn-sm py-0 px-2 shadow-sm ms-2"
+                            type="button"
+                            onclick="deleteAppointment()"
+                            title="Hủy lịch hẹn này">
+                        <small><i class="fas fa-times me-1"></i>Hủy</small>
+                    </button>
                     {% elif lich.trang_thai.name == 'CHO_KHAM' %}
                     <span class="badge bg-primary">Đã xác nhận</span>
                     {% elif lich.trang_thai.name == 'DA_KHAM' %}
                     <span class="badge bg-success">Hoàn thành</span>
+
                     {% else %}
                     <span class="badge bg-danger">Đã hủy</span>
                     {% endif %}
+
                 </td>
+
             </tr>
             {% endfor %}
             </tbody>

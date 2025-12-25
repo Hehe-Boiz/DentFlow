@@ -8,8 +8,10 @@ from DentFlowApp.dao import dichvu_dao, bacsi_dao, lich_hen_dao,ho_so_benh_nhan_
 @app.route('/booking')
 @login_required
 def booking_view():
-        services = dichvu_dao.get_dich_vu()
+        kw = request.args.get('kw')
+        services = dichvu_dao.get_dich_vu(kw=kw)
         return render_template('booking/booking.html', services=services)
+
 
 @app.route('/booking/choose-service', methods=['post'])
 @login_required
@@ -104,16 +106,10 @@ def booking_3_view():
                 except Exception as e:
                         print(e)
                         flash('Lỗi: ' + str(e), 'danger')
-
-        # --- GET REQUEST: Render giao diện ---
+                        return redirect('/booking')
         return render_template('booking/booking_3.html',
                                ten_dich_vu=ten_dich_vu,
                                ten_bac_si=ten_bac_si,
                                ngay_dat=ngay_dat,
                                gio_kham=gio_kham)
 
-
-# Route trang thành công (Đơn giản)
-@app.route('/booking/success')
-def booking_success():
-        return render_template('booking/booking_success.html')
