@@ -33,10 +33,6 @@ def user_can_do(User):
 class ValidationUtils:
     @staticmethod
     def tim_lo_thuoc_tot_nhat(thuoc_id, so_ngay_dung):
-        """
-        Tìm lô thuốc phù hợp nhất (Auto).
-        Trả về: (Success: bool, Data: dict/None, Message: str)
-        """
         try:
             # 1. Tìm lô đáp ứng đủ số ngày (Ưu tiên lô date gần nhất để đẩy hàng cũ đi - FEFO)
             lo_phu_hop = thuoc_dao.get_lo_thuoc_phu_hop(thuoc_id, so_ngay_dung)
