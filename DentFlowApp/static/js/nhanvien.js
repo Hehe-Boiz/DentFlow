@@ -9,7 +9,7 @@ async function loadEmployees() {
 
             if (result.status === 'success' && result.data.length > 0) {
                 result.data.forEach(nv => {
-                    // Tạo avatar từ chữ cái đầu của tên
+
                     const initials = nv.ho_ten.split(' ').pop().charAt(0).toUpperCase();
 
                     const cardHtml = `

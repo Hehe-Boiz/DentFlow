@@ -10,7 +10,6 @@ def role_required(allowed_roles):
             if not current_user.is_authenticated:
                 return redirect(url_for('login_view',next=request.url))
             if current_user.vai_tro not in allowed_roles:
-            # Trả về lỗi 403 không được phép truy cập
                 abort(403)
             return f(*args, **kwargs)
         return decorated_function

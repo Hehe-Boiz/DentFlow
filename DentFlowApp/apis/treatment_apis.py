@@ -101,7 +101,7 @@ def get_lo_thuoc(thuoc_id):
 @app.route('/treatment/thuoc/<int:thuoc_id>/lo-phu-hop', methods=['POST'])
 @doctor_required
 def get_lo_phu_hop(thuoc_id):
-    """Tự động chọn lô thuốc phù hợp dựa trên số ngày dùng"""
+
     try:
         so_ngay = request.json.get('so_ngay_dung', 0)
         # Validate input cơ bản

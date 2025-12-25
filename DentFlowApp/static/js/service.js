@@ -5,7 +5,7 @@ function goToURL(btn) {
     }
 }
 
-// RECEPTIONIST
+
 function getDataProfile(so_dien_thoai, ho_ten, user_id) {
     let ht = document.getElementById('input_ho_ten')
     let sdt = document.getElementById('input_so_dien_thoai')
@@ -19,7 +19,7 @@ function getDataProfile(so_dien_thoai, ho_ten, user_id) {
     sdt.style.backgroundColor = "#e9ecef";
 }
 
-//temlate: phieu_dieu_tri_search_service.html
+
 function searchPdt() {
     const maso = document.getElementById('input_maso').value.trim();
     const resultDiv = document.getElementById('result_container');
@@ -89,15 +89,15 @@ function searchPdt() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Lấy các phần tử cần thiết
+
     const inputName = document.getElementById('searchName');
     const inputPhone = document.getElementById('searchPhone');
     const btnSearch = document.getElementById('btnSearch');
 
-    // Kiểm tra nếu các element này thực sự tồn tại (đề phòng lỗi trang khác dùng file này)
+
     if (!inputName || !inputPhone || !btnSearch) return;
 
-    // 2. Hàm kiểm tra
+
     function checkInputs() {
         const nameValue = inputName.value.trim();
         const phoneValue = inputPhone.value.trim();
@@ -109,11 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // 3. Lắng nghe sự kiện
     inputName.addEventListener('input', checkInputs);
     inputPhone.addEventListener('input', checkInputs);
 
-    // 4. Chạy kiểm tra ban đầu
     checkInputs();
 
 });

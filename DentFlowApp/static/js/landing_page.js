@@ -53,7 +53,6 @@ document.querySelectorAll('.faq-question').forEach(question => {
         const faqItem = question.parentElement;
         const icon = question.querySelector('.faq-icon');
 
-        // Close all other FAQ items
         document.querySelectorAll('.faq-item').forEach(item => {
             if (item !== faqItem) {
                 item.classList.remove('active');
@@ -62,7 +61,6 @@ document.querySelectorAll('.faq-question').forEach(question => {
             }
         });
 
-        // Toggle current FAQ item
         faqItem.classList.toggle('active');
         if (faqItem.classList.contains('active')) {
             icon.classList.remove('fa-arrow-down');

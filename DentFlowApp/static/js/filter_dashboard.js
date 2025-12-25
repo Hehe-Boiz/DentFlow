@@ -46,10 +46,10 @@ function renderDoanhThuNamNgayLineChart(resData) {
             },
             scales: {
                 y: {
-                    beginAtZero: true, // Nên bắt đầu từ 0 để biểu đồ trung thực
+                    beginAtZero: true,
                     ticks: {
                         callback: function (value) {
-                            // Format trục Y thành tiền tệ
+
                             return new Intl.NumberFormat('vi-VN', {
                                 style: 'currency',
                                 currency: 'VND',

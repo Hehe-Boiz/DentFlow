@@ -1,8 +1,8 @@
 :root {
     --main-bg-color: #2447e6;
-    /* Màu nền tối của DentalFlow */
+
     --active-color: white;
-    /* Màu hồng tím điểm nhấn */
+
     --text-color: white;
 }
 
@@ -17,11 +17,11 @@ body {
     align-items: stretch;
 }
 
-/* --- SIDEBAR STYLE --- */
+
 #sidebar-wrapper {
     min-height: 100vh;
     min-width: 260px;
-    /* Độ rộng của menu trái */
+
     max-width: 260px;
     background-color: var(--main-bg-color);
     color: var(--text-color);
@@ -34,12 +34,12 @@ body {
     color: var(--text-color);
 }
 
-/* Style cho các link trong menu */
+
 .list-group-item {
     border: none;
     padding: 15px 20px;
     color: #b8b8b8;
-    /* Màu chữ mờ khi chưa chọn */
+
     font-size: 0.95rem;
 }
 
@@ -48,26 +48,26 @@ body {
     color: #fff;
 }
 
-/* Mục đang được chọn (Active) */
+
 .list-group-item.active {
     background-color: transparent !important;
     color: var(--active-color) !important;
     border-left: 4px solid var(--active-color);
 }
 
-/* Style cho menu con (Dropdown) */
+
 .collapse .list-group-item {
     font-size: 0.85rem;
     padding-left: 3rem !important;
-    /* Thụt đầu dòng menu con */
+
 }
 
-/* --- CONTENT STYLE --- */
+
 #page-content-wrapper {
     width: 100%;
 }
 
-/* Ẩn bớt footer mặc định của flask-admin nếu bị vướng */
+
 footer {
     display: none;
 }

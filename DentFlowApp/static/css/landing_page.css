@@ -1,4 +1,4 @@
-/* ========== COMMON STYLES ========== */
+
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -891,7 +891,7 @@
     }
 }
 
-/* Mobile (max-width: 768px) */
+
 @media (max-width: 768px) {
     .services-section .display-5 {
         font-size: 2rem;
@@ -904,13 +904,13 @@
     }
 }
 
-/* Small Mobile (max-width: 575px) */
+
 @media (max-width: 575px) {
     .section-title {
         font-size: 1.75rem;
     }
 
-    /* Play Button */
+
     .play-button {
         width: 50px;
         height: 50px;
@@ -921,7 +921,7 @@
         margin-left: 3px;
     }
 
-    /* Experts */
+
     .expert-card {
         width: 220px;
         height: 300px;
@@ -940,7 +940,7 @@
         height: 45px;
     }
 
-    /* Testimonials */
+
     .testimonial-card {
         padding: 20px;
     }
@@ -955,7 +955,7 @@
         margin-left: 60px;
     }
 
-    /* Blog & FAQ */
+
     .blog-section,
     .faq-section {
         padding: 60px 0;

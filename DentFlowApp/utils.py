@@ -34,19 +34,16 @@ class ValidationUtils:
     @staticmethod
     def tim_lo_thuoc_tot_nhat(thuoc_id, so_ngay_dung):
         try:
-            # 1. Tìm lô đáp ứng đủ số ngày (Ưu tiên lô date gần nhất để đẩy hàng cũ đi - FEFO)
             lo_phu_hop = thuoc_dao.get_lo_thuoc_phu_hop(thuoc_id, so_ngay_dung)
 
             if lo_phu_hop:
                 return True, lo_phu_hop, "Tìm thấy lô thuốc phù hợp."
 
-            # 2. Nếu không có lô nào đủ, tìm lô có hạn xa nhất để xem tối đa kê được bao lâu
             lo_xa_nhat = thuoc_dao.get_lo_co_han_xa_nhat(thuoc_id)
 
             if not lo_xa_nhat:
                 return False, None, "Thuốc này đã hết hàng hoặc hết hạn sử dụng."
 
-            # Tính số ngày tối đa
             ngay_hien_tai = datetime.now().date()
             han_su_dung_date = lo_xa_nhat.han_su_dung
             if isinstance(han_su_dung_date, datetime):
@@ -65,10 +62,7 @@ class ValidationUtils:
 class CalculationUtils:
     @staticmethod
     def tinh_tong_hoa_don(tien_dich_vu, danh_sach_thuoc):
-        """
-        Thực hiện Yêu cầu 4: Tính tổng chi phí
-        danh_sach_thuoc: list các dict [{'id': 1, 'so_luong': 2}, ...]
-        """
+
         tong_tien_thuoc = 0
 
         # Tính tiền thuốc

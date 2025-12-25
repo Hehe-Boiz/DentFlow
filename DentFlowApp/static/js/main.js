@@ -22,7 +22,6 @@ function saveFullProfile() {
     const diaChi = document.getElementById('new_diachi').value;
     const CCCD = document.getElementById('new_CCCD').value;
 
-    // Validate client cơ bản
     if (!hoTen || !so_dien_thoai) {
         alert("Vui lòng nhập Họ tên và Số điện thoại!");
         return;
@@ -35,7 +34,7 @@ function saveFullProfile() {
         email: email,
         dia_chi: diaChi
     };
-    //Gọi api
+
     fetch('/api/create-profiles', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -45,11 +44,11 @@ function saveFullProfile() {
     .then(res => res.json())
     .then(data => {
         if (data.status === 'success') {
-            // Đóng modal tạo mới
+
             const modalEl = document.getElementById('createProfileModal');
             const modalInstance = bootstrap.Modal.getInstance(modalEl);
             modalInstance.hide();
-            // Reset form
+
             document.getElementById('formCreateProfile').reset();
             alert('Tạo thành công')
         } else {
@@ -58,19 +57,19 @@ function saveFullProfile() {
     })
     .catch(err => console.error(err));
 }
-//Tự động tắt các alert sau 4s
+
 const alerts = document.querySelectorAll('[role="alert"]');
 alerts.forEach(function(alert) {
-    // Sau 4 giây (4000ms) thì tự tắt
+
     setTimeout(function() {
-        // Dùng Bootstrap API để tắt mượt mà
+
         let bsAlert = new bootstrap.Alert(alert);
         bsAlert.close();
     }, 5000);
 });
 
 
-//Ẩn hiện mật khẩu password
+
 const toggleBtn = document.querySelectorAll('.btn-toggle-password');
 toggleBtn.forEach(button => {
     button.addEventListener('click', function () {

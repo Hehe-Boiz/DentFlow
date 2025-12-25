@@ -1,29 +1,29 @@
-/* Style cho từng khối lịch hẹn */
+
 .profile-item {
     background-color: #fff;
-    border: 1px solid #e5e7eb; /* Viền xám rất nhạt */
-    border-radius: 12px; /* Bo góc mềm mại giống Figma */
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
     padding: 20px;
-    margin-bottom: 15px; /* Khoảng cách giữa các item */
+    margin-bottom: 15px;
     transition: all 0.2s ease;
 }
 
 .profile-item:hover {
-    border-color: #2563eb; /* Hover vào viền chuyển xanh */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ */
+    border-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Style cho tên bệnh nhân */
+
 .patient-name {
-    color: #111827; /* Màu đen đậm */
+    color: #111827;
     font-size: 1.05rem;
     font-weight: 600;
     margin-bottom: 4px;
 }
 
-/* Style cho các dòng thông tin phụ (Ngày, Bác sĩ...) */
+
 .info-line {
-    color: #6b7280; /* Màu xám trung tính */
+    color: #6b7280;
     font-size: 0.9rem;
     margin-bottom: 2px;
     display: flex;
@@ -31,11 +31,11 @@
 }
 
 .info-line i {
-    width: 20px; /* Cố định chiều rộng icon để chữ thẳng hàng */
+    width: 20px;
     color: #9ca3af;
 }
 
-/* Badge trạng thái (Soft style) */
+
 .badge-soft-success { background-color: #dcfce7; color: #166534; }
 .badge-soft-warning { background-color: #fef9c3; color: #854d0e; }
 .badge-soft-danger  { background-color: #fee2e2; color: #991b1b; }
