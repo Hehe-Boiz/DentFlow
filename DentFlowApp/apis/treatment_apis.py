@@ -78,26 +78,6 @@ def ke_don_partial():
     return render_template("treatments/ke_don_thuoc.html", thuocs=thuocs)
 
 
-@app.route('/treatment/thuoc/<int:thuoc_id>/lo-thuoc', methods=['GET'])
-@doctor_required
-def get_lo_thuoc(thuoc_id):
-    try:
-        lo_thuocs = thuoc_dao.get_lo_thuoc_by_thuoc_id(thuoc_id)
-        result = []
-        for lo in lo_thuocs:
-            result.append({
-                'id': lo.id,
-                'so_lo': getattr(lo, 'so_lo', f'Lô {lo.id}'),
-                'han_su_dung': lo.han_su_dung.strftime('%d/%m/%Y'),
-                'han_su_dung_raw': lo.han_su_dung.strftime('%Y-%m-%d'),
-                'so_luong_ton': lo.so_luong,
-                'ngay_nhap': lo.ngay_nhap.strftime('%d/%m/%Y')
-            })
-        return jsonify({'status': 'success', 'data': result})
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 500
-
-
 @app.route('/treatment/thuoc/<int:thuoc_id>/lo-phu-hop', methods=['POST'])
 @doctor_required
 def get_lo_phu_hop(thuoc_id):

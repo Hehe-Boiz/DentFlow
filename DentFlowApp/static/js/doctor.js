@@ -71,10 +71,7 @@ function initButtonsLichKham() {
             const patientId = btn.dataset.patientId || btn.getAttribute('data-patientId');
             const dichVuId = btn.dataset.dichvu || btn.getAttribute('data-dichvu');
 
-            console.log(`Chuyển sang điều trị: BN ${patientId}, DV ${dichVuId}`);
-
             const queryString = `?patient_id=${patientId}&dichvu=${dichVuId}`;
-            console.log(patientId)
 
             loadTabContent('tab-treatment', queryString);
             initCreateTreatment()
@@ -83,26 +80,24 @@ function initButtonsLichKham() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll('.tab-btn');
+const buttonsTab = document.querySelectorAll('.tab-btn');
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.dataset.tab;
-            loadTabContent(target);
-        });
+buttonsTab.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        loadTabContent(target);
     });
-
-    const params = new URLSearchParams(window.location.search);
-    const currentTabId = params.get('tab') || 'tab-today';
-
-    const activeBtn = document.querySelector(`.tab-btn[data-tab="${currentTabId}"]`);
-    if (activeBtn) {
-        loadTabContent(currentTabId);
-    } else {
-        loadTabContent('tab-today');
-    }
 });
+
+const params = new URLSearchParams(window.location.search);
+const currentTabId = params.get('tab') || 'tab-today';
+
+const activeBtn = document.querySelector(`.tab-btn[data-tab="${currentTabId}"]`);
+if (activeBtn) {
+    loadTabContent(currentTabId);
+} else {
+    loadTabContent('tab-today');
+}
 
 
 const STATUS_MAP = {
@@ -146,9 +141,16 @@ function initCalendarWork() {
         const btnNext = document.getElementById('btn-next-week');
         const btnToday = document.getElementById('btn-this-week');
 
-        if (btnPrev) btnPrev.addEventListener('click', () => changeWeek(-1));
-        if (btnNext) btnNext.addEventListener('click', () => changeWeek(1));
-        if (btnToday) btnToday.addEventListener('click', () => goToThisWeek());
+        if (btnPrev) {
+            btnPrev.addEventListener('click', () => changeWeek(-1))
+        }
+        ;
+        if (btnNext) {
+            btnNext.addEventListener('click', () => changeWeek(1))
+        }
+        if (btnToday) {
+            btnToday.addEventListener('click', () => goToThisWeek())
+        }
     }
 
     function formatDate(date) {

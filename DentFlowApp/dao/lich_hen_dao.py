@@ -75,6 +75,7 @@ def get_all_lich_hen_by_bac_si(bacsi_id):
             LichHen.id.label("lich_hen_id"),
             HoSoBenhNhan.id,
             HoSoBenhNhan.ho_ten,
+            LichHen.dich_vu_id,
             func.date_format(
                 func.timestamp(LichHen.ngay_dat, LichHen.gio_kham),
                 '%d/%m/%Y %H:%i'
@@ -85,6 +86,8 @@ def get_all_lich_hen_by_bac_si(bacsi_id):
         ).distinct()
         .all()
     )
+    for bn in benh_nhan:
+        print(bn.dich_vu_id)
 
     return benh_nhan
 

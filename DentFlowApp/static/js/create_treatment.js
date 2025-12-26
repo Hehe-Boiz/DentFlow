@@ -60,7 +60,6 @@ function inputUnit() {
 }
 
 
-
 function initServiceEvents() {
     const serviceSelect = document.getElementById('service-select');
     const priceInput = document.getElementById('service-price');
@@ -145,6 +144,7 @@ function initServiceEvents() {
                 }
             });
 
+
             serviceSelect.value = "";
             priceInput.value = 0;
             noteInput.value = "";
@@ -155,6 +155,26 @@ function initServiceEvents() {
             btnAdd.click();
         }
     }
+    const selectPatientElement = document.querySelector('select[name="patient_id"]')
+    selectPatientElement.addEventListener('change', function () {
+        tableBody.innerHTML = '';
+        totalAmount = 0;
+        stt = 0;
+        totalDisplay.innerText = formatCurrency(0);
+        listContainer.classList.add('hidden');
+
+        const selectedOptionDichVu = this.options[this.selectedIndex];
+        const dichVuId = selectedOptionDichVu.getAttribute('data-dichvuId');
+
+        if (dichVuId && dichVuId !== "None" && dichVuId.trim() !== "") {
+            serviceSelect.value = dichVuId;
+
+            updatePrice();
+            btnAdd.click();
+
+        }
+    });
+
 }
 
 
@@ -233,7 +253,6 @@ function checkLoThuoc() {
     inputSoNgay.addEventListener('input', handleInput);
 
 }
-
 
 
 function initAddMedicineEvent() {
@@ -399,10 +418,11 @@ function initDeleteMedicineEvent() {
 
 
 function initSaveTreatmentEvent() {
+    const selectPatientElement = document.querySelector('select[name="patient_id"]')
+
     const btnSaveTreatment = document.getElementById('btn-save-treatment');
     btnSaveTreatment.addEventListener('click', async function (e) {
         e.preventDefault();
-        const selectPatientElement = document.querySelector('select[name="patient_id"]')
         const patientId = selectPatientElement ? selectPatientElement.value : null;
         const selectedOption = selectPatientElement.options[selectPatientElement.selectedIndex];
         const lichHenId = selectedOption ? selectedOption.getAttribute('data-lichhenId') : null;

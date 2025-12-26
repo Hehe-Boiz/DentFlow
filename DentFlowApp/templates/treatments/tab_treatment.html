@@ -26,7 +26,7 @@
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white">
                             <option value="">-- Chọn lịch khám --</option>
                             {% for patient in patients %}
-                            <option value="{{ patient.id }}" data-lichhenId=" {{ patient.lich_hen_id }}"
+                            <option value="{{ patient.id }}" data-lichhenId=" {{ patient.lich_hen_id }}" data-dichvuId="{{ patient.dich_vu_id }}"
                                     {% if selected_patient_id== patient.id %}selected{% endif %}>
                                 {{ patient.ho_ten }} - HS00{{ patient.id }} - {{
                                 patient.thoi_diem_kham_str }}
