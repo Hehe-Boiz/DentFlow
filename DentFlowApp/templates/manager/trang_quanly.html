@@ -29,11 +29,13 @@
 {% endblock %}
 {% block scripts %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
     <script src="{{ url_for('static', filename='js/nhanvien.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/filter_dashboard.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/filter_dashboard.js') }}"></script>
     <script src="{{ url_for('static', filename='js/exportCSV.js') }}"></script>
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/thongkeFetch.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/thonkeRenderChart.js') }}"></script>
 
 
 {% endblock %}

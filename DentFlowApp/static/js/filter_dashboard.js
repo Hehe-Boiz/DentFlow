@@ -4,113 +4,6 @@ function toggleFilter() {
     if (selectBacsiTheoThang) {
         selectBacsiTheoThang.value = monthIndex
     }
-
-}
-
-function renderDoanhThuNamNgayLineChart(resData) {
-    const data = {
-        labels: Object.values(resData).map(item => item.ngay_thanh_toan),
-        datasets: [{
-            label: '',
-            data: Object.values(resData).map(item => item.doanh_thu),
-            fill: true,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.3,
-            borderWidth: 2
-        }]
-    }
-    const config = {
-        type: 'line',
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: false,
-                title: {display: false},
-                tooltip: {
-                    callbacks: {
-                        label: function (context) {
-                            let label = context.dataset.label || '';
-                            if (label) label += ': ';
-                            if (context.parsed.y !== null) {
-                                label += new Intl.NumberFormat('vi-VN', {
-                                    style: 'currency',
-                                    currency: 'VND'
-                                }).format(context.parsed.y);
-                            }
-                            return label;
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function (value) {
-
-                            return new Intl.NumberFormat('vi-VN', {
-                                style: 'currency',
-                                currency: 'VND',
-                                maximumSignificantDigits: 3
-                            }).format(value);
-                        }
-                    }
-                }
-            }
-
-        }
-
-    }
-    const ctx = document.getElementById('myLineChart')
-    if (ctx) {
-        if (Chart.getChart(ctx)) {
-            Chart.getChart(ctx).destroy()
-        }
-        new Chart(ctx, config)
-    }
-
-
-}
-
-
-async function fetchDoanhThuTrongNamNgay() {
-    const respone = await fetch('/manager/statistics/daily-recently');
-    let result = await respone.json()
-    if (result.status !== 'success' && result.status !== 'ok') {
-        console.error("Lỗi dữ liệu:", result);
-
-    } else {
-        return result.data
-    }
-}
-
-async function fetchCTHD(month) {
-    const respone = await fetch(`/manager/statistics/monthly?month=${month}`);
-    let result = await respone.json()
-    if (result.status !== 'success') {
-        console.error("Lỗi dữ liệu:", result);
-    } else {
-        return result.data_ds_hoadon
-    }
-}
-
-async function fetchDoanhThuTheoThang(month) {
-    try {
-        const response = await fetch(`/manager/statistics/monthly?month=${month}`);
-        const data = await response.json();
-        if (data.status === 'success') {
-            console.log('fetch', data.data)
-            renderMonthlyChart(data.data, 'monthly-chart', month);
-            return data.data.reduce((total, item) => total + item.tong_tien, 0)
-        }
-        console.error("Lỗi API:", data.message);
-        return 0;
-    } catch (error) {
-        console.error('Lỗi hệ thống:', error);
-        return 0;
-    }
 }
 
 let cachedDoctorData = {
@@ -208,6 +101,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('vi-VN').format(amount) + ' đ';
     };
+    const module = await import('./thongkeFetch.js');
+    const moduleRender = await import('./thonkeRenderChart.js');
+
+    const {fetchCTHD, fetchDoanhThuTheoThang, fetchDoctors, fetchDoanhThuTrongNamNgay} = module.default;
 
     const data = await fetchCTHD(monthSelect.value)
     const divPaginate = document.getElementById('paginate-numb-cthd');
@@ -232,8 +129,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     async function updateDashboardData(month) {
         if (!month || month === "0") return;
+
         try {
-            const doanh_thu = await fetchDoanhThuTheoThang(month);
+            const data_doanhthu_thang = await fetchDoanhThuTheoThang(month);
+            const doanh_thu = data_doanhthu_thang.reduce((total, item) => total + item.tong_tien, 0)
+            const {renderMonthlyChart} = moduleRender.default;
+            renderMonthlyChart(data_doanhthu_thang, 'monthly-chart', month);
+
             spanMonth.textContent = month
             console.log(doanh_thu)
             spanDoanhThu.textContent = formatCurrency(0)
@@ -262,6 +164,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (cachedDoctorData.daily && cachedDoctorData.daily[selectedBacSi]) {
                 const doctorData = cachedDoctorData.daily[selectedBacSi];
                 console.log(monthSelect.value)
+
+                const {renderMonthlyChart} = moduleRender.default;
                 renderMonthlyChart(doctorData, 'monthly-chart', monthSelect.value)
 
             }
@@ -275,9 +179,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (monthSelect.value !== "0") {
             await updateDashboardData(monthSelect.value);
         }
-
         const resDataNam = await fetchDoanhThuTrongNamNgay();
         const data_monthly = await fetchCTHD(monthSelect.value)
+
+        const {renderDoanhThuNamNgayLineChart} = moduleRender.default;
 
         renderDoanhThuNamNgayLineChart(resDataNam);
 

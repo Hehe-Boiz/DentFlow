@@ -2,17 +2,17 @@ async function loadEmployees() {
     try {
         const response = await fetch('/manager/nhan-vien');
         const result = await response.json();
-
+        console.log(container.id)
         const container = document.getElementById('employee-list');
-        if (container.id === 'nhan-vien') {
-            container.innerHTML = '';
+        // if (container.id === 'nhan-vien') {
+        container.innerHTML = '';
 
-            if (result.status === 'success' && result.data.length > 0) {
-                result.data.forEach(nv => {
+        if (result.status === 'success' && result.data.length > 0) {
+            result.data.forEach(nv => {
 
-                    const initials = nv.ho_ten.split(' ').pop().charAt(0).toUpperCase();
+                const initials = nv.ho_ten.split(' ').pop().charAt(0).toUpperCase();
 
-                    const cardHtml = `
+                const cardHtml = `
                         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                             <div class="card rounded-xl card-hover">
                                 <div class="card-header bg-primary text-white">
@@ -41,12 +41,13 @@ async function loadEmployees() {
                             </div>
                         </div>
                     `;
-                    container.insertAdjacentHTML('beforeend', cardHtml);
-                });
-            } else {
-                container.innerHTML = '<div class="alert alert-warning">Không có dữ liệu nhân viên.</div>';
-            }
+                container.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        } else {
+            console.error("false")
+            container.innerHTML = '<div class="alert alert-warning">Không có dữ liệu nhân viên.</div>';
         }
+        // }
     } catch
         (error) {
         console.error('Lỗi:', error);

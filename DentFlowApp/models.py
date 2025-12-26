@@ -1,5 +1,6 @@
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String, Enum as sqlEnum, DateTime, Date, Time, Double, ForeignKey, Float, Boolean, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Enum as sqlEnum, DateTime, Date, Time, Double, ForeignKey, Float, \
+    Boolean, UniqueConstraint
 from sqlalchemy.orm import relationship
 from DentFlowApp import db, app
 from flask_sqlalchemy import SQLAlchemy
@@ -82,7 +83,6 @@ class NguoiDung(BaseModel, UserMixin):
     avatar = Column(String(255))
     vai_tro = Column(sqlEnum(UserRole), default=UserRole.USER)
 
-
     ho_so_benh_nhan = relationship('HoSoBenhNhan', backref='nguoi_dung', uselist=False)
     bac_si = relationship('BacSi', backref='nguoi_dung', uselist=False)
 
@@ -96,7 +96,6 @@ class NhanVien(db.Model):
     dia_chi = Column(String(255), nullable=False)
     muc_luong = Column(Float)
     ngay_vao_lam = Column(DateTime, default=datetime.now())
-
 
     nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id), nullable=True)
 
@@ -138,9 +137,7 @@ class BacSi(db.Model):
     avatar = Column(String(255))
     loai_bac_si = Column(sqlEnum(LoaiBacSi))
 
-
     nguoi_dung_id = Column(Integer, ForeignKey(NguoiDung.id, ondelete='SET NULL'), nullable=True, unique=True)
-
 
     lich_lam_viec_ds = relationship('LichLamViec', backref='bac_si', lazy=True, cascade="all, delete-orphan")
     lich_hen_ds = relationship('LichHen', backref='bac_si', lazy=True)
@@ -230,7 +227,7 @@ class PhieuDieuTri(BaseModel):
     def get_ds_dich_vu(self):
         ds_dich_vu = list()
         for chi_tiet in self.chi_tiet_dich_vu:
-            ds_dich_vu.append(chi_tiet)
+            ds_dich_vu.append(chi_tiet.dich_vu)
         return ds_dich_vu
 
 
@@ -286,5 +283,3 @@ class LieuLuongSuDung(BaseModel):
 
     so_luong = Column(Integer, nullable=False)
     huong_dan = Column(String(255))
-
-

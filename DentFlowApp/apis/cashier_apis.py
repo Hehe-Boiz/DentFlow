@@ -51,13 +51,13 @@ def cashier_xac_nhan_thanh_toan(id):
     try:
         phieu_dieu_tri = get_phieu_dieu_tri_by_id(id)
         if phieu_dieu_tri.don_thuoc:
-            for ct in phieu_dieu_tri.don_thuoc:
+            for ct in phieu_dieu_tri.don_thuoc.ds_thuoc:
                 so_luong_can = ct.so_luong
                 thuoc_id = ct.thuoc_id
                 lo_thuocs = LoThuoc.query.filter(
                     LoThuoc.thuoc_id == thuoc_id,
                     LoThuoc.so_luong > 0
-                ).order_by(LoThuoc.han_dung_ngay.asc()).all()
+                ).order_by(LoThuoc.han_su_dung.asc()).all()
 
                 tong_ton_kho = sum(lo.so_luong for lo in lo_thuocs)
 

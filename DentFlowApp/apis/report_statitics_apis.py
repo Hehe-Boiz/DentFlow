@@ -78,7 +78,7 @@ def manager_statistics_view():
             list_dv = []
             list_thuoc = []
             for ct in hoa_don.phieu_dieu_tri.get_ds_dich_vu:
-                list_dv.append(ct.dich_vu.ten_dich_vu)
+                list_dv.append(ct.ten_dich_vu)
             if hoa_don.phieu_dieu_tri.don_thuoc:
                 for lt in hoa_don.phieu_dieu_tri.don_thuoc.ds_thuoc:
                     list_thuoc.append(lt.thuoc.ten_thuoc)
