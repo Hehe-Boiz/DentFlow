@@ -9,7 +9,6 @@ import enum
 from sqlalchemy import event
 
 
-# ENUMS
 
 class GioiTinh(enum.Enum):
     NAM = "Nam"

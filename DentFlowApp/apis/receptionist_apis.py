@@ -10,6 +10,7 @@ from DentFlowApp.decorators import receptionist_required
 @app.route('/receptionist', methods=['GET'])
 @receptionist_required
 def receptionist():
+    active_tab = request.args.get('tab','schedule')
     flash('none')
     active_tab = request.args.get('tab', 'schedule')
     session['stats_cards'] = {
@@ -22,7 +23,6 @@ def receptionist():
     kw = request.args.get('kw')
     if active_tab == 'schedule':
         lich_hen = lich_hen_dao.get_lich_hen(page=int(request.args.get('page', 1)), kw=kw)
-        print(lich.ho_ten for lich in lich_hen)
     if active_tab == 'profile':
         ho_so = ho_so_benh_nhan_dao.get_ho_so(page=int(request.args.get('page', 1)), kw=kw)
     return render_template('receptionist/receptionist.html',
@@ -85,3 +85,5 @@ def delete_booked_appointment(lich_hen_id):
             return jsonify({'status': 'error', 'msg': 'Không có lịch hẹn cần xóa'})
     except Exception as ex:
         return jsonify({'status': 'error', 'msg': str(ex)})
+
+
