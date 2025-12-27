@@ -4,7 +4,8 @@ from flask import render_template, jsonify, request
 from DentFlowApp.dao.bacsi_dao import get_doctors
 from DentFlowApp.dao.hoadon_dao import get_ds_hoa_don_trong_thang, get_soluong_hoa_don_trong_thang, \
     get_tong_doanh_thu_trong_thang, get_trung_binh_doanh_thu_trong_thang, get_doanh_thu_trong_ngay, \
-    get_doanh_thu_bac_si_trong_thang, get_doanh_thu_trong_nam_ngay_gan_day
+    get_doanh_thu_bac_si_trong_thang, \
+    get_doanh_thu_theo_so_ngay_gan_day, get_ds_doanh_thu_bac_si
 from DentFlowApp.dao.nhanvien_dao import get_ds_nhan_vien
 from DentFlowApp.decorators import manager_required
 import datetime
@@ -21,6 +22,7 @@ def format_vnd(value):
 def manager_view():
     ds_hoadon = get_ds_hoa_don_trong_thang()
     now = datetime.datetime.now().strftime('%Y-%m-%d')
+    month = int(datetime.datetime.now().strftime('%m'))
     active_tab = request.args.get('tab', 'thong-ke')
     ds_bacsi = get_doctors()
     page = request.args.get('page', 1, type=int)
@@ -41,7 +43,7 @@ def manager_view():
         },
         {
             'title': 'Tổng hóa đơn',
-            'value': get_soluong_hoa_don_trong_thang(),
+            'value': get_soluong_hoa_don_trong_thang(thang_nay=month),
             'sub_text': 'Đã thanh toán trong tháng qua',
             'class': 'bg-primary bg-gradient text-white',
 
@@ -49,7 +51,7 @@ def manager_view():
         },
         {
             'title': 'Trung bình hóa đơn',
-            'value': format_vnd(get_trung_binh_doanh_thu_trong_thang()),
+            'value': format_vnd(get_trung_binh_doanh_thu_trong_thang(thang_nay=month)),
             'sub_text': 'Giá trị trung bình',
             'class': 'bg-success bg-gradient text-white',
 
@@ -61,41 +63,74 @@ def manager_view():
                            cards=cards, now=now, ds_bacsi=ds_bacsi, page=page)
 
 
+@app.route('/manager/statistics/daily-recently', methods=['GET'])
+@manager_required
+def manager_statistics_daily_recently():
+    try:
+        so_lieu = get_doanh_thu_theo_so_ngay_gan_day(so_ngay=5)
+        data = [{
+            'ngay_thanh_toan': str(r.ngay),
+            'doanh_thu': r.doanh_thu or 0,
+        } for r in so_lieu]
+        return jsonify({'status': 'success', 'data': data}), 200
+    except Exception as e:
+        return jsonify(
+            {'status': 'error', 'message': f'Đã có lỗi xảy ra khi lấy thống kê doanh thu {str(e)}: {e}'}), 500
+
+
+@app.route('/manage/statistics/monthly-only', methods=['GET'])
+@manager_required
+def manager_monthly_only():
+    try:
+        select_monthly = request.args.get('month')
+        select_monthly = select_monthly if select_monthly else datetime.datetime.now().month
+        so_lieu = get_ds_hoa_don_trong_thang(thang_nay=select_monthly)
+        data = [
+            {
+                'ngay_thanh_toan': str(r.ngay_thanh_toan),
+                'doanh_thu': r.doanh_thu or 0
+            } for r in so_lieu
+        ]
+        return jsonify(
+            {'status': 'success', 'data': data,
+             'month': select_monthly})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/manage/statistics/doctors-only', methods=['GET'])
+@manager_required
+def manager_doctors_only():
+    try:
+        selected_doctor = request.args.get('doctor', type=str)
+        so_lieu = get_ds_doanh_thu_bac_si(selected_doctor)
+        data = [
+            {
+                'ho_ten_bac_si': str(r.ho_ten_bac_si),
+                'doanh_thu': r.doanh_thu or 0,
+                'so_luot_kham': r.so_luot_kham,
+                'trung_binh_doanh_thu': r.trung_binh_doanh_thu
+            } for r in so_lieu
+        ]
+        return jsonify({'status': 'success', 'data': data})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
 @app.route('/manager/statistics/monthly', methods=['GET'])
 @manager_required
 def manager_statistics_view():
     try:
         select_monthly = request.args.get('month', type=int)
-        ds_hoadon = get_ds_hoa_don_trong_thang(thang_nay=select_monthly)
+        so_lieu = get_ds_hoa_don_trong_thang(thang_nay=select_monthly)
 
-        data = list()
-        data_ds_hoadon = list()
-        for hoa_don in ds_hoadon:
-            data.append({
-                'ngay_thanh_toan': hoa_don.ngay_tao.strftime('%Y-%m-%d %H:%M:%S'),
-                'tong_tien': hoa_don.tong_tien
-            })
-            list_dv = []
-            list_thuoc = []
-            for ct in hoa_don.phieu_dieu_tri.get_ds_dich_vu:
-                list_dv.append(ct.dich_vu.ten_dich_vu)
-            if hoa_don.phieu_dieu_tri.don_thuoc:
-                for lt in hoa_don.phieu_dieu_tri.don_thuoc.ds_thuoc:
-                    list_thuoc.append(lt.thuoc.ten_thuoc)
-            data_ds_hoadon.append({
-                'ngay_thanh_toan': hoa_don.ngay_thanh_toan,
-                'ho_ten': hoa_don.phieu_dieu_tri.ho_so_benh_nhan.ho_ten,
-                'ds_dv': list_dv,
-                'ds_t': list_thuoc,
-                'tong_tien': hoa_don.tong_tien
-            })
         return jsonify({
             'status': 'success',
-            'data': data,
-            'data_ds_hoadon': data_ds_hoadon
+            # 'data': data,
+            # 'data_ds_hoadon': data_ds_hoadon
         })
     except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 403
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
 @app.route('/manager/statistics/doctors', methods=['GET'])
@@ -148,22 +183,6 @@ def manage_nhanvien_view():
                 'nam_sinh': nhan_vien.nam_sinh,
                 'so_dien_thoai': nhan_vien.so_dien_thoai,
                 'ngay_vao_lam': nhan_vien.ngay_vao_lam,
-            })
-        return jsonify({'status': 'success', 'data': data}), 200
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 403
-
-
-@app.route('/manager/statistics/daily-recently', methods=['GET'])
-@manager_required
-def manager_statistics_daily_recently():
-    try:
-        so_lieu = get_doanh_thu_trong_nam_ngay_gan_day()
-        data = list()
-        for ngay_thanh_toan, doanh_thu in so_lieu.items():
-            data.append({
-                'ngay_thanh_toan': ngay_thanh_toan,
-                'doanh_thu': doanh_thu,
             })
         return jsonify({'status': 'success', 'data': data}), 200
     except Exception as e:

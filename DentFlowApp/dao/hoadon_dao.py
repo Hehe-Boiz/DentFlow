@@ -1,63 +1,113 @@
-import datetime
-from datetime import timedelta
+from datetime import timedelta, datetime, time
+from sqlalchemy import extract, func
 
-from sqlalchemy import extract
+from DentFlowApp import db
+from DentFlowApp.models import HoaDon, PhieuDieuTri, BacSi, TrangThaiThanhToan
 
-from DentFlowApp.models import HoaDon
+
+def get_thang_nam(thang_nay=None, nam_nay=None):
+    now = datetime.now()
+    if thang_nay == None:
+        thang_nay = now.month
+    if nam_nay == None:
+        nam_nay = now.year
+    return thang_nay, nam_nay
 
 
 def get_ds_hoa_don_trong_thang(thang_nay=None, nam=None):
-    now = datetime.datetime.now()
-    if thang_nay == None:
-        thang_nay = now.month
-    if not nam:
-        nam = now.year
+    thang_nay, nam_nay = get_thang_nam(thang_nay, nam)
+    query = db.session.query(
+        func.date(HoaDon.ngay_thanh_toan).label('ngay_thanh_toan'),
+        func.sum(HoaDon.tong_tien).label('doanh_thu'),
+    ).filter(
+        extract('month', HoaDon.ngay_thanh_toan) == thang_nay,
+        extract('year', HoaDon.ngay_thanh_toan) == nam_nay
+    ).group_by(func.date(HoaDon.ngay_thanh_toan))
+    return query.all()
+
+
+def get_ds_doanh_thu_bac_si(bac_si_id: str = None):
+    query = db.session.query(
+        BacSi.ma_bac_si.label('ma_bac_si'),
+        BacSi.ho_ten.label('ho_ten_bac_si'),
+        func.sum(HoaDon.tong_tien).label('doanh_thu'),
+        func.count(HoaDon.id).label('so_luot_kham'),
+        func.avg(HoaDon.tong_tien).label('trung_binh_doanh_thu'),
+    ).select_from(HoaDon)
+    query = query.join(PhieuDieuTri).join(BacSi)
+    if not bac_si_id:
+        query = query.filter(PhieuDieuTri.trang_thai_thanh_toan == TrangThaiThanhToan.DA_THANH_TOAN).group_by(
+            BacSi.ma_bac_si, BacSi.ho_ten)
+        return query.all()
+    else:
+        query = query.filter(
+            PhieuDieuTri.trang_thai_thanh_toan == TrangThaiThanhToan.DA_THANH_TOAN and BacSi.ma_bac_si == bac_si_id).group_by(
+            BacSi.ma_bac_si, BacSi.ho_ten)
+        return query.all()
+
+
+def get_soluong_hoa_don_trong_thang(thang_nay=None, nam=None):
+    thang_nay, nam_nay = get_thang_nam(thang_nay, nam)
     return HoaDon.query.filter(extract('month', HoaDon.ngay_thanh_toan) == thang_nay,
-                               extract('year', HoaDon.ngay_thanh_toan) == nam).all()
+                               extract('year', HoaDon.ngay_thanh_toan) == nam_nay).count()
 
 
-def get_soluong_hoa_don_trong_thang(thang_nay=None):
-    return len(get_ds_hoa_don_trong_thang(thang_nay))
+def get_doanh_thu_theo_bac_si(bac_si_id: str):
+    query = db.session.query(
+        BacSi.ho_ten.label('ho_ten_bac_si'),
+        func.sum(HoaDon.tong_tien).label('doanh_thu'),
+    )
+    query = query.join(PhieuDieuTri).join(BacSi)
+    query = query.filter(PhieuDieuTri.bac_si_id == bac_si_id).group_by(BacSi.ho_ten)
+    return query.first()
 
 
-def get_tong_doanh_thu_trong_thang(thang_nay=None):
-    ds_hoadon = get_ds_hoa_don_trong_thang(thang_nay)
-    return sum(hoa_don.tong_tien for hoa_don in ds_hoadon)
+def get_tong_doanh_thu_trong_thang(thang_nay=None, nam_nay=None):
+    query = db.session.query(
+        func.sum(HoaDon.tong_tien)
+    )
+    thang_nay, nam_nay = get_thang_nam(thang_nay, nam_nay)
+    query = query.filter(extract('month', HoaDon.ngay_thanh_toan) == thang_nay)
+    query = query.filter(extract('year', HoaDon.ngay_thanh_toan) == nam_nay)
+    return query.scalar() or 0
 
 
-def get_trung_binh_doanh_thu_trong_thang(thang_nay=None):
-    so_luong = get_soluong_hoa_don_trong_thang(thang_nay)
-    tong_doanh_thu = get_tong_doanh_thu_trong_thang(thang_nay)
-    return tong_doanh_thu / so_luong
+def get_trung_binh_doanh_thu_trong_thang(thang_nay=None, nam_nay=None):
+    query = db.session.query(
+        func.avg(HoaDon.tong_tien)
+    )
+    thang_nay, nam_nay = get_thang_nam(thang_nay, nam_nay)
+    query = query.filter(extract('month', HoaDon.ngay_thanh_toan) == thang_nay)
+    query = query.filter(extract('year', HoaDon.ngay_thanh_toan) == nam_nay)
+    return query.scalar() or 0
 
 
 def get_doanh_thu_trong_ngay():
-    now = datetime.datetime.now()
-    ds_hoadon = HoaDon.query.filter(
+    now = datetime.now()
+    tong_tien = db.session.query(func.sum(HoaDon.tong_tien)).filter(
         extract('day', HoaDon.ngay_thanh_toan) == now.day,
         extract('month', HoaDon.ngay_thanh_toan) == now.month,
         extract('year', HoaDon.ngay_thanh_toan) == now.year
-    ).all()
+    ).scalar()
 
-    return sum(hoa_don.tong_tien for hoa_don in ds_hoadon)
-
-
-def get_ds_hoa_don_trong_nam_ngay_gan_day():
-    now = datetime.datetime.now()
-    bon_ngay_truoc = now - timedelta(days=4)
-    ngay_bat_dau = bon_ngay_truoc.replace(hour=0, minute=0, second=0, microsecond=0)
-    return HoaDon.query.filter(HoaDon.ngay_thanh_toan >= ngay_bat_dau).all()
+    return tong_tien or 0
 
 
-def get_doanh_thu_trong_nam_ngay_gan_day():
-    ds_hoadon = get_ds_hoa_don_trong_nam_ngay_gan_day()
-    thong_ke = {}
-    for hoa_don in ds_hoadon:
-        ngay_thanh_toan = hoa_don.ngay_thanh_toan.strftime("%d/%m")
-        if ngay_thanh_toan not in thong_ke:
-            thong_ke[ngay_thanh_toan] = 0
-        thong_ke[ngay_thanh_toan] += hoa_don.tong_tien
-    return thong_ke
+def get_doanh_thu_theo_so_ngay_gan_day(so_ngay):
+    hom_nay = datetime.now()
+    ngay_bat_dau = datetime.combine(hom_nay - timedelta(days=so_ngay - 1), time.min)
+
+    query = db.session.query(
+        func.date(HoaDon.ngay_thanh_toan).label('ngay'),
+        func.sum(HoaDon.tong_tien).label('doanh_thu'),
+    ).filter(
+        HoaDon.ngay_thanh_toan >= ngay_bat_dau
+    ).group_by(
+        func.date(HoaDon.ngay_thanh_toan)
+    ).order_by(
+        func.date(HoaDon.ngay_thanh_toan)
+    )
+    return query.all()  # ngay_thanh_toan, doanh_thu
 
 
 def get_doanh_thu_bac_si_trong_thang(thang_nay=None):
