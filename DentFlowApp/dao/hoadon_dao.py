@@ -41,7 +41,7 @@ def get_ds_doanh_thu_bac_si(bac_si_id: str = None):
         return query.all()
     else:
         query = query.filter(
-            PhieuDieuTri.trang_thai_thanh_toan == TrangThaiThanhToan.DA_THANH_TOAN and BacSi.ma_bac_si == bac_si_id).group_by(
+            PhieuDieuTri.trang_thai_thanh_toan == TrangThaiThanhToan.DA_THANH_TOAN , BacSi.ma_bac_si == bac_si_id).group_by(
             BacSi.ma_bac_si, BacSi.ho_ten)
         return query.all()
 
